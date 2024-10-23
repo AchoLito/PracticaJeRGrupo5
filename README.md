@@ -31,19 +31,20 @@ Javier Martín Mulero, correo de la universidad: j.martinm.2022@alumnos.urjc.es:
 Unai Pastrana Torres, correo de la universidad: u.pastrana.2022@alumnos.urjc.es, cuenta de GitHub: UnaiPas04
 
 ### 1. CONCEPTO DEL JUEGO
+***
 
 
 *La Maldición* es un videojuego cooperativo multijugador para dos jugadores. Cada jugador controla a un personaje con habilidades únicas: uno es un fantasma y el otro es un humano. Ambos deben colaborar para resolver puzles, desbloquear áreas y escapar de un castillo. El fantasma puede atravesar paredes y manipular ciertos objetos, mientras el humano puede interactuar con el mundo físico. Los jugadores deben coordinar sus acciones y utilizar sus habilidades complementarias para progresar.
 
 ### 2. GÉNERO
-
+***
 
 *La Maldición* pertenece al género de puzles con elementos de aventura gráfica. Se enfoca en la resolución de problemas y la exploración a través de la colaboración entre dos jugadores, cada uno con habilidades diferentes y complementarias. El diseño del juego está enfocado en la comunicación y el trabajo en equipo, ya que los jugadores deberán combinar sus talentos únicos para superar desafíos.
 
 El tono del juego es misterioso y tenso, pero no terror puro. El diseño visual y mecánicas están orientadas a generar una sensación de suspenso y exploración, más que de miedo intenso.
 
 ### 3. ESTILO VISUAL
-
+***
 
 *La Maldición* presenta un estilo visual en 2D, ambientado en un castillo medieval con iluminación tenue y detalles sombríos que crean un ambiente misterioso. Los personajes destacan en el entorno oscuro, con el humano en tonos más naturales y el fantasma con un brillo espectral. La paleta de colores utiliza tonos apagados y efectos visuales sutiles para resaltar los objetos interactivos, generando una atmósfera inmersiva pero accesible a un público amplio. Se utilizará una vista cenital o “top-down”, que permitirá a los jugadores visualizar el entorno desde una perspectiva aérea, lo que facilitará la resolución de puzles.
 
@@ -103,24 +104,24 @@ La perspectiva será similar a la de las imágenes 1, 2 y 3, pero con un estilo 
 
 
 ### 4. PROPÓSITO Y PÚBLICO OBJETIVO
-
+***
 
 El público objetivo de *La Maldición* son jugadores a partir de 12 años, interesados en experiencias cooperativas y de resolución de puzles. Está diseñado tanto para jugadores que disfrutan de los juegos que fomentan la colaboración de forma casual como para aficionados de juegos cooperativos más experimentados que buscan una experiencia diferente.
 
 Aunque incluye elementos de misterio y ambientación sombría, *La Maldición* no recurre a imágenes perturbadoras o violencia explícita, lo que lo hace adecuado para público más amplio, incluidas personas jóvenes. 
 
 ### 5. PLATAFORMA
-
+***
 
 *La Maldición* está diseñado para jugarse en PC. 
 
 ### 6. ALCANCE
-
+***
 
 El juego está diseñado para ofrecer una experiencia cooperativa de corta a mediana duración, con una campaña principal que abarca entre 3 y 5 niveles progresivamente más complejos. 
 
 ### 7. MECÁNICAS PRINCIPALES
-
+***
 
 Las mecánicas principales se basan en la cooperación entre los dos jugadores que controlan los personajes con mecánicas y habilidades únicas y complementarias: uno juega como humano y el otro como fantasma. Además, cada personaje tiene sus propias mecánicas que reflejan sus características dentro del mundo y son cruciales para la resolución de puzles. 
 
@@ -154,7 +155,7 @@ Protección contra trampas o enemigos.
 Todas las mecánicas propuestas en los apartados anteriores tienen como objetivo permitir que la experiencia de juego sea mucho más inmersiva y que la resolución de puzles alcance una nueva perspectiva.
 
 ### 8. NARRATIVA
-
+***
 
 La narrativa de *La Maldición* gira en torno a una maldición ancestral que ha condenado a un rey y sus súbditos a vagar eternamente por un castillo olvidado. El juego permite a los jugadores investigar el castillo y descubrir la trama oculta entre sus paredes.
 
@@ -165,6 +166,7 @@ El castillo pertenecía a un joven rey que, por su inmadurez y arrogancia, conde
 Según los jugadores avanzan, descubren la historia del castillo y del pasado del fantasma. La trama se va revelando a través de los puzles y enemigos que enfrentan. La revelación final muestra que el humano es en realidad un esqueleto más, afectado por la maldición del castillo. 
 
 ### 9. PERSONAJES
+***
 
 #### 9.1. FANTASMA
 
@@ -245,33 +247,34 @@ Los soldados del castillo van vestidos con unas armaduras que les cubren todo el
 
 
 ### 10. OBJETOS
+***
 
 
 A lo largo del videojuego, los personajes irán recogiendo diferentes objetos que les ayudarán a superar los puzles propuestos y avanzar por las diferentes salas del castillo.
 
 ### 11. NIVELES
-
+***
 
 Como ya se ha mencionado, el juego tendrá entre 3 y 5 niveles. Cada uno de los niveles estarán asociados a las diferentes habitaciones del castillo, siendo cada escenario un nivel distinto. En ellos se encontrarán los objetos necesarios para poder avanzar al siguiente.
 
 ### 12. LOGROS
-
+***
 
 En esta sección, estableceremos una lista de todos los logros que están disponibles en el juego. La mayoría de estos se conseguirán al ir completando las diferentes pantallas, pero existirán otros que dependan de encontrar ciertos objetos o detalles ocultos.
 
 ### 13. INTERFAZ
-
+***
 
 La interfaz tendrá un estilo similar a la estética del juego, siendo simple y fácil de entender para los jugadores, además de que no obstruirá la pantalla a la hora de jugar. El juego incluirá unos botones en el menú inicial, siendo estos el de jugar, opciones, controles y salir; un menú de pausa, un inventario y bocadillos de diálogo.
 
 ### 14. MÚSICA Y EFECTOS DE SONIDO
-
+***
 
 La música en *La Maldición* está diseñada para sumergir a los jugadores en la atmósfera inquietante de un castillo sin distraerlos de la jugabilidad. Una música suave y tensa creará un efecto de suspense y misterio que incrementará la tensión de los jugadores conforme se vayan adentrando en el castillo y los peligros aumenten. Además de la música, habrá efectos de sonido que permitirán crear un atmósfera mucho más inmersiva, como el soplo del viento o susurros de voces que hagan que el jugador se sienta dentro del castillo, pero sin llegar a asustarlo, para así reflejar la estética y género del juego.
 
 
 ### 15. IMÁGENES DE REFERENCIA
-
+***
 
 https://www.craiyon.com/image/N0GfFcb8So-2AAmaaE1NZA
 
