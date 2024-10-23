@@ -72,10 +72,13 @@ Las mecánicas principales se basan en la cooperación entre los dos jugadores q
 
 **Resolución de puzles:** La resolución de puzles es la mecánica principal del juego, que combina las mecánicas y habilidades de los dos jugadores para desarrollarse. Algunos de los puzles que puede incluir el juego son:   
 
-*Puzles de puertas dobles o invisibles.
-*Puzles de combinación de objetos.
-*Activación de mecanismos de forma simultánea.
-*Protección contra trampas o enemigos.  
+* Puzles de puertas dobles o invisibles.  
+
+* Puzles de combinación de objetos.  
+
+* Activación de mecanismos de forma simultánea.  
+
+* Protección contra trampas o enemigos.  
 
 **Enemigos y trampas:** A lo largo del juego los jugadores se encontrarán con dos tipos de peligros. Por un lado, enemigos que deambulan por ciertas zonas y que son incapaces de ver al fantasma, por lo que este podrá generar distracciones u obstáculos para que no ataquen al jugador humano. Por otro lado, trampas que pueden ser o no visibles por el humano, lo que hace que ambos jugadores tengan que combinar sus habilidades para sortearlas.  
 
