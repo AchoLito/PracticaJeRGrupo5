@@ -30,48 +30,6 @@ Lara Sánchez Sanz, correo de la universidad: l.sanchezsa.2022@alumnos.urjc.es, 
 Javier Martín Mulero, correo de la universidad: j.martinm.2022@alumnos.urjc.es: , cuenta de GitHub: AchoLito
 Unai Pastrana Torres, correo de la universidad: u.pastrana.2022@alumnos.urjc.es, cuenta de GitHub: UnaiPas04
 
-## ÍNDICE
-
-
-##### 1. CONCEPTO DEL JUEGO	
-2. GÉNERO	
-3. ESTILO VISUAL	
-3.1 REFERENCIAS	
-4. PROPÓSITO Y PÚBLICO OBJETIVO	
-5. PLATAFORMA	
-6. ALCANCE	
-7. MECÁNICAS PRINCIPALES	
-7.1. MECÁNICAS DEL FANTASMA	
-7.2. MECÁNICAS DEL HUMANO	
-8. NARRATIVA	
-9. PERSONAJES	
-9.1. FANTASMA	
-9.2. HUMANO	
-9.3. ENEMIGOS	
-10. ITEMS	
-11. NIVELES	
-12. LOGROS	
-13. INTERFAZ	
-14. MÚSICA Y EFECTOS DE SONIDO
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 CONCEPTO DEL JUEGO
 
 
