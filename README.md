@@ -30,7 +30,7 @@ Lara Sánchez Sanz, correo de la universidad: l.sanchezsa.2022@alumnos.urjc.es, 
 Javier Martín Mulero, correo de la universidad: j.martinm.2022@alumnos.urjc.es: , cuenta de GitHub: AchoLito
 Unai Pastrana Torres, correo de la universidad: u.pastrana.2022@alumnos.urjc.es, cuenta de GitHub: UnaiPas04
 
-ÍNDICE
+## ÍNDICE
 
 
 1. CONCEPTO DEL JUEGO	
