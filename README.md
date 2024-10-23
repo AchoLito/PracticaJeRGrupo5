@@ -24,7 +24,7 @@ DISEÑO Y DESARROLLO DE VIDEOJUEGOS - URJC
 
 Realizado por:
 
-Ana María Caamaño del Amo, correo de la universidad: am.caamano.2022@alumnos.urjc.es, cuenta de GitHub: MagaBlanca46
+Ana María Caamaño del Amo, correo de la universidad: am.caamano.2022@alumnos.urjc.es, cuenta de GitHub: MagaBlanca46  
 Jesús Mercado Rioja, correo de la universidad: j.mercado.2022@alumnos.urjc.es, cuenta de GitHub: JesusMerRio
 Lara Sánchez Sanz, correo de la universidad: l.sanchezsa.2022@alumnos.urjc.es, cuenta de GitHub: LaraSs06
 Javier Martín Mulero, correo de la universidad: j.martinm.2022@alumnos.urjc.es: , cuenta de GitHub: AchoLito
