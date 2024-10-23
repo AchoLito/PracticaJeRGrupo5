@@ -3,7 +3,7 @@
 JUEGOS EN RED
 DISEÑO Y DESARROLLO DE VIDEOJUEGOS - URJC
 
-![Logo Equipo]("Logo del equipo")
+![Logo Equipo](Imágenes/Logo_PatataGames_re.png "Logo del equipo") 
 
  PATATA GAMES  
  
@@ -35,6 +35,7 @@ El tono del juego es misterioso y tenso, pero no terror puro. El diseño visual 
 
 La perspectiva será similar a la de las imágenes 1, 2 y 3, pero con un estilo gráfico inspirado en las imágenes 4, 5 y 6.  
 
+![Logo Equipo](Imágenes/Logo_PatataGames_re.png "Logo del equipo")
 *Imágenes 1, 2 y 3: Referencias de vista “Top - Down”*  
 
 *Imágenes 4, 5 y 6: Referencias del estilo visual.*  
