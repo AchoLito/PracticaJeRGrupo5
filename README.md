@@ -13,7 +13,7 @@ DISEÑO Y DESARROLLO DE VIDEOJUEGOS - URJC
 
 
 
-
+![Logo Equipo]("Logo del equipo")
 
 
 
