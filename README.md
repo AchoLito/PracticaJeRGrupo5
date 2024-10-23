@@ -1,6 +1,7 @@
 # PracticaJeRGrupo5
 ## LA MALDICIÓN
-JUEGOS EN RED
+JUEGOS EN RED  
+
 DISEÑO Y DESARROLLO DE VIDEOJUEGOS - URJC
 
 ![Logo Equipo](Imágenes/Logo_PatataGames_re.png "Logo del equipo") 
