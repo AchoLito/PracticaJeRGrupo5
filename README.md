@@ -33,19 +33,19 @@ Unai Pastrana Torres, correo de la universidad: u.pastrana.2022@alumnos.urjc.es,
 ### 1. CONCEPTO DEL JUEGO
 
 
-La Maldición es un videojuego cooperativo multijugador para dos jugadores. Cada jugador controla a un personaje con habilidades únicas: uno es un fantasma y el otro es un humano. Ambos deben colaborar para resolver puzles, desbloquear áreas y escapar de un castillo. El fantasma puede atravesar paredes y manipular ciertos objetos, mientras el humano puede interactuar con el mundo físico. Los jugadores deben coordinar sus acciones y utilizar sus habilidades complementarias para progresar.
+*La Maldición* es un videojuego cooperativo multijugador para dos jugadores. Cada jugador controla a un personaje con habilidades únicas: uno es un fantasma y el otro es un humano. Ambos deben colaborar para resolver puzles, desbloquear áreas y escapar de un castillo. El fantasma puede atravesar paredes y manipular ciertos objetos, mientras el humano puede interactuar con el mundo físico. Los jugadores deben coordinar sus acciones y utilizar sus habilidades complementarias para progresar.
 
 ### 2. GÉNERO
 
 
-La Maldición pertenece al género de puzles con elementos de aventura gráfica. Se enfoca en la resolución de problemas y la exploración a través de la colaboración entre dos jugadores, cada uno con habilidades diferentes y complementarias. El diseño del juego está enfocado en la comunicación y el trabajo en equipo, ya que los jugadores deberán combinar sus talentos únicos para superar desafíos.
+*La Maldición* pertenece al género de puzles con elementos de aventura gráfica. Se enfoca en la resolución de problemas y la exploración a través de la colaboración entre dos jugadores, cada uno con habilidades diferentes y complementarias. El diseño del juego está enfocado en la comunicación y el trabajo en equipo, ya que los jugadores deberán combinar sus talentos únicos para superar desafíos.
 
 El tono del juego es misterioso y tenso, pero no terror puro. El diseño visual y mecánicas están orientadas a generar una sensación de suspenso y exploración, más que de miedo intenso.
 
 ### 3. ESTILO VISUAL
 
 
-La Maldición presenta un estilo visual en 2D, ambientado en un castillo medieval con iluminación tenue y detalles sombríos que crean un ambiente misterioso. Los personajes destacan en el entorno oscuro, con el humano en tonos más naturales y el fantasma con un brillo espectral. La paleta de colores utiliza tonos apagados y efectos visuales sutiles para resaltar los objetos interactivos, generando una atmósfera inmersiva pero accesible a un público amplio. Se utilizará una vista cenital o “top-down”, que permitirá a los jugadores visualizar el entorno desde una perspectiva aérea, lo que facilitará la resolución de puzles.
+*La Maldición* presenta un estilo visual en 2D, ambientado en un castillo medieval con iluminación tenue y detalles sombríos que crean un ambiente misterioso. Los personajes destacan en el entorno oscuro, con el humano en tonos más naturales y el fantasma con un brillo espectral. La paleta de colores utiliza tonos apagados y efectos visuales sutiles para resaltar los objetos interactivos, generando una atmósfera inmersiva pero accesible a un público amplio. Se utilizará una vista cenital o “top-down”, que permitirá a los jugadores visualizar el entorno desde una perspectiva aérea, lo que facilitará la resolución de puzles.
 
 #### 3.1 REFERENCIAS
 
@@ -68,7 +68,7 @@ La perspectiva será similar a la de las imágenes 1, 2 y 3, pero con un estilo 
 
 
 
-Imágenes 1, 2 y 3: Referencias de vista “Top - Down”
+*Imágenes 1, 2 y 3: Referencias de vista “Top - Down”*
 
 
 
@@ -92,7 +92,7 @@ Imágenes 1, 2 y 3: Referencias de vista “Top - Down”
 
 
 
-Imágenes 4, 5 y 6: Referencias del estilo visual.
+*Imágenes 4, 5 y 6: Referencias del estilo visual.*
 
 
 
@@ -105,14 +105,14 @@ Imágenes 4, 5 y 6: Referencias del estilo visual.
 ### 4. PROPÓSITO Y PÚBLICO OBJETIVO
 
 
-El público objetivo de La Maldición son jugadores a partir de 12 años, interesados en experiencias cooperativas y de resolución de puzles. Está diseñado tanto para jugadores que disfrutan de los juegos que fomentan la colaboración de forma casual como para aficionados de juegos cooperativos más experimentados que buscan una experiencia diferente.
+El público objetivo de *La Maldición* son jugadores a partir de 12 años, interesados en experiencias cooperativas y de resolución de puzles. Está diseñado tanto para jugadores que disfrutan de los juegos que fomentan la colaboración de forma casual como para aficionados de juegos cooperativos más experimentados que buscan una experiencia diferente.
 
-Aunque incluye elementos de misterio y ambientación sombría, La Maldición no recurre a imágenes perturbadoras o violencia explícita, lo que lo hace adecuado para público más amplio, incluidas personas jóvenes. 
+Aunque incluye elementos de misterio y ambientación sombría, *La Maldición* no recurre a imágenes perturbadoras o violencia explícita, lo que lo hace adecuado para público más amplio, incluidas personas jóvenes. 
 
 ### 5. PLATAFORMA
 
 
-La Maldición está diseñado para jugarse en PC. 
+*La Maldición* está diseñado para jugarse en PC. 
 
 ### 6. ALCANCE
 
@@ -124,40 +124,41 @@ El juego está diseñado para ofrecer una experiencia cooperativa de corta a med
 
 Las mecánicas principales se basan en la cooperación entre los dos jugadores que controlan los personajes con mecánicas y habilidades únicas y complementarias: uno juega como humano y el otro como fantasma. Además, cada personaje tiene sus propias mecánicas que reflejan sus características dentro del mundo y son cruciales para la resolución de puzles. 
 
-Resolución de puzles: La resolución de puzles es la mecánica principal del juego, que combina las mecánicas y habilidades de los dos jugadores para desarrollarse. Algunos de los puzles que puede incluir el juego son: 
+**Resolución de puzles:** La resolución de puzles es la mecánica principal del juego, que combina las mecánicas y habilidades de los dos jugadores para desarrollarse. Algunos de los puzles que puede incluir el juego son: 
 
 Puzles de puertas dobles o invisibles.
 Puzles de combinación de objetos.
 Activación de mecanismos de forma simultánea.
 Protección contra trampas o enemigos.
 
-Enemigos y trampas: A lo largo del juego los jugadores se encontrarán con dos tipos de peligros. Por un lado, enemigos que deambulan por ciertas zonas y que son incapaces de ver al fantasma, por lo que este podrá generar distracciones u obstáculos para que no ataquen al jugador humano. Por otro lado, trampas que pueden ser o no visibles por el humano, lo que hace que ambos jugadores tengan que combinar sus habilidades para sortearlas.
+**Enemigos y trampas:** A lo largo del juego los jugadores se encontrarán con dos tipos de peligros. Por un lado, enemigos que deambulan por ciertas zonas y que son incapaces de ver al fantasma, por lo que este podrá generar distracciones u obstáculos para que no ataquen al jugador humano. Por otro lado, trampas que pueden ser o no visibles por el humano, lo que hace que ambos jugadores tengan que combinar sus habilidades para sortearlas.
 
 #### 7.1. MECÁNICAS DEL FANTASMA
 
-Invisible a enemigos: Su apariencia transparente permite que este jugador no pueda ser visto por enemigos.
-Atravesar paredes: El fantasma podrá atravesar ciertos tipos de muros, lo que le permitirá explorar áreas que el humano no puede.
+**Invisible a enemigos:** Su apariencia transparente permite que este jugador no pueda ser visto por enemigos.  
 
-Posesión de objetos: A la hora de resolver algunos acertijos, el fantasma necesitará poseer ciertos objetos para ayudarse a sí mismo o al humano.
+**Atravesar paredes:** El fantasma podrá atravesar ciertos tipos de muros, lo que le permitirá explorar áreas que el humano no puede.
 
-Detección de elementos invisibles: Podrá ver objetos que a simple vista el humano no podrá ver. Estos objetos pueden ser esenciales para resolver los puzles.
+**Posesión de objetos:** A la hora de resolver algunos acertijos, el fantasma necesitará poseer ciertos objetos para ayudarse a sí mismo o al humano.
+
+**Detección de elementos invisibles:** Podrá ver objetos que a simple vista el humano no podrá ver. Estos objetos pueden ser esenciales para resolver los puzles.
 
 #### 7.2. MECÁNICAS DEL HUMANO 
 
-Manipulación de objetos: El humano podrá interactuar con objetos en el mundo físico, ya sea moviéndose, cogiéndolos o usándolos para resolver puzles.
+**Manipulación de objetos:** El humano podrá interactuar con objetos en el mundo físico, ya sea moviéndose, cogiéndolos o usándolos para resolver puzles.
 
-Resolución de puzles: Este jugador será el único que pueda activar mecanismos manuales o resolver acertijos en el mundo físico. 
+**Resolución de puzles:** Este jugador será el único que pueda activar mecanismos manuales o resolver acertijos en el mundo físico. 
 
-Visión reducida: Su visión está limitada al mundo físico, haciendo que no pueda interactuar con objetos o peligros ocultos sin la ayuda del fantasma.
+**Visión reducida:** Su visión está limitada al mundo físico, haciendo que no pueda interactuar con objetos o peligros ocultos sin la ayuda del fantasma.
 
 Todas las mecánicas propuestas en los apartados anteriores tienen como objetivo permitir que la experiencia de juego sea mucho más inmersiva y que la resolución de puzles alcance una nueva perspectiva.
 
 ### 8. NARRATIVA
 
 
-La narrativa de La Maldición gira en torno a una maldición ancestral que ha condenado a un rey y sus súbditos a vagar eternamente por un castillo olvidado. El juego permite a los jugadores investigar el castillo y descubrir la trama oculta entre sus paredes.
+La narrativa de *La Maldición* gira en torno a una maldición ancestral que ha condenado a un rey y sus súbditos a vagar eternamente por un castillo olvidado. El juego permite a los jugadores investigar el castillo y descubrir la trama oculta entre sus paredes.
 
-La Maldición empieza cuando el jugador humano despierta encerrado en una celda en un castillo antiguo y allí se encuentra con un fantasma desorientado que no recuerda quién es ni cómo murió. Ambos se unen para escapar del castillo, pero pronto descubren que una maldición envuelve el lugar afectando a todos sus habitantes. 
+*La Maldición* empieza cuando el jugador humano despierta encerrado en una celda en un castillo antiguo y allí se encuentra con un fantasma desorientado que no recuerda quién es ni cómo murió. Ambos se unen para escapar del castillo, pero pronto descubren que una maldición envuelve el lugar afectando a todos sus habitantes. 
 
 El castillo pertenecía a un joven rey que, por su inmadurez y arrogancia, condenó a su reino a una  maldición eterna. Todos los habitantes están atrapados cumpliendo sus roles incluso después de la muerte, por ello los guardias se han convertido en esqueletos. El fantasma es en realidad el rey, aunque él lo desconoce al principio. 
 
@@ -178,7 +179,7 @@ La única oportunidad del fantasma para escapar es romper la maldición que le a
 La apariencia del fantasma está fuertemente inspirada en la cultura popular, su aspecto está basado en la imagen tradicional de un fantasma como es la de la sabana flotando. Esto es así para facilitar que el jugador sepa desde un primer momento que el personaje está muerto.
 
 
-Imagen 7: Referencia para la apariencia del fantasma.
+*Imagen 7: Referencia para la apariencia del fantasma.*
 
 #### 9.2. HUMANO
 
@@ -204,7 +205,7 @@ El bandido va vestido con unos pantalones negros y una camisa blanca, propia de 
 
 
 
-Imágenes 8 y 9: Referencias para la apariencia del humano.
+*Imágenes 8 y 9: Referencias para la apariencia del humano.*
 
 #### 9.3. ENEMIGOS 
 
@@ -240,7 +241,7 @@ Los soldados del castillo van vestidos con unas armaduras que les cubren todo el
 
 
 
-
+*Imagen 10: Referencias para la apariencia de los enemigos.*
 
 
 ### 10. OBJETOS
@@ -266,7 +267,7 @@ La interfaz tendrá un estilo similar a la estética del juego, siendo simple y 
 ### 14. MÚSICA Y EFECTOS DE SONIDO
 
 
-La música en La Maldición está diseñada para sumergir a los jugadores en la atmósfera inquietante de un castillo sin distraerlos de la jugabilidad. Una música suave y tensa creará un efecto de suspense y misterio que incrementará la tensión de los jugadores conforme se vayan adentrando en el castillo y los peligros aumenten. Además de la música, habrá efectos de sonido que permitirán crear un atmósfera mucho más inmersiva, como el soplo del viento o susurros de voces que hagan que el jugador se sienta dentro del castillo, pero sin llegar a asustarlo, para así reflejar la estética y género del juego.
+La música en *La Maldición* está diseñada para sumergir a los jugadores en la atmósfera inquietante de un castillo sin distraerlos de la jugabilidad. Una música suave y tensa creará un efecto de suspense y misterio que incrementará la tensión de los jugadores conforme se vayan adentrando en el castillo y los peligros aumenten. Además de la música, habrá efectos de sonido que permitirán crear un atmósfera mucho más inmersiva, como el soplo del viento o susurros de voces que hagan que el jugador se sienta dentro del castillo, pero sin llegar a asustarlo, para así reflejar la estética y género del juego.
 
 
 ### 15. IMÁGENES DE REFERENCIA
