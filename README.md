@@ -33,7 +33,7 @@ Unai Pastrana Torres, correo de la universidad: u.pastrana.2022@alumnos.urjc.es,
 ## ÍNDICE
 
 
-1. CONCEPTO DEL JUEGO	
+### 1. CONCEPTO DEL JUEGO	
 2. GÉNERO	
 3. ESTILO VISUAL	
 3.1 REFERENCIAS	
