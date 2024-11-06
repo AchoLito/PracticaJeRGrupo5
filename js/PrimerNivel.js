@@ -13,14 +13,10 @@ class PantallaInicio extends Phaser.Scene
     create()
     {
         //HUMANO
-        this.humano = this.physics.add.sprite(40, 40, 'NOMBRE SPRITEEEEE');
-        this.humano.body.setImmovable(true);
-        this.humano.body.setAllowGravity(false);
+        this.humano = new Humano(10,10,'DOWN');
 
         //FANTASMA
-        this.fantasma = this.physics.add.sprite(40, 40, 'NOMBRE SPRITEEEEE');
-        this.fantasma.body.setImmovable(true);
-        this.fantasma.body.setAllowGravity(false);
+        this.fantasma = new Fantasma(15,10,'DOWN');
 
         var estatuasGO = Array(6);
         var estatua = Array(6);
@@ -30,6 +26,10 @@ class PantallaInicio extends Phaser.Scene
         this.inicializarControlesHumano();
         this.inicializarControlesFantasma();
     }    
+    update()
+    {
+
+    }
 
     crearEstatua(estatua){
         estatua[0] = this.physics.add.sprite(80, 80, 'ESTATUA_ATRAS');
@@ -63,11 +63,7 @@ class PantallaInicio extends Phaser.Scene
         this.estatua[5] = new Estatua(100,100,'ESTATUA_ATRAS');
     }
 
-    update()
-    {
-
-    }
-
+    
     inicializarControlesHumano() {
         
         //MOVIMIENTO
@@ -141,10 +137,12 @@ class PantallaInicio extends Phaser.Scene
             case 'UP':
                 this.humano.body.setVelocityX(0);
                 this.humano.body.setVelocityY(velocidad);
+                this.humano.cambiarDireccion(control);
                 break;
             case 'DOWN':
                 this.humano.body.setVelocityX(0);
                 this.humano.body.setVelocityY(-velocidad);
+                this.humano.cambiarDireccion(control);
                 break;
             case 'Y_NONE':
                 this.humano.body.setVelocityY(0);
@@ -153,10 +151,12 @@ class PantallaInicio extends Phaser.Scene
             case 'LEFT':
                 this.humano.body.setVelocityX(-velocidad);
                 this.humano.body.setVelocityY(0);
+                this.humano.cambiarDireccion(control);
                 break;
             case 'RIGHT':
                 this.humano.body.setVelocityX(velocidad);
                 this.humano.body.setVelocityY(0);
+                this.humano.cambiarDireccion(control);
                 break;
             case 'E':
                 girarEstatua();
@@ -198,7 +198,73 @@ class PantallaInicio extends Phaser.Scene
         }       
     }
 }
+class Humano
+{
+    constructor(x, y, direccion)
+    {
+        this.x = x;
+        this.y = y;
+        this.direccion = direccion;
 
+        this.SpriteObject = this.physics.add.sprite(40, 40, 'NOMBRE SPRITEEEEE');
+        this.body = SpriteObject.body;
+
+        this.body.setImmovable(true);
+        this.body.setAllowGravity(false);
+    }
+
+    cambiarDireccion(direccion){
+        switch(direccion){
+            case 'UP':
+                    this.SpriteObject.setTexture('NOMBRETEXT');
+                break;
+            case 'DOWN':
+                    this.SpriteObject.setTexture('NOMBRETEXT');
+                break;
+            case 'LEFT':
+                    this.SpriteObject.setTexture('NOMBRETEXT');
+                break;
+            case 'RIGHT':
+                    this.SpriteObject.setTexture('NOMBRETEXT');
+                break;
+        }
+        
+    }
+}
+
+class Fantasma
+{
+    constructor(x, y, direccion)
+    {
+        this.x = x;
+        this.y = y;
+        this.direccion = direccion;
+
+        this.SpriteObject = this.physics.add.sprite(40, 40, 'NOMBRE SPRITEEEEE');
+        this.body = SpriteObject.body;
+
+        this.body.setImmovable(true);
+        this.body.setAllowGravity(false);
+    }
+
+    cambiarDireccion(direccion){
+        switch(direccion){
+            case 'UP':
+                    this.SpriteObject.setTexture('NOMBRETEXT');
+                break;
+            case 'DOWN':
+                    this.SpriteObject.setTexture('NOMBRETEXT');
+                break;
+            case 'LEFT':
+                    this.SpriteObject.setTexture('NOMBRETEXT');
+                break;
+            case 'RIGHT':
+                    this.SpriteObject.setTexture('NOMBRETEXT');
+                break;
+        }
+        
+    }
+}
 class Estatua
 {
     constructor(x, y, direccion)
