@@ -2,40 +2,41 @@
 <html>
 <head>
     <title> La Maldición </title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.86.0/phaser.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.86.0/phaser.min.js"></script>
     <script src="js/PantallaInicio.js"></script>
+    <script src="js/PrimerNivel.js"></script>
     <script src="js/MenuInicio.js"></script>
     <!-- <script src="js/endgame.js"></script> -->
-    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <!-- <link type="text/css" rel="stylesheet" href="style.css" />-->
 </head>
-<body>
-    <script>
-        // Game configuration
-        const config = {
-            type: Phaser.AUTO,
-            width: 1280, // tamaño canvas, depende del tamaño del escenario
-            height: 900,
-            parent: 'game-canvas',
-            backgroundImage: 'Assets/Boothill_chiquito.png', // poner un a imagen en vez de color
-            
-            physics: {
-                default: 'arcade',
-                arcade: {
-                    debug: true,
-                }
-            },
+    <body>
+        <script>
+            // Game configuration
+            const config = {
+                type: Phaser.AUTO,
+                width: 1280, // tamaño canvas, depende del tamaño del escenario
+                height: 900,
+                parent: 'game-canvas',
+                backgroundImage: 'Assets/Boothill_chiquito.png', // poner un a imagen en vez de color
 
-            scale: {
-                autoCenter: Phaser.Scale.CENTER_BOTH,
-            },
+                physics: {
+                    default: 'arcade',
+                    arcade: {
+                        debug: true,
+                    }
+                },
 
-            scene: [PantallaInicio, MenuInicio]
-        };
+                scale: {
+                    autoCenter: Phaser.Scale.CENTER_BOTH,
+                },
 
-        // Create the game instance
-        const game = new Phaser.Game(config);
-        game.scene.start("PantallaInicio");
+                scene: [PrimerNivel, PantallaInicio, MenuInicio]
+            };
 
-    </script>
-</body>
-</html>
+            // Create the game instance
+            const game = new Phaser.Game(config);
+            game.scene.start("PrimerNivel");
+
+        </script>
+    </body>
+    </html>
