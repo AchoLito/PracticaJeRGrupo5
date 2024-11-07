@@ -14,21 +14,27 @@ class PrimerNivel extends Phaser.Scene
     {
         
         //HUMANO
-        this.humano = new Humano(10,10,'DOWN', this);
-        /*
-        //FANTASMA
-        this.fantasma = new Fantasma(15,10,'DOWN');
+        this.humano = new Humano(20,40,'DOWN', this);
         
-
+        //FANTASMA
+        this.fantasma = new Fantasma(70,40,'DOWN', this);
+        
+/*
         var estatuasGO = Array(6);
         var estatua = Array(6);
         //ESTATUA   
         crearEstatuas(estatuasGO);
 */
         this.inicializarControlesHumano();
-        //this.inicializarControlesFantasma();
-        
-    }    
+        this.inicializarControlesFantasma();
+
+        this.inicializarColisiones();
+       
+    }
+
+    // Función llamada cuando los objetos colisionan
+    
+    
     update()
     {
 
@@ -67,48 +73,75 @@ class PrimerNivel extends Phaser.Scene
     }
 
     
-    inicializarControlesHumano() {
+    inicializarControlesHumano(){
         
-        var velocidad = 90;
         //MOVIMIENTO
-        this.input.keyboard.on('keydown-W', () => { this.humano.body.setVelocityY(-velocidad);
-            this.humano.cambiarDireccion(control);});
+        this.input.keyboard.on('keydown-W', () => { this.humano.input('UP');});
+        this.input.keyboard.on('keyup-W', () => { this.humano.input('Y_NONE');});
+
+        this.input.keyboard.on('keydown-S', () => { this.humano.input('DOWN'); });
+        this.input.keyboard.on('keyup-S', () => { this.humano.input('Y_NONE');});
         
-        this.input.keyboard.on('keyup-W', () => {this.humano.body.setVelocityY(0);});
+        this.input.keyboard.on('keydown-A', () => { this.humano.input('LEFT');});
+        this.input.keyboard.on('keyup-A', () => {this.humano.input('X_NONE');});
 
-        this.input.keyboard.on('keydown-S', () => { this.humano.body.setVelocityY(velocidad);
-            this.humano.cambiarDireccion(control);});
-
-        this.input.keyboard.on('keyup-S', () => {this.humano.body.setVelocityY(0);});
-        
-        this.input.keyboard.on('keydown-A', () => {this.humano.body.setVelocityX(-velocidad);
-                this.humano.cambiarDireccion(control);});
-        this.input.keyboard.on('keyup-A', () => {this.humano.body.setVelocityX(0);});
-
-        this.input.keyboard.on('keydown-D', () => {this.humano.body.setVelocityX(velocidad);
-            this.humano.cambiarDireccion(control);});
-        this.input.keyboard.on('keyup-D', () => {this.humano.body.setVelocityX(0);});
+        this.input.keyboard.on('keydown-D', () => {this.humano.input('RIGHT');});
+        this.input.keyboard.on('keyup-D', () => {this.humano.input('X_NONE');});
 
         //TECLAS ESPECIALES
-        this.input.keyboard.on('keydown-E', this.humanoInput('E'));
+        this.input.keyboard.on('keydown-E',  () => {this.humano.input('INTERACT');});
+        this.input.keyboard.on('keyup-E',  () => {this.humano.input('I_NONE');});
     }
 
-    inicializarControlesFantasma() {
-        
+    inicializarControlesFantasma(){
         //MOVIMIENTO
-        this.input.keyboard.on('keydown-UP', fantasmaInput('UP'));
-        this.input.keyboard.on('keyup-UP', fantasmaInput('Y_NONE'));
+        this.input.keyboard.on('keydown-UP', () => { this.fantasma.input('UP');});
+        this.input.keyboard.on('keyup-UP', () => { this.fantasma.input('Y_NONE');});
 
-        this.input.keyboard.on('keydown-DOWN', fantasmaInput('DOWN'));
-        this.input.keyboard.on('keyup-DOWN', fantasmaInput('Y_NONE'));
+        this.input.keyboard.on('keydown-DOWN', () => { this.fantasma.input('DOWN'); });
+        this.input.keyboard.on('keyup-DOWN', () => { this.fantasma.input('Y_NONE');});
         
-        this.input.keyboard.on('keydown-LEFT', fantasmaInput('LEFT'));
-        this.input.keyboard.on('keyup-LEFT', fantasmaInput('X_NONE'));
+        this.input.keyboard.on('keydown-LEFT', () => { this.fantasma.input('LEFT');});
+        this.input.keyboard.on('keyup-LEFT', () => {this.fantasma.input('X_NONE');});
 
-        this.input.keyboard.on('keydown-RIGHT', fantasmaInput('RIGHT'));
-        this.input.keyboard.on('keyup-RIGHT', fantasmaInput('X_NONE'));
+        this.input.keyboard.on('keydown-RIGHT', () => {this.fantasma.input('RIGHT');});
+        this.input.keyboard.on('keyup-RIGHT', () => {this.fantasma.input('X_NONE');});
 
         //TECLAS ESPECIALES
+        this.input.keyboard.on('keydown-ENTER',  () => {this.fantasma.input('INTERACT');});
+        this.input.keyboard.on('keyup-ENTER',  () => {this.fantasma.input('I_NONE');});
+    }
+
+    inicializarColisiones(){
+        //const grupoEstatuas = scene.physics.add.group();
+        //const grupoVelas = scene.physics.add.group();
+        //grupo.addMultiple(array con spriteobjects de todas las estatuas);
+        //array de grupos?
+
+        //se añaden colisiones entre parejas de objetos, o entre objetos y grupos
+
+        //manejo de colisiones por defecto, (se puede usar entre jugadores y otros objetos estaticos)
+        //this.physics.add.collider(this.humano.SpriteObject , grupoEstatuas);
+         //this.physics.add.collider(this.fantasma.SpriteObject , grupoEstatuas);
+
+        //esta la hacemos diferente por que necesitamos manejar las colisiones de otra forma
+        this.physics.add.collider(this.humano.SpriteObject, this.fantasma.SpriteObject, this.manejoDeColisionJugadores);
+
+        
+    
+    }
+
+    manejoDeColisionJugadores(humanoObj, fantasmaObj) 
+    {
+        console.log("tocao");
+        //se contrarrestan sus velocidades ()
+        var vx= humanoObj.body.velocity.x + fantasmaObj.body.velocity.x;
+        var vy= humanoObj.body.velocity.y + fantasmaObj.body.velocity.y;
+
+        humanoObj.setVelocityX(0);
+        humanoObj.setVelocityY(0);
+        fantasmaObj.setVelocityX(0);
+        fantasmaObj.setVelocityY(0);
     }
 
     girarEstatua(){
@@ -137,102 +170,23 @@ class PrimerNivel extends Phaser.Scene
             }
         }       
     }
-
-    humanoInput(control){
-        var velocidad=90;
-        switch(control)
-        {
-            //EJE Y
-            case 'UP':
-                this.humano.body.setVelocityX(0);
-                this.humano.body.setVelocityY(-velocidad);
-                this.humano.cambiarDireccion(control);
-                break;
-            case 'DOWN':
-                this.humano.body.setVelocityX(0);
-                this.humano.body.setVelocityY(velocidad);
-                this.humano.cambiarDireccion(control);
-                break;
-            case 'Y_NONE':
-                this.humano.body.setVelocityY(0);
-                break;
-            //EJE X
-            case 'LEFT':
-                this.humano.body.setVelocityX(-velocidad);
-                this.humano.body.setVelocityY(0);
-                this.humano.cambiarDireccion(control);
-                break;
-            case 'RIGHT':
-                this.humano.body.setVelocityX(velocidad);
-                this.humano.body.setVelocityY(0);
-                this.humano.cambiarDireccion(control);
-                break;
-            case 'E':
-                girarEstatua();
-                break;
-            case 'X_NONE':
-                this.humano.body.setVelocityX(0);
-                break;
-            default:
-                this.humano.body.setVelocityX(0);
-                this.humano.body.setVelocityY(0);
-                break;
-        }
-    }
-   
-    fantasmaInput(control){
-        var velocidad=3;
-        switch(control)
-        {
-            //EJE Y
-            case 'UP':
-                this.humano.body.setVelocityX(0);
-                this.humano.body.setVelocityY(velocidad);
-                break;
-            case 'DOWN':
-                this.humano.body.setVelocityX(0);
-                this.humano.body.setVelocityY(-velocidad);
-                break;
-            case 'Y_NONE':
-                this.humano.body.setVelocityY(0);
-                break;
-            //EJE X
-            case 'LEFT':
-                this.humano.body.setVelocityX(-velocidad);
-                this.humano.body.setVelocityY(0);
-                break;
-            case 'RIGHT':
-                this.humano.body.setVelocityX(velocidad);
-                this.humano.body.setVelocityY(0);
-                break;
-            case 'X_NONE':
-                this.humano.body.setVelocityX(0);
-                break;
-            default:
-                this.humano.body.setVelocityX(0);
-                this.humano.body.setVelocityY(0);
-                break;
-
-        }       
-    }
 }
 class Humano {
     constructor(x, y, direccion, scene)
     {
-        this.x = x;
-        this.y = y;
         this.direccion = direccion;
+        this.interacting = false;
 
-        //scene.load.image("ESTATUA_ATRAS", "js/ESTATUA_ATRAS.png");
-
-        this.SpriteObject = scene.physics.add.image(80, 80, "ESTATUA_ATRAS");
+        this.SpriteObject = scene.physics.add.image(40, 40, "ESTATUA_ATRAS");
         this.body = this.SpriteObject.body;
 
-        this.body.setImmovable(true);
         this.body.setAllowGravity(false);
+        this.body.setCollideWorldBounds(true);
+        this.SpriteObject.setPosition(x,y);
     }
 
-    cambiarDireccion(direccion){
+    cambiarDireccion(direccion)
+    {
         switch(direccion){
             case 'UP':
                 //this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
@@ -249,39 +203,129 @@ class Humano {
         }
         
     }
+
+    input(control){
+        var velocidad=90;
+        switch(control)
+        {
+            //EJE Y
+            case 'UP':
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(-velocidad);
+                this.cambiarDireccion(control);
+                break;
+            case 'DOWN':
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(velocidad);
+                this.cambiarDireccion(control);
+                break;
+            case 'Y_NONE':
+                this.body.setVelocityY(0);
+                break;
+            //EJE X
+            case 'LEFT':
+                this.body.setVelocityX(-velocidad);
+                this.body.setVelocityY(0);
+                this.cambiarDireccion(control);
+                break;
+            case 'RIGHT':
+                this.body.setVelocityX(velocidad);
+                this.body.setVelocityY(0);
+                this.cambiarDireccion(control);
+                break;
+            case 'X_NONE':
+                this.body.setVelocityX(0);
+                break;
+            case 'INTERACT':
+                this.interacting =true;
+                break;
+            case 'I_NONE':
+                this.interacting =false;
+                break;
+            default:
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(0);
+                break;
+        }
+    }
 }
 
 class Fantasma
 {
-    constructor(x, y, direccion)
+    constructor(x, y, direccion,scene)
     {
-        this.x = x;
-        this.y = y;
         this.direccion = direccion;
+        this.interacting = false;
 
-        this.SpriteObject = this.physics.add.sprite(40, 40, 'NOMBRE SPRITEEEEE');
-        this.body = SpriteObject.body;
+        this.SpriteObject = scene.physics.add.image(40, 40, 'ESTATUA_ATRAS');
+        this.body = this.SpriteObject.body;
 
-        this.body.setImmovable(true);
         this.body.setAllowGravity(false);
+        this.body.setCollideWorldBounds(true);
+        this.SpriteObject.setPosition(x,y);
     }
 
     cambiarDireccion(direccion){
         switch(direccion){
             case 'UP':
-                    this.SpriteObject.setTexture('NOMBRETEXT');
+                    //this.SpriteObject.setTexture('NOMBRETEXT');
                 break;
             case 'DOWN':
-                    this.SpriteObject.setTexture('NOMBRETEXT');
+                   // this.SpriteObject.setTexture('NOMBRETEXT');
                 break;
             case 'LEFT':
-                    this.SpriteObject.setTexture('NOMBRETEXT');
+                    //this.SpriteObject.setTexture('NOMBRETEXT');
                 break;
             case 'RIGHT':
-                    this.SpriteObject.setTexture('NOMBRETEXT');
+                   // this.SpriteObject.setTexture('NOMBRETEXT');
                 break;
         }
         
+    }
+
+    input(control){
+        var velocidad=90;
+        switch(control)
+        {
+            //EJE Y
+            case 'UP':
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(-velocidad);
+                this.cambiarDireccion(control);
+                break;
+            case 'DOWN':
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(velocidad);
+                this.cambiarDireccion(control);
+                break;
+            case 'Y_NONE':
+                this.body.setVelocityY(0);
+                break;
+            //EJE X
+            case 'LEFT':
+                this.body.setVelocityX(-velocidad);
+                this.body.setVelocityY(0);
+                this.cambiarDireccion(control);
+                break;
+            case 'RIGHT':
+                this.body.setVelocityX(velocidad);
+                this.body.setVelocityY(0);
+                this.cambiarDireccion(control);
+                break;
+            case 'X_NONE':
+                this.body.setVelocityX(0);
+                break;
+            case 'INTERACT':
+                this.interacting =true;
+                break;
+            case 'I_NONE':
+                this.interacting =false;
+                break;
+            default:
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(0);
+                break;
+        }
     }
 }
 class Estatua
