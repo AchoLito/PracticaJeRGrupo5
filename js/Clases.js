@@ -147,7 +147,7 @@ class Antorcha
 
     constructor(x, y,scene)
     {
-        //this.SpriteObject = scene.physics.add.image(x, y, 'ESTATUA_ATRAS');
+       // this.SpriteObject = scene.physics.add.image(x, y, 'ESTATUA_ATRAS');
         this.rect = scene.add.rectangle(x, y, 20, 20, 0x00cccc);
         this.SpriteObject =scene.physics.add.existing(this.rect); // Enable physics on the rectangle
         

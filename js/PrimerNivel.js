@@ -19,10 +19,10 @@ class PrimerNivel extends Phaser.Scene
         //FANTASMA
         this.fantasma = new Fantasma(70,40, this);
 
-        this.antorchas_Array = Array(3);
-        for(var i=0;i<this.antorchas_Array.length;i++)
+        this.antorchas_Array = [];
+        for(var i=0;i<3;i++)
         {
-            this.antorchas_Array[i] = new Antorcha(160*i+200,200, this);
+            this.antorchas_Array.push(new Antorcha(160*i+200,200, this));
         }
         
         
@@ -120,34 +120,30 @@ class PrimerNivel extends Phaser.Scene
     }
 
     inicializarColisiones(){
-        //const grupoEstatuas = scene.physics.add.group();
-        //
-        //grupo.addMultiple(array con spriteobjects de todas las estatuas);
-        //array de grupos?
-
-        //se añaden colisiones entre parejas de objetos, o entre objetos y grupos
-
-        //manejo de colisiones por defecto, (se puede usar entre jugadores y otros objetos estaticos)
-        //this.physics.add.collider(this.humano.SpriteObject , grupoEstatuas);
-         //this.physics.add.collider(this.fantasma.SpriteObject , grupoEstatuas);
-
-        //esta la hacemos diferente por que necesitamos manejar las colisiones de otra forma
+        //Colision entre jugadores, hacemos q se frenen tras colisionar
         this.physics.add.collider(this.humano.SpriteObject, this.fantasma.SpriteObject, this.manejoDeColisionJugadores);
 
-        const grupoAntorchas = scene.physics.add.group();
+        /*const grupoAntorchas = this.physics.add.group({immovable: true});
+        for(var i=0;i<this.antorchas_Array.length;i++){
+            grupoAntorchas.add(this.antorchas_Array[i].SpriteObject);
+        }
 
+        this.physics.add.collider(this.humano.SpriteObject,grupoAntorchas,() => {miObjetoX.m();});// Llama al método m() cuando ocurre la colisión*/
 
-        
-    
+        for(let i=0;i<this.antorchas_Array.length;i++){
+            
+            this.physics.add.collider(this.humano.SpriteObject,this.antorchas_Array[i].SpriteObject,
+                () => {
+                        if(this.humano.interacting){
+                            this.antorchas_Array[i].interactuar();
+                        }
+                    }
+                );
+        }
     }
 
     manejoDeColisionJugadores(humanoObj, fantasmaObj) 
     {
-        console.log("tocao");
-        //se contrarrestan sus velocidades ()
-        var vx= humanoObj.body.velocity.x + fantasmaObj.body.velocity.x;
-        var vy= humanoObj.body.velocity.y + fantasmaObj.body.velocity.y;
-
         humanoObj.setVelocityX(0);
         humanoObj.setVelocityY(0);
         fantasmaObj.setVelocityX(0);
