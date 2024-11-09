@@ -45,6 +45,9 @@ class Humano {
                 this.body.setVelocityX(this.velocidad);
                 this.body.setVelocityY(0);
                 break;
+            default:
+                console.log("nee");
+                break;
         }
         
     }
@@ -60,7 +63,8 @@ class Humano {
             if(control){
                 this.desplazarse(input);
             }
-            else if(this.direccion===input){
+            else if(this.direccion===input)
+            {
                 this.desplazarse('0');
             }
         }
@@ -143,7 +147,11 @@ class Antorcha
 
     constructor(x, y,scene)
     {
-        this.SpriteObject = scene.physics.add.image(x, y, 'ESTATUA_ATRAS');
+        //this.SpriteObject = scene.physics.add.image(x, y, 'ESTATUA_ATRAS');
+        this.rect = scene.add.rectangle(x, y, 20, 20, 0x00cccc);
+        this.SpriteObject =scene.physics.add.existing(this.rect); // Enable physics on the rectangle
+        
+
         this.body = this.SpriteObject.body;
         this.boolEncendido = false;
         this.body.setAllowGravity(false);
@@ -152,14 +160,19 @@ class Antorcha
 
     interactuar()//cada vez q interactuas cambia su estado
     {
-        if(this.boolEncendido)
+        if(this.boolEncendido)//apagar
         {
             this.boolEncendido = false;
+
+            this.rect.setFillStyle(0x00cccc, 1);
+            
             //this.SpriteObject.setTexture('sprite apagada');
         }
         else
         {
             this.boolEncendido = true;
+
+            this.rect.setFillStyle(0xffffff, 1);
             //this.SpriteObject.setTexture('sprite encendida');
         }
 
