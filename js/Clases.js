@@ -150,36 +150,30 @@ class Antorcha
        // this.SpriteObject = scene.physics.add.image(x, y, 'ESTATUA_ATRAS');
         this.rect = scene.add.rectangle(x, y, 20, 20, 0x00cccc);
         this.SpriteObject =scene.physics.add.existing(this.rect); // Enable physics on the rectangle
-        
+
+        var radioInteraccion=30;
+        this.circ = scene.add.circle(x, y, radioInteraccion, 0x000000,0);
+        this.AreaInteraccion =scene.physics.add.existing(this.circ); 
 
         this.body = this.SpriteObject.body;
         this.boolEncendido = false;
         this.body.setAllowGravity(false);
         this.body.setImmovable(true);
+        this.AreaInteraccion.body.setImmovable(true);
     }
 
-    interactuar()//cada vez q interactuas cambia su estado
+    encender()//cada vez q interactuas cambia su estado
     {
-        if(this.boolEncendido)//apagar
-        {
-            this.boolEncendido = false;
-
-            this.rect.setFillStyle(0x00cccc, 1);
-            
-            //this.SpriteObject.setTexture('sprite apagada');
-        }
-        else
-        {
-            this.boolEncendido = true;
-
-            this.rect.setFillStyle(0xffffff, 1);
-            //this.SpriteObject.setTexture('sprite encendida');
-        }
-
+        this.boolEncendido = true;
+        this.rect.setFillStyle(0xffffff, 1);
+        //this.SpriteObject.setTexture('sprite encendida');
         //la clase del nivel se encarga de comprobar si todas estan encendidas
         //en ese caso llamara a una funcion de mostrar pistas
         //comprobara si todas estan encendidas tras encender una
+    
     }
+
+        
 
 
 }

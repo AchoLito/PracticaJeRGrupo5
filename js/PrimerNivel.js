@@ -132,10 +132,11 @@ class PrimerNivel extends Phaser.Scene
 
         for(let i=0;i<this.antorchas_Array.length;i++){
             
-            this.physics.add.collider(this.humano.SpriteObject,this.antorchas_Array[i].SpriteObject,
+            this.physics.add.overlap(this.humano.SpriteObject,this.antorchas_Array[i].SpriteObject);
+            this.physics.add.overlap(this.humano.SpriteObject,this.antorchas_Array[i].AreaInteraccion,
                 () => {
                         if(this.humano.interacting){
-                            this.antorchas_Array[i].interactuar();
+                            this.antorchas_Array[i].encender();
                         }
                     }
                 );
