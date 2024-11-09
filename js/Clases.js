@@ -1,15 +1,15 @@
 class Humano {
-    constructor(x, y, direccion, scene)
+    constructor(x, y, scene)
     {
-        this.direccion = direccion;
-        this.interacting = false;
+        this.interacting = false; //indica si pulsas la tecla de interaccion
 
-        this.SpriteObject = scene.physics.add.image(40, 40, "ESTATUA_ATRAS");
+        this.SpriteObject = scene.physics.add.image(x, y, "ESTATUA_ATRAS");
         this.body = this.SpriteObject.body;
 
         this.body.setAllowGravity(false);
         this.body.setCollideWorldBounds(true);
-        this.SpriteObject.setPosition(x,y);
+       // this.SpriteObject.setPosition(x,y);
+       
     }
 
     cambiarDireccion(direccion)
@@ -79,17 +79,15 @@ class Humano {
 
 class Fantasma
 {
-    constructor(x, y, direccion,scene)
+    constructor(x, y,scene)
     {
-        this.direccion = direccion;
-        this.interacting = false;
+        this.interacting = false; //indica si pulsas la tecla de interaccion
 
-        this.SpriteObject = scene.physics.add.image(40, 40, 'ESTATUA_ATRAS');
+        this.SpriteObject = scene.physics.add.image(x, y, 'ESTATUA_ATRAS');
         this.body = this.SpriteObject.body;
 
         this.body.setAllowGravity(false);
         this.body.setCollideWorldBounds(true);
-        this.SpriteObject.setPosition(x,y);
     }
 
     cambiarDireccion(direccion){
@@ -161,17 +159,31 @@ class Antorcha
     //Objeto estatico
     //Se puede encender estando cerca y con la tecla de interaccion pulsada
 
-    constructor(x, y, direccion,scene)
+    constructor(x, y,scene)
     {
-        this.direccion = direccion;
-        this.interacting = false;
-
-        this.SpriteObject = scene.physics.add.image(40, 40, 'ESTATUA_ATRAS');
+        this.SpriteObject = scene.physics.add.image(x, y, 'ESTATUA_ATRAS');
         this.body = this.SpriteObject.body;
-
+        this.boolEncendido = false;
         this.body.setAllowGravity(false);
-        this.body.setCollideWorldBounds(true);
-        this.SpriteObject.setPosition(x,y);
+        this.body.setImmovable(true);
+    }
+
+    interactuar()//cada vez q interactuas cambia su estado
+    {
+        if(this.boolEncendido)
+        {
+            this.boolEncendido = false;
+            //this.SpriteObject.setTexture('sprite apagada');
+        }
+        else
+        {
+            this.boolEncendido = true;
+            //this.SpriteObject.setTexture('sprite encendida');
+        }
+
+        //la clase del nivel se encarga de comprobar si todas estan encendidas
+        //en ese caso llamara a una funcion de mostrar pistas
+        //comprobara si todas estan encendidas tras encender una
     }
 
 

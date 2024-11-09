@@ -14,10 +14,17 @@ class PrimerNivel extends Phaser.Scene
     {
         
         //HUMANO
-        this.humano = new Humano(20,40,'DOWN', this);
-        
+        this.humano = new Humano(20,40, this);
+
         //FANTASMA
-        this.fantasma = new Fantasma(70,40,'DOWN', this);
+        this.fantasma = new Fantasma(70,40, this);
+
+        this.antorchas_Array = Array(3);
+        for(var i=0;i<this.antorchas_Array.length;i++)
+        {
+            this.antorchas_Array[i] = new Antorcha(160*i+200,200, this);
+        }
+        
         
 /*
         var estatuasGO = Array(6);
@@ -114,7 +121,7 @@ class PrimerNivel extends Phaser.Scene
 
     inicializarColisiones(){
         //const grupoEstatuas = scene.physics.add.group();
-        //const grupoVelas = scene.physics.add.group();
+        //
         //grupo.addMultiple(array con spriteobjects de todas las estatuas);
         //array de grupos?
 
@@ -126,6 +133,9 @@ class PrimerNivel extends Phaser.Scene
 
         //esta la hacemos diferente por que necesitamos manejar las colisiones de otra forma
         this.physics.add.collider(this.humano.SpriteObject, this.fantasma.SpriteObject, this.manejoDeColisionJugadores);
+
+        const grupoAntorchas = scene.physics.add.group();
+
 
         
     
