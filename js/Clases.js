@@ -3,76 +3,66 @@ class Humano {
     {
         this.interacting = false; //indica si pulsas la tecla de interaccion
 
+        this.direccion="0";//quieto
+        this.velocidad=90;
+
         this.SpriteObject = scene.physics.add.image(x, y, "ESTATUA_ATRAS");
         this.body = this.SpriteObject.body;
 
         this.body.setAllowGravity(false);
         this.body.setCollideWorldBounds(true);
+
        // this.SpriteObject.setPosition(x,y);
        
     }
 
-    cambiarDireccion(direccion)
+    desplazarse(direccion)
     {
+        this.direccion = direccion;
         switch(direccion){
+            case '0'://quieto
+                //this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(0);
+                break;
             case 'UP':
                 //this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(-this.velocidad);
                 break;
             case 'DOWN':
                 //this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(this.velocidad);
                 break;
             case 'LEFT':
                 //this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
+                this.body.setVelocityX(-this.velocidad);
+                this.body.setVelocityY(0);
                 break;
             case 'RIGHT':
                // this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
+                this.body.setVelocityX(this.velocidad);
+                this.body.setVelocityY(0);
                 break;
         }
         
     }
 
-    input(control){
-        var velocidad=90;
-        switch(control)
-        {
-            //EJE Y
-            case 'UP':
-                this.body.setVelocityX(0);
-                this.body.setVelocityY(-velocidad);
-                this.cambiarDireccion(control);
-                break;
-            case 'DOWN':
-                this.body.setVelocityX(0);
-                this.body.setVelocityY(velocidad);
-                this.cambiarDireccion(control);
-                break;
-            case 'Y_NONE':
-                this.body.setVelocityY(0);
-                break;
-            //EJE X
-            case 'LEFT':
-                this.body.setVelocityX(-velocidad);
-                this.body.setVelocityY(0);
-                this.cambiarDireccion(control);
-                break;
-            case 'RIGHT':
-                this.body.setVelocityX(velocidad);
-                this.body.setVelocityY(0);
-                this.cambiarDireccion(control);
-                break;
-            case 'X_NONE':
-                this.body.setVelocityX(0);
-                break;
-            case 'INTERACT':
-                this.interacting =true;
-                break;
-            case 'I_NONE':
-                this.interacting =false;
-                break;
-            default:
-                this.body.setVelocityX(0);
-                this.body.setVelocityY(0);
-                break;
+    input(input,control)
+    { 
+        //Teclas especiales
+        if(input ==='INTERACT'){
+            this.interacting = control;
+        }
+        //Movimieno
+        else{
+            if(control){
+                this.desplazarse(input);
+            }
+            else if(this.direccion===input){
+                this.desplazarse('0');
+            }
         }
     }
 }
@@ -83,6 +73,9 @@ class Fantasma
     {
         this.interacting = false; //indica si pulsas la tecla de interaccion
 
+        this.direccion="0";//quieto
+        this.velocidad=90;
+
         this.SpriteObject = scene.physics.add.image(x, y, 'ESTATUA_ATRAS');
         this.body = this.SpriteObject.body;
 
@@ -90,66 +83,55 @@ class Fantasma
         this.body.setCollideWorldBounds(true);
     }
 
-    cambiarDireccion(direccion){
+    desplazarse(direccion)
+    {
+        this.direccion = direccion;
         switch(direccion){
+            case '0'://quieto
+                //this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(0);
+                break;
             case 'UP':
-                    //this.SpriteObject.setTexture('NOMBRETEXT');
+                //this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(-this.velocidad);
                 break;
             case 'DOWN':
-                   // this.SpriteObject.setTexture('NOMBRETEXT');
+                //this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
+                this.body.setVelocityX(0);
+                this.body.setVelocityY(this.velocidad);
                 break;
             case 'LEFT':
-                    //this.SpriteObject.setTexture('NOMBRETEXT');
+                //this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
+                this.body.setVelocityX(-this.velocidad);
+                this.body.setVelocityY(0);
                 break;
             case 'RIGHT':
-                   // this.SpriteObject.setTexture('NOMBRETEXT');
+               // this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
+                this.body.setVelocityX(this.velocidad);
+                this.body.setVelocityY(0);
                 break;
         }
         
     }
+    
 
-    input(control){
-        var velocidad=90;
-        switch(control)
-        {
-            //EJE Y
-            case 'UP':
-                this.body.setVelocityX(0);
-                this.body.setVelocityY(-velocidad);
-                this.cambiarDireccion(control);
-                break;
-            case 'DOWN':
-                this.body.setVelocityX(0);
-                this.body.setVelocityY(velocidad);
-                this.cambiarDireccion(control);
-                break;
-            case 'Y_NONE':
-                this.body.setVelocityY(0);
-                break;
-            //EJE X
-            case 'LEFT':
-                this.body.setVelocityX(-velocidad);
-                this.body.setVelocityY(0);
-                this.cambiarDireccion(control);
-                break;
-            case 'RIGHT':
-                this.body.setVelocityX(velocidad);
-                this.body.setVelocityY(0);
-                this.cambiarDireccion(control);
-                break;
-            case 'X_NONE':
-                this.body.setVelocityX(0);
-                break;
-            case 'INTERACT':
-                this.interacting =true;
-                break;
-            case 'I_NONE':
-                this.interacting =false;
-                break;
-            default:
-                this.body.setVelocityX(0);
-                this.body.setVelocityY(0);
-                break;
+    input(input,control)
+    { 
+        //Teclas especiales
+        if(input ==='INTERACT'){
+            this.interacting = control;
+        }
+        //Movimieno
+        else{
+            if(control){
+                this.desplazarse(input);
+            }
+            else if(this.direccion===input)
+            {
+                this.desplazarse('0');
+            }
         }
     }
 }

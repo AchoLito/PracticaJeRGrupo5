@@ -83,40 +83,40 @@ class PrimerNivel extends Phaser.Scene
     inicializarControlesHumano(){
         
         //MOVIMIENTO
-        this.input.keyboard.on('keydown-W', () => { this.humano.input('UP');});
-        this.input.keyboard.on('keyup-W', () => { this.humano.input('Y_NONE');});
+        this.input.keyboard.on('keydown-W', () => { this.humano.input('UP',true);});
+        this.input.keyboard.on('keyup-W', () => { this.humano.input('UP',false);});
 
-        this.input.keyboard.on('keydown-S', () => { this.humano.input('DOWN'); });
-        this.input.keyboard.on('keyup-S', () => { this.humano.input('Y_NONE');});
+        this.input.keyboard.on('keydown-S', () => { this.humano.input('DOWN',true); });
+        this.input.keyboard.on('keyup-S', () => { this.humano.input('DOWN',false);});
         
-        this.input.keyboard.on('keydown-A', () => { this.humano.input('LEFT');});
-        this.input.keyboard.on('keyup-A', () => {this.humano.input('X_NONE');});
+        this.input.keyboard.on('keydown-A', () => { this.humano.input('LEFT',true);});
+        this.input.keyboard.on('keyup-A', () => {this.humano.input('LEFT',false);});
 
-        this.input.keyboard.on('keydown-D', () => {this.humano.input('RIGHT');});
-        this.input.keyboard.on('keyup-D', () => {this.humano.input('X_NONE');});
+        this.input.keyboard.on('keydown-D', () => {this.humano.input('RIGHT',true);});
+        this.input.keyboard.on('keyup-D', () => {this.humano.input('RIGHT',false);});
 
         //TECLAS ESPECIALES
-        this.input.keyboard.on('keydown-E',  () => {this.humano.input('INTERACT');});
-        this.input.keyboard.on('keyup-E',  () => {this.humano.input('I_NONE');});
+        this.input.keyboard.on('keydown-E',  () => {this.humano.input('INTERACT',true);});
+        this.input.keyboard.on('keyup-E',  () => {this.humano.input('INTERACT',false);});
     }
 
     inicializarControlesFantasma(){
         //MOVIMIENTO
-        this.input.keyboard.on('keydown-UP', () => { this.fantasma.input('UP');});
-        this.input.keyboard.on('keyup-UP', () => { this.fantasma.input('Y_NONE');});
+        this.input.keyboard.on('keydown-UP', () => { this.fantasma.input('UP',true);});
+        this.input.keyboard.on('keyup-UP', () => { this.fantasma.input('UP',false);});
 
-        this.input.keyboard.on('keydown-DOWN', () => { this.fantasma.input('DOWN'); });
-        this.input.keyboard.on('keyup-DOWN', () => { this.fantasma.input('Y_NONE');});
+        this.input.keyboard.on('keydown-DOWN', () => { this.fantasma.input('DOWN',true); });
+        this.input.keyboard.on('keyup-DOWN', () => { this.fantasma.input('DOWN',false);});
         
-        this.input.keyboard.on('keydown-LEFT', () => { this.fantasma.input('LEFT');});
-        this.input.keyboard.on('keyup-LEFT', () => {this.fantasma.input('X_NONE');});
+        this.input.keyboard.on('keydown-LEFT', () => { this.fantasma.input('LEFT',true);});
+        this.input.keyboard.on('keyup-LEFT', () => {this.fantasma.input('LEFT',false);});
 
-        this.input.keyboard.on('keydown-RIGHT', () => {this.fantasma.input('RIGHT');});
-        this.input.keyboard.on('keyup-RIGHT', () => {this.fantasma.input('X_NONE');});
+        this.input.keyboard.on('keydown-RIGHT', () => {this.fantasma.input('RIGHT',true);});
+        this.input.keyboard.on('keyup-RIGHT', () => {this.fantasma.input('RIGHT',false);});
 
         //TECLAS ESPECIALES
-        this.input.keyboard.on('keydown-ENTER',  () => {this.fantasma.input('INTERACT');});
-        this.input.keyboard.on('keyup-ENTER',  () => {this.fantasma.input('I_NONE');});
+        this.input.keyboard.on('keydown-ENTER',  () => {this.fantasma.input('INTERACT',true);});
+        this.input.keyboard.on('keyup-ENTER',  () => {this.fantasma.input('INTERACT',false);});
     }
 
     inicializarColisiones(){
