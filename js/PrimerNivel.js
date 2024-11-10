@@ -149,6 +149,10 @@ class PrimerNivel extends Phaser.Scene
                     else if(resultadoInteraccion===false)//se apagó
                     {
                         this.numeroAntorchasEncendidas--;
+                        if(this.numeroAntorchasEncendidas+1 ===this.NUM_ANTORCHAS)
+                        {
+                            this.desActivarPistasAntorchas();
+                        }
                     }
                 }
                 else
@@ -169,10 +173,18 @@ class PrimerNivel extends Phaser.Scene
 
     activarPistasAntorchas()//se llama cuando se encienden todas las antorchas
     {
-
         for(var i=0;i<this.NUM_ANTORCHAS;i++)
         {
             this.antorchas_Array[i].rect.setFillStyle(0x0011ff, 1);
+        }
+    }
+    desActivarPistasAntorchas()
+    {
+        for(var i=0;i<this.NUM_ANTORCHAS;i++)
+        {
+            if( this.antorchas_Array[i].encendida){
+                this.antorchas_Array[i].rect.setFillStyle(0xffffff, 1);
+            }
         }
     }
 
