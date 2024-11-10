@@ -188,14 +188,17 @@ class PrimerNivel extends Phaser.Scene
         }
     }
 
-    girarEstatua(){
+/*    girarEstatua(){
         var sigue = true;
         for(var i = 0; i < estatua.length && sigue; i++)
         {
+        //no recorrer array (bombardeen el tiempo lineal)
             if(Math.abs(estatua[i].x - this.humano.x) < 1 && Math.abs(estatua[i].y - this.humano.y) < 1)
-            {
+            { 
+            //usar colisiones en vez de if con distancias
                 switch(estatua[i].direccion)
                 {
+                //no usar add si no texture
                     case 'ESTATUA_ATRAS.png':
                         estatuaGO[i] = this.physics.add.sprite(estatuaGO[i].x, estatuaGO[i].y, 'ESTATUA_DERECHA.png');
                         break;
@@ -213,5 +216,5 @@ class PrimerNivel extends Phaser.Scene
                 sigue = false;
             }
         }       
-    }
+    }*/
 }
