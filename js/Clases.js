@@ -174,13 +174,16 @@ class Antorcha
             {
                 this.encendida = false;
                 this.rect.setFillStyle(0x00cccc, 1);
+                return false;
             }
             else//encender
             {
                 this.encendida = true;
                 this.rect.setFillStyle(0xffffff, 1);
+                return true;
             }
         }
+        return -1;
         //this.SpriteObject.setTexture('sprite encendida');
     }
 

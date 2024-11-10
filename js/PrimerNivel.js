@@ -12,31 +12,32 @@ class PrimerNivel extends Phaser.Scene
 
     create()
     {
-        
         //HUMANO
         this.humano = new Humano(20,40, this);
 
         //FANTASMA
         this.fantasma = new Fantasma(70,40, this);
 
+        //ANTORCHAS
         this.antorchas_Array = [];
-        for(var i=0;i<3;i++)
+        this.NUM_ANTORCHAS = 4;
+        this.numeroAntorchasEncendidas=0;
+        for(var i=0;i<this.NUM_ANTORCHAS;i++)
         {
             this.antorchas_Array.push(new Antorcha(160*i+200,200, this));
         }
         
-        
-/*
+
+        //FUNCIONES DE RESPUESTA
+        this.inicializarControlesHumano();
+        this.inicializarControlesFantasma();
+        this.inicializarColisiones();
+       /*
         var estatuasGO = Array(6);
         var estatua = Array(6);
         //ESTATUA   
         crearEstatuas(estatuasGO);
 */
-        this.inicializarControlesHumano();
-        this.inicializarControlesFantasma();
-
-        this.inicializarColisiones();
-       
     }
 
     // Función llamada cuando los objetos colisionan
@@ -135,7 +136,20 @@ class PrimerNivel extends Phaser.Scene
             this.physics.add.overlap(this.humano.SpriteObject,this.antorchas_Array[i].AreaInteraccion,() => {
                 if(this.humano.interacting)
                 {
-                    this.antorchas_Array[i].interactuar();
+                    var resultadoInteraccion=this.antorchas_Array[i].interactuar();
+                    if(resultadoInteraccion===-1){}//no se pudo por cooldown
+                    else if(resultadoInteraccion===true)//se encendió
+                    {
+                        this.numeroAntorchasEncendidas++;
+                        if(this.numeroAntorchasEncendidas===this.NUM_ANTORCHAS)
+                        {
+                            this.activarPistasAntorchas();
+                        }
+                    }
+                    else if(resultadoInteraccion===false)//se apagó
+                    {
+                        this.numeroAntorchasEncendidas--;
+                    }
                 }
                 else
                 {
@@ -151,6 +165,15 @@ class PrimerNivel extends Phaser.Scene
         humanoObj.setVelocityY(0);
         fantasmaObj.setVelocityX(0);
         fantasmaObj.setVelocityY(0);
+    }
+
+    activarPistasAntorchas()//se llama cuando se encienden todas las antorchas
+    {
+
+        for(var i=0;i<this.NUM_ANTORCHAS;i++)
+        {
+            this.antorchas_Array[i].rect.setFillStyle(0x0011ff, 1);
+        }
     }
 
     girarEstatua(){
