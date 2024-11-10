@@ -127,19 +127,21 @@ class PrimerNivel extends Phaser.Scene
         for(var i=0;i<this.antorchas_Array.length;i++){
             grupoAntorchas.add(this.antorchas_Array[i].SpriteObject);
         }
-
-        this.physics.add.collider(this.humano.SpriteObject,grupoAntorchas,() => {miObjetoX.m();});// Llama al método m() cuando ocurre la colisión*/
+        this.physics.add.collider(this.humano.SpriteObject,grupoAntorchas,() => {});// Llama al método m() cuando ocurre la colisión*/
 
         for(let i=0;i<this.antorchas_Array.length;i++){
             
-            this.physics.add.overlap(this.humano.SpriteObject,this.antorchas_Array[i].SpriteObject);
-            this.physics.add.overlap(this.humano.SpriteObject,this.antorchas_Array[i].AreaInteraccion,
-                () => {
-                        if(this.humano.interacting){
-                            this.antorchas_Array[i].encender();
-                        }
-                    }
-                );
+            this.physics.add.collider(this.humano.SpriteObject,this.antorchas_Array[i].SpriteObject);
+            this.physics.add.overlap(this.humano.SpriteObject,this.antorchas_Array[i].AreaInteraccion,() => {
+                if(this.humano.interacting)
+                {
+                    this.antorchas_Array[i].interactuar();
+                }
+                else
+                {
+                    this.antorchas_Array[i].resetearCooldown();
+                }
+            });
         }
     }
 

@@ -120,7 +120,6 @@ class Fantasma
         
     }
     
-
     input(input,control)
     { 
         //Teclas especiales
@@ -147,6 +146,9 @@ class Antorcha
 
     constructor(x, y,scene)
     {
+        this.encendida=false;
+        this.cooldown=false;//indica si esta en espera para poder interactuar con ella
+
        // this.SpriteObject = scene.physics.add.image(x, y, 'ESTATUA_ATRAS');
         this.rect = scene.add.rectangle(x, y, 20, 20, 0x00cccc);
         this.SpriteObject =scene.physics.add.existing(this.rect); // Enable physics on the rectangle
@@ -156,24 +158,36 @@ class Antorcha
         this.AreaInteraccion =scene.physics.add.existing(this.circ); 
 
         this.body = this.SpriteObject.body;
-        this.boolEncendido = false;
         this.body.setAllowGravity(false);
         this.body.setImmovable(true);
         this.AreaInteraccion.body.setImmovable(true);
-    }
-
-    encender()//cada vez q interactuas cambia su estado
-    {
-        this.boolEncendido = true;
-        this.rect.setFillStyle(0xffffff, 1);
-        //this.SpriteObject.setTexture('sprite encendida');
-        //la clase del nivel se encarga de comprobar si todas estan encendidas
-        //en ese caso llamara a una funcion de mostrar pistas
-        //comprobara si todas estan encendidas tras encender una
-    
-    }
 
         
+    }
+
+    interactuar()//cada vez q interactuas cambia su estado
+    {
+        if(!this.cooldown)//si no hay cooldow
+        {
+            this.cooldown = true;
+            if(this.encendida)//apagar
+            {
+                this.encendida = false;
+                this.rect.setFillStyle(0x00cccc, 1);
+            }
+            else//encender
+            {
+                this.encendida = true;
+                this.rect.setFillStyle(0xffffff, 1);
+            }
+        }
+        //this.SpriteObject.setTexture('sprite encendida');
+    }
+
+    resetearCooldown()
+    {
+        this.cooldown = false;
+    }
 
 
 }
