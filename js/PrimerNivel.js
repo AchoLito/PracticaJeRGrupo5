@@ -193,6 +193,20 @@ class PrimerNivel extends Phaser.Scene
 
         this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
         this.physics.add.collider(this.fantasma.SpriteObject,grupoMuros);
+
+        //Recatangulo 5
+        var rect = this.add.rectangle(255, 260, 140, 55, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
+        this.physics.add.collider(this.fantasma.SpriteObject,grupoMuros);
+
+        //Recatangulo 6
+        var rect = this.add.rectangle(225, 403, 80, 340, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
+        this.physics.add.collider(this.fantasma.SpriteObject,grupoMuros);
     }
 
     manejoDeColisionJugadores(humanoObj, fantasmaObj) 
