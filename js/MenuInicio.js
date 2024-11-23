@@ -12,9 +12,9 @@ class MenuInicio extends Phaser.Scene
         this.load.audio("musicaMenu"); // sonido música fondo menú
 
         this.load.image("tituloJuego");
-        this.load.image("botonJugar"); // imagen del botón de jugar
-        this.load.image("botonAjustes"); // imagen del botón de ajustes
-        this.load.image("botonControles"); // imagen del botón de controles
+        this.load.image("botonJugar", "imagenes/BotonJugar.png"); // imagen del botón de jugar
+        this.load.image("botonControles", "imagenes/BotonControles.png"); // imagen del botón de controles
+        this.load.image("botonCreditos", "imagenes/BotonCreditos.png"); // imagen del botón de créditos
     }
 
     create()
@@ -33,21 +33,21 @@ class MenuInicio extends Phaser.Scene
                 this.scene.start("Historia");
             });
 
-        const botonAjustes = this.add.image("botonAjustes")
+        const botonControles = this.add.image("botonControles")
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.sound.play("clic");
+                this.scene.stop("MenuInicio");
+                this.scene.start("Controles");
+            });
+            
+        const botonCreditos = this.add.image("botonCreditos")
             .setInteractive()
             .on("pointerdown", () => {
                 this.sound.play("clic");
                 this.scene.stop("MenuInicio");
                 this.scene.start("MenuAjustes");
             });
-
-        const botonSalir = this.add.image("botonControles")
-            .setInteractive()
-            .on("pointerdown", () => {
-                this.sound.play("clic");
-                this.scene.stop("MenuInicio");
-                this.scene.start("Controles");
-            })
     }
 
     update()
