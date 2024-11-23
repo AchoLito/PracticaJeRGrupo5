@@ -173,6 +173,30 @@ class PrimerNivel extends Phaser.Scene
         }
     }
 
+    colliderMuros()
+    {
+        const grupoMuros = this.physics.add.group({immovable: true});
+
+        //Rectangulo 1
+        var rect = this.add.rectangle(1280/2, 92 , 1280,80, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        //Rectangulo 2
+        var rect = this.add.rectangle(45, 325 , 90, 492, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        //Rectangulo 3
+        var rect = this.add.rectangle(800, 200, 702, 175, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        //Rectangulo 4
+        var rect = this.add.rectangle(800, 200, 702, 175, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
+        this.physics.add.collider(this.fantasma.SpriteObject,grupoMuros);
+    }
+
     manejoDeColisionJugadores(humanoObj, fantasmaObj) 
     {
         humanoObj.setVelocityX(0);
