@@ -19,19 +19,15 @@ class PrimerNivel extends Phaser.Scene
         this.add.image(1280/2,900/2,'FONDO');
 
         //HUMANO
-        this.humano = new Humano(20,40, this);
+        this.humano = new Humano(580,500, this);
 
         //FANTASMA
-        this.fantasma = new Fantasma(70,40, this);
+        this.fantasma = new Fantasma(659,500, this);
 
         //ANTORCHAS
         this.antorchas_Array = [];
         this.NUM_ANTORCHAS = 4;
         this.numeroAntorchasEncendidas=0;
-        for(var i=0;i<this.NUM_ANTORCHAS;i++)
-        {
-            this.antorchas_Array.push(new Antorcha(160*i+200,200, this));
-        }
 
         this.antorchas_Array.push(new Antorcha(500,320, this));
         this.antorchas_Array.push(new Antorcha(793,320, this));
@@ -42,6 +38,8 @@ class PrimerNivel extends Phaser.Scene
         this.inicializarControlesHumano();
         this.inicializarControlesFantasma();
         this.inicializarColisiones();
+        this.colliderMuros();
+
        /*
         var estatuasGO = Array(6);
         var estatua = Array(6);
