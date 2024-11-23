@@ -38,11 +38,12 @@ class PrimerNivel extends Phaser.Scene
         //ESTATUAS
         this.estatuas_Array = [];
         this.NUM_ESTATUAS = 4;
+        this.numeroEstatuasCorrectas = 0;
 
-        this.estatuas_Array.push(new Estatua(320,320, this, 'ESTATUA_FRONTAL'));
-        this.estatuas_Array.push(new Estatua(910,320, this,'ESTATUA_DERECHA'));
-        this.estatuas_Array.push(new Estatua(320,715, this,'ESTATUA_DERECHA'));
-        this.estatuas_Array.push(new Estatua(910,715, this,'ESTATUA_IZQUIERDA'));
+        this.estatuas_Array.push(new Estatua(320,320, this, 'ESTATUA_ATRAS','ESTATUA_DERECHA'));
+        this.estatuas_Array.push(new Estatua(910,320, this,'ESTATUA_FRONTAL','ESTATUA_IZQUIERDA'));
+        this.estatuas_Array.push(new Estatua(320,715, this,'ESTATUA_IZQUIERDA','ESTATUA_FRONTAL'));
+        this.estatuas_Array.push(new Estatua(910,715, this,'ESTATUA_DERECHA','ESTATUA_ATRAS'));
 
         //DIALOGOS
         this.dialogo = new Dialogo(this);
@@ -201,10 +202,30 @@ class PrimerNivel extends Phaser.Scene
                 if(this.humano.interacting)
                 {
                     var resultadoInteraccion=this.estatuas_Array[i].girarEstatua();
-                    if(!(resultadoInteraccion===-1)) //No entra en el if si tiene cooldown
+                    if(!(resultadoInteraccion===-1))
                     {
-                        
-                    }
+                        if(this.comprobarPosicionEstatua(this.estatuas_Array[i]))
+                        {
+                            this.estatuas_Array[i].correcta = true;
+                        }
+                        else
+                        {
+                            this.estatuas_Array[i].correcta = false;
+                        }
+                        this.numeroEstatuasCorrectas = 0;
+                        for(let j = 0; j < this.estatuas_Array.length; j++)
+                        {
+                            if(this.estatuas_Array[j].correcta)
+                            {
+                                this.numeroEstatuasCorrectas++;
+                            }
+                        }
+
+                        if(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS)
+                        {
+                            this.accionEstatua();
+                        }
+                    }                    
                 }
                 else
                 {
@@ -277,33 +298,23 @@ class PrimerNivel extends Phaser.Scene
         }
     }
 
-/*    girarEstatua(){
-        var sigue = true;
-        for(var i = 0; i < estatua.length && sigue; i++)
+    comprobarPosicionEstatua(estatua)
+    {
+        if(estatua.direccion === estatua.posCorrecta)
         {
-        //no recorrer array (bombardeen el tiempo lineal)
-            if(Math.abs(estatua[i].x - this.humano.x) < 1 && Math.abs(estatua[i].y - this.humano.y) < 1)
-            { 
-            //usar colisiones en vez de if con distancias
-                switch(estatua[i].direccion)
-                {
-                //no usar add si no texture
-                    case 'ESTATUA_ATRAS.png':
-                        estatuaGO[i] = this.physics.add.sprite(estatuaGO[i].x, estatuaGO[i].y, 'ESTATUA_DERECHA.png');
-                        break;
-                    case 'ESTATUA_DERECHA.png':
-                        estatuaGO[i] = this.physics.add.sprite(estatuaGO[i].x, estatuaGO[i].y, 'ESTATUA_FRONTAL.png');
-                        break;
-                    case 'ESTATUA_IZQ.png':
-                        estatuaGO[i] = this.physics.add.sprite(estatuaGO[i].x, estatuaGO[i].y, 'ESTATUA_ATRAS.png');
-                        break;
-                    case 'ESTATUA_FRONTAL.png':
-                        estatuaGO[i] = this.physics.add.sprite(estatuaGO[i].x, estatuaGO[i].y, 'ESTATUA_IZQ.png');
-                        break; 
-                }
-                
-                sigue = false;
-            }
-        }       
-    }*/
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    accionEstatua()
+    {
+        //Aqui se haria la implementacion de lo que pase cuando
+        //las estatuas esten en su posicion
+        console.log("Has hecho el puzle");
+    }
 }

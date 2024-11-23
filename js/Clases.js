@@ -196,7 +196,7 @@ class Antorcha
 }
 class Estatua
 {
-    constructor(x, y, scene, direccion)
+    constructor(x, y, scene, direccion, pos)
     {
         this.direccion = direccion;
 
@@ -210,6 +210,9 @@ class Estatua
 
         this.circ = scene.add.rectangle(x, y, 130, 160, 0x000000,0);
         this.AreaInteraccion =scene.physics.add.existing(this.circ);
+
+        this.posCorrecta = pos;
+        this.correcta = false;
     } 
 
     girarEstatua()
