@@ -34,6 +34,19 @@ class PrimerNivel extends Phaser.Scene
         this.antorchas_Array.push(new Antorcha(500,715, this));
         this.antorchas_Array.push(new Antorcha(793,715, this));
 
+        //ESTATUAS
+        this.estatuas_Array = [];
+        this.NUM_ESTATUAS = 6;
+
+        this.estatuas_Array.push(new Estatua(320,320, this, 'ESTATUA_FRONTAL'));
+        this.estatuas_Array.push(new Estatua(910,320, this,'ESTATUA_DERECHA'));
+        this.estatuas_Array.push(new Estatua(500,715, this,'ESTATUA_DERECHA'));
+        this.estatuas_Array.push(new Estatua(793,715, this,'ESTATUA_IZQUIERDA'));
+        this.estatuas_Array.push(new Estatua(793,715, this,'ESTATUA_ATRAS'));
+        this.estatuas_Array.push(new Estatua(793,715, this,'ESTATUA_IZQUIERDA'));
+
+
+
         //FUNCIONES DE RESPUESTA
         this.inicializarControlesHumano();
         this.inicializarControlesFantasma();

@@ -196,11 +196,11 @@ class Antorcha
 }
 class Estatua
 {
-    constructor(x, y, direccion, scene)
+    constructor(x, y, scene, direccion)
     {
         this.direccion = direccion;
 
-        this.SpriteObject =scene.physics.add.image(x, y, 'ESTATUA_FRONTAL');
+        this.SpriteObject = scene.physics.add.image(x, y, direccion);
 
         this.body = this.SpriteObject.body;
         this.body.setAllowGravity(false);
