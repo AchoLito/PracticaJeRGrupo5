@@ -207,3 +207,113 @@ class Estatua
         this.body.setImmovable(true);
     } 
 }
+
+class Dialogo 
+{
+    constructor(scene) 
+    {
+        this.scene = scene;
+        this.cuadroDialogo = null;
+        this.imagenPersonaje = null;
+        this.texto = null;
+        this.isVisible = false;
+        this.dialogos = [];
+        this.indiceDialogo = 0;
+        this.teclaEspacio = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // Tecla espacio
+        this.puedeAvanzar = true;
+    }
+
+    // Método para configurar los diálogos
+    configurarDialogos(dialogos) 
+    {
+        this.dialogos = dialogos;
+        this.mostrarDialogo(this.dialogos[this.indiceDialogo]);
+    }
+
+    // Mostrar el cuadro de diálogo, la imagen del personaje y el texto
+    mostrarDialogo(dialogo) 
+    {
+        // Crear o actualizar el cuadro de diálogo
+        if (!this.cuadroDialogo) 
+        {
+            this.cuadroDialogo = this.scene.add.image(this.scene.cameras.main.centerX, this.scene.cameras.main.centerY + 100, 'cuadro_dialogo');
+            this.cuadroDialogo.setDepth(10);
+        }
+
+        // Crear o actualizar la imagen del personaje
+        if (!this.imagenPersonaje) 
+        {
+            this.imagenPersonaje = this.scene.add.image(this.scene.cameras.main.centerX - 200, this.scene.cameras.main.centerY + 50, dialogo.imagenPersonaje);
+            this.imagenPersonaje.setDepth(11);
+        }
+        else 
+        {
+            this.imagenPersonaje.setTexture(dialogo.imagenPersonaje);
+        }
+
+        // Crear o actualizar el texto
+        if (!this.texto) 
+        {
+            this.texto = this.scene.add.text(this.scene.cameras.main.centerX + 50, this.scene.cameras.main.centerY + 50, dialogo.mensaje, {
+                font: '18px Arial',
+                fill: '#ffffff',
+                wordWrap: { width: 600, useAdvancedWrap: true }
+            });
+            this.texto.setDepth(11);
+        } 
+        else 
+        {
+            this.texto.setText(dialogo.mensaje);
+        }
+
+        this.setVisible(true);
+    }
+
+    // Cambiar la visibilidad del diálogo
+    setVisible(visible) 
+    {
+        if (this.cuadroDialogo) this.cuadroDialogo.setVisible(visible);
+        if (this.imagenPersonaje) this.imagenPersonaje.setVisible(visible);
+        if (this.texto) this.texto.setVisible(visible);
+        this.isVisible = visible;
+    }
+
+    // Avanzar al siguiente diálogo
+    avanzarDialogo() 
+    {
+        if (!this.puedeAvanzar) return; 
+
+        this.puedeAvanzar = false; 
+
+        this.indiceDialogo++;
+
+        // Verificar si hay más diálogos
+        if (this.indiceDialogo < this.dialogos.length) 
+        {
+            this.mostrarDialogo(this.dialogos[this.indiceDialogo]);
+        } 
+        else 
+        {
+            this.ocultarDialogo();
+        }
+
+        setTimeout(() => {
+            this.puedeAvanzar = true; 
+        }, 1000);
+    }
+
+    // Ocultar el diálogo
+    ocultarDialogo() 
+    {
+        this.setVisible(false);
+    }
+
+    // Comprobar si presiona la tecla espacio
+    actualizar() 
+    {
+        if (this.teclaEspacio.isDown && this.puedeAvanzar) 
+        {
+            this.avanzarDialogo();
+        }
+    }
+}

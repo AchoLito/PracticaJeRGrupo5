@@ -3,6 +3,7 @@ class PrimerNivel extends Phaser.Scene
     constructor()
     {
         super({ key: "PrimerNivel"});
+        this.dialogo = null;
     }
 
     preload()
@@ -43,7 +44,16 @@ class PrimerNivel extends Phaser.Scene
         this.estatuas_Array.push(new Estatua(320,715, this,'ESTATUA_DERECHA'));
         this.estatuas_Array.push(new Estatua(910,715, this,'ESTATUA_IZQUIERDA'));
 
+        //DIALOGOS
+        this.dialogo = new Dialogo(this);
 
+        // Configurar los diálogos (puedes tener varios)
+        this.dialogo.configurarDialogos
+        ([
+            { imagenPersonaje: 'ESTATUA_FRONTAL', mensaje: '¡Hola, soy el primer personaje!' },
+            { imagenPersonaje: 'ESTATUA_ATRAS', mensaje: 'Ahora soy otro personaje, ¿qué tal?' },
+            { imagenPersonaje: 'ESTATUA_FRONTAL', mensaje: 'Gracias por escucharme. ¡Nos vemos pronto!' }
+        ]);
 
         //FUNCIONES DE RESPUESTA
         this.inicializarControlesHumano();
@@ -64,7 +74,7 @@ class PrimerNivel extends Phaser.Scene
     
     update()
     {
-
+        this.dialogo.actualizar();
     }
 
     crearEstatua(estatua){
