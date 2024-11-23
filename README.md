@@ -4,7 +4,7 @@ JUEGOS EN RED
 
 DISEÑO Y DESARROLLO DE VIDEOJUEGOS - URJC
 
-![Logo Equipo](Imágenes/Logo_PatataGames_re.png "Logo del equipo") 
+![Logo Equipo](imagenes/Logo_PatataGames_re.png "Logo del equipo") 
 
  **PATATA GAMES**  
  
@@ -36,16 +36,16 @@ El tono del juego es misterioso y tenso, pero no terror puro. El diseño visual 
 
 La perspectiva será similar a la de las imágenes 1, 2 y 3, pero con un estilo gráfico inspirado en las imágenes 4, 5 y 6.  
 
-![Imagen 1 de la perspectiva](Imágenes/Imagen1_perspectiva.jpg "Imagen 1 de la perspectiva")  
-![Imagen 2 de la perspectiva](Imágenes/Imagen2_perspectiva.jpg "Imagen 2 de la perspectiva")  
-![Imagen 3 de la perspectiva](Imágenes/Imagen3_perspectiva.jpg "Imagen 3 de la perspectiva")  
+![Imagen 1 de la perspectiva](imagenes/Imagen1_perspectiva.jpg "Imagen 1 de la perspectiva")  
+![Imagen 2 de la perspectiva](imagenes/Imagen2_perspectiva.jpg "Imagen 2 de la perspectiva")  
+![Imagen 3 de la perspectiva](imagenes/Imagen3_perspectiva.jpg "Imagen 3 de la perspectiva")  
 
 *Imágenes 1, 2 y 3: Referencias de vista “Top - Down”*      
 
 
-![Imagen 2 del estilo visual](Imágenes/Imagen2_estiloVisual.jpg "Imagen 2 del estilo visual")  
-![Imagen 3 del estilo visual](Imágenes/Imagen3_estiloVisual.png "Imagen 3 del estilo visual")   
-![Imagen 4 del estilo visual](Imágenes/Imagen4_estiloVisual.jpg "Imagen 4 del estilo visual")  
+![Imagen 2 del estilo visual](imagenes/Imagen2_estiloVisual.jpg "Imagen 2 del estilo visual")  
+![Imagen 3 del estilo visual](imagenes/Imagen3_estiloVisual.png "Imagen 3 del estilo visual")   
+![Imagen 4 del estilo visual](imagenes/Imagen4_estiloVisual.jpg "Imagen 4 del estilo visual")  
 
 *Imágenes 4, 5 y 6: Referencias del estilo visual.*  
 
@@ -126,7 +126,7 @@ La única oportunidad del fantasma para escapar es romper la maldición que le a
 ##### 9.1.2. APARIENCIA
 La apariencia del fantasma está fuertemente inspirada en la cultura popular, su aspecto está basado en la imagen tradicional de un fantasma como es la de la sabana flotando. Esto es así para facilitar que el jugador sepa desde un primer momento que el personaje está muerto.   
 
-![Imagen fantasma](Imágenes/Imagen_fantasma.jpg "Imagen Fantasma")
+![Imagen fantasma](imagenes/Imagen_fantasma.jpg "Imagen Fantasma")
 
 *Imagen 7: Referencia para la apariencia del fantasma.*  
 
@@ -138,7 +138,7 @@ El bandido es el segundo personaje jugable del videojuego. Al igual que pasa con
 ##### 9.2.2. APARIENCIA
 El bandido va vestido con unos pantalones negros y una camisa blanca, propia de la época en la que vivió; por encima de dicha ropa lleva una larga capa con capucha que le permite cubrirse la cara para pasar desapercibido. Esta capa cumple dos propósitos, el primero es aportar un trasfondo al personaje, ya que da a entender que tiene un pasado misterioso. Por otra parte, cumple un propósito con la narrativa, dado que impide que el jugador sepa si el personaje está muerto o no.    
 
-![Imagen Bandido 2](Imágenes/Imagen2_Bandido.png "Imagen Bandido 2")
+![Imagen Bandido 2](imagenes/Imagen2_Bandido.png "Imagen Bandido 2")
 
 *Imágenes 8 y 9: Referencias para la apariencia del humano.*  
 
@@ -152,7 +152,7 @@ Los antiguos guardias del castillo se vieron arrastrados por la maldición puest
 
 Los soldados del castillo van vestidos con unas armaduras que les cubren todo el cuerpo, dichas armaduras son propias de la época en la que murieron los soldados. Al igual que con el bandido, su vestimenta provoca que los jugadores desconozcan si los guardias están vivos o muertos.  
 
-![Imagen Enemigos](Imágenes/Imagen_guardias.png "Imagen enemigos")
+![Imagen Enemigos](imagenes/Imagen_guardias.png "Imagen enemigos")
 
 *Imagen 10: Referencias para la apariencia de los enemigos.*
 
