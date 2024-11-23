@@ -8,10 +8,16 @@ class PrimerNivel extends Phaser.Scene
     preload()
     {
         this.load.image('ESTATUA_ATRAS','imagenes/ESTATUA_ATRAS.png');
+        this.load.image('ESTATUA_FRONTAL','imagenes/ESTATUA_FRONTAL.png');
+        this.load.image('ESTATUA_IZQUIERDA','imagenes/ESTATUA_IZQ.png');
+        this.load.image('ESTATUA_DERECHA','imagenes/ESTATUA_DERECHA.png');
+        this.load.image('FONDO','imagenes/Escenario.png');
     }
 
     create()
     {
+        this.add.image(1280/2,900/2,'FONDO');
+
         //HUMANO
         this.humano = new Humano(20,40, this);
 
@@ -26,7 +32,11 @@ class PrimerNivel extends Phaser.Scene
         {
             this.antorchas_Array.push(new Antorcha(160*i+200,200, this));
         }
-        
+
+        this.antorchas_Array.push(new Antorcha(500,320, this));
+        this.antorchas_Array.push(new Antorcha(793,320, this));
+        this.antorchas_Array.push(new Antorcha(500,715, this));
+        this.antorchas_Array.push(new Antorcha(793,715, this));
 
         //FUNCIONES DE RESPUESTA
         this.inicializarControlesHumano();
