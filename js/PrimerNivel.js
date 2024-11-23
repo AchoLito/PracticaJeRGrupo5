@@ -159,6 +159,7 @@ class PrimerNivel extends Phaser.Scene
         }
         this.physics.add.collider(this.humano.SpriteObject,grupoAntorchas,() => {});// Llama al método m() cuando ocurre la colisión*/
 
+        //Colision de las antorchas
         for(let i=0;i<this.antorchas_Array.length;i++){
             
             this.physics.add.collider(this.humano.SpriteObject,this.antorchas_Array[i].SpriteObject);
@@ -189,6 +190,13 @@ class PrimerNivel extends Phaser.Scene
                     this.antorchas_Array[i].resetearCooldown();
                 }
             });
+        }
+
+        //Colision de las estatuas
+        for(let i=0;i<this.estatuas_Array.length;i++){
+            
+            this.physics.add.collider(this.humano.SpriteObject,this.estatuas_Array[i].SpriteObject);
+            this.physics.add.overlap(this.humano.SpriteObject,this.estatuas_Array[i].AreaInteraccion);
         }
     }
 

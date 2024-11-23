@@ -204,8 +204,15 @@ class Estatua
 
         this.body = this.SpriteObject.body;
         this.body.setAllowGravity(false);
-        this.body.setImmovable(true);
+        this.body.setImmovable(false);
+
+        this.cooldown = false;
     } 
+
+    girarEstatua()
+    {
+
+    }
 }
 
 class Dialogo 
