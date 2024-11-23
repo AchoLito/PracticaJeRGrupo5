@@ -40,6 +40,7 @@ class PrimerNivel extends Phaser.Scene
         this.NUM_ESTATUAS = 4;
         this.numeroEstatuasCorrectas = 0;
 
+        //El segundo string es para marcar cual es la posicion correcta de la estatua
         this.estatuas_Array.push(new Estatua(320,320, this, 'ESTATUA_ATRAS','ESTATUA_DERECHA'));
         this.estatuas_Array.push(new Estatua(910,320, this,'ESTATUA_FRONTAL','ESTATUA_IZQUIERDA'));
         this.estatuas_Array.push(new Estatua(320,715, this,'ESTATUA_IZQUIERDA','ESTATUA_FRONTAL'));
@@ -267,6 +268,17 @@ class PrimerNivel extends Phaser.Scene
 
         //Recatangulo 6
         var rect = this.add.rectangle(225, 403, 80, 340, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
+        this.physics.add.collider(this.fantasma.SpriteObject,grupoMuros);
+
+        //Recatangulo 7
+        var rect = this.add.rectangle(640, 910, 1280, 340, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        //Recatangulo 8
+        var rect = this.add.rectangle(110, 910, 300, 410, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
