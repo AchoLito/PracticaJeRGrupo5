@@ -200,23 +200,10 @@ class PrimerNivel extends Phaser.Scene
             this.physics.add.overlap(this.humano.SpriteObject,this.estatuas_Array[i].AreaInteraccion,() => {
                 if(this.humano.interacting)
                 {
-                    var resultadoInteraccion=this.antorchas_Array[i].interactuar();
-                    if(resultadoInteraccion===-1){}//no se pudo por cooldown
-                    else if(resultadoInteraccion===true)//se encendió
+                    var resultadoInteraccion=this.estatuas_Array[i].girarEstatua();
+                    if(!(resultadoInteraccion===-1)) //No entra en el if si tiene cooldown
                     {
-                        this.numeroAntorchasEncendidas++;
-                        if(this.numeroAntorchasEncendidas===this.NUM_ANTORCHAS)
-                        {
-                            this.activarPistasAntorchas();
-                        }
-                    }
-                    else if(resultadoInteraccion===false)//se apagó
-                    {
-                        this.numeroAntorchasEncendidas--;
-                        if(this.numeroAntorchasEncendidas+1 ===this.NUM_ANTORCHAS)
-                        {
-                            this.desActivarPistasAntorchas();
-                        }
+                        
                     }
                 }
                 else

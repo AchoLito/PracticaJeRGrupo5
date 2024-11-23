@@ -207,6 +207,9 @@ class Estatua
         this.body.setImmovable(true);
 
         this.cooldown = false;
+
+        this.circ = scene.add.rectangle(x, y, 130, 160, 0x000000,0);
+        this.AreaInteraccion =scene.physics.add.existing(this.circ);
     } 
 
     girarEstatua()
@@ -235,7 +238,7 @@ class Estatua
             }
             return 1;
         }
-        return -1
+        return -1;
     }
 
     resetearCooldown()
