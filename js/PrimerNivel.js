@@ -76,7 +76,7 @@ class PrimerNivel extends Phaser.Scene
     {
         this.dialogo.actualizar();
     }
-
+    /*
     crearEstatua(estatua){
         estatua[0] = this.physics.add.sprite(80, 80, 'ESTATUA_ATRAS.png');
         estatua[0].body.setImmovable(true);
@@ -108,6 +108,7 @@ class PrimerNivel extends Phaser.Scene
         estatua[5].body.setAllowGravity(false);
         this.estatua[5] = new Estatua(100, 100,'ESTATUA_ATRAS.png');
     }
+    */
 
     
     inicializarControlesHumano(){
@@ -196,7 +197,33 @@ class PrimerNivel extends Phaser.Scene
         for(let i=0;i<this.estatuas_Array.length;i++){
             
             this.physics.add.collider(this.humano.SpriteObject,this.estatuas_Array[i].SpriteObject);
-            this.physics.add.overlap(this.humano.SpriteObject,this.estatuas_Array[i].AreaInteraccion);
+            this.physics.add.overlap(this.humano.SpriteObject,this.estatuas_Array[i].AreaInteraccion,() => {
+                if(this.humano.interacting)
+                {
+                    var resultadoInteraccion=this.antorchas_Array[i].interactuar();
+                    if(resultadoInteraccion===-1){}//no se pudo por cooldown
+                    else if(resultadoInteraccion===true)//se encendió
+                    {
+                        this.numeroAntorchasEncendidas++;
+                        if(this.numeroAntorchasEncendidas===this.NUM_ANTORCHAS)
+                        {
+                            this.activarPistasAntorchas();
+                        }
+                    }
+                    else if(resultadoInteraccion===false)//se apagó
+                    {
+                        this.numeroAntorchasEncendidas--;
+                        if(this.numeroAntorchasEncendidas+1 ===this.NUM_ANTORCHAS)
+                        {
+                            this.desActivarPistasAntorchas();
+                        }
+                    }
+                }
+                else
+                {
+                    this.estatuas_Array[i].resetearCooldown();
+                }
+            });
         }
     }
 

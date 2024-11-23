@@ -204,14 +204,43 @@ class Estatua
 
         this.body = this.SpriteObject.body;
         this.body.setAllowGravity(false);
-        this.body.setImmovable(false);
+        this.body.setImmovable(true);
 
         this.cooldown = false;
     } 
 
     girarEstatua()
     {
+        if(!this.cooldown)//si no hay cooldow
+        {
+            this.cooldown = true;
+            switch(this.direccion)
+            {
+                case 'ESTATUA_ATRAS':
+                    this.direccion = 'ESTATUA_DERECHA';
+                    this.SpriteObject.setTexture('ESTATUA_DERECHA');
+                    break;
+                case 'ESTATUA_FRONTAL':
+                    this.direccion = 'ESTATUA_IZQUIERDA';
+                    this.SpriteObject.setTexture('ESTATUA_IZQUIERDA');
+                    break;
+                case 'ESTATUA_DERECHA':
+                    this.direccion = 'ESTATUA_FRONTAL';
+                    this.SpriteObject.setTexture('ESTATUA_FRONTAL');
+                    break;
+                case 'ESTATUA_IZQUIERDA':
+                    this.direccion = 'ESTATUA_ATRAS';
+                    this.SpriteObject.setTexture('ESTATUA_ATRAS');
+                    break;
+            }
+            return 1;
+        }
+        return -1
+    }
 
+    resetearCooldown()
+    {
+        this.cooldown = false;
     }
 }
 
