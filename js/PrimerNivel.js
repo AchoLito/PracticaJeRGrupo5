@@ -8,10 +8,19 @@ class PrimerNivel extends Phaser.Scene
 
     preload()
     {
+        //SPRITE FANTASMA
+        this.load.image('FANTASMA_ATRAS', 'imagenes/FANTASMA_ATRAS.png');
+        this.load.image('FANTASMA_FRONTAL', 'imagenes/FANTASMA_DELANTE.png');
+        this.load.image('FANTASMA_IZQUIERDA', 'imagenes/FANTASMA_PERFIL_IZQUIERDO.png');
+        this.load.image('FANTASMA_DERECHA', 'imagenes/FANTASMA_PERFIL_DERECHO.png');
+
+        //SPRITE ESTATUA
         this.load.image('ESTATUA_ATRAS','imagenes/ESTATUA_ATRAS.png');
         this.load.image('ESTATUA_FRONTAL','imagenes/ESTATUA_FRONTAL.png');
         this.load.image('ESTATUA_IZQUIERDA','imagenes/ESTATUA_IZQ.png');
         this.load.image('ESTATUA_DERECHA','imagenes/ESTATUA_DERECHA.png');
+
+        //SPRITE FONDO
         this.load.image('FONDO','imagenes/Escenario.png');
     }
 
