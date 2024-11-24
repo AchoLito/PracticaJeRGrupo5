@@ -80,47 +80,12 @@ class PrimerNivel extends Phaser.Scene
 */
     }
 
-    // Función llamada cuando los objetos colisionan
-    
+    // Función llamada cuando los objetos colisionan    
     
     update()
     {
         this.dialogo.actualizar();
     }
-    /*
-    crearEstatua(estatua){
-        estatua[0] = this.physics.add.sprite(80, 80, 'ESTATUA_ATRAS.png');
-        estatua[0].body.setImmovable(true);
-        estatua[0].body.setAllowGravity(false);
-        this.estatua[0] = new Estatua(80, 80,'ESTATUA_ATRAS.png');
-
-        estatua[1] = this.physics.add.sprite(90, 80, 'ESTATUA_ATRAS.png');
-        estatua[1].body.setImmovable(true);
-        estatua[1].body.setAllowGravity(false);
-        this.estatua[1] = new Estatua(90, 80,'ESTATUA_ATRAS.png');
-
-        estatua[2] = this.physics.add.sprite(80, 90, 'ESTATUA_ATRAS.png');
-        estatua[2].body.setImmovable(true);
-        estatua[2].body.setAllowGravity(false);
-        this.estatua[2] = new Estatua(80, 90,'ESTATUA_ATRAS.png');
-
-        estatua[3] = this.physics.add.sprite(70, 80, 'ESTATUA_ATRAS.png');
-        estatua[3].body.setImmovable(true);
-        estatua[3].body.setAllowGravity(false);
-        this.estatua[3] = new Estatua(70, 80,'ESTATUA_ATRAS.png');
-
-        estatua[4] = this.physics.add.sprite(80, 70, 'ESTATUA_ATRAS.png');
-        estatua[4].body.setImmovable(true);
-        estatua[4].body.setAllowGravity(false);
-        this.estatua[4] = new Estatua(80, 70,'ESTATUA_ATRAS.png');
-
-        estatua[5] = this.physics.add.sprite(100, 100, 'ESTATUA_ATRAS.png');
-        estatua[5].body.setImmovable(true);
-        estatua[5].body.setAllowGravity(false);
-        this.estatua[5] = new Estatua(100, 100,'ESTATUA_ATRAS.png');
-    }
-    */
-
     
     inicializarControlesHumano(){
         
@@ -265,22 +230,13 @@ class PrimerNivel extends Phaser.Scene
         var rect = this.add.rectangle(800, 200, 702, 175, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
-        this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
-        this.physics.add.collider(this.fantasma.SpriteObject,grupoMuros);
-
         //Recatangulo 5
         var rect = this.add.rectangle(255, 260, 140, 55, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
-        this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
-        this.physics.add.collider(this.fantasma.SpriteObject,grupoMuros);
-
         //Recatangulo 6
         var rect = this.add.rectangle(225, 403, 80, 340, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
-
-        this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
-        this.physics.add.collider(this.fantasma.SpriteObject,grupoMuros);
 
         //Recatangulo 7
         var rect = this.add.rectangle(640, 910, 1280, 340, 0x000000,0);
@@ -288,6 +244,14 @@ class PrimerNivel extends Phaser.Scene
 
         //Recatangulo 8
         var rect = this.add.rectangle(110, 910, 300, 410, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        //Recatangulo 9
+        var rect = this.add.rectangle(1000, 710, 50, 260, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        //Recatangulo 10
+        var rect = this.add.rectangle(1000, 315, 50, 260, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
