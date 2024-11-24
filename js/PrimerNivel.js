@@ -21,7 +21,7 @@ class PrimerNivel extends Phaser.Scene
         this.load.image('ESTATUA_DERECHA','imagenes/ESTATUA_DERECHA.png');
 
         //SPRITE FONDO
-        this.load.image('FONDO','imagenes/Escenario.png');
+        this.load.image('FONDO','imagenes/ESCENARIO_SIN_PASILLO.png');
 
         //DIALOGO
         this.load.image('CAJA_DIALOGO','imagenes/CajaDialogos.png');
