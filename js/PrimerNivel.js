@@ -28,6 +28,14 @@ class PrimerNivel extends Phaser.Scene
 
         //PUERTAS
         //(Cargars imagenes de las puertas)
+
+        //PISTAS ANTORCHAS
+        //
+        //SON PLACEHOLDERS, CUANDO ESTEN LAS PISTAS SUSTITUIS LOS ARCHIVOS :D
+        this.load.image('FLECHA_ABAJO', 'imagenes/FLECHA_ABAJO.png');
+        this.load.image('FLECHA_ARRIBA', 'imagenes/FLECHA_ARRIBA.png');
+        this.load.image('FLECHA_DERECHA', 'imagenes/FLECHA_DERECHA.png');
+        this.load.image('FLECHA_IZQUIERDA', 'imagenes/FLECHA_IZQUIERDA.png');
     }
 
     create()
@@ -49,6 +57,14 @@ class PrimerNivel extends Phaser.Scene
         this.antorchas_Array.push(new Antorcha(793,320, this));
         this.antorchas_Array.push(new Antorcha(500,715, this));
         this.antorchas_Array.push(new Antorcha(793,715, this));
+
+        //PISTAS ANTORCHAS
+        this.pistas_Array = [];
+
+        this.pistas_Array.push(new Pista(500,370, this, 'FLECHA_DERECHA'));
+        this.pistas_Array.push(new Pista(793,370, this, 'FLECHA_IZQUIERDA'));
+        this.pistas_Array.push(new Pista(500,665, this, 'FLECHA_ABAJO'));
+        this.pistas_Array.push(new Pista(793,665, this, 'FLECHA_ARRIBA'));
 
         //ESTATUAS
         this.estatuas_Array = [];
@@ -321,6 +337,7 @@ class PrimerNivel extends Phaser.Scene
         for(var i=0;i<this.NUM_ANTORCHAS;i++)
         {
             this.antorchas_Array[i].rect.setFillStyle(0x0011ff, 1);
+            this.pistas_Array[i].SpriteObject.setVisible(true);
         }
     }
     desActivarPistasAntorchas()
@@ -328,8 +345,9 @@ class PrimerNivel extends Phaser.Scene
         for(var i=0;i<this.NUM_ANTORCHAS;i++)
         {
             if( this.antorchas_Array[i].encendida){
-                this.antorchas_Array[i].rect.setFillStyle(0xffffff, 1);
+                this.antorchas_Array[i].rect.setFillStyle(0xffffff, 1);               
             }
+            this.pistas_Array[i].SpriteObject.setVisible(false);
         }
     }
 

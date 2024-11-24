@@ -192,6 +192,22 @@ class Antorcha
 
 
 }
+
+class Pista
+{
+    constructor(x, y,scene, direccion)
+    {
+        this.encendida=false;
+
+       this.SpriteObject = scene.physics.add.image(x, y, direccion);
+
+        this.body = this.SpriteObject.body;
+        this.body.setAllowGravity(false);
+        this.body.setImmovable(true);
+        this.SpriteObject.setVisible(false);
+    }
+}
+
 class Estatua
 {
     constructor(x, y, scene, direccion, pos)
