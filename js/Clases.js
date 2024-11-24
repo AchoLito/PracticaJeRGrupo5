@@ -161,8 +161,6 @@ class Antorcha
         this.body.setAllowGravity(false);
         this.body.setImmovable(true);
         this.AreaInteraccion.body.setImmovable(true);
-
-        
     }
 
     interactuar()//cada vez q interactuas cambia su estado
@@ -358,5 +356,60 @@ class Dialogo
         {
             this.avanzarDialogo();
         }
+    }
+}
+
+class Puerta
+{
+    constructor(x, y, scene, puertaCerrada, puertaAbierta)
+    {
+        this.x = x;
+        this.y = y;
+        this.scene = scene;
+        this.puertaCerrada = scene.physics.add.image(x, y, 'PUERTA_CERRADA');
+        this.puertaAbierta = scene.physics.add.image(x, y, 'PUERTA_ABIERTA');
+
+        this.puertaAbierta.setVisible(false);
+
+        this.puertaAbierta.setImmovable(true);
+        this.puertaCerrada.setImmovable(true);
+        this.puertaAbierta.body.setAllowGravity(false);
+        this.puertaCerrada.body.setAllowGravity(false);
+
+        //Area de interacción
+        var radioInteraccion=30;
+        this.circ = scene.add.circle(x, y, radioInteraccion, 0x000000,0);
+        this.AreaInteraccion = scene.physics.add.existing(this.circ); 
+        this.AreaInteraccion.body.setImmovable(true);
+
+        this.cooldown = false;
+        
+    }
+
+    interactuar()
+    {
+        if(!this.cooldown)//si no hay cooldow
+        {
+            this.cooldown = true;
+
+            if(this.puertaAbierta.visible == false)
+            {
+                this.puertaAbierta.setVisible(true);
+                this.puertaCerrada.setVisible(false);
+                return true;
+            }
+            else
+            {
+                this.puertaAbierta.setVisible(false);
+                this.puertaCerrada.setVisible(true);
+                return false;
+            }
+        }
+        return -1;
+    }
+
+    resetearCooldown()
+    {
+        this.cooldown = false;
     }
 }

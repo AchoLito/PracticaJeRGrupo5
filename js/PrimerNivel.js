@@ -25,6 +25,9 @@ class PrimerNivel extends Phaser.Scene
 
         //DIALOGO
         this.load.image('CAJA_DIALOGO','imagenes/CajaDialogos.png');
+
+        //PUERTAS
+        //(Cargars imagenes de las puertas)
     }
 
     create()
@@ -68,6 +71,12 @@ class PrimerNivel extends Phaser.Scene
             { imagenPersonaje: 'FANTASMA_FRONTAL', mensaje: 'Eso... quisiera saberlo yo también, soy un eco. Una sombra atrapada en este lugar.' },
             { imagenPersonaje: 'ESTATUA_FRONTAL', mensaje: '¿Eres... un fantasma?' }
         ]);
+
+        // PUERTAS
+        this.puertas_Array = [];
+        this.puertas_Array.push(new Puerta (960, 520, this));
+        this.puertas_Array.push(new Puerta (140, 600, this));
+        this.puertas_Array.push(new Puerta (380, 320, this));
 
         //FUNCIONES DE RESPUESTA
         this.inicializarControlesHumano();
@@ -208,6 +217,36 @@ class PrimerNivel extends Phaser.Scene
                 else
                 {
                     this.estatuas_Array[i].resetearCooldown();
+                }
+            });
+        }
+
+        //Colisiones de las puertas
+        for(let i = 0; i < this.puertas_Array.length; i++){
+            
+            this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaCerrada);
+            this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaAbierta);
+            this.physics.add.overlap(this.humano.SpriteObject,this.puertas_Array[i].AreaInteraccion,() => {
+
+                if(this.humano.interacting)
+                {
+                    var resultadoInteraccion = this.puertas_Array[i].interactuar();
+
+                    if(resultadoInteraccion === -1)
+                    {
+                    }//no se pudo por cooldown
+                    else if(resultadoInteraccion === true)
+                    {
+                        console.log('Se ha abierto la puerta');
+                    }
+                    else if(resultadoInteraccion === false)//se apagó
+                    {
+                        console.log('Se ha cerrado la puerta');
+                    }
+                }
+                else
+                {
+                    this.puertas_Array[i].resetearCooldown();
                 }
             });
         }
