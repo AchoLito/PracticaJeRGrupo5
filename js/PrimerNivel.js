@@ -254,6 +254,14 @@ class PrimerNivel extends Phaser.Scene
         var rect = this.add.rectangle(1000, 315, 50, 260, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
+        //Recatangulo 11
+        var rect = this.add.rectangle(1105, 710, 260, 155, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        //Recatangulo 12
+        var rect = this.add.rectangle(1105, 315, 260, 155, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
         this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
         this.physics.add.collider(this.fantasma.SpriteObject,grupoMuros);
     }
