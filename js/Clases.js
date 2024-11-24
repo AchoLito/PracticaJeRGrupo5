@@ -278,14 +278,15 @@ class Dialogo
         // Crear o actualizar el cuadro de diálogo
         if (!this.cuadroDialogo) 
         {
-            this.cuadroDialogo = this.scene.add.image(this.scene.cameras.main.centerX, this.scene.cameras.main.centerY + 100, 'cuadro_dialogo');
+            this.cuadroDialogo = this.scene.add.image(this.scene.cameras.main.centerX- 20, this.scene.cameras.main.centerY + 325, 'CAJA_DIALOGO');
             this.cuadroDialogo.setDepth(10);
+            this.cuadroDialogo.setScale(1.5, 1);
         }
 
         // Crear o actualizar la imagen del personaje
         if (!this.imagenPersonaje) 
         {
-            this.imagenPersonaje = this.scene.add.image(this.scene.cameras.main.centerX - 200, this.scene.cameras.main.centerY + 50, dialogo.imagenPersonaje);
+            this.imagenPersonaje = this.scene.add.image(this.scene.cameras.main.centerX - 260, this.scene.cameras.main.centerY + 325, dialogo.imagenPersonaje);
             this.imagenPersonaje.setDepth(11);
         }
         else 
@@ -296,10 +297,10 @@ class Dialogo
         // Crear o actualizar el texto
         if (!this.texto) 
         {
-            this.texto = this.scene.add.text(this.scene.cameras.main.centerX + 50, this.scene.cameras.main.centerY + 50, dialogo.mensaje, {
-                font: '18px Arial',
-                fill: '#ffffff',
-                wordWrap: { width: 600, useAdvancedWrap: true }
+            this.texto = this.scene.add.text(this.scene.cameras.main.centerX - 180, this.scene.cameras.main.centerY + 315, dialogo.mensaje, {
+                font: '18px Sans Serif',
+                fill: '#000000',
+                wordWrap: { width: 430, useAdvancedWrap: true }
             });
             this.texto.setDepth(11);
         } 

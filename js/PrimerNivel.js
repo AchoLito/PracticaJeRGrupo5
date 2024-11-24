@@ -22,6 +22,9 @@ class PrimerNivel extends Phaser.Scene
 
         //SPRITE FONDO
         this.load.image('FONDO','imagenes/Escenario.png');
+
+        //DIALOGO
+        this.load.image('CAJA_DIALOGO','imagenes/CajaDialogos.png');
     }
 
     create()
@@ -61,9 +64,9 @@ class PrimerNivel extends Phaser.Scene
         // Configurar los diálogos (puedes tener varios)
         this.dialogo.configurarDialogos
         ([
-            { imagenPersonaje: 'ESTATUA_FRONTAL', mensaje: '¡Hola, soy el primer personaje!' },
-            { imagenPersonaje: 'ESTATUA_ATRAS', mensaje: 'Ahora soy otro personaje, ¿qué tal?' },
-            { imagenPersonaje: 'ESTATUA_FRONTAL', mensaje: 'Gracias por escucharme. ¡Nos vemos pronto!' }
+            { imagenPersonaje: 'ESTATUA_FRONTAL', mensaje: '¿Qué es esto? ¿Dónde estoy? ¿Quién… qué eres tú?' },
+            { imagenPersonaje: 'FANTASMA_FRONTAL', mensaje: 'Eso... quisiera saberlo yo también, soy un eco. Una sombra atrapada en este lugar.' },
+            { imagenPersonaje: 'ESTATUA_FRONTAL', mensaje: '¿Eres... un fantasma?' }
         ]);
 
         //FUNCIONES DE RESPUESTA
