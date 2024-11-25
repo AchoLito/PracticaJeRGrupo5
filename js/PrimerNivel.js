@@ -14,6 +14,12 @@ class PrimerNivel extends Phaser.Scene
         this.load.image('FANTASMA_IZQUIERDA', 'imagenes/FANTASMA_PERFIL_IZQUIERDO.png');
         this.load.image('FANTASMA_DERECHA', 'imagenes/FANTASMA_PERFIL_DERECHO.png');
 
+        //SPRITE BANDIDO
+         this.load.image('BANDIDO_ATRAS', 'imagenes/BANDIDO_ATRAS.png');
+         this.load.image('BANDIDO_FRONTAL', 'imagenes/BANDIDO_DELANTE.png');
+         this.load.image('BANDIDO_IZQUIERDA', 'imagenes/BANDIDO_PERFIL_IZQUIERDO.png');
+         this.load.image('BANDIDO_DERECHA', 'imagenes/BANDIDO_PERFIL_DERECHO.png');
+
         //SPRITE ESTATUA
         this.load.image('ESTATUA_ATRAS','imagenes/ESTATUA_ATRAS.png');
         this.load.image('ESTATUA_FRONTAL','imagenes/ESTATUA_FRONTAL.png');
@@ -83,9 +89,9 @@ class PrimerNivel extends Phaser.Scene
         // Configurar los diálogos (puedes tener varios)
         this.dialogo.configurarDialogos
         ([
-            { imagenPersonaje: 'ESTATUA_FRONTAL', mensaje: '¿Qué es esto? ¿Dónde estoy? ¿Quién… qué eres tú?' },
+            { imagenPersonaje: 'BANDIDO_FRONTAL', mensaje: '¿Qué es esto? ¿Dónde estoy? ¿Quién… qué eres tú?' },
             { imagenPersonaje: 'FANTASMA_FRONTAL', mensaje: 'Eso... quisiera saberlo yo también, soy un eco. Una sombra atrapada en este lugar.' },
-            { imagenPersonaje: 'ESTATUA_FRONTAL', mensaje: '¿Eres... un fantasma?' }
+            { imagenPersonaje: 'BANDIDO_FRONTAL', mensaje: '¿Eres... un fantasma?' }
         ]);
 
         // PUERTAS
