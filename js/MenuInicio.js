@@ -12,6 +12,7 @@ class MenuInicio extends Phaser.Scene
         //this.load.audio("musicaMenu"); // sonido música fondo menú
 
         //this.load.image("tituloJuego");
+        this.load.image("Fondo_menu", "imagenes/FONDO_MENÚ_INICIO.png"); 
         this.load.image("botonJugar", "imagenes/BotonJugar.png"); // imagen del botón de jugar
         this.load.image("botonControles", "imagenes/BotonControles.png"); // imagen del botón de controles
         this.load.image("botonCreditos", "imagenes/BotonCreditos.png"); // imagen del botón de créditos
@@ -24,6 +25,8 @@ class MenuInicio extends Phaser.Scene
         this.musica.play();
 
         const tituloJuego = this.add.image("tituloJuego");*/
+
+        this.add.image(1280/2,900/2,'Fondo_menu');
 
         const botonJugar = this.add.image(640, 320, "botonJugar") // añadir en el paréntesis la posición en la que queremos la imagen
             .setInteractive()
