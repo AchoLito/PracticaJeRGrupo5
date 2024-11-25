@@ -6,7 +6,7 @@ class Humano {
         this.direccion="0";//quieto
         this.velocidad=90;
 
-        this.SpriteObject = scene.physics.add.image(x, y, "ESTATUA_FRONTAL");
+        this.SpriteObject = scene.physics.add.image(x, y, "BANDIDO_FRONTAL");
         this.body = this.SpriteObject.body;
 
         this.body.setAllowGravity(false);
@@ -26,22 +26,22 @@ class Humano {
                 this.body.setVelocityY(0);
                 break;
             case 'UP':
-                this.SpriteObject.setTexture('ESTATUA_ATRAS');
+                this.SpriteObject.setTexture('BANDIDO_ATRAS');
                 this.body.setVelocityX(0);
                 this.body.setVelocityY(-this.velocidad);
                 break;
             case 'DOWN':
-                this.SpriteObject.setTexture('ESTATUA_FRONTAL');
+                this.SpriteObject.setTexture('BANDIDO_FRONTAL');
                 this.body.setVelocityX(0);
                 this.body.setVelocityY(this.velocidad);
                 break;
             case 'LEFT':
-                this.SpriteObject.setTexture('ESTATUA_IZQUIERDA');
+                this.SpriteObject.setTexture('BANDIDO_IZQUIERDA');
                 this.body.setVelocityX(-this.velocidad);
                 this.body.setVelocityY(0);
                 break;
             case 'RIGHT':
-                this.SpriteObject.setTexture('ESTATUA_DERECHA');
+                this.SpriteObject.setTexture('BANDIDO_DERECHA');
                 this.body.setVelocityX(this.velocidad);
                 this.body.setVelocityY(0);
                 break;
