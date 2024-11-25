@@ -402,13 +402,13 @@ class Puerta
         
     }
 
-    interactuar()
+    interactuar(completado)
     {
         if(!this.cooldown)//si no hay cooldow
         {
             this.cooldown = true;
 
-            if(this.puertaAbierta.visible == false)
+            if(this.puertaAbierta.visible === false && completado)
             {
                 this.puertaAbierta.setVisible(true);
                 this.puertaCerrada.setVisible(false);

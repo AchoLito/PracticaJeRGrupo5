@@ -77,6 +77,8 @@ class PrimerNivel extends Phaser.Scene
         this.NUM_ESTATUAS = 4;
         this.numeroEstatuasCorrectas = 0;
 
+        this.completado = false;
+
         //El segundo string es para marcar cual es la posicion correcta de la estatua
         this.estatuas_Array.push(new Estatua(320,320, this, 'ESTATUA_ATRAS','ESTATUA_DERECHA'));
         this.estatuas_Array.push(new Estatua(910,320, this,'ESTATUA_FRONTAL','ESTATUA_IZQUIERDA'));
@@ -99,6 +101,8 @@ class PrimerNivel extends Phaser.Scene
         this.puertas_Array.push(new Puerta (960, 520, this));
         this.puertas_Array.push(new Puerta (140, 600, this));
         this.puertas_Array.push(new Puerta (380, 320, this));
+
+        this.puertasColliders_Array = [];
 
         //FUNCIONES DE RESPUESTA
         this.inicializarControlesHumano();
@@ -246,13 +250,13 @@ class PrimerNivel extends Phaser.Scene
         //Colisiones de las puertas
         for(let i = 0; i < this.puertas_Array.length; i++){
             
-            this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaCerrada);
-            this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaAbierta);
+            this.puertasColliders_Array.push(this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaCerrada));
+            //this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaAbierta);
             this.physics.add.overlap(this.humano.SpriteObject,this.puertas_Array[i].AreaInteraccion,() => {
 
                 if(this.humano.interacting)
                 {
-                    var resultadoInteraccion = this.puertas_Array[i].interactuar();
+                    var resultadoInteraccion = this.puertas_Array[i].interactuar(this.completado);
 
                     if(resultadoInteraccion === -1)
                     {
@@ -260,10 +264,14 @@ class PrimerNivel extends Phaser.Scene
                     else if(resultadoInteraccion === true)
                     {
                         console.log('Se ha abierto la puerta');
+                        console.log(this.puertasColliders_Array.length);
+                        this.physics.world.removeCollider(this.puertasColliders_Array[i])
                     }
                     else if(resultadoInteraccion === false)//se apagó
                     {
                         console.log('Se ha cerrado la puerta');
+                        console.log(this.puertasColliders_Array.length);
+                        this.puertasColliders_Array[i] = this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaCerrada);
                     }
                 }
                 else
@@ -375,5 +383,6 @@ class PrimerNivel extends Phaser.Scene
         //Aqui se haria la implementacion de lo que pase cuando
         //las estatuas esten en su posicion
         console.log("Has hecho el puzle");
+        this.completado = true;
     }
 }
