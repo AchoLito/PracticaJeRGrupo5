@@ -407,7 +407,7 @@ class Puerta
         if(!this.cooldown)//si no hay cooldow
         {
             this.cooldown = true;
-
+            console.log(completado);
             if(this.puertaAbierta.visible === false && completado)
             {
                 this.puertaAbierta.setVisible(true);

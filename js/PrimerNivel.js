@@ -77,7 +77,7 @@ class PrimerNivel extends Phaser.Scene
         this.NUM_ESTATUAS = 4;
         this.numeroEstatuasCorrectas = 0;
 
-        this.completado = false;
+        this.completado = true;
 
         //El segundo string es para marcar cual es la posicion correcta de la estatua
         this.estatuas_Array.push(new Estatua(320,320, this, 'ESTATUA_ATRAS','ESTATUA_DERECHA'));
@@ -236,7 +236,10 @@ class PrimerNivel extends Phaser.Scene
 
                         if(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS)
                         {
-                            this.accionEstatua();
+                            this.accionEstatua(true);
+                        }else
+                        {
+                            this.accionEstatua(false);
                         }
                     }                    
                 }
@@ -271,6 +274,7 @@ class PrimerNivel extends Phaser.Scene
                     {
                         console.log('Se ha cerrado la puerta');
                         console.log(this.puertasColliders_Array.length);
+                        this.physics.world.removeCollider(this.puertasColliders_Array[i])
                         this.puertasColliders_Array[i] = this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaCerrada);
                     }
                 }
@@ -378,11 +382,20 @@ class PrimerNivel extends Phaser.Scene
 
     }
 
-    accionEstatua()
+    accionEstatua(hecho)
     {
         //Aqui se haria la implementacion de lo que pase cuando
         //las estatuas esten en su posicion
-        console.log("Has hecho el puzle");
-        this.completado = true;
+        if(hecho)
+        {
+            console.log("Has hecho el puzle");
+            this.completado = true;
+        }
+        else
+        {
+            console.log("Has deshecho el puzle");
+            this.completado = false;
+        }
+        
     }
 }
