@@ -10,8 +10,8 @@ class Controles extends Phaser.Scene
         /*this.load.audio("clic"); // sonido pulsar botón
         this.load.audio("musicaMenu"); // sonido música fondo menú*/
 
-        //this.load.image("humano"); // imagen humano
-        this.load.image("fantasma", "imagenes/FANTASMA_DELANTE.png"); // imagen fantasma
+        this.load.image("humano", "imagenes/HUMANO.png"); // imagen humano
+        this.load.image("fantasma", "imagenes/FANTASMA.png"); // imagen fantasma
         this.load.image("botonVolver", "imagenes/BotonVolver.png"); // imagen del botón volver
         this.load.image("WASD", "imagenes/TeclasWASD.png"); // movimiento humano
         this.load.image("flechas", "imagenes/TeclasFlechas.png"); // movimiento fantasma
@@ -24,25 +24,35 @@ class Controles extends Phaser.Scene
     {
         /*this.musica = this.sound.add("musicaMenu");
         this.musica.loop = true;
-        this.musica.play();
+        this.musica.play();*/
 
-        const humano = this.add.image("humano");*/
+        const humano = this.add.image(280, 180, "humano");
 
-        //const textHumano = this.add.text("Humano");
+        const textHumano = this.add.text(220, 300, "Humano", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
 
-        const fantasma = this.add.image(300, 700, "fantasma");
+        const fantasma = this.add.image(1100, 700, "fantasma");
 
-        //const textFantasma = this.add.text("Fantasma");
+        const textFantasma = this.add.text(1025, 800, "Fantasma", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
 
         const wasd = this.add.image(700, 200, "WASD");
 
+        const textWASD = this.add.text(600, 300,"Movimiento", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
+
         const teclaE = this.add.image(1100, 200, "TeclaE");
+
+        const textE = this.add.text(1020, 300,"Interactuar", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
 
         const flechas = this.add.image(700, 700, "flechas");
 
-        const intro = this.add.image(1100, 700, "Intro");
+        const textFlechas = this.add.text(600, 800,"Movimiento", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
 
-        const espacio = this.add.image(925, 450, "espacio");
+        const intro = this.add.image(300, 700, "Intro");
+
+        const textIntro = this.add.text(220, 800,"Interactuar", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
+
+        const espacio = this.add.image(900, 480, "espacio");
+
+        const dialogos = this.add.text(400, 455,"Pasar diálogos", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
 
         const botonVolver = this.add.image(75, 75, "botonVolver")
             .setInteractive()
