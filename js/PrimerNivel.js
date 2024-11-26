@@ -28,6 +28,7 @@ class PrimerNivel extends Phaser.Scene
 
         //SPRITE FONDO
         this.load.image('FONDO','imagenes/ESCENARIO_SIN_PASILLO.png');
+        this.load.image('FONDO_CON_PASILLO','imagenes/ESCENARIO_CON_PASILLO.png');
 
         //DIALOGO
         this.load.image('CAJA_DIALOGO','imagenes/CajaDialogos.png');
@@ -40,24 +41,19 @@ class PrimerNivel extends Phaser.Scene
   
         //PUERTAS
         //(Cargars imagenes de las puertas)
-
+        this.load.image('FONDO','imagenes/ESCENARIO_SIN_PASILLO.png');
 
         //ANTORCHAS 
         this.load.image('ANTORCHA_APAGADA','imagenes/ANTORCHA_APAGADA.png');
         this.load.image('ANTORCHA_ENCENDIDA','imagenes/ANTORCHA_ENCENDIDA.png');
 
-        //PISTAS ANTORCHAS
-        //
-        //SON PLACEHOLDERS, CUANDO ESTEN LAS PISTAS SUSTITUIS LOS ARCHIVOS :D
-        this.load.image('FLECHA_ABAJO', 'imagenes/FLECHA_ABAJO.png');
-        this.load.image('FLECHA_ARRIBA', 'imagenes/FLECHA_ARRIBA.png');
-        this.load.image('FLECHA_DERECHA', 'imagenes/FLECHA_DERECHA.png');
-        this.load.image('FLECHA_IZQUIERDA', 'imagenes/FLECHA_IZQUIERDA.png');
+        //PISTA ANTORCHAS
+        
     }
 
     create()
     {
-        this.add.image(1280/2,900/2,'FONDO');
+        this.fondo = new Fondo(1280/2,900/2,this);
 
         //HUMANO
         this.humano = new Humano(580,500, this);
@@ -76,12 +72,7 @@ class PrimerNivel extends Phaser.Scene
         this.antorchas_Array.push(new Antorcha(793,715, this));
 
         //PISTAS ANTORCHAS
-        this.pistas_Array = [];
-
-        this.pistas_Array.push(new Pista(500,370, this, 'FLECHA_DERECHA'));
-        this.pistas_Array.push(new Pista(793,370, this, 'FLECHA_IZQUIERDA'));
-        this.pistas_Array.push(new Pista(500,665, this, 'FLECHA_ABAJO'));
-        this.pistas_Array.push(new Pista(793,665, this, 'FLECHA_ARRIBA'));
+        
 
         //ESTATUAS
         this.estatuas_Array = [];
@@ -194,13 +185,8 @@ class PrimerNivel extends Phaser.Scene
                     this.palanca.interactuar(this.inventario);
                     
                 }
-         });
-        /*const grupoAntorchas = this.physics.add.group({immovable: true});
-        for(var i=0;i<this.antorchas_Array.length;i++){
-            grupoAntorchas.add(this.antorchas_Array[i].SpriteObject);
-        }
-        this.physics.add.collider(this.humano.SpriteObject,grupoAntorchas,() => {});// Llama al método m() cuando ocurre la colisión*/
-
+        });
+        
         //Colision de las antorchas
         for(let i=0;i<this.antorchas_Array.length;i++){
             
@@ -279,7 +265,7 @@ class PrimerNivel extends Phaser.Scene
 
         //Colisiones de las puertas
         for(let i = 0; i < this.puertas_Array.length; i++){
-            
+
             this.puertasColliders_Array.push(this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaCerrada));
             //this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaAbierta);
             this.physics.add.overlap(this.humano.SpriteObject,this.puertas_Array[i].AreaInteraccion,() => {
@@ -382,7 +368,7 @@ class PrimerNivel extends Phaser.Scene
         for(var i=0;i<this.NUM_ANTORCHAS;i++)
         {
            
-            this.pistas_Array[i].SpriteObject.setVisible(true);
+            
         }
     }
     desActivarPistasAntorchas()
@@ -390,7 +376,7 @@ class PrimerNivel extends Phaser.Scene
         for(var i=0;i<this.NUM_ANTORCHAS;i++)
         {
             
-            this.pistas_Array[i].SpriteObject.setVisible(false);
+            
         }
     }
 

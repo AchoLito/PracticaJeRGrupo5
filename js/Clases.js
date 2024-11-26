@@ -492,3 +492,18 @@ class Inventario{
     }
 
 }
+
+class FondoNivel1{
+    constructor(x, y, scene) 
+    {
+        
+        this.inventario = scene.add.image(x,y ,'FONDO');
+        
+        
+
+    }     
+
+    cambioFondo(pasillo,pistas){
+
+    }
+}
