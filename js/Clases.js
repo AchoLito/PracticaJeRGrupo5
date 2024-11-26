@@ -378,14 +378,23 @@ class Dialogo
 
 class Puerta
 {
-    constructor(x, y, scene, puertaCerrada, puertaAbierta)
+    constructor(x, y, scene,cerrada,abierta)
     {
         this.x = x;
         this.y = y;
         this.scene = scene;
-        this.puertaCerrada = scene.physics.add.image(x, y, 'PUERTA_CERRADA');
-        this.puertaAbierta = scene.physics.add.image(x, y, 'PUERTA_ABIERTA');
 
+        this.tipoPuerta = cerrada;
+        this.puertaCerrada = scene.physics.add.image(x, y, cerrada);
+        
+
+        if(this.tipoPuerta==='PUERTA_LATERAL_CERRADA')
+        {
+            this.puertaAbierta = scene.physics.add.image(x+32, y-30, abierta);
+        }
+        else{
+            this.puertaAbierta = scene.physics.add.image(x-22, y-31, abierta);
+        }
         this.puertaAbierta.setVisible(false);
 
         this.puertaAbierta.setImmovable(true);
@@ -405,24 +414,23 @@ class Puerta
 
     interactuar(completado)
     {
-        if(!this.cooldown)//si no hay cooldow
+        if( !this.puertaAbierta.visible && completado)
         {
-            this.cooldown = true;
-            console.log(completado);
-            if(this.puertaAbierta.visible === false && completado)
-            {
-                this.puertaAbierta.setVisible(true);
-                this.puertaCerrada.setVisible(false);
-                return true;
-            }
-            else
-            {
-                this.puertaAbierta.setVisible(false);
-                this.puertaCerrada.setVisible(true);
-                return false;
-            }
+            this.puertaAbierta.setVisible(true);
+            this.puertaCerrada.setVisible(false);
+
+            
+
+            return true;
         }
-        return -1;
+        else
+        {
+            this.puertaAbierta.setVisible(false);
+            this.puertaCerrada.setVisible(true);
+
+            return false;
+        }
+
     }
 
     resetearCooldown()
@@ -450,13 +458,40 @@ class PalancaInventario {
 
     interactuar(p)//cada vez q interactuas cambia su estado
     {       
-         p.meterInventario('PALANCA');   
-         //this.body.setPosition(10000,10000);
-         this.body.x=10000;
+        p.meterInventario('PALANCA');   
+        this.body.x=10000;
+        this.AreaInteraccion.body.x=10000;
        
     }
 
 }
+
+class PalancaPared {
+    constructor(x, y, scene) {
+        this.SpriteObject = scene.physics.add.image(x, y, 'BASE_PALANCA');
+
+        var radioInteraccion=30;
+        this.circ = scene.add.circle(x, y, radioInteraccion, 0x000000,0);
+        this.AreaInteraccion =scene.physics.add.existing(this.circ); 
+
+
+        this.body = this.SpriteObject.body;
+        this.body.setAllowGravity(false);
+        this.body.setImmovable(true);
+        this.AreaInteraccion.body.setImmovable(true);
+    
+       
+    }
+    
+
+    moverEstatua(estatua){
+        estatua.body.x -= 30;
+        estatua.SpriteObject.x = estatua.body.x;
+
+    }
+
+}
+
 
 class Inventario{
     constructor(x, y, scene) 
@@ -468,6 +503,10 @@ class Inventario{
         this.inventario_objetos_Array = [0,0,0];
 
     }       
+    getHerramienta(i)
+    {
+        return this.inventario_objetos_Array[i];
+    }
 
     meterInventario( nombre )
     {
@@ -497,13 +536,23 @@ class FondoNivel1{
     constructor(x, y, scene) 
     {
         
-        this.inventario = scene.add.image(x,y ,'FONDO');
-        
-        
+        this.img = scene.add.image(x,y ,'FONDO_SP_SB');
 
-    }     
+    }
 
     cambioFondo(pasillo,pistas){
 
+        if(pasillo && pistas){
+           
+            this.img.setTexture('FONDO_CP_CB');
+        }
+        else if(pasillo && !pistas){
+            this.img.setTexture('FONDO_CP_SB');
+        }
+        else if(!pasillo && pistas){
+            this.img.setTexture('FONDO_SP_CB');
+        }else{
+            this.img.setTexture('FONDO_SP_SB');
+        }
     }
 }

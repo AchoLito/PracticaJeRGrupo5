@@ -27,8 +27,10 @@ class PrimerNivel extends Phaser.Scene
         this.load.image('ESTATUA_DERECHA','imagenes/ESTATUA_DERECHA.png');
 
         //SPRITE FONDO
-        this.load.image('FONDO','imagenes/ESCENARIO_SIN_PASILLO.png');
-        this.load.image('FONDO_CON_PASILLO','imagenes/ESCENARIO_CON_PASILLO.png');
+        this.load.image('FONDO_SP_SB','imagenes/ESCENARIO_SIN_PASILLO.png');
+        this.load.image('FONDO_CP_SB','imagenes/ESCENARIO_CON_PASILLO.png');
+        this.load.image('FONDO_CP_CB','imagenes/ESCENARIO_CON_DIBUJO_BALDOSAS.png');
+        this.load.image('FONDO_SP_CB','imagenes/ESCENARIO_CON_DIBUJO_BALDOSAS_SIN_PASILLO.png');
 
         //DIALOGO
         this.load.image('CAJA_DIALOGO','imagenes/CajaDialogos.png');
@@ -36,18 +38,25 @@ class PrimerNivel extends Phaser.Scene
         //INVENTARIO
         this.load.image('INVENTARIO','imagenes/INVENTARIO.png');
 
-        //OBJETOS
-        this.load.image('PALANCA','imagenes/ANTORCHA_ENCENDIDA.png');
+        //pal
+        this.load.image('PALANCA','imagenes/PALANCA.png');
+        this.load.image('BASE_PALANCA','imagenes/BASE_PALANCA.png');
+        this.load.image('ABAJO_PALANCA','imagenes/PALANCA_HACIA_ABAJO.png');
+        this.load.image('ARRIBA_PALANCA','imagenes/PALANCA_HACIA_ARRIBA.png');
+
   
         //PUERTAS
-        //(Cargars imagenes de las puertas)
-        this.load.image('FONDO','imagenes/ESCENARIO_SIN_PASILLO.png');
+        this.load.image('PUERTA_FRONTAL_CERRADA','imagenes/PUERTA_FRONTAL_2.png');
+        this.load.image('PUERTA_FRONTAL_ABIERTA','imagenes/PUERTA_PERFIL_2.png');
+        this.load.image('PUERTA_LATERAL_CERRADA','imagenes/PUERTA_PERFIL_1.png');
+        this.load.image('PUERTA_LATERAL_ABIERTA','imagenes/PUERTA_FRONTAL_1.png');
+        
 
         //ANTORCHAS 
         this.load.image('ANTORCHA_APAGADA','imagenes/ANTORCHA_APAGADA.png');
         this.load.image('ANTORCHA_ENCENDIDA','imagenes/ANTORCHA_ENCENDIDA.png');
 
-        //PISTA ANTORCHAS
+        
         
     }
 
@@ -55,12 +64,16 @@ class PrimerNivel extends Phaser.Scene
     {
         this.fondo = new FondoNivel1(1280/2,900/2,this);
 
-        //HUMANO
-        this.humano = new Humano(580,500, this);
 
-        //FANTASMA
-        this.fantasma = new Fantasma(659,500, this);
+        this.palancaPared_Estatua = new PalancaPared(450,300, this); 
 
+        
+
+        this.palancaPared_Puerta = new PalancaPared(350,95, this); 
+
+        this.pasilloDescubierto=false;
+
+        this.herramientaActiva='';
         //ANTORCHAS
         this.antorchas_Array = [];
         this.NUM_ANTORCHAS = 4;
@@ -71,24 +84,38 @@ class PrimerNivel extends Phaser.Scene
         this.antorchas_Array.push(new Antorcha(500,715, this));
         this.antorchas_Array.push(new Antorcha(793,715, this));
 
-        //PISTAS ANTORCHAS
+        // PUERTAS
+        this.puertas_Array = [];
+        this.puertas_Array.push(new Puerta (968, 500, this,'PUERTA_LATERAL_CERRADA','PUERTA_LATERAL_ABIERTA'));
+        this.puertas_Array.push(new Puerta (173, 568, this,'PUERTA_FRONTAL_CERRADA','PUERTA_FRONTAL_ABIERTA'));
+        this.puertas_Array.push(new Puerta (380, 295, this,'PUERTA_FRONTAL_CERRADA','PUERTA_FRONTAL_ABIERTA'));
+
+        this.puertasColliders_Array = [];
         
 
+        //HUMANO
+        this.humano = new Humano(580,500, this);
+
+        //FANTASMA
+        this.fantasma = new Fantasma(659,500, this);
+
+        
         //ESTATUAS
         this.estatuas_Array = [];
         this.NUM_ESTATUAS = 6;
         this.numeroEstatuasCorrectas = 0;
 
-        this.completado = false;
+        
 
         //El segundo string es para marcar cual es la posicion correcta de la estatua
-        this.estatuas_Array.push(new Estatua(320,470, this, 'ESTATUA_ATRAS','ESTATUA_DERECHA'));
-        this.estatuas_Array.push(new Estatua(910,320, this,'ESTATUA_FRONTAL','ESTATUA_IZQUIERDA'));
-        this.estatuas_Array.push(new Estatua(910,655, this,'ESTATUA_IZQUIERDA','ESTATUA_FRONTAL'));
-        this.estatuas_Array.push(new Estatua(640,655, this,'ESTATUA_DERECHA','ESTATUA_ATRAS'));
-        this.estatuas_Array.push(new Estatua(640,320, this,'ESTATUA_IZQUIERDA','ESTATUA_FRONTAL'));
+        this.estatuas_Array.push(new Estatua(320,515, this, 'ESTATUA_ATRAS','ESTATUA_DERECHA'));
+        this.estatuas_Array.push(new Estatua(380,655, this,'ESTATUA_DERECHA','ESTATUA_ATRAS'));
+        this.estatuas_Array.push(new Estatua(380,320, this,'ESTATUA_IZQUIERDA','ESTATUA_FRONTAL'));
+        this.estatuas_Array.push(new Estatua(910,320, this,'ESTATUA_DERECHA','ESTATUA_FRONTAL'));
+        this.estatuas_Array.push(new Estatua(910,655, this,'ESTATUA_IZQUIERDA','ESTATUA_ATRAS'));
         this.estatuas_Array.push(new Estatua(1150,515, this,'ESTATUA_DERECHA','ESTATUA_IZQUIERDA'));
 
+     //   this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]) ;
 
         //DIALOGOS
         this.dialogo = new Dialogo(this);
@@ -101,32 +128,21 @@ class PrimerNivel extends Phaser.Scene
             { imagenPersonaje: 'BANDIDO_FRONTAL', mensaje: '¿Eres... un fantasma?' }
         ]);
 
-        // PUERTAS
-        this.puertas_Array = [];
-        this.puertas_Array.push(new Puerta (960, 520, this));
-        this.puertas_Array.push(new Puerta (140, 600, this));
-        this.puertas_Array.push(new Puerta (380, 320, this));
-
-        this.puertasColliders_Array = [];
+        
 
 
-         //INVENTARIO
-         this.inventario= new Inventario(1105,80, this );
-         this.palanca= new PalancaInventario(600,500, this );
+        //INVENTARIO
+        this.inventario= new Inventario(1105,80, this );
+        this.palanca= new PalancaInventario(1100,450, this );
 
 
         //FUNCIONES DE RESPUESTA
         this.inicializarControlesHumano();
         this.inicializarControlesFantasma();
+        this.inicializarControlesInventario();
         this.inicializarColisiones();
         this.colliderMuros();
 
-       /*
-        var estatuasGO = Array(6);
-        var estatua = Array(6);
-        //ESTATUA   
-        crearEstatuas(estatuasGO);
-*/
     }
 
     // Función llamada cuando los objetos colisionan    
@@ -175,19 +191,24 @@ class PrimerNivel extends Phaser.Scene
         this.input.keyboard.on('keyup-ENTER',  () => {this.fantasma.input('INTERACT',false);});
     }
 
+    inicializarControlesInventario(){
+        this.input.keyboard.on('keydown-ONE', () => { this.herramientaActiva = this.inventario.getHerramienta(0)});
+        this.input.keyboard.on('keydown-TWO', () => { this.herramientaActiva = this.inventario.getHerramienta(1)});
+        this.input.keyboard.on('keydown-THREE', () => { this.herramientaActiva = this.inventario.getHerramienta(2)});
+    }
     inicializarColisiones(){
         //Colision entre jugadores, hacemos q se frenen tras colisionar
         this.physics.add.collider(this.humano.SpriteObject, this.fantasma.SpriteObject, this.manejoDeColisionJugadores);
 
 
-         //Coision palanca
-         this.physics.add.collider(this.humano.SpriteObject,this.palanca.SpriteObject);
-         this.physics.add.overlap(this.humano.SpriteObject,this.palanca.AreaInteraccion,() => {
-                if(this.humano.interacting)
-                {
-                    this.palanca.interactuar(this.inventario);
-                    
-                }
+        //Coision palanca
+        this.physics.add.collider(this.humano.SpriteObject,this.palanca.SpriteObject);
+        this.physics.add.overlap(this.humano.SpriteObject,this.palanca.AreaInteraccion,() => {
+            if(this.humano.interacting)
+            {
+                this.palanca.interactuar(this.inventario);
+                
+            }
         });
         
         //Colision de las antorchas
@@ -264,6 +285,45 @@ class PrimerNivel extends Phaser.Scene
                     this.estatuas_Array[i].resetearCooldown();
                 }
             });
+
+            this.physics.add.overlap(this.fantasma.SpriteObject,this.estatuas_Array[i].AreaInteraccion,() => {
+                if(this.fantasma.interacting)
+                {
+                    var resultadoInteraccion=this.estatuas_Array[i].girarEstatua();
+                    if(!(resultadoInteraccion===-1))
+                    {
+                        if(this.comprobarPosicionEstatua(this.estatuas_Array[i]))
+                        {
+                            this.estatuas_Array[i].correcta = true;
+                        }
+                        else
+                        {
+                            this.estatuas_Array[i].correcta = false;
+                        }
+                        this.numeroEstatuasCorrectas = 0;
+                        for(let j = 0; j < this.estatuas_Array.length; j++)
+                        {
+                            if(this.estatuas_Array[j].correcta)
+                            {
+                                this.numeroEstatuasCorrectas++;
+                            }
+                        }
+
+
+                        if(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS)
+                        {
+                            this.accionEstatua(true);
+                        }else
+                        {
+                            this.accionEstatua(false);
+                        }
+                    }                    
+                }
+                else
+                {
+                    this.estatuas_Array[i].resetearCooldown();
+                }
+            });
         }
 
         //Colisiones de las puertas
@@ -271,34 +331,7 @@ class PrimerNivel extends Phaser.Scene
 
             this.puertasColliders_Array.push(this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaCerrada));
             //this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaAbierta);
-            this.physics.add.overlap(this.humano.SpriteObject,this.puertas_Array[i].AreaInteraccion,() => {
-
-                if(this.humano.interacting)
-                {
-                    var resultadoInteraccion = this.puertas_Array[i].interactuar(this.completado);
-
-                    if(resultadoInteraccion === -1)
-                    {
-                    }//no se pudo por cooldown
-                    else if(resultadoInteraccion === true)
-                    {
-                        console.log('Se ha abierto la puerta');
-                        console.log(this.puertasColliders_Array.length);
-                        this.physics.world.removeCollider(this.puertasColliders_Array[i])
-                    }
-                    else if(resultadoInteraccion === false)//se apagó
-                    {
-                        console.log('Se ha cerrado la puerta');
-                        console.log(this.puertasColliders_Array.length);
-                        this.physics.world.removeCollider(this.puertasColliders_Array[i])
-                        this.puertasColliders_Array[i] = this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaCerrada);
-                    }
-                }
-                else
-                {
-                    this.puertas_Array[i].resetearCooldown();
-                }
-            });
+           
         }
     }
 
@@ -368,19 +401,12 @@ class PrimerNivel extends Phaser.Scene
 
     activarPistasAntorchas()//se llama cuando se encienden todas las antorchas
     {
-        for(var i=0;i<this.NUM_ANTORCHAS;i++)
-        {
-           
-            
-        }
+       
+        this.fondo.cambioFondo(this.pasilloDescubierto,true);
     }
     desActivarPistasAntorchas()
     {
-        for(var i=0;i<this.NUM_ANTORCHAS;i++)
-        {
-            
-            
-        }
+        this.fondo.cambioFondo(this.pasilloDescubierto,false);
     }
 
     comprobarPosicionEstatua(estatua)
@@ -402,14 +428,44 @@ class PrimerNivel extends Phaser.Scene
         //las estatuas esten en su posicion
         if(hecho)
         {
-            console.log("Has hecho el puzle");
-            this.completado = true;
+            this.puertas_Array[0].interactuar(true);
+            
+            this.physics.world.removeCollider(this.puertasColliders_Array[0]);
         }
         else
         {
-            console.log("Has deshecho el puzle");
-            this.completado = false;
+            var n =this.puertas_Array[0].interactuar(false);
+
+            
+            if(!n){
+                this.physics.world.removeCollider(this.puertasColliders_Array[0]);
+                this.puertasColliders_Array[0] =this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[0].puertaCerrada);
+            } 
+
+
+            
         }
+    }
         
+    abrirYCerrarPuertaArriba(hecho){
+        if(hecho)
+        {
+            this.puertas_Array[2].interactuar(true);
+            
+            this.physics.world.removeCollider(this.puertasColliders_Array[2]);
+        }
+        else
+        {
+            var n =this.puertas_Array[2].interactuar(false);
+
+            
+            if(!n){
+                this.physics.world.removeCollider(this.puertasColliders_Array[2]);
+                this.puertasColliders_Array[2] =this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[2].puertaCerrada);
+            } 
+
+
+            
+        }
     }
 }
