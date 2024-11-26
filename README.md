@@ -205,4 +205,19 @@ https://commons.nicovideo.jp/works/nc286416
 
 https://www.freepik.es/vector-gratis/coleccion-fantasmas-halloween-dibujados-mano_18953723.htm  
 
-https://www.freepik.es/vector-premium/castillo-ilustracion-fondo-juego-torre_64818939.htm
+https://www.freepik.es/vector-premium/castillo-ilustracion-fondo-juego-torre_64818939.htm  
+
+### 16. CRÉDITOS DE LA MÚSICA Y SONIDOS
+***  
+
+**Música:**  
+https://www.youtube.com/watch?v=1rNzn-R_Eg4  
+
+**Botón:**  
+https://pixabay.com/es/sound-effects/click-effect-86995/  
+
+**Mover estatua:**  
+https://www.youtube.com/watch?v=zOnMIjl19g8  
+
+**Abrir puerta:**  
+https://www.youtube.com/watch?v=OohvbnXhtXA
