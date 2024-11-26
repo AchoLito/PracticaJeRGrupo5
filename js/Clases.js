@@ -474,7 +474,7 @@ class PalancaPared {
         this.circ = scene.add.circle(x, y, radioInteraccion, 0x000000,0);
         this.AreaInteraccion =scene.physics.add.existing(this.circ); 
 
-
+        this.cooldown = true;
         this.body = this.SpriteObject.body;
         this.body.setAllowGravity(false);
         this.body.setImmovable(true);

@@ -213,23 +213,28 @@ class PrimerNivel extends Phaser.Scene
 
         this.physics.add.collider(this.humano.SpriteObject,this.palancaPared_Estatua.SpriteObject);
         this.physics.add.overlap(this.humano.SpriteObject,this.palancaPared_Estatua.AreaInteraccion,() => {
-            if(this.humano.interacting)
+            if(this.humano.interacting && this.herramientaActiva === 'PALANCA')
             {       
-                if(!this.metida)
+                if(!this.palancaPared_Estatua.metida && !this.palancaPared_Estatua.cooldown)
                 {
                     this.palancaPared_Estatua.SpriteObject.setTexture('ARRIBA_PALANCA');
                     this.palancaPared_Estatua.metida = true;
                 }
                 else
                 {
-                    if(!this.palancaPared_Estatua.usada){
+                    if(this.palancaPared_Estatua.cooldown){}
+                    else if(!this.palancaPared_Estatua.usada && !this.cooldown){
                         this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
                         this.abrirYCerrarPuertaArriba(true);   
                         
                         this.fondo.cambioFondo(true, false);
-                        this.palancaPared_Estatua.setTexture('ABAJO_PALANCA');
+                        this.palancaPared_Estatua.SpriteObject.setTexture('ABAJO_PALANCA');
                     }
                 }                                         
+            }
+            else
+            {
+                this.palancaPared_Estatua.cooldown = false;
             }
         });
 
@@ -240,7 +245,7 @@ class PrimerNivel extends Phaser.Scene
                 if(!this.palancaPared_Puerta.usada){
                     this.palancaPared_Puerta.usada = true;
                     this.abrirYCerrarPuertaBajo(true);   
-                    this.palancaPared_Puerta.setTexture('ABAJO_PALANCA');
+                    this.palancaPared_Puerta.SpriteObject.setTexture('ABAJO_PALANCA');
                     //this.fondo.cambioFondo(true, false);
                 }
                          
