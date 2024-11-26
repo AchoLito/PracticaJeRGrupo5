@@ -179,7 +179,25 @@ A lo largo del videojuego, los personajes irán recogiendo diferentes objetos qu
 ### 11. NIVELES
 ***
 
-Como ya se ha mencionado, el juego tendrá entre 3 y 5 niveles. Cada uno de los niveles estarán asociados a las diferentes habitaciones del castillo, siendo cada escenario un nivel distinto. En ellos se encontrarán los objetos necesarios para poder avanzar al siguiente.
+Como ya se ha mencionado, el juego tendrá entre 3 y 5 niveles. Cada uno de los niveles estarán asociados a las diferentes habitaciones del castillo, siendo cada escenario un nivel distinto. En ellos se encontrarán los objetos necesarios para poder avanzar al siguiente.  
+
+#### 11.1. NIVEL 1  
+
+En el primer nivel, se introduce a los jugadores a la historia y al sistema de puzles y mecánicas del juego y establece la necesidad de cooperación entre el humano y el fantasma. Abientado en un calabozo oscuro, este nivel desafía a los jugadores a trabajar juntos para resolver un acertijo basado en antorchas, estatuas y mecanismos ocultos, que finalmente les permitirá avanzar a la siguiente área del castillo.  
+
+##### 11.1.1. OBJETIVO DEL NIVEL  
+
+Los jugadores deben encender una serie de antorchas y alinear correctamente las estatuas de la sala para abrir una puerta secreta que les permitirá escapar. La solución del puzle involucra encontrar pistas, manipular objetos físicos y activar mecanismos sobrenaturales, aprovechando las habilidades únicas de ambos personajes.  
+
+##### 11.1.2. ELEMENTOS DEL NIVEL  
+
+**Antorcha:** Las antorchas, una vez encendidas, revelan pistas visuales en el suelo que indican hacia qué dirección deben mirar las estatuas de la sala.  
+
+**Estatuas:** Cada estatua puede rotarse y deben colocarse mirando en una dirección concreta revelada por los antorchas. Una de estas estatuas está bloqueada destrás de una puerta bloqueada a la que solo puede acceder el fantasma. Cuando las estatuas se colocan correctamete esta puerta se abre, permitiendo al humano acceder y recoger un objecto del suelo: un trozo de palanca.  
+
+**Palanca rota:** En la sala hay una palanca incompleta que el humano debe reparar utilizando el trozo de palanca encontrado. Una vez reparada, esta palanca permite mover una estatua que oculta una puerta secreta.  
+
+**Palanca oculta del fantasma:** AL final del puzle, el fantasma debe localizar y activar una palanca oculta que desbloquea la puerta secreta final, permitiendo a ambos jugadores salir de la cámara.
 
 ### 12. LOGROS
 ***
