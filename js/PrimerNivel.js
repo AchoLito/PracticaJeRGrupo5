@@ -495,6 +495,7 @@ class PrimerNivel extends Phaser.Scene
         }
     }
     cambiarDeNivel(){
+        this.scene.stop("PrimerNivel");
         this.scene.start("Fin");
 
     }
