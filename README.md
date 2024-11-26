@@ -61,7 +61,7 @@ La perspectiva será similar a la de las imágenes 1, 2 y 3, pero con un estilo 
 ### 4. PROPÓSITO Y PÚBLICO OBJETIVO
 ***
 
-*La MAldición* está dirigido a un rango de jugadores establecido con PEGI 7, interesados en experiencias cooperativas y de resolución de puzles. Está diseñado tanto para jugadores que disfrutan de los juegos que fomentan la colaboración de forma casual como para aficionados de juegos cooperativos más experimentados que buscan una experiencia diferente.  
+*La Maldición* está dirigido a un rango de jugadores establecido con PEGI 7, interesados en experiencias cooperativas y de resolución de puzles. Está diseñado tanto para jugadores que disfrutan de los juegos que fomentan la colaboración de forma casual como para aficionados de juegos cooperativos más experimentados que buscan una experiencia diferente.  
 
 Aunque incluye elementos de misterio y ambientación sombría, *La Maldición* no recurre a imágenes perturbadoras o violencia explícita, lo que lo hace adecuado para público más amplio, incluidas personas jóvenes. 
 
@@ -244,7 +244,7 @@ Durante el juego, la interfaz del primer nivel incluye elementos específicos di
 ### 14. MÚSICA Y EFECTOS DE SONIDO
 ***
 
-La música en *La Maldición* está diseñada para sumergir a los jugadores en la atmósfera inquietante de un castillo sin distraerlos de la jugabilidad. Una música suave y tensa creará un efecto de suspense y misterio que incrementará la tensión de los jugadores conforme se vayan adentrando en el castillo y los peligros aumenten. Además de la música, habrá efectos de sonido que permitirán crear un atmósfera mucho más inmersiva, como el soplo del viento o susurros de voces que hagan que el jugador se sienta dentro del castillo, pero sin llegar a asustarlo, para así reflejar la estética y género del juego.
+La música en *La Maldición* está pensada para sumergir a los jugadores en la atmósfera de un castillo sin distraerlos de la jugabilidad. Una música suave creará la ambientación perfecta que incrementará la tensión de los jugadores conforme se vayan adentrando en el castillo y los peligros aumenten. Además de la música, habrá efectos de sonido que permitirán crear una atmósfera mucho más inmersiva, como el soplo del viento o susurros de voces que hagan que el jugador se sienta dentro del castillo, pero sin llegar a asustarlo, para así reflejar la estética y género del juego.
 
 ### 15. IMÁGENES DE REFERENCIA
 ***
