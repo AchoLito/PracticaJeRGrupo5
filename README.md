@@ -49,6 +49,13 @@ La perspectiva será similar a la de las imágenes 1, 2 y 3, pero con un estilo 
 
 *Imágenes 4, 5 y 6: Referencias del estilo visual.*  
 
+#### 3.2 DISEÑOS FINALES
+
+![Imagen 1 del escenario sin baldosa](imagenes/ESCENARIO_CON_PASILLO.png "Imagen 1 del escenario sin baldosas")
+![Imagen 2 del escenario con baldosa](imagenes/ESCENARIO_CON_DIBUJO_BALDOSAS.png "Imagen 2 del escenario con baldosas")  
+
+*Imágenes 7 y 8: Diseño final del escenario del primer nivel.*
+
 ### 4. PROPÓSITO Y PÚBLICO OBJETIVO
 ***
 
@@ -128,7 +135,11 @@ La apariencia del fantasma está fuertemente inspirada en la cultura popular, su
 
 ![Imagen fantasma](imagenes/Imagen_fantasma.jpg "Imagen Fantasma")
 
-*Imagen 7: Referencia para la apariencia del fantasma.*  
+*Imagen 9: Referencia para la apariencia del fantasma.*   
+
+![Imagen fantasma final](imagenes/FANTASMA.png "Imagen fantasma final")  
+
+*Imagen 10: Diseño final del fantasma.*
 
 #### 9.2. HUMANO
 
@@ -140,7 +151,11 @@ El bandido va vestido con unos pantalones negros y una camisa blanca, propia de 
 
 ![Imagen Bandido 2](imagenes/Imagen2_Bandido.png "Imagen Bandido 2")
 
-*Imágenes 8 y 9: Referencias para la apariencia del humano.*  
+*Imágenes 11 y 12: Referencias para la apariencia del humano.*  
+
+![Imagen humano](imagens/HUMANO.png "Imagen humano final")  
+
+*Imagen 13: Diseño final del humano.*
 
 #### 9.3. ENEMIGOS 
 
