@@ -7,8 +7,7 @@ class Controles extends Phaser.Scene
 
     preload()
     {
-        /*this.load.audio("clic"); // sonido pulsar botón
-        this.load.audio("musicaMenu"); // sonido música fondo menú*/
+        this.load.audio("clic", "audio/clic.mp3"); // sonido pulsar botón
 
         this.load.image("humano", "imagenes/HUMANO.png"); // imagen humano
         this.load.image("fantasma", "imagenes/FANTASMA.png"); // imagen fantasma
@@ -22,10 +21,6 @@ class Controles extends Phaser.Scene
 
     create()
     {
-        /*this.musica = this.sound.add("musicaMenu");
-        this.musica.loop = true;
-        this.musica.play();*/
-
         const humano = this.add.image(280, 180, "humano");
 
         const textHumano = this.add.text(220, 300, "Humano", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
@@ -57,7 +52,7 @@ class Controles extends Phaser.Scene
         const botonVolver = this.add.image(75, 75, "botonVolver")
             .setInteractive()
             .on("pointerdown", () => {
-                //this.sound.play("clic");
+                this.sound.play("clic");
                 this.scene.stop("Controles");
                 this.scene.start("MenuInicio");
             });
