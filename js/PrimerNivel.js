@@ -65,11 +65,12 @@ class PrimerNivel extends Phaser.Scene
         this.fondo = new FondoNivel1(1280/2,900/2,this);
 
 
-        this.palancaPared_Estatua = new PalancaPared(450,300, this); 
+        this.palancaPared_Estatua = new PalancaPared(450,300, this, false); 
 
         
 
-        this.palancaPared_Puerta = new PalancaPared(350,95, this); 
+        this.palancaPared_Puerta = new PalancaPared(350,95, this, true); 
+        this.palancaPared_Puerta.SpriteObject.setTexture('ARRIBA_PALANCA');
 
         this.pasilloDescubierto=false;
 
@@ -213,14 +214,22 @@ class PrimerNivel extends Phaser.Scene
         this.physics.add.collider(this.humano.SpriteObject,this.palancaPared_Estatua.SpriteObject);
         this.physics.add.overlap(this.humano.SpriteObject,this.palancaPared_Estatua.AreaInteraccion,() => {
             if(this.humano.interacting)
-            {             
-                if(!this.palancaPared_Estatua.usada){
-                    this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
-                    this.abrirYCerrarPuertaArriba(true);   
-                    
-                    this.fondo.cambioFondo(true, false);
+            {       
+                if(!this.metida)
+                {
+                    this.palancaPared_Estatua.SpriteObject.setTexture('ARRIBA_PALANCA');
+                    this.palancaPared_Estatua.metida = true;
                 }
-                         
+                else
+                {
+                    if(!this.palancaPared_Estatua.usada){
+                        this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
+                        this.abrirYCerrarPuertaArriba(true);   
+                        
+                        this.fondo.cambioFondo(true, false);
+                        this.palancaPared_Estatua.setTexture('ABAJO_PALANCA');
+                    }
+                }                                         
             }
         });
 
@@ -231,7 +240,7 @@ class PrimerNivel extends Phaser.Scene
                 if(!this.palancaPared_Puerta.usada){
                     this.palancaPared_Puerta.usada = true;
                     this.abrirYCerrarPuertaBajo(true);   
-                    
+                    this.palancaPared_Puerta.setTexture('ABAJO_PALANCA');
                     //this.fondo.cambioFondo(true, false);
                 }
                          

@@ -467,7 +467,7 @@ class PalancaInventario {
 }
 
 class PalancaPared {
-    constructor(x, y, scene) {
+    constructor(x, y, scene, estado) {
         this.SpriteObject = scene.physics.add.image(x, y, 'BASE_PALANCA');
 
         var radioInteraccion=30;
@@ -482,7 +482,7 @@ class PalancaPared {
 
         this.usada = false;
         
-       
+       this.metida = estado;
     }
     
 
