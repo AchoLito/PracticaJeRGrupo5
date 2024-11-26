@@ -223,6 +223,20 @@ class PrimerNivel extends Phaser.Scene
                          
             }
         });
+
+        this.physics.add.collider(this.humano.SpriteObject,this.palancaPared_Puerta.SpriteObject);
+        this.physics.add.overlap(this.humano.SpriteObject,this.palancaPared_Puerta.AreaInteraccion,() => {
+            if(this.humano.interacting)
+            {             
+                if(!this.palancaPared_Puerta.usada){
+                    this.palancaPared_Puerta.usada = true;
+                    this.abrirYCerrarPuertaBajo(true);   
+                    
+                    //this.fondo.cambioFondo(true, false);
+                }
+                         
+            }
+        });
         
         //Colision de las antorchas
         for(let i=0;i<this.antorchas_Array.length;i++){
@@ -353,7 +367,7 @@ class PrimerNivel extends Phaser.Scene
         const grupoMuros = this.physics.add.group({immovable: true});
 
         //Rectangulo 1
-        var rect = this.add.rectangle(1280/2, 92 , 1280,80, 0x000000,0);
+        var rect = this.add.rectangle(1280/2, 40 , 1280,80, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         //Rectangulo 2
@@ -475,6 +489,28 @@ class PrimerNivel extends Phaser.Scene
             if(!n){
                 this.physics.world.removeCollider(this.puertasColliders_Array[2]);
                 this.puertasColliders_Array[2] =this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[2].puertaCerrada);
+            } 
+
+
+            
+        }
+    }
+
+    abrirYCerrarPuertaBajo(hecho){
+        if(hecho)
+        {
+            this.puertas_Array[1].interactuar(true);
+            
+            this.physics.world.removeCollider(this.puertasColliders_Array[1]);
+        }
+        else
+        {
+            var n =this.puertas_Array[1].interactuar(false);
+
+            
+            if(!n){
+                this.physics.world.removeCollider(this.puertasColliders_Array[1]);
+                this.puertasColliders_Array[1] =this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[1].puertaCerrada);
             } 
 
 

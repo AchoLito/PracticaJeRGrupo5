@@ -487,13 +487,10 @@ class PalancaPared {
     
 
     moverEstatua(estatua){
-        if(!this.usada)
-        {
-            estatua.body.x -= 30;
-            estatua.SpriteObject.x = estatua.body.x;
+        estatua.body.x -= 20;
+        estatua.SpriteObject.x = estatua.body.x;
 
-            this.usada = true;
-        }
+        this.usada = true;
         
     }
 
