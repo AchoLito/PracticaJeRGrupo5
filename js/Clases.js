@@ -564,8 +564,7 @@ class FondoNivel1{
 class FinNivel{
     constructor(x, y, scene) {
 
-        var radioInteraccion=30;
-        this.circ = scene.add.circle(x, y, radioInteraccion, 0x000000,0);
-        this.AreaInteraccion =scene.physics.add.existing(this.circ);
+        this.rect = scene.add.rectangle(x, y, 30,200, 0x000000,0);
+        this.AreaInteraccion =scene.physics.add.existing(this.rect);
     }
 }

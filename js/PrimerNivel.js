@@ -64,6 +64,7 @@ class PrimerNivel extends Phaser.Scene
     {
         this.fondo = new FondoNivel1(1280/2,900/2,this);
 
+        this.finNivel = new FinNivel(15,630, this);
 
         this.palancaPared_Estatua = new PalancaPared(450,300, this, false); 
 
@@ -201,6 +202,12 @@ class PrimerNivel extends Phaser.Scene
         //Colision entre jugadores, hacemos q se frenen tras colisionar
         this.physics.add.collider(this.humano.SpriteObject, this.fantasma.SpriteObject, this.manejoDeColisionJugadores);
 
+
+        this.physics.add.overlap(this.humano.SpriteObject,this.finNivel.AreaInteraccion,() => 
+        {
+            this.cambiarDeNivel();
+            
+        });
 
         //Coision palanca
         this.physics.add.collider(this.humano.SpriteObject,this.palanca.SpriteObject);
