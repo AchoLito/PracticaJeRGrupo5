@@ -8,8 +8,8 @@ class PantallaInicio extends Phaser.Scene
     preload()
     {
         // Hay que añadir la ruta a los archivos
-        //this.load.audio("clic"); // sonido pulsar botón
-        //this.load.audio("musicaInicio"); // sonido música fondo 
+        this.load.audio("clic", "audio/clic.mp3"); // sonido pulsar botón
+        this.load.audio("musicaInicio", "audio/MusicaFondo.mp3"); // sonido música fondo 
 
         this.load.image("fondo", "imagenes/FONDO_MENÚ_INICIO.png"); // imagen del fondo
         this.load.image("tituloJuego", "imagenes/TÍTULO.png"); // imagen con las letras del título
@@ -18,9 +18,9 @@ class PantallaInicio extends Phaser.Scene
 
     create()
     {
-        //this.musica = this.sound.add("musicaInicio");
-        //this.musica.loop = true;
-        //this.musica.play();
+        this.musica = this.sound.add("musicaInicio", { volume: 0.2 });
+        this.musica.loop = true;
+        this.musica.play();
 
         const fondo = this.add.image(640, 450, "fondo");
 
@@ -29,7 +29,7 @@ class PantallaInicio extends Phaser.Scene
         const botonJugar = this.add.image(640, 800, "botonContinuar") // añadir en el paréntesis la posición en la que queremos la imagen
             .setInteractive()
             .on("pointerdown", () => {
-                //this.sound.play("clic");
+                this.sound.play("clic");
                 this.scene.stop("PantallaInicio");
                 this.scene.start("MenuInicio");
             });
