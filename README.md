@@ -207,7 +207,27 @@ En esta sección, estableceremos una lista de todos los logros que están dispon
 ### 13. INTERFAZ
 ***
 
-La interfaz tendrá un estilo similar a la estética del juego, siendo simple y fácil de entender para los jugadores, además de que no obstruirá la pantalla a la hora de jugar. El juego incluirá unos botones en el menú inicial, siendo estos el de jugar, opciones, controles y salir; un menú de pausa, un inventario y bocadillos de diálogo.
+La interfaz tendrá un estilo similar a la estética del juego, siendo simple y fácil de entender para los jugadores, además de que no obstruirá la pantalla a la hora de jugar. El juego incluirá unos botones en el menú inicial, siendo estos el de jugar, opciones, controles y salir; un menú de pausa, un inventario y bocadillos de diálogo.  
+
+La interfaz incluye varios elementos que facilitan el control y la navegación tanto para el jugador que controla al humano como para el jugador que controla al fantasma. El diseño sigue una lógica de transición entre pantallas, con un flujo claro que se representa en el diagrama adjunto. Este flujo asegura que los jugadores puedan moverse de una pantalla a otra de manera fluida, ya sea al iniciar el juego, pausar, consultar información o avanzar al siguiente nivel.
+
+#### 13.1. PANTALLA DE TÍTULO  
+
+La pantalla de título es la primera que los jugadores ven al iniciar el juego. Sirve como introducción visual y establece el tono del juego. Tiene un botón interactivo con el texto "Comenzar". Al interactuar con él, el juego lleva automáticamente a la pantalla de Menú de Inicio.  
+
+#### 13.2. MENÚ DE INICIO  
+
+El menú principal contiene todas las opciones iniciales necesarias para comenzar la partida. Las opciones disponibles son:  
+
+**Jugar:** Inicia el juego y lleva al primer nivel.  
+
+**Controles:** Accede a la pantalla donde se explican los controles básicos de ambos personajes.  
+
+**Créditos:** Muestra información sobre el equipo que ha desarrollado el juego.  
+
+#### 13.3. NIVEL 1  
+
+Durante el juego, la interfaz del primer nivel incluye elementos específicos diseñados para guiar a los jugadores en la exploración y resolución del puzle. Esta interfaz muestra el inventario del humano, además de los diálogos que aparecen en los momentos requeridos. Al completar el puzle principal del nivel 1, la pantalla muestra un breve mensaje de "*Continurá*" antes de cargar el siguiente nivel. 
 
 ### 14. MÚSICA Y EFECTOS DE SONIDO
 ***
