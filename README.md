@@ -82,6 +82,14 @@ Respecto a la monetización, el juego será de compra única sin posibilidad de 
 
 Las mecánicas principales se basan en la cooperación entre los dos jugadores que controlan los personajes con mecánicas y habilidades únicas y complementarias: uno juega como humano y el otro como fantasma. Además, cada personaje tiene sus propias mecánicas que reflejan sus características dentro del mundo y son cruciales para la resolución de puzles.  
 
+**Movimiento:** El personaje del humano se puede mover utilizando las teclas W (movimiento hacia delante), A (movimiento hacia la izquierda), D (movimiento hacia la derecha) y S (movimiento hacia atrás). El personaje del fantasma se mueve mediante las flechas del teclado, pudiendo moverse en las mismas direcciones que el humano.  
+
+**Interacción:** El humano puede recoger objetos e interactuar con elementos del juego mediante la tecla E, mientras que el fantasma interactúa con la tecla del ENTER.  
+
+El humano y el fantasma no interactúan de la misma manerda con el entorno, cada uno de ellos posee habilidades únicas que los diferencian el uno del otro, por ejemplo el fantasma puede atravesar paredes y el humano puede recoger objetos y guardarlos en el inventario.  
+
+**Diálogos:** A lo largo del juego hay una serie de diálogos entre el fantasma y el humano, que permiten no solo avanzar en la historia sino también guiar al jugador a lo largo del juego. Para poder avanzar los diálogos, se debe hacer uso de la tecla ESPACIO. 
+
 **Resolución de puzles:** La resolución de puzles es la mecánica principal del juego, que combina las mecánicas y habilidades de los dos jugadores para desarrollarse. Algunos de los puzles que puede incluir el juego son:   
 
 * Puzles de puertas dobles o invisibles.  
