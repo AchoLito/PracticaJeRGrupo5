@@ -153,7 +153,7 @@ El bandido va vestido con unos pantalones negros y una camisa blanca, propia de 
 
 *Imágenes 11 y 12: Referencias para la apariencia del humano.*  
 
-![Imagen humano](imagens/HUMANO.png "Imagen humano final")  
+![Imagen humano](imagenes/HUMANO.png "Imagen humano final")  
 
 *Imagen 13: Diseño final del humano.*
 
