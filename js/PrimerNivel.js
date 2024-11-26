@@ -206,8 +206,21 @@ class PrimerNivel extends Phaser.Scene
         this.physics.add.overlap(this.humano.SpriteObject,this.palanca.AreaInteraccion,() => {
             if(this.humano.interacting)
             {
-                this.palanca.interactuar(this.inventario);
-                
+                this.palanca.interactuar(this.inventario);               
+            }
+        });
+
+        this.physics.add.collider(this.humano.SpriteObject,this.palancaPared_Estatua.SpriteObject);
+        this.physics.add.overlap(this.humano.SpriteObject,this.palancaPared_Estatua.AreaInteraccion,() => {
+            if(this.humano.interacting)
+            {             
+                if(!this.palancaPared_Estatua.usada){
+                    this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
+                    this.abrirYCerrarPuertaArriba(true);   
+                    
+                    this.fondo.cambioFondo(true, false);
+                }
+                         
             }
         });
         

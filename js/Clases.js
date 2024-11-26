@@ -479,15 +479,22 @@ class PalancaPared {
         this.body.setAllowGravity(false);
         this.body.setImmovable(true);
         this.AreaInteraccion.body.setImmovable(true);
-    
+
+        this.usada = false;
+        
        
     }
     
 
     moverEstatua(estatua){
-        estatua.body.x -= 30;
-        estatua.SpriteObject.x = estatua.body.x;
+        if(!this.usada)
+        {
+            estatua.body.x -= 30;
+            estatua.SpriteObject.x = estatua.body.x;
 
+            this.usada = true;
+        }
+        
     }
 
 }
