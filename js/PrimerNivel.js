@@ -32,6 +32,12 @@ class PrimerNivel extends Phaser.Scene
         //DIALOGO
         this.load.image('CAJA_DIALOGO','imagenes/CajaDialogos.png');
 
+        //INVENTARIO
+        this.load.image('INVENTARIO','imagenes/INVENTARIO.png');
+
+        //OBJETOS
+        this.load.image('PALANCA','imagenes/ANTORCHA_ENCENDIDA.png');
+  
         //PUERTAS
         //(Cargars imagenes de las puertas)
 
@@ -104,6 +110,12 @@ class PrimerNivel extends Phaser.Scene
 
         this.puertasColliders_Array = [];
 
+
+         //INVENTARIO
+         this.inventario= new Inventario(1105,80, this );
+         this.palanca= new PalancaInventario(600,500, this );
+
+
         //FUNCIONES DE RESPUESTA
         this.inicializarControlesHumano();
         this.inicializarControlesFantasma();
@@ -168,6 +180,16 @@ class PrimerNivel extends Phaser.Scene
         //Colision entre jugadores, hacemos q se frenen tras colisionar
         this.physics.add.collider(this.humano.SpriteObject, this.fantasma.SpriteObject, this.manejoDeColisionJugadores);
 
+
+         //Coision palanca
+         this.physics.add.collider(this.humano.SpriteObject,this.palanca.SpriteObject);
+         this.physics.add.overlap(this.humano.SpriteObject,this.palanca.AreaInteraccion,() => {
+                if(this.humano.interacting)
+                {
+                    this.palanca.interactuar(this.inventario);
+                    
+                }
+         });
         /*const grupoAntorchas = this.physics.add.group({immovable: true});
         for(var i=0;i<this.antorchas_Array.length;i++){
             grupoAntorchas.add(this.antorchas_Array[i].SpriteObject);

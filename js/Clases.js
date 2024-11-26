@@ -429,3 +429,65 @@ class Puerta
         this.cooldown = false;
     }
 }
+
+class PalancaInventario {
+    constructor(x, y, scene) {
+        this.SpriteObject = scene.physics.add.image(x, y, 'PALANCA');
+
+        var radioInteraccion=30;
+        this.circ = scene.add.circle(x, y, radioInteraccion, 0x000000,0);
+        this.AreaInteraccion =scene.physics.add.existing(this.circ); 
+
+
+        this.body = this.SpriteObject.body;
+        this.body.setAllowGravity(false);
+        this.body.setImmovable(true);
+        this.AreaInteraccion.body.setImmovable(true);
+    
+       
+    }
+
+    interactuar(p)//cada vez q interactuas cambia su estado
+    {       
+         p.meterInventario('PALANCA');   
+         //this.body.setPosition(10000,10000);
+         this.body.x=10000;
+       
+    }
+
+}
+
+class Inventario{
+    constructor(x, y, scene) 
+    {
+        this.scene=scene;
+        this.x=x;
+        this.y=y;
+        this.inventario = scene.add.image(x,y ,'INVENTARIO');
+        this.inventario_objetos_Array = [0,0,0];
+
+    }       
+
+    meterInventario( nombre )
+    {
+        for(var i=0; i<3; i++)
+        {
+            if( this.inventario_objetos_Array [i]== 0)
+            {
+                this.inventario_objetos_Array [i]= nombre;
+                this.cambioImagen(i, nombre);
+                        
+            }
+
+           break;
+
+        }  
+
+    }
+
+    cambioImagen(i, nombre)
+    {
+        this.SpriteObject = this.scene.physics.add.image(this.x-73+i*73, this.y+4, nombre);
+    }
+
+}
