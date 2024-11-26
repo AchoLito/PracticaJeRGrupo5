@@ -53,7 +53,7 @@ class PrimerNivel extends Phaser.Scene
 
     create()
     {
-        this.fondo = new Fondo(1280/2,900/2,this);
+        this.fondo = new FondoNivel1(1280/2,900/2,this);
 
         //HUMANO
         this.humano = new Humano(580,500, this);
@@ -76,16 +76,19 @@ class PrimerNivel extends Phaser.Scene
 
         //ESTATUAS
         this.estatuas_Array = [];
-        this.NUM_ESTATUAS = 4;
+        this.NUM_ESTATUAS = 6;
         this.numeroEstatuasCorrectas = 0;
 
-        this.completado = true;
+        this.completado = false;
 
         //El segundo string es para marcar cual es la posicion correcta de la estatua
-        this.estatuas_Array.push(new Estatua(320,320, this, 'ESTATUA_ATRAS','ESTATUA_DERECHA'));
+        this.estatuas_Array.push(new Estatua(320,470, this, 'ESTATUA_ATRAS','ESTATUA_DERECHA'));
         this.estatuas_Array.push(new Estatua(910,320, this,'ESTATUA_FRONTAL','ESTATUA_IZQUIERDA'));
-        this.estatuas_Array.push(new Estatua(320,715, this,'ESTATUA_IZQUIERDA','ESTATUA_FRONTAL'));
-        this.estatuas_Array.push(new Estatua(910,715, this,'ESTATUA_DERECHA','ESTATUA_ATRAS'));
+        this.estatuas_Array.push(new Estatua(910,655, this,'ESTATUA_IZQUIERDA','ESTATUA_FRONTAL'));
+        this.estatuas_Array.push(new Estatua(640,655, this,'ESTATUA_DERECHA','ESTATUA_ATRAS'));
+        this.estatuas_Array.push(new Estatua(640,320, this,'ESTATUA_IZQUIERDA','ESTATUA_FRONTAL'));
+        this.estatuas_Array.push(new Estatua(1150,515, this,'ESTATUA_DERECHA','ESTATUA_IZQUIERDA'));
+
 
         //DIALOGOS
         this.dialogo = new Dialogo(this);
