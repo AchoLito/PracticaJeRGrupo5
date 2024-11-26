@@ -19,7 +19,9 @@ Unai Pastrana Torres, correo de la universidad: u.pastrana.2022@alumnos.urjc.es,
 ### 1. CONCEPTO DEL JUEGO
 ***
 
-*La Maldición* es un videojuego cooperativo multijugador para dos jugadores. Cada jugador controla a un personaje con habilidades únicas: uno es un fantasma y el otro es un humano. Ambos deben colaborar para resolver puzles, desbloquear áreas y escapar de un castillo. El fantasma puede atravesar paredes y manipular ciertos objetos, mientras el humano puede interactuar con el mundo físico. Los jugadores deben coordinar sus acciones y utilizar sus habilidades complementarias para progresar.
+*La Maldición* es un videojuego cooperativo multijugador para dos jugadores. Cada jugador controla a un personaje con habilidades únicas: uno es un fantasma y el otro es un humano. Ambos deben colaborar para resolver puzles, desbloquear áreas y escapar de un castillo. El fantasma puede atravesar paredes y manipular ciertos objetos, mientras el humano puede interactuar con el mundo físico. Los jugadores deben coordinar sus acciones y utilizar sus habilidades complementarias para progresar.  
+
+La licencia utilizada es Apache 2.0.
 
 ### 2. GÉNERO
 ***
@@ -59,7 +61,7 @@ La perspectiva será similar a la de las imágenes 1, 2 y 3, pero con un estilo 
 ### 4. PROPÓSITO Y PÚBLICO OBJETIVO
 ***
 
-El público objetivo de *La Maldición* son jugadores a partir de 12 años, interesados en experiencias cooperativas y de resolución de puzles. Está diseñado tanto para jugadores que disfrutan de los juegos que fomentan la colaboración de forma casual como para aficionados de juegos cooperativos más experimentados que buscan una experiencia diferente.  
+*La MAldición* está dirigido a un rango de jugadores establecido con PEGI 7, interesados en experiencias cooperativas y de resolución de puzles. Está diseñado tanto para jugadores que disfrutan de los juegos que fomentan la colaboración de forma casual como para aficionados de juegos cooperativos más experimentados que buscan una experiencia diferente.  
 
 Aunque incluye elementos de misterio y ambientación sombría, *La Maldición* no recurre a imágenes perturbadoras o violencia explícita, lo que lo hace adecuado para público más amplio, incluidas personas jóvenes. 
 
@@ -71,7 +73,9 @@ Aunque incluye elementos de misterio y ambientación sombría, *La Maldición* n
 ### 6. ALCANCE
 ***
 
-El juego está diseñado para ofrecer una experiencia cooperativa de corta a mediana duración, con una campaña principal que abarca entre 3 y 5 niveles progresivamente más complejos. 
+El juego está diseñado para ofrecer una experiencia cooperativa de corta a mediana duración, con una campaña principal que abarca entre 3 y 5 niveles progresivamente más complejos.  
+
+Respecto a la monetización, el juego será de compra única sin posibilidad de DLCs en un futuro.
 
 ### 7. MECÁNICAS PRINCIPALES
 ***
