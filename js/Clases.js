@@ -149,9 +149,10 @@ class Antorcha
         this.encendida=false;
         this.cooldown=false;//indica si esta en espera para poder interactuar con ella
 
-       // this.SpriteObject = scene.physics.add.image(x, y, 'ESTATUA_ATRAS');
-        this.rect = scene.add.rectangle(x, y, 20, 20, 0x00cccc);
-        this.SpriteObject =scene.physics.add.existing(this.rect); // Enable physics on the rectangle
+        //this.SpriteObject = scene.physics.add.image(x, y, 'ESTATUA_ATRAS');
+       
+        this.SpriteObject = scene.physics.add.image(x, y, 'ANTORCHA_APAGADA');
+
 
         var radioInteraccion=30;
         this.circ = scene.add.circle(x, y, radioInteraccion, 0x000000,0);
@@ -171,13 +172,13 @@ class Antorcha
             if(this.encendida)//apagar
             {
                 this.encendida = false;
-                this.rect.setFillStyle(0x00cccc, 1);
+                this.SpriteObject.setTexture('ANTORCHA_APAGADA');
                 return false;
             }
             else//encender
             {
                 this.encendida = true;
-                this.rect.setFillStyle(0xffffff, 1);
+                this.SpriteObject.setTexture('ANTORCHA_ENCENDIDA');
                 return true;
             }
         }

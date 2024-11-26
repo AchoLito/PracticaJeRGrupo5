@@ -41,6 +41,11 @@ class PrimerNivel extends Phaser.Scene
         //PUERTAS
         //(Cargars imagenes de las puertas)
 
+
+        //ANTORCHAS 
+        this.load.image('ANTORCHA_APAGADA','imagenes/ANTORCHA_APAGADA.png');
+        this.load.image('ANTORCHA_ENCENDIDA','imagenes/ANTORCHA_ENCENDIDA.png');
+
         //PISTAS ANTORCHAS
         //
         //SON PLACEHOLDERS, CUANDO ESTEN LAS PISTAS SUSTITUIS LOS ARCHIVOS :D
@@ -376,7 +381,7 @@ class PrimerNivel extends Phaser.Scene
     {
         for(var i=0;i<this.NUM_ANTORCHAS;i++)
         {
-            this.antorchas_Array[i].rect.setFillStyle(0x0011ff, 1);
+           
             this.pistas_Array[i].SpriteObject.setVisible(true);
         }
     }
@@ -384,9 +389,7 @@ class PrimerNivel extends Phaser.Scene
     {
         for(var i=0;i<this.NUM_ANTORCHAS;i++)
         {
-            if( this.antorchas_Array[i].encendida){
-                this.antorchas_Array[i].rect.setFillStyle(0xffffff, 1);               
-            }
+            
             this.pistas_Array[i].SpriteObject.setVisible(false);
         }
     }
