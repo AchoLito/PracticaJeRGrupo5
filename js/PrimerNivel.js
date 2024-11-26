@@ -495,8 +495,8 @@ class PrimerNivel extends Phaser.Scene
         }
     }
     cambiarDeNivel(){
+        this.scene.start("Fin");
 
-        
     }
     abrirYCerrarPuertaArriba(hecho){
         if(hecho)
