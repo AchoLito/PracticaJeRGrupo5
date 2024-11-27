@@ -263,7 +263,7 @@ El menú principal contiene todas las opciones iniciales necesarias para comenza
 
 #### 13.3. NIVEL 1  
 
-Durante el juego, la interfaz del primer nivel incluye elementos específicos diseñados para guiar a los jugadores en la exploración y resolución del puzle. Esta interfaz muestra el inventario del humano, además de los diálogos que aparecen en los momentos requeridos. Al completar el puzle principal del nivel 1, la pantalla muestra un breve mensaje de "*Continurá*" antes de cargar el siguiente nivel.  
+Durante el juego, la interfaz del primer nivel incluye elementos específicos diseñados para guiar a los jugadores en la exploración y resolución del puzle. Esta interfaz muestra el inventario del humano, además de los diálogos que aparecen en los momentos requeridos. Al completar el puzle principal del nivel 1, la pantalla muestra un breve mensaje de "*Continuará*" antes de cargar el siguiente nivel.  
 
 ![Imagen nivel 1](imagenes/Nivel_1.png "Imagen del nivel 1")  
 
