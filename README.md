@@ -181,7 +181,7 @@ Los soldados del castillo van vestidos con unas armaduras que les cubren todo el
 
 ![Imagen Enemigos](imagenes/Imagen_guardias.png "Imagen enemigos")
 
-*Imagen 10: Referencias para la apariencia de los enemigos.*
+*Imagen 14: Referencias para la apariencia de los enemigos.*
 
 ### 10. OBJETOS
 ***
@@ -213,9 +213,9 @@ Los jugadores deben encender una serie de antorchas y alinear correctamente las 
 
 ##### 11.1.3. IMAGEN DEL NIVEL  
 
-![Imagen nivel 1](imagenes/Nivel1.png "Imagen nivel 1")  
+![Imagen nivel 1](imagenes/Nivel_1.png "Imagen nivel 1")  
 
-*Imagen 11: Escenario del Nivel 1*
+*Imagen 15: Escenario del Nivel 1*
 
 ### 12. LOGROS
 ***
@@ -231,7 +231,7 @@ La interfaz incluye varios elementos que facilitan el control y la navegación t
 
 ![Imagen diagrama](imagenes/DIAGRAMA_PANTALLAS.png "Imagen diagrama de patallas")  
 
-*Imagen 12: Diagrama de pantallas*  
+*Imagen 16: Diagrama de pantallas*  
 
 
 #### 13.1. PANTALLA DE TÍTULO  
@@ -250,24 +250,24 @@ El menú principal contiene todas las opciones iniciales necesarias para comenza
 
 ![Imagen menú inicio](imagenes/Menu_Inicio.png "Imagen del menú de inicio")  
 
-*Imagen 13: Menú de inicio del juego*  
+*Imagen 17: Menú de inicio del juego*  
 
 ![Imagen controles](imagenes/Pantalla_Controles.png "Imagen de los controles")
 
-*Imagen 14: Controles de cada jugador del juego*  
+*Imagen 18: Controles de cada jugador del juego*  
 
 ![Imagen créditos](imagenes/Creditos.png "Imagen de lso créditos")  
 
-*Imagen 15: Créditos del juego*  
+*Imagen 19: Créditos del juego*  
 
 
 #### 13.3. NIVEL 1  
 
 Durante el juego, la interfaz del primer nivel incluye elementos específicos diseñados para guiar a los jugadores en la exploración y resolución del puzle. Esta interfaz muestra el inventario del humano, además de los diálogos que aparecen en los momentos requeridos. Al completar el puzle principal del nivel 1, la pantalla muestra un breve mensaje de "*Continurá*" antes de cargar el siguiente nivel.  
 
-![Imagen nivel 1](imagenes/Nivel1.png "Imagen del nivel 1")  
+![Imagen nivel 1](imagenes/Nivel_1.png "Imagen del nivel 1")  
 
-*Imagen 16: Nivel 1 del juego*
+*Imagen 20: Nivel 1 del juego*
 
 ### 14. MÚSICA Y EFECTOS DE SONIDO
 ***
