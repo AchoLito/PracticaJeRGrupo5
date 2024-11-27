@@ -209,7 +209,13 @@ Los jugadores deben encender una serie de antorchas y alinear correctamente las 
 
 **Palanca rota:** En la sala hay una palanca incompleta que el humano debe reparar utilizando el trozo de palanca encontrado. Una vez reparada, esta palanca permite mover una estatua que oculta una puerta secreta.  
 
-**Palanca oculta del fantasma:** AL final del puzle, el fantasma debe localizar y activar una palanca oculta que desbloquea la puerta secreta final, permitiendo a ambos jugadores salir de la cámara.
+**Palanca oculta del fantasma:** AL final del puzle, el fantasma debe localizar y activar una palanca oculta que desbloquea la puerta secreta final, permitiendo a ambos jugadores salir de la cámara.  
+
+##### 11.1.3. IMAGEN DEL NIVEL  
+
+![Imagen nivel 1](imagenes/Nivel1.png "Imagen nivel 1")  
+
+*Imagen 11: Escenario del Nivel 1*
 
 ### 12. LOGROS
 ***
@@ -221,7 +227,12 @@ En esta sección, estableceremos una lista de todos los logros que están dispon
 
 La interfaz tendrá un estilo similar a la estética del juego, siendo simple y fácil de entender para los jugadores, además de que no obstruirá la pantalla a la hora de jugar. El juego incluirá unos botones en el menú inicial, siendo estos el de jugar, opciones, controles y salir; un menú de pausa, un inventario y bocadillos de diálogo.  
 
-La interfaz incluye varios elementos que facilitan el control y la navegación tanto para el jugador que controla al humano como para el jugador que controla al fantasma. El diseño sigue una lógica de transición entre pantallas, con un flujo claro que se representa en el diagrama adjunto. Este flujo asegura que los jugadores puedan moverse de una pantalla a otra de manera fluida, ya sea al iniciar el juego, pausar, consultar información o avanzar al siguiente nivel.
+La interfaz incluye varios elementos que facilitan el control y la navegación tanto para el jugador que controla al humano como para el jugador que controla al fantasma. El diseño sigue una lógica de transición entre pantallas, con un flujo claro que se representa en el diagrama adjunto. Este flujo asegura que los jugadores puedan moverse de una pantalla a otra de manera fluida, ya sea al iniciar el juego, pausar, consultar información o avanzar al siguiente nivel.  
+
+![Imagen diagrama](imagenes/DIAGRAMA_PANTALLAS.png "Imagen diagrama de patallas")  
+
+*Imagen 12: Diagrama de pantallas*  
+
 
 #### 13.1. PANTALLA DE TÍTULO  
 
@@ -237,9 +248,26 @@ El menú principal contiene todas las opciones iniciales necesarias para comenza
 
 **Créditos:** Muestra información sobre el equipo que ha desarrollado el juego.  
 
+![Imagen menú inicio](imagenes/Menu_Inicio.png "Imagen del menú de inicio")  
+
+*Imagen 13: Menú de inicio del juego*  
+
+![Imagen controles](imagenes/Pantalla_Controles.png "Imagen de los controles")
+
+*Imagen 14: Controles de cada jugador del juego*  
+
+![Imagen créditos](imagenes/Creditos.png "Imagen de lso créditos")  
+
+*Imagen 15: Créditos del juego*  
+
+
 #### 13.3. NIVEL 1  
 
-Durante el juego, la interfaz del primer nivel incluye elementos específicos diseñados para guiar a los jugadores en la exploración y resolución del puzle. Esta interfaz muestra el inventario del humano, además de los diálogos que aparecen en los momentos requeridos. Al completar el puzle principal del nivel 1, la pantalla muestra un breve mensaje de "*Continurá*" antes de cargar el siguiente nivel. 
+Durante el juego, la interfaz del primer nivel incluye elementos específicos diseñados para guiar a los jugadores en la exploración y resolución del puzle. Esta interfaz muestra el inventario del humano, además de los diálogos que aparecen en los momentos requeridos. Al completar el puzle principal del nivel 1, la pantalla muestra un breve mensaje de "*Continurá*" antes de cargar el siguiente nivel.  
+
+![Imagen nivel 1](imagenes/Nivel1.png "Imagen del nivel 1")  
+
+*Imagen 16: Nivel 1 del juego*
 
 ### 14. MÚSICA Y EFECTOS DE SONIDO
 ***
