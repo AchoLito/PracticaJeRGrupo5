@@ -252,6 +252,7 @@ class PrimerNivel extends Phaser.Scene
                         this.abrirYCerrarPuertaArriba(true);   
                         
                         this.fondo.cambioFondo(true, false);
+                        this.pasilloDescubierto = true;
                         this.palancaPared_Puerta.SpriteObject.setVisible(true);
                         this.palancaPared_Estatua.SpriteObject.setTexture('ABAJO_PALANCA');
                     }
@@ -272,6 +273,7 @@ class PrimerNivel extends Phaser.Scene
                     this.abrirYCerrarPuertaArriba(true);   
                     
                     this.fondo.cambioFondo(true, false);
+                    this.pasilloDescubierto = true;
                     this.palancaPared_Puerta.SpriteObject.setVisible(true);
                     this.palancaPared_Estatua.SpriteObject.setTexture('ABAJO_PALANCA');
                 }
