@@ -229,7 +229,7 @@ La interfaz tendrá un estilo similar a la estética del juego, siendo simple y 
 
 La interfaz incluye varios elementos que facilitan el control y la navegación tanto para el jugador que controla al humano como para el jugador que controla al fantasma. El diseño sigue una lógica de transición entre pantallas, con un flujo claro que se representa en el diagrama adjunto. Este flujo asegura que los jugadores puedan moverse de una pantalla a otra de manera fluida, ya sea al iniciar el juego, pausar, consultar información o avanzar al siguiente nivel.  
 
-![Imagen diagrama](imagenes/DIAGRAMA_PANTALLAS.png "Imagen diagrama de patallas")  
+![Imagen diagrama](imagenes/DIAGRAMA_PANTALLAS.png "Imagen diagrama de pantallas")  
 
 *Imagen 16: Diagrama de pantallas*  
 
@@ -252,11 +252,11 @@ El menú principal contiene todas las opciones iniciales necesarias para comenza
 
 *Imagen 17: Menú de inicio del juego*  
 
-![Imagen controles](imagenes/Pantalla_Controles.png "Imagen de los controles")
+![Imagen controles](imagenes/Controles.png "Imagen de los controles")
 
 *Imagen 18: Controles de cada jugador del juego*  
 
-![Imagen créditos](imagenes/Creditos.png "Imagen de lso créditos")  
+![Imagen créditos](imagenes/Creditos.png "Imagen de los créditos")  
 
 *Imagen 19: Créditos del juego*  
 
