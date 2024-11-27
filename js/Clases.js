@@ -541,7 +541,7 @@ class FondoNivel1{
     constructor(x, y, scene) 
     {
         
-        this.img = scene.add.image(x,y ,'FONDO_SP_SB');
+        this.img = scene.add.image(x,y ,'FONDO_CP_SB');
 
     }
 

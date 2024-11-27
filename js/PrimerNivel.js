@@ -57,6 +57,9 @@ class PrimerNivel extends Phaser.Scene
         //ANTORCHAS 
         this.load.image('ANTORCHA_APAGADA','imagenes/ANTORCHA_APAGADA.png');
         this.load.image('ANTORCHA_ENCENDIDA','imagenes/ANTORCHA_ENCENDIDA.png');
+
+        this.load.audio('ESTATUA','audio/MoverEstatua.mp3');
+        this.load.audio('PUERTA','audio/SonidoPuerta.mp3');
     }
 
     create()
@@ -245,6 +248,7 @@ class PrimerNivel extends Phaser.Scene
                     if(this.palancaPared_Estatua.cooldown){}
                     else if(!this.palancaPared_Estatua.usada && !this.cooldown){
                         this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
+                        this.sound.play('ESTATUA');
                         this.abrirYCerrarPuertaArriba(true);   
                         
                         this.fondo.cambioFondo(true, false);
@@ -264,6 +268,7 @@ class PrimerNivel extends Phaser.Scene
             {       
                 if(!this.palancaPared_Estatua.usada && this.palancaPared_Estatua.metida){
                     this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
+                    this.sound.play('ESTATUA');
                     this.abrirYCerrarPuertaArriba(true);   
                     
                     this.fondo.cambioFondo(true, false);
@@ -345,6 +350,7 @@ class PrimerNivel extends Phaser.Scene
                 if(this.humano.interacting)
                 {
                     var resultadoInteraccion=this.estatuas_Array[i].girarEstatua();
+                    this.sound.play('ESTATUA');
                     if(!(resultadoInteraccion===-1))
                     {
                         if(this.comprobarPosicionEstatua(this.estatuas_Array[i]))
@@ -383,6 +389,7 @@ class PrimerNivel extends Phaser.Scene
                 if(this.fantasma.interacting)
                 {
                     var resultadoInteraccion=this.estatuas_Array[i].girarEstatua();
+                    this.sound.play('ESTATUA');
                     if(!(resultadoInteraccion===-1))
                     {
                         if(this.comprobarPosicionEstatua(this.estatuas_Array[i]))
@@ -437,27 +444,23 @@ class PrimerNivel extends Phaser.Scene
         grupoMuros.add(this.physics.add.existing(rect));
 
         //Rectangulo 2
-        var rect = this.add.rectangle(45, 325 , 90, 492, 0x000000,0);
+        var rect = this.add.rectangle(60, 325 , 110, 482, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         //Rectangulo 3
-        var rect = this.add.rectangle(800, 200, 702, 175, 0x000000,0);
-        grupoMuros.add(this.physics.add.existing(rect));
-
-        //Rectangulo 4
-        var rect = this.add.rectangle(800, 200, 702, 175, 0x000000,0);
+        var rect = this.add.rectangle(800, 175, 720, 215, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         //Recatangulo 5
-        var rect = this.add.rectangle(255, 260, 140, 55, 0x000000,0);
+        var rect = this.add.rectangle(285, 245, 100, 35, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         //Recatangulo 6
-        var rect = this.add.rectangle(225, 403, 80, 340, 0x000000,0);
+        var rect = this.add.rectangle(250, 393, 40, 340, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         //Recatangulo 7
-        var rect = this.add.rectangle(640, 910, 1280, 340, 0x000000,0);
+        var rect = this.add.rectangle(640, 910, 1280, 360, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         //Recatangulo 8
@@ -465,23 +468,28 @@ class PrimerNivel extends Phaser.Scene
         grupoMuros.add(this.physics.add.existing(rect));
 
         //Recatangulo 9
-        var rect = this.add.rectangle(1000, 710, 50, 260, 0x000000,0);
+        var rect = this.add.rectangle(1010, 730, 70, 260, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         //Recatangulo 10
-        var rect = this.add.rectangle(1000, 315, 50, 260, 0x000000,0);
+        var rect = this.add.rectangle(1010, 315, 70, 260, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         //Recatangulo 11
-        var rect = this.add.rectangle(1105, 710, 260, 155, 0x000000,0);
+        var rect = this.add.rectangle(1105, 745, 260, 155, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         //Recatangulo 12
-        var rect = this.add.rectangle(1105, 315, 260, 155, 0x000000,0);
+        var rect = this.add.rectangle(1105, 265, 260, 155, 0x000000,0);
+        grupoMuros.add(this.physics.add.existing(rect));
+
+        //Recatangulo 13
+        var rect = this.add.rectangle(1250, 465, 80, 400, 0x000000,0);
         grupoMuros.add(this.physics.add.existing(rect));
 
         this.physics.add.collider(this.humano.SpriteObject,grupoMuros);
         this.physics.add.collider(this.fantasma.SpriteObject,grupoMuros);
+        
     }
 
     manejoDeColisionJugadores(humanoObj, fantasmaObj) 
@@ -547,12 +555,14 @@ class PrimerNivel extends Phaser.Scene
     abrirYCerrarPuertaArriba(hecho){
         if(hecho)
         {
+            this.sound.play('PUERTA');
             this.puertas_Array[2].interactuar(true);
             
             this.physics.world.removeCollider(this.puertasColliders_Array[2]);
         }
         else
         {
+            this.sound.play('PUERTA');
             var n =this.puertas_Array[2].interactuar(false);
 
             
@@ -569,12 +579,14 @@ class PrimerNivel extends Phaser.Scene
     abrirYCerrarPuertaBajo(hecho){
         if(hecho)
         {
+            this.sound.play('PUERTA');
             this.puertas_Array[1].interactuar(true);
             
             this.physics.world.removeCollider(this.puertasColliders_Array[1]);
         }
         else
         {
+            this.sound.play('PUERTA');
             var n =this.puertas_Array[1].interactuar(false);
 
             
