@@ -303,6 +303,7 @@ class Dialogo
         {
             this.imagenPersonaje = this.scene.add.image(this.scene.cameras.main.centerX - 260, this.scene.cameras.main.centerY + 325, dialogo.imagenPersonaje);
             this.imagenPersonaje.setDepth(11);
+            this.imagenPersonaje.setScale(0.70, 0.70);
         }
         else 
         {
@@ -312,7 +313,7 @@ class Dialogo
         // Crear o actualizar el texto
         if (!this.texto) 
         {
-            this.texto = this.scene.add.text(this.scene.cameras.main.centerX - 180, this.scene.cameras.main.centerY + 315, dialogo.mensaje, {
+            this.texto = this.scene.add.text(this.scene.cameras.main.centerX - 180, this.scene.cameras.main.centerY + 290 , dialogo.mensaje, {
                 font: '18px Sans Serif',
                 fill: '#000000',
                 wordWrap: { width: 430, useAdvancedWrap: true }

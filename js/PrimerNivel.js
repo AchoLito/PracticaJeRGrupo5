@@ -34,6 +34,8 @@ class PrimerNivel extends Phaser.Scene
 
         //DIALOGO
         this.load.image('CAJA_DIALOGO','imagenes/CajaDialogos.png');
+        this.load.image('HUMANO','imagenes/HUMANO.png');
+        this.load.image('FANTASMA','imagenes/FANTASMA.png');
 
         //INVENTARIO
         this.load.image('INVENTARIO','imagenes/INVENTARIO.png');
@@ -55,9 +57,6 @@ class PrimerNivel extends Phaser.Scene
         //ANTORCHAS 
         this.load.image('ANTORCHA_APAGADA','imagenes/ANTORCHA_APAGADA.png');
         this.load.image('ANTORCHA_ENCENDIDA','imagenes/ANTORCHA_ENCENDIDA.png');
-
-        
-        
     }
 
     create()
@@ -72,6 +71,7 @@ class PrimerNivel extends Phaser.Scene
 
         this.palancaPared_Puerta = new PalancaPared(350,95, this, true); 
         this.palancaPared_Puerta.SpriteObject.setTexture('ARRIBA_PALANCA');
+        this.palancaPared_Puerta.SpriteObject.setVisible(false);
 
         this.pasilloDescubierto=false;
 
@@ -125,9 +125,22 @@ class PrimerNivel extends Phaser.Scene
         // Configurar los diálogos (puedes tener varios)
         this.dialogo.configurarDialogos
         ([
-            { imagenPersonaje: 'BANDIDO_FRONTAL', mensaje: '¿Qué es esto? ¿Dónde estoy? ¿Quién… qué eres tú?' },
-            { imagenPersonaje: 'FANTASMA_FRONTAL', mensaje: 'Eso... quisiera saberlo yo también, soy un eco. Una sombra atrapada en este lugar.' },
-            { imagenPersonaje: 'BANDIDO_FRONTAL', mensaje: '¿Eres... un fantasma?' }
+            { imagenPersonaje: 'HUMANO', mensaje: '¿Qué es esto? ¿Dónde estoy? ¿Quién… qué eres tú?' },
+            { imagenPersonaje: 'FANTASMA', mensaje: 'Eso... quisiera saberlo yo también, soy un eco. Una sombra atrapada en este lugar.' },
+            { imagenPersonaje: 'HUMANO', mensaje: '¿Eres... un fantasma?' },
+            { imagenPersonaje: 'FANTASMA', mensaje: 'Supongo que lo soy. Aunque el término no alcanza para describir lo que significa estar... aquí. No soy como tú, pero tampoco estoy completamente perdido.' },
+            { imagenPersonaje: 'HUMANO', mensaje: '¿Qué es este lugar?' },
+            { imagenPersonaje: 'FANTASMA', mensaje: 'Un castillo que respira. Una prisión de piedra y memoria. Nadie llega aquí por accidente.' },
+            { imagenPersonaje: 'HUMANO', mensaje: '¿Tú también estás atrapado?' },
+            { imagenPersonaje: 'FANTASMA', mensaje: 'Sí. Y por más tiempo del que puedo recordar. Este lugar... se alimenta de lo que éramos, borra lo que fuimos. Pero creo que tú puedes cambiar eso, para ambos.' },
+            { imagenPersonaje: 'HUMANO', mensaje: '¿Yo? ¿Cómo podría ayudarte yo a ti?' },
+            { imagenPersonaje: 'FANTASMA', mensaje: 'No ahora. Pero juntos podemos descubrirlo. Lo único que sé con certeza es que este castillo no quiere que te vayas. Si no nos ayudamos el uno al otro, no saldrás de aquí con vida.' },
+            { imagenPersonaje: 'HUMANO', mensaje: 'Esto no puede estar pasando.' },
+            { imagenPersonaje: 'FANTASMA', mensaje: 'Lo sé. Todo parece un mal sueño. Pero estás aquí, y eso significa que tienes un propósito. Confía en eso, aunque no confíes en mí todavía.' },
+            { imagenPersonaje: 'HUMANO', mensaje: 'De acuerdo. Pero... ¿por dónde empezamos?' },
+            { imagenPersonaje: 'FANTASMA', mensaje: 'Primero deberíamos encontrar la forma de sacarte de aquí. Este lugar es un laberinto, pero algunos caminos nos llevarán más cerca de las respuestas. Y otros... nos llevarán al final.' },
+            { imagenPersonaje: 'HUMANO', mensaje: '¿Al final? ¿Quieres decir… la muerte?' },
+            { imagenPersonaje: 'FANTASMA', mensaje: 'No, algo peor que eso. Mantente cerca. Este castillo nos está mirando.' }
         ]);
 
         
@@ -235,6 +248,7 @@ class PrimerNivel extends Phaser.Scene
                         this.abrirYCerrarPuertaArriba(true);   
                         
                         this.fondo.cambioFondo(true, false);
+                        this.palancaPared_Puerta.SpriteObject.setVisible(true);
                         this.palancaPared_Estatua.SpriteObject.setTexture('ABAJO_PALANCA');
                     }
                 }                                         
@@ -245,9 +259,40 @@ class PrimerNivel extends Phaser.Scene
             }
         });
 
+        this.physics.add.overlap(this.fantasma.SpriteObject,this.palancaPared_Estatua.AreaInteraccion,() => {
+            if(this.fantasma.interacting)
+            {       
+                if(!this.palancaPared_Estatua.usada && this.palancaPared_Estatua.metida){
+                    this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
+                    this.abrirYCerrarPuertaArriba(true);   
+                    
+                    this.fondo.cambioFondo(true, false);
+                    this.palancaPared_Puerta.SpriteObject.setVisible(true);
+                    this.palancaPared_Estatua.SpriteObject.setTexture('ABAJO_PALANCA');
+                }
+            }                                                 
+            else
+            {
+                this.palancaPared_Estatua.cooldown = false;
+            }
+        });
+
         this.physics.add.collider(this.humano.SpriteObject,this.palancaPared_Puerta.SpriteObject);
         this.physics.add.overlap(this.humano.SpriteObject,this.palancaPared_Puerta.AreaInteraccion,() => {
             if(this.humano.interacting)
+            {             
+                if(!this.palancaPared_Puerta.usada){
+                    this.palancaPared_Puerta.usada = true;
+                    this.abrirYCerrarPuertaBajo(true);   
+                    this.palancaPared_Puerta.SpriteObject.setTexture('ABAJO_PALANCA');
+                    //this.fondo.cambioFondo(true, false);
+                }
+                         
+            }
+        });
+
+        this.physics.add.overlap(this.fantasma.SpriteObject,this.palancaPared_Puerta.AreaInteraccion,() => {
+            if(this.fantasma.interacting)
             {             
                 if(!this.palancaPared_Puerta.usada){
                     this.palancaPared_Puerta.usada = true;
