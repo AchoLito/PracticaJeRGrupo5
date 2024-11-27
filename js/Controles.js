@@ -17,6 +17,7 @@ class Controles extends Phaser.Scene
         this.load.image("TeclaE", "imagenes/TeclaE.png"); // interacción humano
         this.load.image("Intro", "imagenes/TeclaIntro.png"); // interacción fantasma 
         this.load.image("espacio", "imagenes/TeclaEspacio.png"); // tecla para pasar los diálogos
+        this.load.image("teclasNum", "imagenes/botones_num.png")
     }
 
     create()
@@ -45,9 +46,15 @@ class Controles extends Phaser.Scene
 
         const textIntro = this.add.text(220, 800,"Interactuar", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
 
-        const espacio = this.add.image(900, 480, "espacio");
+        const espacio = this.add.image(1100, 480, "espacio");
 
-        const dialogos = this.add.text(400, 455,"Pasar diálogos", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
+        const dialogos = this.add.text(680, 455,"Pasar diálogos", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
+
+        const teclasNum = this.add.image(480, 480, "teclasNum");
+
+        const select = this.add.text(100, 440,"Seleccionar", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
+    
+        const inventario = this.add.text(100, 475,"inventario", { fontFamily: "serif-sans", fontSize: "40px", color: "#FFFFFF" });
 
         const botonVolver = this.add.image(75, 75, "botonVolver")
             .setInteractive()
