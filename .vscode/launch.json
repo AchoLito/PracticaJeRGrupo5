@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-LamaldicionApplication<lamaldicion>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "grupo5.lamaldicion.lamaldicion.LamaldicionApplication",
+            "projectName": "lamaldicion",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

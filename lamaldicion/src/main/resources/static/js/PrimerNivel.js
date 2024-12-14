@@ -60,6 +60,12 @@ class PrimerNivel extends Phaser.Scene
 
         this.load.audio('ESTATUA','audio/MoverEstatua.mp3');
         this.load.audio('PUERTA','audio/SonidoPuerta.mp3');
+
+        //BOTONES
+
+        this.load.image('BOTON_PAUSA','imagenes/iconoBoton_Pausa.png');
+        this.load.image('BOTON_CHAT','imagenes/iconoBoton_Chat.png');
+        this.load.audio("clic", "audio/clic.mp3"); // sonido pulsar botón
     }
 
     create()
@@ -67,6 +73,27 @@ class PrimerNivel extends Phaser.Scene
         this.fondo = new FondoNivel1(1280/2,900/2,this);
 
         this.finNivel = new FinNivel(15,630, this);
+        
+
+        this.BotonChat = this.add.image(70, 70, 'BOTON_CHAT').setScale(0.7,0.7)
+        .setInteractive()
+            .on("pointerdown", () => {
+                this.sound.play("clic");
+                
+                console.log("abril");
+                
+                this.scene.bringToTop('Chat');
+                this.scene.launch("Chat");
+                this.scene.pause("PrimerNivel");
+                    
+                
+                
+            });
+        this.BotonPausa = this.add.image(70, 165, 'BOTON_PAUSA').setScale(0.65,0.65)
+        .setInteractive()
+            .on("pointerdown", () => {
+
+            });
 
         this.palancaPared_Estatua = new PalancaPared(450,300, this, false); 
 
