@@ -76,24 +76,15 @@ class PrimerNivel extends Phaser.Scene
         
 
         this.BotonChat = this.add.image(70, 70, 'BOTON_CHAT').setScale(0.7,0.7)
-        .setInteractive()
-            .on("pointerdown", () => {
-                this.sound.play("clic");
-                
-                console.log("abril");
-                
-                this.scene.bringToTop('Chat');
-                this.scene.launch("Chat");
-                this.scene.pause("PrimerNivel");
-                    
-                
-                
-            });
+        .setInteractive().on("pointerdown", () => {
+            this.sound.play("clic");
+            this.scene.launch("Chat");
+            this.scene.pause("PrimerNivel");   
+        });
         this.BotonPausa = this.add.image(70, 165, 'BOTON_PAUSA').setScale(0.65,0.65)
-        .setInteractive()
-            .on("pointerdown", () => {
+        .setInteractive().on("pointerdown", () => {
 
-            });
+        });
 
         this.palancaPared_Estatua = new PalancaPared(450,300, this, false); 
 
