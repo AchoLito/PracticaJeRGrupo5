@@ -13,7 +13,7 @@ class Chat extends Phaser.Scene
     create()
     {
         
-        this.FondoChat = this.add.image(0, 0, 'CHAT_Fondo');
+        this.FondoChat = this.add.image(1280/2,900/2, 'CHAT_Fondo');
     }
     
     update()
