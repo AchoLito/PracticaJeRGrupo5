@@ -3,6 +3,7 @@
     <head>
         <title> La Maldición </title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.86.0/phaser.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="js/PantallaInicio.js"></script>
         <script src="js/PrimerNivel.js"></script>
         <script src="js/MenuInicio.js"></script>
@@ -11,6 +12,7 @@
         <script src="js/Controles.js"></script>
         <script src="js/Creditos.js"></script>
         <script src="js/Fin.js"></script>
+        <script src="js/LogIn.js"></script>
         <!-- <script src="js/endgame.js"></script> -->
         <!-- <link type="text/css" rel="stylesheet" href="style.css" />-->
     </head>
@@ -35,12 +37,16 @@
                     autoCenter: Phaser.Scale.CENTER_BOTH,
                 },
 
-                scene: [PantallaInicio, MenuInicio, Controles, Creditos,Chat, PrimerNivel, Fin]
+                dom: {
+                    createContainer: true
+                },
+
+                scene: [LogIn, PantallaInicio, MenuInicio, Controles, Creditos,Chat, PrimerNivel, Fin]
             };
 
             // Create the game instance
             const game = new Phaser.Game(config);
-            game.scene.start("PantallaInicio");
+            game.scene.start("LogIn");
 
         </script>
     </body>

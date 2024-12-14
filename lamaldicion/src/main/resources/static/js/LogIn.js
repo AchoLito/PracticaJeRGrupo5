@@ -1,32 +1,40 @@
 class LogIn extends Phaser.Scene
 {
+    constructor()
+    {
+        super({ key: "LogIn"});
+    }
+
     preload()
     {       
         this.load.html("logIn", "html/logIn.html");
-        this.load.json("usuarios", "data/login.json");
+        this.load.json("acho", "data/acho.json");
     }
 
     create()
     {
-        const users = this.cache.getJSON("usuarios");
-
-        const formulario = this.add.dom(400, 400).createFromCache("logIn");
-
+        //const text = this.add.text(10, 10, 'Please login to play', { color: 'white', fontFamily: 'Arial', fontSize: '32px '});
+        const users = this.cache.json.get("acho",);
+        const formulario = this.add.dom(590, 400).createFromCache('logIn');
+        const nombreInputs = formulario.getChildByID("nombreUsuario");
+        console.log(formulario);
+        console.log(users.key);
         formulario.addListener("click");
 
         formulario.on("click", function (event)
         {
             if (event.target.name === "botonLogIn")
             {
-                const nombreInput = this.getChildByName("nombreUsuario");
-                const passwordInput = this.getChildByName("password");
+                const nombreInput = formulario.getChildByID("nombreUsuario");
+                const passwordInput = formulario.getChildByID("password");
 
                 if (nombreInput.value !== "" && passwordInput.value !== "")
                 {
-                    if (nombreInput.value === users.name && passwordInput.value === users.password)
+                    //if (nombreInput.value === users.name && passwordInput.value === users.password)
+                    if (users.find("Acho") && passwordInput.value === users.password)
                     {
-                        this.removeListener("click");
-
+                        formulario.removeListener("click");
+                        console.log("hola");
                         this.scene.tweens.add({
                             targets: formulario, scaleX: 2, scaleY: 2, y: 700, duration: 3000, ease: 'Power3',
                             onComplete: function ()
