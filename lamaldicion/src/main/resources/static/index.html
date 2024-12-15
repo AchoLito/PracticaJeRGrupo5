@@ -13,6 +13,7 @@
         <script src="js/Creditos.js"></script>
         <script src="js/Fin.js"></script>
         <script src="js/LogIn.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
         <!-- <script src="js/endgame.js"></script> -->
         <!-- <link type="text/css" rel="stylesheet" href="style.css" />-->
     </head>
@@ -46,7 +47,9 @@
 
             // Create the game instance
             const game = new Phaser.Game(config);
-            game.scene.start("LogIn");
+            
+           // game.scene.start("LogIn");
+            game.scene.start("PrimerNivel");
 
         </script>
     </body>

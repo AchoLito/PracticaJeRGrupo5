@@ -30,6 +30,7 @@ class Chat extends Phaser.Scene
         // Convertimos domChat a un objeto jQuery
         this. $domChat = $(this.domChat.node);
         this. input = this.$domChat.find('#Input');
+        this.historialMensajes = this.$domChat.find('#Historial');
 
         this.domChat.addListener('click');
         this.domChat.on('click', function (event)
@@ -59,13 +60,13 @@ class Chat extends Phaser.Scene
     }
       
     cargarMensajes() {
-        $.get(this.baseUrl, { since: lastTimestamp }, function (data) {
-            if (data.messages && data.messages.length > 0) {
-                data.messages.forEach(msg => {
-                    chatBox.append(`<div>${msg}</div>`);
+        $.get(this.baseUrl, { since: this.lastTimestamp }, function (data) {
+            if (data.filteredMessages && data.filteredMessages.length > 0) {
+                data.filteredMessages.forEach(msg => {
+                    this.historialMensajes.append(`<div>${msg}</div>`);
                 });
-                chatBox.scrollTop(chatBox.prop('scrollHeight')); // Scroll to the bottom
-                lastTimestamp = data.timestamp; // Update last timestamp
+                this.historialMensajes.scrollTop(chatBox.prop('scrollHeight')); // Scroll to the bottom
+                this.lastTimestamp = data.timestamp; // Update last timestamp
             }
         });
     }
