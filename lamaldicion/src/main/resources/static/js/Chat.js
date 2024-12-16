@@ -33,12 +33,11 @@ class Chat extends Phaser.Scene
         this.historialMensajes = this.$domChat.find('#Historial');
 
         this.domChat.addListener('click');
-        this.domChat.on('click', function (event)
+        this.domChat.on('click',  (event)=>
         {
             if (event.target.name === 'Enviar')//cuando haces click en el boton de enviar de chat.html
             {
-               
-                enviarMensaje();
+                this.enviarMensaje();
             }
         });
 
@@ -54,7 +53,7 @@ class Chat extends Phaser.Scene
         if(this.t>this.intervaloActualizaciones){
             this.t=0;
 
-            this.cargarMensajes();
+           // this.cargarMensajes();
         }
 
     }
@@ -72,7 +71,8 @@ class Chat extends Phaser.Scene
     }
  
     
-    enviarMensaje() {
+    enviarMensaje()
+    {
         const mensaje=this.input.val().trim();
         if (!mensaje) return;
 
@@ -85,7 +85,7 @@ class Chat extends Phaser.Scene
         };
 
         
-        $.post(baseUrl, {datosMensaje }, function () {
+        $.post(this.baseUrl, {datosMensaje }, function () {
             console.log("Mensaje Enviado");
             this.input.val('');
             cargarMensajes(); // Fetch new messages
