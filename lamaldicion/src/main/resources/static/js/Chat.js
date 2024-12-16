@@ -46,14 +46,14 @@ class Chat extends Phaser.Scene
         this.lastTimestamp = 0; 
     }
     
-    update(time,deltaTime)
+    update(_,deltaTime)
     {
         this.t += deltaTime;
 
         if(this.t>this.intervaloActualizaciones){
             this.t=0;
 
-           // this.cargarMensajes();
+            this.cargarMensajes();
         }
 
     }
