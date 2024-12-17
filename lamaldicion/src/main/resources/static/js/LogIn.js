@@ -8,18 +8,19 @@ class LogIn extends Phaser.Scene
     preload()
     {       
         this.load.html("logIn", "html/logIn.html");
-        this.load.json("acho", "data/acho.json");
+        //this.load.json("acho", "data/acho.json");
     }
 
     create()
     {
         //const text = this.add.text(10, 10, 'Please login to play', { color: 'white', fontFamily: 'Arial', fontSize: '32px '});
-        const users = this.cache.json.get("acho",);
+        this.baseUrl = `${window.location.origin}/api/users/`;
+        //const users = this.cache.json.get("data/acho.json");
         const formulario = this.add.dom(590, 400).createFromCache('logIn');
         const nombreInputs = formulario.getChildByID("nombreUsuario");
         const scene = this.scene;
         console.log(formulario);
-        console.log(users[0].name);
+        //console.log(users);
         console.log(nombreInputs.value);
         formulario.addListener("click");
 
@@ -27,13 +28,17 @@ class LogIn extends Phaser.Scene
         {
             if (event.target.name === "botonLogIn")
             {
+                /*
+                this.scene.load.json("acho", "data/acho.json");
+                const users = this.cache.json.get("data/acho.json");
+                */
                 const nombreInput = this.getChildByID("nombreUsuario");
                 const passwordInput = this.getChildByID("password");               
 
                 if (nombreInput.value !== "" && passwordInput.value !== "")
                 {
                     //if (nombreInput.value === users.name && passwordInput.value === users.password)
-                    console.log(this.scene.compruebaNombre(users, nombreInput.value) && this.scene.compruebaPassword(users, passwordInput.value));
+                    console.log(this.scene.postUserServer(nombreInput.value, passwordInput.value));
                     if (this.scene.compruebaNombre(users, nombreInput.value) && this.scene.compruebaPassword(users, passwordInput.value))
                     {
                         this.removeListener("click");
@@ -88,5 +93,34 @@ class LogIn extends Phaser.Scene
         }
 
         return false;
+    }
+
+    getUserServer(username)
+    {
+        console.log("He obtenido el usuario:");
+        $.get(this.baseUrl, `/${username}`, function(data){
+            console.log("He obtenido el usuario: " + data.user.getName());
+        })
+    }
+
+    postUserServer(username, contrasena)
+    {
+        console.log("He posteado el usuario:");
+        const user = 
+        {
+            name: username,
+            password: contrasena
+        };
+
+        console.log(user);
+
+        $.post(this.baseUrl, {user}, function(){
+            console.log("He posteado el usuario: suuuuuuu");
+        })
+    }
+
+    getPasswordUser()
+    {
+
     }
 }
