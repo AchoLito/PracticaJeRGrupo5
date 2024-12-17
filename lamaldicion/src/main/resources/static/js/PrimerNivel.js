@@ -179,13 +179,14 @@ class PrimerNivel extends Phaser.Scene
         this.inicializarColisiones();
         this.colliderMuros();
 
+        this.input.keyboard.on('keydown-SPACE', () => { this.dialogo.actualizar();});
+
     }
 
     // Función llamada cuando los objetos colisionan    
     
     update()
     {
-        this.dialogo.actualizar();
     }
     
     inicializarControlesHumano(){

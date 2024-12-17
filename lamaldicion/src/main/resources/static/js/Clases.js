@@ -276,7 +276,7 @@ class Dialogo
         this.isVisible = false;
         this.dialogos = [];
         this.indiceDialogo = 0;
-        this.teclaEspacio = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // Tecla espacio
+     //   this.teclaEspacio = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // Tecla espacio
         this.puedeAvanzar = true;
     }
 
@@ -370,10 +370,10 @@ class Dialogo
     // Comprobar si presiona la tecla espacio
     actualizar() 
     {
-        if (this.teclaEspacio.isDown && this.puedeAvanzar) 
-        {
+      //  if (this.teclaEspacio.isDown && this.puedeAvanzar) 
+       // {
             this.avanzarDialogo();
-        }
+        //}
     }
 }
 

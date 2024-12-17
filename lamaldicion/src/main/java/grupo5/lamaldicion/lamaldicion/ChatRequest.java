@@ -10,7 +10,7 @@ public class ChatRequest
     
     public String getUser()
     {
-        return user;
+        return this.user;
     }
 
     public void setUser(String user)
@@ -20,7 +20,7 @@ public class ChatRequest
 
     public String getMessage()
     {
-        return message;
+        return this.message;
     }
 
     public void setMessage(String message)
@@ -30,7 +30,7 @@ public class ChatRequest
 
     public LocalDateTime getTimestamp()
     {
-        return timestamp;
+        return this.timestamp;
     }
 
     public void setTimestamp(LocalDateTime timestamp)

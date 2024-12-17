@@ -14,7 +14,7 @@ class LogIn extends Phaser.Scene
     create()
     {
         //const text = this.add.text(10, 10, 'Please login to play', { color: 'white', fontFamily: 'Arial', fontSize: '32px '});
-        this.baseUrl = `${window.location.origin}/api/users/`;
+        this.baseUrl = `${window.location.origin}/api/users`;
         //const users = this.cache.json.get("data/acho.json");
         const formulario = this.add.dom(590, 400).createFromCache('logIn');
         const nombreInputs = formulario.getChildByID("nombreUsuario");
@@ -38,7 +38,7 @@ class LogIn extends Phaser.Scene
                 if (nombreInput.value !== "" && passwordInput.value !== "")
                 {
                     //if (nombreInput.value === users.name && passwordInput.value === users.password)
-                    console.log(this.scene.postUserServer(nombreInput.value, passwordInput.value));
+                    console.log(this.scene.getUserServer(nombreInput.value));
                     if (this.scene.compruebaNombre(users, nombreInput.value) && this.scene.compruebaPassword(users, passwordInput.value))
                     {
                         this.removeListener("click");
@@ -113,10 +113,23 @@ class LogIn extends Phaser.Scene
         };
 
         console.log(user);
-
+        /*
         $.post(this.baseUrl, {user}, function(){
             console.log("He posteado el usuario: suuuuuuu");
         })
+            */
+        $.ajax({
+            url: this.baseUrl + `/`, // URL del servidor
+            type: "POST", // Método HTTP
+            data: JSON.stringify(user), // Convertir a JSON
+            contentType: "application/json", // Especificar Content-Type
+            success:  (data)=> {
+                console.log("Mensaje Enviado" + data);
+            },
+            error: function (error) {
+                console.error("Error al enviar mensaje:", error);
+            }
+        });
     }
 
     getPasswordUser()

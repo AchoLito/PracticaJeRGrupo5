@@ -15,6 +15,9 @@ class Chat extends Phaser.Scene
 
     create()
     {
+
+        
+
         this.scene.bringToTop('Chat');
         this.FondoChat = this.add.image(1010,445, 'CHAT_Fondo');
         this.BotonChat = this.add.image(70, 70, 'BOTON_CHAT').setScale(0.7,0.7)
@@ -23,14 +26,23 @@ class Chat extends Phaser.Scene
             this.scene.resume("PrimerNivel");
             this.scene.stop("Chat");
         });
+        
+        this.input.keyboard.on('keydown-ENTER', () => { this.enviarMensaje();});
+        
+        this.events.on('shutdown', () => {
+            this.input.keyboard.off('keydown-ENTER'); // Eliminar el listener
+        });
 
 
         this.baseUrl = `${window.location.origin}/api/chat`;
-        this.domChat = this.add.dom(400, 600).createFromCache('DOM_CHAT');
+        this.domChat = this.add.dom(1010, 445).createFromCache('DOM_CHAT');
+
         // Convertimos domChat a un objeto jQuery
         this. $domChat = $(this.domChat.node);
-        this. input = this.$domChat.find('#Input');
+        this.inputChat = this.$domChat.find('#Input');
         this.historialMensajes = this.$domChat.find('#Historial');
+
+        
 
         this.domChat.addListener('click');
         this.domChat.on('click',  (event)=>
@@ -40,10 +52,18 @@ class Chat extends Phaser.Scene
                 this.enviarMensaje();
             }
         });
+        
+        
 
         this.t=0;
+        
+
         this.intervaloActualizaciones=2000;//en milisegundos
-        this.lastTimestamp = 0; 
+        this.lastTimestamp = new Date(); 
+
+        this.id=0;
+
+        this.cargarMensajes();
     }
     
     update(_,deltaTime)
@@ -59,46 +79,55 @@ class Chat extends Phaser.Scene
     }
       
     cargarMensajes() {
-        $.get(this.baseUrl, { since: this.lastTimestamp }, function (data) {
-            if (data.filteredMessages && data.filteredMessages.length > 0) {
-                data.filteredMessages.forEach(msg => {
-                    this.historialMensajes.append(`<div>${msg}</div>`);
+        const self=this;
+        $.get(this.baseUrl, { since: this.id },  (data)=> {
+            if ( data.length > 0) 
+            {
+                data.forEach(msg => {
+                    
+                    self.historialMensajes.append(`<div>${msg.user}:  ${msg.text}</div>`);
+                    self.id++;
                 });
-                this.historialMensajes.scrollTop(chatBox.prop('scrollHeight')); // Scroll to the bottom
-                this.lastTimestamp = data.timestamp; // Update last timestamp
+                
+                self.historialMensajes.scrollTop(self.historialMensajes.prop('scrollHeight')); // Scroll to the bottom
+                self.lastTimestamp = data.timestamp; // Update last timestamp
             }
         });
+
+        
     }
  
     
-    enviarMensaje() {
-    const mensaje = this.input.val().trim();
-    if (!mensaje) return;
+    enviarMensaje() 
+    {
 
-    console.log(mensaje);
-    
-    // Crear objeto JSON tipo ChatRequest
-    const datosMensaje = {
-        user: "juan",
-        message: mensaje,
-        timestamp: this.lastTimestamp
-    };
+        
 
-    // Enviar solicitud POST con JSON
-    $.ajax({
-        url: this.baseUrl, // URL del servidor
-        type: "POST", // Método HTTP
-        data: JSON.stringify(datosMensaje), // Convertir a JSON
-        contentType: "application/json", // Especificar Content-Type
-        success:  ()=> {
-            console.log("Mensaje Enviado");
-            this.input.val(''); // Limpiar input
-            cargarMensajes(); // Fetch new messages
-        },
-        error: function (error) {
-            console.error("Error al enviar mensaje:", error);
-        }
-    });
-}
+        if (!this.inputChat.val().trim()) return;
+
+        const mensaje = this.inputChat.val();
+        
+        // Crear objeto JSON tipo ChatRequest
+        const datosMensaje = {
+            user: "juan",
+            message: mensaje,
+            timestamp: this.lastTimestamp
+        };
+
+        // Enviar solicitud POST con JSON
+        $.ajax({
+            url: this.baseUrl, // URL del servidor
+            type: "POST", // Método HTTP
+            data: JSON.stringify(datosMensaje), // Convertir a JSON
+            contentType: "application/json", // Especificar Content-Type
+            success:  ()=> {
+                this.inputChat.val(''); // Limpiar input
+                this.cargarMensajes(); // Fetch new messages
+            },
+            error: function (error) {
+                console.error("Error al enviar mensaje:", error);
+            }
+        });
+    }
     
 }

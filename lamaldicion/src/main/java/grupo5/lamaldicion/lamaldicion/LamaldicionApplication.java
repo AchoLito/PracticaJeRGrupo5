@@ -5,8 +5,6 @@ import java.lang.String;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-//import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
@@ -16,7 +14,7 @@ public class LamaldicionApplication {
 	@Qualifier("usersPath")
 	public String usersPath()
 	{
-		return new String("/api/users");
+		return new String("localhost:8080/api/users");
 	}
 	
 	public static void main(String[] args) 
