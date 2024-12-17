@@ -28,7 +28,7 @@ public class ChatRequest
         this.message = message;
     }
 
-    public LocalDateTime setTimestamp()
+    public LocalDateTime getTimestamp()
     {
         return timestamp;
     }

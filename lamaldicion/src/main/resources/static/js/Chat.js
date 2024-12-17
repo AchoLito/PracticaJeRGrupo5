@@ -71,25 +71,34 @@ class Chat extends Phaser.Scene
     }
  
     
-    enviarMensaje()
-    {
-        const mensaje=this.input.val().trim();
-        if (!mensaje) return;
+    enviarMensaje() {
+    const mensaje = this.input.val().trim();
+    if (!mensaje) return;
 
+    console.log(mensaje);
+    
+    // Crear objeto JSON tipo ChatRequest
+    const datosMensaje = {
+        user: "juan",
+        message: mensaje,
+        timestamp: this.lastTimestamp
+    };
 
-        const datosMensaje = //json objeto tipo ChatRequest
-        {
-            user: "juan",
-            message: mensaje,
-            timestamp:this.lastTimestamp
-        };
-
-        
-        $.post(this.baseUrl, {datosMensaje }, function () {
+    // Enviar solicitud POST con JSON
+    $.ajax({
+        url: this.baseUrl, // URL del servidor
+        type: "POST", // Método HTTP
+        data: JSON.stringify(datosMensaje), // Convertir a JSON
+        contentType: "application/json", // Especificar Content-Type
+        success:  ()=> {
             console.log("Mensaje Enviado");
-            this.input.val('');
+            this.input.val(''); // Limpiar input
             cargarMensajes(); // Fetch new messages
-        });
-    }
+        },
+        error: function (error) {
+            console.error("Error al enviar mensaje:", error);
+        }
+    });
+}
     
 }
