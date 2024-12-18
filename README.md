@@ -246,6 +246,8 @@ El menú principal contiene todas las opciones iniciales necesarias para comenza
 
 **Controles:** Accede a la pantalla donde se explican los controles básicos de ambos personajes.  
 
+**Ajustes:** Accede a la pantalla donde se pueden modificar los ajustes del juego.
+
 **Créditos:** Muestra información sobre el equipo que ha desarrollado el juego.  
 
 ![Imagen menú inicio](lamaldicion/src/main/resources/static/imagenes/Menu_Inicio.png "Imagen del menú de inicio")  
@@ -260,8 +262,31 @@ El menú principal contiene todas las opciones iniciales necesarias para comenza
 
 *Imagen 19: Créditos del juego*  
 
+#### 13.3. PANTALLA DE PAUSA  
 
-#### 13.3. NIVEL 1  
+El menú de pausa aparece cuando el usuario presiona en alguna de las pantallas de niveles el botón en la esquina superior izquierda que tiene el símbolo de pausa. Esta pantalla permite a los jugadores detener el juego, acceder a las opciones de ajustes y salir al menú principal. Estos son los elementos de esta pantalla:  
+
+**Reanudar:** Regresa al juego en el punto donde se dejó.  
+
+**Menú principal:** Vuelve al menú de inicio.  
+
+**Ajustes:** Accede a la pantalla donde se pueden modificar los ajustes del juego.  
+
+#### 13.4. PANTALLA DE AJUSTES  
+
+El menú de ajustes permite al jugador personalizar ciertos aspectos del juego para mejorar su experiencia. Las opciones son:  
+
+**Volumen:** Ajusta el nivel de volumen del juego.  
+
+#### 13.5. PANTALLA DE CHAT  
+
+La pantalla de chat se activa durante el juego presionando el botón en la esquina superior izquierda que tiene el símbolo de chat. Esta pantalla permite a los usuarios comunicarse mientras siguen en la partida. Los elementos principales de esta pantalla son:  
+
+**Área de mensajes:** Muestra los mensajes escritos por ambos jugadores en tiempo real.  
+
+**Campo de entrada:** En la parte inferior, hay un cuadro de texto donde el jugador puede escribir su mensaje.
+
+#### 13.6. NIVEL 1  
 
 Durante el juego, la interfaz del primer nivel incluye elementos específicos diseñados para guiar a los jugadores en la exploración y resolución del puzle. Esta interfaz muestra el inventario del humano, además de los diálogos que aparecen en los momentos requeridos. Al completar el puzle principal del nivel 1, la pantalla muestra un breve mensaje de "*Continuará*" antes de cargar el siguiente nivel.  
 
