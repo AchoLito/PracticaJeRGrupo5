@@ -10,7 +10,7 @@ class MenuAjustes2 extends Phaser.Scene
         this.load.image("Fondo_menu_ajustes", "imagenes/MENU_AJUSTES.png"); 
         this.load.audio("clic", "audio/clic.mp3"); // sonido pulsar botón
 
-        this.load.image("botonVolver", "imagenes/BotonVolver.png"); // imagen del botón volver
+        this.load.image("botonVolverAlJuego", "imagenes/BOTON_REANUDAR.png"); // imagen del botón volver
         this.load.image("Simbolo_volumen", "imagenes/SIMBOLO_VOLUMEN.png"); // imagen del simbolo del volumen
         this.load.image("botonMasVolumen", "imagenes/BOTON_SUBIR_VOLUMEN.png"); // imagen del botón para subir el volumen
         this.load.image("botonMenosVolumen", "imagenes/BOTON_BAJAR_VOLUMEN.png"); // imagen del botón para bajar el volumen
@@ -48,12 +48,12 @@ class MenuAjustes2 extends Phaser.Scene
                 controlVolumen.setVolume(volumenActual);
             });
 
-        const botonVolver = this.add.image(75, 75, "botonVolver")
+        const botonVolver = this.add.image(250, 75, "botonVolverAlJuego")
             .setInteractive()
             .on("pointerdown", () => {
                 this.sound.play("clic");
                 this.scene.stop("MenuAjustes2");
-                this.scene.resume("MenúPausa");
+                this.scene.resume("PrimerNivel");
             });
 
     }

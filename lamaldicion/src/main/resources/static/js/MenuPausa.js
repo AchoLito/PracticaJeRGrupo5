@@ -12,9 +12,8 @@ class MenuPausa extends Phaser.Scene
       
         this.load.image("Fondo_menu_pausa", "imagenes/MENU_PAUSA.png"); 
         this.load.image("botonSeguirJugando", "imagenes/BOTON_REANUDAR.png"); // imagen del botón de reanudar
-        this.load.image("botonAjustes", "imagenes/BOTON_AJUSTES.png"); // imagen del botón de ajustes
         this.load.image("botonMenuPrincipal", "imagenes/BOTON_MENU_INICIAL.png"); // imagen del botón de menu principal
-        this.load.image("botonAjustes", "imagenes/BOTON_AJUSTES.png"); // imagen del botón de ajustes
+        this.load.image("botonAjustesVolumen", "imagenes/BOTON_AJUSTES.png"); // imagen del botón de ajustes
     }
 
     create()
@@ -41,13 +40,14 @@ class MenuPausa extends Phaser.Scene
             });
 
             
-       const botonAjustes = this.add.image(640, 620, "botonAjustes")
+       const botonAjustes = this.add.image(640, 620, "botonAjustesVolumen")
             .setInteractive()
             .on("pointerdown", () => {
                 this.sound.play("clic");
-                this.scene.launch("MenuAjustes");
-                this.scene.pause("MenuPausa");
-                this.scene.pause("PrimerNivel");
+                this.scene.launch("MenuAjustes2");
+                this.scene.stop("MenuPausa");
+             
+               
                 
             });
             
