@@ -71,9 +71,13 @@ public class UserDAO {
         var objectMapper = new ObjectMapper();
         try {
             // Construct the file path dynamically based on the username
+            /* 
             ClassPathResource resource = new ClassPathResource(usersPath + "/" + username + ".json");
             String content = new String(Files.readAllBytes(Paths.get(resource.getURI())));
-            User user = objectMapper.readValue(content, User.class);
+            */
+            String filePath = this.usersPath + "/" + username + ".json";
+            File file = new File(filePath);
+            User user = objectMapper.readValue(file, User.class);
             return user;
             
         } catch (IOException ex) {
@@ -113,7 +117,7 @@ public class UserDAO {
         path = StreamUtils.copyToString(resource.getInputStream() , StandardCharsets.UTF_8);
         System.out.println("HOLA:" + path);
         */
-        String filePath = "src/main/resources/" + this.usersPath + "/" + updatedUser.getName() + ".json";
+        String filePath = this.usersPath + "/" + updatedUser.getName() + ".json";
         temp = new File(filePath);
         
         temp.createNewFile();

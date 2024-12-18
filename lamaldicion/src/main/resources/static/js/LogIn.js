@@ -45,7 +45,7 @@ class LogIn extends Phaser.Scene
 
                     //this.scene.getUserServer(nombreInput.value, passwordInput.value, formulario, scene);
                     this.scene.postUserServer(nombreInput.value, passwordInput.value);
-                    this.scene.scene.get('Musica').setUsuario(nombreInput.value);
+                    
                     
                     /*
                     if (this.scene.compruebaNombre(users, nombreInput.value) && this.scene.compruebaPassword(users, passwordInput.value))
@@ -70,14 +70,12 @@ class LogIn extends Phaser.Scene
 
             if(event.target.name === "botonLogIn")//si el usuario existe y la contraseña exis
             {
-                this.scene.getUserServer(nombreInput.value, passwordInput.value);
-
-                scene.stop("LogIn");
-                    scene.start("MenuInicio");
+                this.scene.getUserServer(nombreInput.value, passwordInput.value, formulario, scene);
+                this.scene.scene.get('Musica').setUsuario(nombreInput.value);
             }
 
             if(event.target.name === "botonDelete"){
-                this.scene.deleteUserServer(nombreInput.value, passwordInput.value);
+                this.scene.deleteUserServer(nombreInput.value);
             }
             if(event.target.name === "botonEdit"){
                 this.scene.updateUserServer(nombreInput.value, passwordInput.value);
@@ -132,6 +130,7 @@ class LogIn extends Phaser.Scene
         .then(data => {
             console.log(data); // Aquí puedes manejar la respuesta del servidor
             var user = JSON.parse(data)
+            console.log(contrasena + " " + formulario);
             this.compruebaUser(user, username, contrasena, formulario, scene);
         })
         .catch(error => {
