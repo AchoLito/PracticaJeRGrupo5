@@ -350,8 +350,10 @@ La música en *La Maldición* está pensada para sumergir a los jugadores en la 
 
 Para poder ejecutar el juego es necesario que el usuario tenga instalado en su máquina java y el Java Development Kit (JDK) de la versión 21 o superior.  
 
+Para compilarlo hay que irse a la raíz del protecto y escribir en una terminal .\mvnw.cmd package
+
 Si se cuenta con un archivo.jar ya generado para ejecutarlo se debe usar el comando java -jar:  
-> > java -jar lamaldicion-SNAPSHOT.jar. Es importante que cuando se ejecute el servidor, se debe asegurar de que la carpeta de datos esté en el mismo directorio que el .jar.
+> > java -jar target\lamaldicion-SNAPSHOT.jar. Es importante que cuando se ejecute el servidor, se debe asegurar de que la carpeta de datos esté en el mismo directorio que el .jar.
 
 Para acceder al juego desde un navegador, abre cualquier navegador y escribe la URL en la barra de direcciones para jugar localmente: *localhost:8080*.  
 
