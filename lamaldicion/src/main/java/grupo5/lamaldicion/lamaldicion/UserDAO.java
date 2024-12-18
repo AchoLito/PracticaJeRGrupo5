@@ -106,7 +106,7 @@ public class UserDAO {
     public boolean postUser(User updatedUser) {
         String json = "{"
                 + "\"name\":\"" + updatedUser.getName() + "\","
-                + "\"password\":" + updatedUser.getPassword()
+                + "\"password\":\"" + updatedUser.getPassword() + "\""
                 + "}";
         String path = "";
         File temp = new File(path);
