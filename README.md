@@ -14,7 +14,14 @@ Ana María Caamaño del Amo, correo de la universidad: am.caamano.2022@alumnos.u
 Jesús Mercado Rioja, correo de la universidad: j.mercado.2022@alumnos.urjc.es, cuenta de GitHub: JesusMerRio  
 Lara Sánchez Sanz, correo de la universidad: l.sanchezsa.2022@alumnos.urjc.es, cuenta de GitHub: LaraSs06  
 Javier Martín Mulero, correo de la universidad: j.martinm.2022@alumnos.urjc.es: , cuenta de GitHub: AchoLito  
-Unai Pastrana Torres, correo de la universidad: u.pastrana.2022@alumnos.urjc.es, cuenta de GitHub: UnaiPas04
+Unai Pastrana Torres, correo de la universidad: u.pastrana.2022@alumnos.urjc.es, cuenta de GitHub: UnaiPas04  
+
+### 1. CAMBIOS  
+***  
+
+Mientras se ha realizado este documento se ha tomado la decisión de cambiar el sprite del jugador humano. Se considera que este era difícil de distinguir con el fondo y se ha modificado para que llame más la atención.  
+
+Se han añadido nuevas pantallas como el LogIn, los ajustes, el chat y la pausa, facilitando así la navegación y personalización.  
 
 ### 2. CONCEPTO DEL JUEGO
 ***
@@ -229,7 +236,7 @@ La interfaz tendrá un estilo similar a la estética del juego, siendo simple y 
 
 La interfaz incluye varios elementos que facilitan el control y la navegación tanto para el jugador que controla al humano como para el jugador que controla al fantasma. El diseño sigue una lógica de transición entre pantallas, con un flujo claro que se representa en el diagrama adjunto. Este flujo asegura que los jugadores puedan moverse de una pantalla a otra de manera fluida, ya sea al iniciar el juego, pausar, consultar información o avanzar al siguiente nivel.  
 
-![Imagen diagrama](lamaldicion/src/main/resources/static/imagenes/DIAGRAMA_PANTALLAS.png "Imagen diagrama de pantallas")  
+![Imagen diagrama](lamaldicion/src/main/resources/static/imagenes/DiagramaPantallas.png "Imagen diagrama de pantallas")  
 
 *Imagen 16: Diagrama de pantallas*  
 
@@ -243,11 +250,19 @@ La pantalla de login es la primera interacción del usuario con el juego permiti
 
 **Editar usuario:** Modifica información de un usuario existente.  
 
-**Eliminar usuario:** Borra una cuenta tras confirmación.
+**Eliminar usuario:** Borra una cuenta tras confirmación.  
+
+![Imagen login](lamaldicion/src/main/resources/static/imagenes/Login.png "Imagen de la pantalla de LogIn")  
+
+*Imagen 17: Pantalla de LogIn*  
 
 #### 14.2. PANTALLA DE TÍTULO  
 
 La pantalla de título es la primera que los jugadores ven al iniciar el juego. Sirve como introducción visual y establece el tono del juego. Tiene un botón interactivo con el texto "Comenzar". Al interactuar con él, el juego lleva automáticamente a la pantalla de Menú de Inicio.  
+
+![Imagen título](lamaldicion/src/main/resources/static/imagenes/Pantalla_titulo.png "Imagen de la pantalla de título")  
+
+*Imagen 18: Pantalla de título*
 
 #### 14.3. MENÚ DE INICIO  
 
