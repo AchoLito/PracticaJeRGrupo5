@@ -37,13 +37,15 @@ class Chat extends Phaser.Scene
 
 
         this.baseUrl = `${window.location.origin}/api/chat`;
+        this.urlNumUsers=`${window.location.origin}/api/numberUsers`;
+
         this.domChat = this.add.dom(1010, 445).createFromCache('DOM_CHAT');
 
         // Convertimos domChat a un objeto jQuery
         this. $domChat = $(this.domChat.node);
         this.inputChat = this.$domChat.find('#Input');
         this.historialMensajes = this.$domChat.find('#Historial');
-
+        this.numerin = this.$domChat.find('#N_Usuarios');
         
 
         this.domChat.addListener('click');
@@ -76,6 +78,7 @@ class Chat extends Phaser.Scene
             this.t=0;
 
             this.cargarMensajes();
+            this.actualizarNumeroUsuarios();
         }
 
     }
@@ -129,6 +132,16 @@ class Chat extends Phaser.Scene
             error: function (error) {
                 console.error("Error al enviar mensaje:", error);
             }
+        });
+    }
+
+
+    actualizarNumeroUsuarios()
+    {
+        const self=this;
+        $.get(this.urlNumUsers, { since: 10000},  (data)=> {
+            console.log(data);
+            this.numerin.val(data);
         });
     }
     
