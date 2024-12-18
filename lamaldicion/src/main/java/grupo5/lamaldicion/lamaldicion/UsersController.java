@@ -32,9 +32,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class UsersController
 {
     UserDAO userDAO;
+    ApiStatus api;
+
     public UsersController(UserDAO user)
     {
         this.userDAO = user;
+        this.api = new ApiStatus();
         //this.lock
     }
 
@@ -44,6 +47,8 @@ public class UsersController
         User user = this.userDAO.getUser(username);
         if(user.getName() != "")
         {
+            this.api.hasSeen(user.getName());
+            this.api.connectedUsersSince(10000);
             return ResponseEntity.ok(new UserDTO(user));
         }
         else
@@ -56,6 +61,7 @@ public class UsersController
     @DeleteMapping("/{username}")
     public ResponseEntity<?> deleteUser(@PathVariable String username)
     {
+        userDAO.deleteUser(username);
         return ResponseEntity.noContent().build();
     }
 
@@ -74,18 +80,22 @@ public class UsersController
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
 
+        this.api.hasSeen(username.getName());
+        this.api.connectedUsersSince(10000);
         userDAO.postUser(username);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{username}{password}")
-    public ResponseEntity<?> updatePassword(@RequestBody User username, @RequestBody PasswordUpadte password)
+    @PutMapping("/{username}")
+    public ResponseEntity<?> updatePassword(@RequestBody User username)
     {
+        User user = new User(username.getName(), username.getPassword());
+        userDAO.updateUser(user);
+        this.api.hasSeen(username.getName());
+        this.api.connectedUsersSince(10000);
         return ResponseEntity.noContent().build();
     }
 
-    record PasswordUpadte(String password)
-    {
-    }
 }
+
 

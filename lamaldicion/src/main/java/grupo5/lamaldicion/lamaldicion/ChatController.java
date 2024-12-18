@@ -27,6 +27,7 @@ public class ChatController
     private final List<ChatMessage> messages = new ArrayList<>();
     private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
     private final AtomicLong messageIdGenerator = new AtomicLong(1); 
+    ApiStatus api = new ApiStatus();
 
     // POST -> Crear un nuevo mensaje
     @PostMapping()
@@ -47,6 +48,9 @@ public class ChatController
                 request.getUser(),
                 request.getMessage()
             );
+
+            this.api.hasSeen(request.getUser());
+            this.api.connectedUsersSince(10000);
 
             messages.add(message);
         }
@@ -140,3 +144,4 @@ public class ChatController
 
     
 }
+

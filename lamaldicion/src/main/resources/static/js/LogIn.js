@@ -64,21 +64,23 @@ class LogIn extends Phaser.Scene
                     }   
                     */   
                    
-                    scene.stop("LogIn");
-                    scene.start("MenuInicio");
+                    
                 }
             }
 
             if(event.target.name === "botonLogIn")//si el usuario existe y la contraseña exis
             {
+                this.scene.getUserServer(nombreInput.value, passwordInput.value);
 
+                scene.stop("LogIn");
+                    scene.start("MenuInicio");
             }
 
             if(event.target.name === "botonDelete"){
-                
+                this.scene.deleteUserServer(nombreInput.value, passwordInput.value);
             }
             if(event.target.name === "botonEdit"){
-                
+                this.scene.updateUserServer(nombreInput.value, passwordInput.value);
             }
         });
 
@@ -109,7 +111,7 @@ class LogIn extends Phaser.Scene
         console.log(this.baseUrl + `/${username}`);
         $.get(this.baseUrl, `/${username}`, function(data){
             //console.log("He obtenido el usuario: " + data.user.getName());
-
+   
             var user = JSON.parse(data)
             console.log(user);
             console.log(user.name + " " + username + " " + user.password + " " + contrasena);
@@ -136,8 +138,8 @@ class LogIn extends Phaser.Scene
             console.error('There has been a problem with your fetch operation:', error);
         });
     }
-
-    postUserServer(username, contrasena)
+   
+    postUserServer(username, contrasena, formulario, scene)
     {
         console.log("He posteado el usuario:");
         const user = 
@@ -145,13 +147,8 @@ class LogIn extends Phaser.Scene
             name: username,
             password: contrasena
         };
-
+   
         console.log(user);
-        /*
-        $.post(this.baseUrl, {user}, function(){
-            console.log("He posteado el usuario: suuuuuuu");
-        })
-            */
         $.ajax({
             url: this.baseUrl + `/`, // URL del servidor
             type: "POST", // Método HTTP
@@ -165,9 +162,45 @@ class LogIn extends Phaser.Scene
             }
         });
     }
-
-    getPasswordUser()
+   
+    updateUserServer(username, contrasena)
     {
-
+        console.log("He posteado el usuario:");
+        const user = 
+        {
+            name: username,
+            password: contrasena
+        };
+   
+        console.log(user);
+        $.ajax({
+            url: this.baseUrl + `/${username}`, // URL del servidor
+            type: "PUT", // Método HTTP
+            data: JSON.stringify(user), // Convertir a JSON
+            contentType: "application/json", // Especificar Content-Type
+            success:  (data)=> {
+                console.log("Mensaje Enviado" + data);
+            },
+            error: function (error) {
+                console.error("Error al enviar mensaje:", error);
+            }
+        });
+    }
+   
+    deleteUserServer(username, contrasena, formulario, scene)
+    {
+        //console.log(user);
+        $.ajax({
+            url: this.baseUrl + `/${username}`, // URL del servidor
+            type: "DELETE", // Método HTTP
+            data: username, // Convertir a JSON
+            contentType: "application/json", // Especificar Content-Type
+            success:  (data)=> {
+                console.log("Mensaje Enviado" + data);
+            },
+            error: function (error) {
+                console.error("Err or al enviar mensaje:", error);
+            }
+        });
     }
 }
