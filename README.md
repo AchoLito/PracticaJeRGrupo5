@@ -260,7 +260,7 @@ La pantalla de login es la primera interacción del usuario con el juego permiti
 
 La pantalla de título es la primera que los jugadores ven al iniciar el juego. Sirve como introducción visual y establece el tono del juego. Tiene un botón interactivo con el texto "Comenzar". Al interactuar con él, el juego lleva automáticamente a la pantalla de Menú de Inicio.  
 
-![Imagen título](lamaldicion/src/main/resources/static/imagenes/Pantalla_titulo.png "Imagen de la pantalla de título")  
+![Imagen título](lamaldicion/src/main/resources/static/imagenes/Pantalla_Titulo.png "Imagen de la pantalla de título")  
 
 *Imagen 18: Pantalla de título*
 
