@@ -1,7 +1,9 @@
 package grupo5.lamaldicion.lamaldicion;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,6 +16,7 @@ import java.lang.String;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StreamUtils;
 import org.springframework.core.io.ClassPathResource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -68,7 +71,7 @@ public class UserDAO {
         var objectMapper = new ObjectMapper();
         try {
             // Construct the file path dynamically based on the username
-            ClassPathResource resource = new ClassPathResource("users/" + username + ".json");
+            ClassPathResource resource = new ClassPathResource(usersPath + "/" + username + ".json");
             String content = new String(Files.readAllBytes(Paths.get(resource.getURI())));
             User user = objectMapper.readValue(content, User.class);
             return user;
@@ -89,6 +92,41 @@ public class UserDAO {
 
             // Write the updated User object back to the file
             objectMapper.writeValue(file, updatedUser);
+            return true; // Successfully updated the file
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false; // Error occurred while updating the file
+        }
+    }
+
+    public boolean postUser(User updatedUser) {
+        String json = "{"
+                + "\"name\":\"" + updatedUser.getName() + "\","
+                + "\"password\":" + updatedUser.getPassword()
+                + "}";
+        String path = "";
+        File temp = new File(path);
+        try
+        {          
+            /*      
+        ClassPathResource resource = new ClassPathResource(usersPath + "/");
+        path = StreamUtils.copyToString(resource.getInputStream() , StandardCharsets.UTF_8);
+        System.out.println("HOLA:" + path);
+        */
+        String filePath = "src/main/resources/" + this.usersPath + "/" + updatedUser.getName() + ".json";
+        temp = new File(filePath);
+        
+        temp.createNewFile();
+
+        }
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+        try (FileWriter file = new FileWriter(temp)) {
+            // Construct the file path dynamically based on the username
+            file.write(json);
+            file.flush();
             return true; // Successfully updated the file
         } catch (IOException e) {
             e.printStackTrace();

@@ -61,7 +61,6 @@ public class UsersController
 
     @PostMapping("/")
     public ResponseEntity<?> postUser(@RequestBody User username)
-    //public ResponseEntity<?> postUser(@RequestParam String name)
     {
         //username = new User("Javi", "123");
         if(username.getName() == null || username.getPassword() == null)
@@ -75,6 +74,7 @@ public class UsersController
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
 
+        userDAO.postUser(username);
         return ResponseEntity.ok().build();
     }
 

@@ -39,7 +39,10 @@ class LogIn extends Phaser.Scene
                 {
                     //if (nombreInput.value === users.name && passwordInput.value === users.password)
                     //var cond = await this.scene.getUserServer(nombreInput.value, passwordInput.value);
-                    this.scene.getUserServer(nombreInput.value, passwordInput.value, formulario, scene);
+
+                    //this.scene.getUserServer(nombreInput.value, passwordInput.value, formulario, scene);
+                    this.scene.postUserServer(nombreInput.value, passwordInput.value)
+
                     /*
                     if (this.scene.compruebaNombre(users, nombreInput.value) && this.scene.compruebaPassword(users, passwordInput.value))
                     {
@@ -82,20 +85,6 @@ class LogIn extends Phaser.Scene
         }
     }
 
-    compruebaPassword(array, password)
-    {
-        for(var i = 0; i < array.length; i++)
-        {
-            console.log(password + " " + array[i].password);
-            if(password == array[i].password)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     getUserServer(username, contrasena, formulario, scene)
     {
         /*
@@ -124,15 +113,7 @@ class LogIn extends Phaser.Scene
         .then(data => {
             console.log(data); // Aquí puedes manejar la respuesta del servidor
             var user = JSON.parse(data)
-            /*
-            console.log(user);
-            console.log(user.name + " " + username + " " + user.password + " " + contrasena);
-            console.log(user.name === username && user.password === contrasena);
-            console.log(result2);
-            var result2 = user.name === username && user.password === contrasena;
-            console.log(result2);
-            */
-           this.compruebaUser(user, username, contrasena, formulario, scene);
+            this.compruebaUser(user, username, contrasena, formulario, scene);
         })
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
