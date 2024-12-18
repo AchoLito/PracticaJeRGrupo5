@@ -18,9 +18,9 @@ class PantallaInicio extends Phaser.Scene
 
     create()
     {
-        this.musica = this.sound.add("musicaInicio", { volume: 0.2 });
+        /*this.musica = this.sound.add("musicaInicio", { volume: 0.2 });
         this.musica.loop = true;
-        this.musica.play();
+        this.musica.play();*/
 
         const fondo = this.add.image(640, 450, "fondo");
 

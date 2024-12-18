@@ -4,9 +4,13 @@
         <title> La Maldición </title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.86.0/phaser.min.js"></script>
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+        <script src="js/Musica.js"></script>
         <script src="js/PantallaInicio.js"></script>
         <script src="js/PrimerNivel.js"></script>
         <script src="js/MenuInicio.js"></script>
+        <script src="js/MenuAjustes.js"></script>
+        <script src="js/MenuAjustes2.js"></script>
+        <script src="js/MenuPausa.js"></script>
         <script src="js/Clases.js"></script>
         <script src="js/Chat.js"></script>
         <script src="js/Controles.js"></script>
@@ -42,7 +46,7 @@
                     createContainer: true
                 },
 
-                scene: [LogIn, PantallaInicio, MenuInicio, Controles, Creditos,Chat, PrimerNivel, Fin]
+                scene: [ LogIn, Musica, PantallaInicio, MenuInicio, Controles, Creditos,Chat, PrimerNivel, MenuAjustes2, MenuPausa, Fin, MenuAjustes]
             };
 
             // Create the game instance
