@@ -282,7 +282,9 @@ El menú de pausa aparece cuando el usuario presiona en alguna de las pantallas 
 
 **Ajustes:** Accede a la pantalla donde se pueden modificar los ajustes del juego.  
 
-![Imagen pausa](lamaldicion/src/main/resources/static/imagenes/Pausa.png "Imagen del menú de pausa") 
+![Imagen pausa](lamaldicion/src/main/resources/static/imagenes/Pausa.png "Imagen del menú de pausa")  
+
+*Imagen 20: Menú de pausa*
 
 #### 14.5. PANTALLA DE AJUSTES  
 
@@ -290,7 +292,9 @@ El menú de ajustes permite al jugador personalizar ciertos aspectos del juego p
 
 **Volumen:** Ajusta el nivel de volumen del juego.  
 
-![Imagen ajustes](lamaldicion/src/main/resources/static/imagenes/Pantalla_Ajustes.png "Imagen de los ajustes") 
+![Imagen ajustes](lamaldicion/src/main/resources/static/imagenes/Pantalla_Ajustes.png "Imagen de los ajustes")  
+
+*Imagen 21: Pantalla de ajustes*
 
 #### 14.6. PANTALLA DE CHAT  
 
@@ -300,7 +304,9 @@ La pantalla de chat se activa durante el juego presionando el botón en la esqui
 
 **Campo de entrada:** En la parte inferior, hay un cuadro de texto donde el jugador puede escribir su mensaje.  
 
-![Imagen chat](lamaldicion/src/main/resources/static/imagenes/Pantalla_Chat.png "Imagen del chat") 
+![Imagen chat](lamaldicion/src/main/resources/static/imagenes/Pantalla_Chat.png "Imagen del chat")  
+
+*Imagen 22: Chat del juego*
 
 #### 14.7. NIVEL 1  
 
@@ -308,7 +314,7 @@ Durante el juego, la interfaz del primer nivel incluye elementos específicos di
 
 ![Imagen nivel 1](lamaldicion/src/main/resources/static/imagenes/Nivel_1.png "Imagen del nivel 1")  
 
-*Imagen 20: Nivel 1 del juego*
+*Imagen 23: Nivel 1 del juego*
 
 ### 15. MÚSICA Y EFECTOS DE SONIDO
 ***
