@@ -17,7 +17,7 @@ Los métodos utilizados para conseguir esto han sido:
 Nos permite enviar y recibir mensajes de diferentes usuarios que se encuentren conectados.  
 Los métodos utilizados han sido:  
 
-**GET:** Obtiene los mensajes mandados por los usuarios.  
+**GET:** Obtiene los mensajes mandados por los usuarios con su nombre de usuario correspondiente.  
 **POST:** Crea y envía un nuevo mensaje del usuario.  
 
 ### USUARIOS CONECTADOS  
