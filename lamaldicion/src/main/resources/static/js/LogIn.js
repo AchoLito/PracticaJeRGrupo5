@@ -9,10 +9,14 @@ class LogIn extends Phaser.Scene
     {       
         this.load.html("logIn", "html/logIn.html");
         //this.load.json("acho", "data/acho.json");
+
+        this.load.image("fondo", "imagenes/MENU_PAUSA.png");        
     }
 
     create()
     {
+        this.add.image(1280/2, 900/2, "fondo").setScale(0.45);
+
         //const text = this.add.text(10, 10, 'Please login to play', { color: 'white', fontFamily: 'Arial', fontSize: '32px '});
         this.baseUrl = `${window.location.origin}/api/users`;
         //const users = this.cache.json.get("data/acho.json");
@@ -23,6 +27,8 @@ class LogIn extends Phaser.Scene
         console.log(formulario);
         //console.log(users);
         formulario.addListener("click");
+
+        
 
         formulario.on("click", function (event)
         {
@@ -41,8 +47,8 @@ class LogIn extends Phaser.Scene
                     //var cond = await this.scene.getUserServer(nombreInput.value, passwordInput.value);
 
                     //this.scene.getUserServer(nombreInput.value, passwordInput.value, formulario, scene);
-                    this.scene.postUserServer(nombreInput.value, passwordInput.value)
-
+                    this.scene.postUserServer(nombreInput.value, passwordInput.value);
+                    this.scene.scene.get('Musica').setUsuario(nombreInput.value);
                     /*
                     if (this.scene.compruebaNombre(users, nombreInput.value) && this.scene.compruebaPassword(users, passwordInput.value))
                     {
@@ -63,6 +69,16 @@ class LogIn extends Phaser.Scene
                 }
             }
 
+            if(event.target.name === "botonRegistrar"){
+
+            }
+
+            if(event.target.name === "botonDelete"){
+                
+            }
+            if(event.target.name === "botonEdit"){
+                
+            }
         });
 
         this.tweens.add({

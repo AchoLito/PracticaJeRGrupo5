@@ -26,6 +26,8 @@ class Chat extends Phaser.Scene
             this.scene.resume("PrimerNivel");
             this.scene.stop("Chat");
         });
+
+        this.nombreUsuario=this.scene.get('Musica').getUsuario();
         
         this.input.keyboard.on('keydown-ENTER', () => { this.enviarMensaje();});
         
@@ -109,7 +111,7 @@ class Chat extends Phaser.Scene
         
         // Crear objeto JSON tipo ChatRequest
         const datosMensaje = {
-            user: "juan",
+            user: this.nombreUsuario,
             message: mensaje,
             timestamp: this.lastTimestamp
         };
