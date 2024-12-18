@@ -21,11 +21,11 @@ class Musica extends Phaser.Scene
         if (!this.musica.isPlaying) {
         this.musica.play();
 
-    }
+        }
 
         this.registry.set('Volumen', 0.5);
 
-
+        this.nombreUsuario="";
 
     }
 
@@ -39,5 +39,13 @@ class Musica extends Phaser.Scene
         return this.registry.get('Volumen');
     }
 
+    setUsuario(nuevoUsuario){
+        this.nombreUsuario = nuevoUsuario;
+    }
+
+    getUsuario()
+    {
+        return this.nombreUsuario;
+    }
 
 }
