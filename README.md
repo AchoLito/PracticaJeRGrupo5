@@ -252,7 +252,6 @@ La pantalla de título es la primera que los jugadores ven al iniciar el juego. 
 #### 14.3. MENÚ DE INICIO  
 
 El menú principal contiene todas las opciones iniciales necesarias para comenzar la partida. Las opciones disponibles son:  
-
 **Jugar:** Inicia el juego y lleva al primer nivel.  
 
 **Controles:** Accede a la pantalla donde se explican los controles básicos de ambos personajes.  
@@ -261,7 +260,7 @@ El menú principal contiene todas las opciones iniciales necesarias para comenza
 
 **Créditos:** Muestra información sobre el equipo que ha desarrollado el juego.  
 
-![Imagen menú inicio](lamaldicion/src/main/resources/static/imagenes/Menu_Inicio.png "Imagen del menú de inicio")  
+![Imagen menú inicio](lamaldicion/src/main/resources/static/imagenes/Menu_Nuevo.png "Imagen del menú de inicio")  
 
 *Imagen 17: Menú de inicio del juego*  
 
@@ -283,11 +282,15 @@ El menú de pausa aparece cuando el usuario presiona en alguna de las pantallas 
 
 **Ajustes:** Accede a la pantalla donde se pueden modificar los ajustes del juego.  
 
+![Imagen pausa](lamaldicion/src/main/resources/static/imagenes/Pausa.png "Imagen del menú de pausa") 
+
 #### 14.5. PANTALLA DE AJUSTES  
 
 El menú de ajustes permite al jugador personalizar ciertos aspectos del juego para mejorar su experiencia. Las opciones son:  
 
 **Volumen:** Ajusta el nivel de volumen del juego.  
+
+![Imagen ajustes](lamaldicion/src/main/resources/static/imagenes/Pantalla_Ajustes.png "Imagen de los ajustes") 
 
 #### 14.6. PANTALLA DE CHAT  
 
@@ -295,7 +298,9 @@ La pantalla de chat se activa durante el juego presionando el botón en la esqui
 
 **Área de mensajes:** Muestra los mensajes escritos por ambos jugadores en tiempo real.  
 
-**Campo de entrada:** En la parte inferior, hay un cuadro de texto donde el jugador puede escribir su mensaje.
+**Campo de entrada:** En la parte inferior, hay un cuadro de texto donde el jugador puede escribir su mensaje.  
+
+![Imagen chat](lamaldicion/src/main/resources/static/imagenes/Pantalla_Chat.png "Imagen del chat") 
 
 #### 14.7. NIVEL 1  
 
