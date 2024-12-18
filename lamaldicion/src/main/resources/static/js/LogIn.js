@@ -32,15 +32,12 @@ class LogIn extends Phaser.Scene
 
         formulario.on("click", function (event)
         {
-            if (event.target.name === "botonLogIn")
-            {
-                /*
-                this.scene.load.json("acho", "data/acho.json");
-                const users = this.cache.json.get("data/acho.json");
-                */
-                nombreInput = this.getChildByID("nombreUsuario");
-                passwordInput = this.getChildByID("password");               
+            nombreInput = this.getChildByID("nombreUsuario");
+            passwordInput = this.getChildByID("password");      
 
+            if (event.target.name === "botonRegistrar") //Crea el usuario
+            {
+                
                 if (nombreInput.value !== "" && passwordInput.value !== "")
                 {
                     //if (nombreInput.value === users.name && passwordInput.value === users.password)
@@ -49,6 +46,7 @@ class LogIn extends Phaser.Scene
                     //this.scene.getUserServer(nombreInput.value, passwordInput.value, formulario, scene);
                     this.scene.postUserServer(nombreInput.value, passwordInput.value);
                     this.scene.scene.get('Musica').setUsuario(nombreInput.value);
+                    
                     /*
                     if (this.scene.compruebaNombre(users, nombreInput.value) && this.scene.compruebaPassword(users, passwordInput.value))
                     {
@@ -62,14 +60,17 @@ class LogIn extends Phaser.Scene
                             }
                         });
                         
-                        scene.stop("LogIn");
-                        scene.start("PantallaInicio");
+                        
                     }   
-                    */           
+                    */   
+                   
+                    scene.stop("LogIn");
+                    scene.start("MenuInicio");
                 }
             }
 
-            if(event.target.name === "botonRegistrar"){
+            if(event.target.name === "botonLogIn")//si el usuario existe y la contraseña exis
+            {
 
             }
 
@@ -97,7 +98,7 @@ class LogIn extends Phaser.Scene
             console.log(scene);
             
             scene.stop("LogIn");
-            scene.start("PantallaInicio");
+            scene.start("MenuInicio");
         }
     }
 
