@@ -38,23 +38,23 @@ El tono del juego es misterioso y tenso, pero no terror puro. El diseño visual 
 
 La perspectiva será similar a la de las imágenes 1, 2 y 3, pero con un estilo gráfico inspirado en las imágenes 4, 5 y 6.  
 
-![Imagen 1 de la perspectiva](imagenes/Imagen1_perspectiva.jpg "Imagen 1 de la perspectiva")  
-![Imagen 2 de la perspectiva](imagenes/Imagen2_perspectiva.jpg "Imagen 2 de la perspectiva")  
-![Imagen 3 de la perspectiva](imagenes/Imagen3_perspectiva.jpg "Imagen 3 de la perspectiva")  
+![Imagen 1 de la perspectiva](lamaldicion/src/main/resources/static/imagenes/Imagen1_perspectiva.jpg "Imagen 1 de la perspectiva")  
+![Imagen 2 de la perspectiva](lamaldicion/src/main/resources/static/imagenes/Imagen2_perspectiva.jpg "Imagen 2 de la perspectiva")  
+![Imagen 3 de la perspectiva](lamaldicion/src/main/resources/static/imagenes/Imagen3_perspectiva.jpg "Imagen 3 de la perspectiva")  
 
 *Imágenes 1, 2 y 3: Referencias de vista “Top - Down”*      
 
 
-![Imagen 2 del estilo visual](imagenes/Imagen2_estiloVisual.jpg "Imagen 2 del estilo visual")  
-![Imagen 3 del estilo visual](imagenes/Imagen3_estiloVisual.png "Imagen 3 del estilo visual")   
-![Imagen 4 del estilo visual](imagenes/Imagen4_estiloVisual.jpg "Imagen 4 del estilo visual")  
+![Imagen 2 del estilo visual](lamaldicion/src/main/resources/static/imagenes/Imagen2_estiloVisual.jpg "Imagen 2 del estilo visual")  
+![Imagen 3 del estilo visual](lamaldicion/src/main/resources/static/imagenes/Imagen3_estiloVisual.png "Imagen 3 del estilo visual")   
+![Imagen 4 del estilo visual](lamaldicion/src/main/resources/static/imagenes/Imagen4_estiloVisual.jpg "Imagen 4 del estilo visual")  
 
 *Imágenes 4, 5 y 6: Referencias del estilo visual.*  
 
 #### 3.2 DISEÑOS FINALES
 
-![Imagen 1 del escenario sin baldosa](imagenes/ESCENARIO_CON_PASILLO.png "Imagen 1 del escenario sin baldosas")
-![Imagen 2 del escenario con baldosa](imagenes/ESCENARIO_CON_DIBUJO_BALDOSAS.png "Imagen 2 del escenario con baldosas")  
+![Imagen 1 del escenario sin baldosa](lamaldicion/src/main/resources/static/imagenes/ESCENARIO_CON_PASILLO.png "Imagen 1 del escenario sin baldosas")
+![Imagen 2 del escenario con baldosa](lamaldicion/src/main/resources/static/imagenes/ESCENARIO_CON_DIBUJO_BALDOSAS.png "Imagen 2 del escenario con baldosas")  
 
 *Imágenes 7 y 8: Diseño final del escenario del primer nivel.*
 
@@ -145,11 +145,11 @@ La única oportunidad del fantasma para escapar es romper la maldición que le a
 ##### 9.1.2. APARIENCIA
 La apariencia del fantasma está fuertemente inspirada en la cultura popular, su aspecto está basado en la imagen tradicional de un fantasma como es la de la sabana flotando. Esto es así para facilitar que el jugador sepa desde un primer momento que el personaje está muerto.   
 
-![Imagen fantasma](imagenes/Imagen_fantasma.jpg "Imagen Fantasma")
+![Imagen fantasma](lamaldicion/src/main/resources/static/imagenes/Imagen_fantasma.jpg "Imagen Fantasma")
 
 *Imagen 9: Referencia para la apariencia del fantasma.*   
 
-![Imagen fantasma final](imagenes/FANTASMA.png "Imagen fantasma final")  
+![Imagen fantasma final](lamaldicion/src/main/resources/static/imagenes/FANTASMA.png "Imagen fantasma final")  
 
 *Imagen 10: Diseño final del fantasma.*
 
@@ -161,11 +161,11 @@ El bandido es el segundo personaje jugable del videojuego. Al igual que pasa con
 ##### 9.2.2. APARIENCIA
 El bandido va vestido con unos pantalones negros y una camisa blanca, propia de la época en la que vivió; por encima de dicha ropa lleva una larga capa con capucha que le permite cubrirse la cara para pasar desapercibido. Esta capa cumple dos propósitos, el primero es aportar un trasfondo al personaje, ya que da a entender que tiene un pasado misterioso. Por otra parte, cumple un propósito con la narrativa, dado que impide que el jugador sepa si el personaje está muerto o no.    
 
-![Imagen Bandido 2](imagenes/Imagen2_Bandido.png "Imagen Bandido 2")
+![Imagen Bandido 2](lamaldicion/src/main/resources/static/imagenes/Imagen2_Bandido.png "Imagen Bandido 2")
 
 *Imágenes 11 y 12: Referencias para la apariencia del humano.*  
 
-![Imagen humano](imagenes/HUMANO.png "Imagen humano final")  
+![Imagen humano](lamaldicion/src/main/resources/static/imagenes/HUMANO.png "Imagen humano final")  
 
 *Imagen 13: Diseño final del humano.*
 
@@ -179,7 +179,7 @@ Los antiguos guardias del castillo se vieron arrastrados por la maldición puest
 
 Los soldados del castillo van vestidos con unas armaduras que les cubren todo el cuerpo, dichas armaduras son propias de la época en la que murieron los soldados. Al igual que con el bandido, su vestimenta provoca que los jugadores desconozcan si los guardias están vivos o muertos.  
 
-![Imagen Enemigos](imagenes/Imagen_guardias.png "Imagen enemigos")
+![Imagen Enemigos](lamaldicion/src/main/resources/static/imagenes/Imagen_guardias.png "Imagen enemigos")
 
 *Imagen 14: Referencias para la apariencia de los enemigos.*
 
@@ -213,7 +213,7 @@ Los jugadores deben encender una serie de antorchas y alinear correctamente las 
 
 ##### 11.1.3. IMAGEN DEL NIVEL  
 
-![Imagen nivel 1](imagenes/Nivel_1.png "Imagen nivel 1")  
+![Imagen nivel 1](lamaldicion/src/main/resources/static/imagenes/Nivel_1.png "Imagen nivel 1")  
 
 *Imagen 15: Escenario del Nivel 1*
 
@@ -229,7 +229,7 @@ La interfaz tendrá un estilo similar a la estética del juego, siendo simple y 
 
 La interfaz incluye varios elementos que facilitan el control y la navegación tanto para el jugador que controla al humano como para el jugador que controla al fantasma. El diseño sigue una lógica de transición entre pantallas, con un flujo claro que se representa en el diagrama adjunto. Este flujo asegura que los jugadores puedan moverse de una pantalla a otra de manera fluida, ya sea al iniciar el juego, pausar, consultar información o avanzar al siguiente nivel.  
 
-![Imagen diagrama](imagenes/DIAGRAMA_PANTALLAS.png "Imagen diagrama de pantallas")  
+![Imagen diagrama](lamaldicion/src/main/resources/static/imagenes/DIAGRAMA_PANTALLAS.png "Imagen diagrama de pantallas")  
 
 *Imagen 16: Diagrama de pantallas*  
 
@@ -248,15 +248,15 @@ El menú principal contiene todas las opciones iniciales necesarias para comenza
 
 **Créditos:** Muestra información sobre el equipo que ha desarrollado el juego.  
 
-![Imagen menú inicio](imagenes/Menu_Inicio.png "Imagen del menú de inicio")  
+![Imagen menú inicio](lamaldicion/src/main/resources/static/imagenes/Menu_Inicio.png "Imagen del menú de inicio")  
 
 *Imagen 17: Menú de inicio del juego*  
 
-![Imagen controles](imagenes/Controles.png "Imagen de los controles")
+![Imagen controles](lamaldicion/src/main/resources/static/imagenes/Controles.png "Imagen de los controles")
 
 *Imagen 18: Controles de cada jugador del juego*  
 
-![Imagen créditos](imagenes/Creditos.png "Imagen de los créditos")  
+![Imagen créditos](lamaldicion/src/main/resources/static/imagenes/Creditos.png "Imagen de los créditos")  
 
 *Imagen 19: Créditos del juego*  
 
@@ -265,7 +265,7 @@ El menú principal contiene todas las opciones iniciales necesarias para comenza
 
 Durante el juego, la interfaz del primer nivel incluye elementos específicos diseñados para guiar a los jugadores en la exploración y resolución del puzle. Esta interfaz muestra el inventario del humano, además de los diálogos que aparecen en los momentos requeridos. Al completar el puzle principal del nivel 1, la pantalla muestra un breve mensaje de "*Continuará*" antes de cargar el siguiente nivel.  
 
-![Imagen nivel 1](imagenes/Nivel_1.png "Imagen del nivel 1")  
+![Imagen nivel 1](lamaldicion/src/main/resources/static/imagenes/Nivel_1.png "Imagen del nivel 1")  
 
 *Imagen 20: Nivel 1 del juego*
 
