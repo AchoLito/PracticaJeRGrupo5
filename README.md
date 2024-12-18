@@ -277,15 +277,15 @@ El menú principal contiene todas las opciones iniciales necesarias para comenza
 
 ![Imagen menú inicio](lamaldicion/src/main/resources/static/imagenes/Menu_Nuevo.png "Imagen del menú de inicio")  
 
-*Imagen 17: Menú de inicio del juego*  
+*Imagen 19: Menú de inicio del juego*  
 
 ![Imagen controles](lamaldicion/src/main/resources/static/imagenes/Controles.png "Imagen de los controles")
 
-*Imagen 18: Controles de cada jugador del juego*  
+*Imagen 20: Controles de cada jugador del juego*  
 
 ![Imagen créditos](lamaldicion/src/main/resources/static/imagenes/Creditos.png "Imagen de los créditos")  
 
-*Imagen 19: Créditos del juego*  
+*Imagen 21: Créditos del juego*  
 
 #### 14.4. PANTALLA DE PAUSA  
 
@@ -299,7 +299,7 @@ El menú de pausa aparece cuando el usuario presiona en alguna de las pantallas 
 
 ![Imagen pausa](lamaldicion/src/main/resources/static/imagenes/Pausa.png "Imagen del menú de pausa")  
 
-*Imagen 20: Menú de pausa*
+*Imagen 22: Menú de pausa*
 
 #### 14.5. PANTALLA DE AJUSTES  
 
@@ -309,7 +309,7 @@ El menú de ajustes permite al jugador personalizar ciertos aspectos del juego p
 
 ![Imagen ajustes](lamaldicion/src/main/resources/static/imagenes/Pantalla_Ajustes.png "Imagen de los ajustes")  
 
-*Imagen 21: Pantalla de ajustes*
+*Imagen 23: Pantalla de ajustes*
 
 #### 14.6. PANTALLA DE CHAT  
 
@@ -321,7 +321,7 @@ La pantalla de chat se activa durante el juego presionando el botón en la esqui
 
 ![Imagen chat](lamaldicion/src/main/resources/static/imagenes/Pantalla_Chat.png "Imagen del chat")  
 
-*Imagen 22: Chat del juego*
+*Imagen 24: Chat del juego*
 
 #### 14.7. NIVEL 1  
 
@@ -329,14 +329,35 @@ Durante el juego, la interfaz del primer nivel incluye elementos específicos di
 
 ![Imagen nivel 1](lamaldicion/src/main/resources/static/imagenes/Nivel_1.png "Imagen del nivel 1")  
 
-*Imagen 23: Nivel 1 del juego*
+*Imagen 25: Nivel 1 del juego*  
 
-### 15. MÚSICA Y EFECTOS DE SONIDO
+### 15. DIAGRAMA DE CLASES  
+*** 
+
+Este es el diagrama de las clases que se han implementado en Java, obviando los métodos y atributos de cada una:  
+
+![Imagen diagrama clases](lamaldicion/src/main/resources/static/imagenes/DiagramaClases.png "Imagen diagrama de clases")  
+
+*Imagen 26: Diagrama de clases*
+
+### 16. MÚSICA Y EFECTOS DE SONIDO
 ***
 
-La música en *La Maldición* está pensada para sumergir a los jugadores en la atmósfera de un castillo sin distraerlos de la jugabilidad. Una música suave creará la ambientación perfecta que incrementará la tensión de los jugadores conforme se vayan adentrando en el castillo y los peligros aumenten. Además de la música, habrá efectos de sonido que permitirán crear una atmósfera mucho más inmersiva, como el soplo del viento o susurros de voces que hagan que el jugador se sienta dentro del castillo, pero sin llegar a asustarlo, para así reflejar la estética y género del juego.
+La música en *La Maldición* está pensada para sumergir a los jugadores en la atmósfera de un castillo sin distraerlos de la jugabilidad. Una música suave creará la ambientación perfecta que incrementará la tensión de los jugadores conforme se vayan adentrando en el castillo y los peligros aumenten. Además de la música, habrá efectos de sonido que permitirán crear una atmósfera mucho más inmersiva, como el soplo del viento o susurros de voces que hagan que el jugador se sienta dentro del castillo, pero sin llegar a asustarlo, para así reflejar la estética y género del juego.  
 
-### 16. IMÁGENES DE REFERENCIA
+### 17. QUÉ SE NECESITA Y CÓMO EJECUTAR EL JUEGO  
+***  
+
+Para poder ejecutar el juego es necesario que el usuario tenga instalado en su máquina java y el Java Development Kit (JDK) de la versión 21 o superior.  
+
+Si se cuenta con un archivo.jar ya generado para ejecutarlo se debe usar el comando java -jar:  
+>> java -jar lamaldicion-SNAPSHOT.jar. Es importante que cuando se ejecute el servidor, se debe asegurar de que la carpeta de datos esté en el mismo directorio que el .jar.
+
+Para acceder al juego desde un navegador, abre cualquier navegador y escribe la URL en la barra de direcciones para jugar localmente: *localhost:8080*.  
+
+Si el servidor está en una máquina remota, reemplaza *localhost* por la dirección IP del servidor: *<IP del servidor>:8080*  
+
+### 18. IMÁGENES DE REFERENCIA
 ***
 
 https://www.craiyon.com/image/N0GfFcb8So-2AAmaaE1NZA  
@@ -347,7 +368,7 @@ https://www.freepik.es/vector-gratis/coleccion-fantasmas-halloween-dibujados-man
 
 https://www.freepik.es/vector-premium/castillo-ilustracion-fondo-juego-torre_64818939.htm  
 
-### 16. CRÉDITOS DE LA MÚSICA Y SONIDOS
+### 19. CRÉDITOS DE LA MÚSICA Y SONIDOS
 ***  
 
 **Música:**  
