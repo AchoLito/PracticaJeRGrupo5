@@ -4,7 +4,7 @@ JUEGOS EN RED
 
 DISEÑO Y DESARROLLO DE VIDEOJUEGOS - URJC
 
-![Logo Equipo](imagenes/Logo_PatataGames_re.png "Logo del equipo") 
+![Logo Equipo](lamaldicion/src/main/resources/static/imagenes/Logo_PatataGames_re.png "Logo del equipo") 
 
  **PATATA GAMES**  
  
