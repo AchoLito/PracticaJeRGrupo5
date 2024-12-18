@@ -41,10 +41,10 @@ public class UsersController
     @GetMapping("/{username}")
     public ResponseEntity<UserDTO> getUser(@PathVariable String username)
     {
-        Optional<User> user = this.userDAO.getUser(username);
-        if(user.isPresent())
+        User user = this.userDAO.getUser(username);
+        if(user.getName() != "")
         {
-            return ResponseEntity.ok(new UserDTO(user.get()));
+            return ResponseEntity.ok(new UserDTO(user));
         }
         else
         {
@@ -63,14 +63,14 @@ public class UsersController
     public ResponseEntity<?> postUser(@RequestBody User username)
     //public ResponseEntity<?> postUser(@RequestParam String name)
     {
-        username = new User("Javi", "123");
+        //username = new User("Javi", "123");
         if(username.getName() == null || username.getPassword() == null)
         {
             return ResponseEntity.badRequest().build();
         }
 
-        Optional<User> other = this.userDAO.getUser(username.getName());
-        if(other.isPresent())
+        User other = this.userDAO.getUser(username.getName());
+        if(other.getName() != "")
         {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
@@ -88,3 +88,4 @@ public class UsersController
     {
     }
 }
+

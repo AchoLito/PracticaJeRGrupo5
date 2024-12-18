@@ -14,7 +14,7 @@ public class LamaldicionApplication {
 	@Qualifier("usersPath")
 	public String usersPath()
 	{
-		return new String("localhost:8080/api/users");
+		return new String("users");
 	}
 	
 	public static void main(String[] args) 

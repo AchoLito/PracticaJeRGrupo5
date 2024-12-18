@@ -14,6 +14,7 @@ import java.lang.String;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.core.io.ClassPathResource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -63,16 +64,18 @@ public class UserDAO {
 
     }
 
-    public Optional<User> getUser(String username) {
+    public User getUser(String username) {
         var objectMapper = new ObjectMapper();
         try {
             // Construct the file path dynamically based on the username
-            System.out.print(username);
-            String filePath = this.usersPath + "/" + username + ".json";
-            File file = new File(filePath);
-            return Optional.of(objectMapper.readValue(file, User.class));
+            ClassPathResource resource = new ClassPathResource("users/" + username + ".json");
+            String content = new String(Files.readAllBytes(Paths.get(resource.getURI())));
+            User user = objectMapper.readValue(content, User.class);
+            return user;
+            
         } catch (IOException ex) {
-            return Optional.empty();
+            User v = new User();
+            return v;
         }
 
     }
