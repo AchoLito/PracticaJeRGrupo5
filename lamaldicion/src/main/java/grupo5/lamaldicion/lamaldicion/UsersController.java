@@ -32,28 +32,37 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class UsersController
 {
     UserDAO userDAO;
+    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
     ApiStatus api;
 
     public UsersController(UserDAO user)
     {
         this.userDAO = user;
         this.api = new ApiStatus();
-        //this.lock
     }
 
     @GetMapping("/{username}")
     public ResponseEntity<UserDTO> getUser(@PathVariable String username)
     {
-        User user = this.userDAO.getUser(username);
-        if(user.getName() != "")
+        var readLock = this.lock.readLock();
+        readLock.lock();
+        try
         {
-            this.api.hasSeen(user.getName());
-            this.api.connectedUsersSince(10000);
-            return ResponseEntity.ok(new UserDTO(user));
+            User user = this.userDAO.getUser(username);
+            if(user.getName() != "")
+            {
+                this.api.hasSeen(user.getName());
+                this.api.connectedUsersSince(10000);
+                return ResponseEntity.ok(new UserDTO(user));
+            }
+            else
+            {
+                return ResponseEntity.notFound().build();
+            }
         }
-        else
+        finally
         {
-            return ResponseEntity.notFound().build();
+            readLock.unlock();
         }
         
     }
@@ -61,39 +70,70 @@ public class UsersController
     @DeleteMapping("/{username}")
     public ResponseEntity<?> deleteUser(@PathVariable String username)
     {
-        userDAO.deleteUser(username);
-        return ResponseEntity.noContent().build();
+        var writeLock = lock.writeLock();
+        writeLock.lock();
+
+        try
+        {
+            userDAO.deleteUser(username);
+            return ResponseEntity.noContent().build();
+        }
+        finally
+        {
+            writeLock.unlock();
+        }
     }
 
     @PostMapping("/")
     public ResponseEntity<?> postUser(@RequestBody User username)
     {
-        //username = new User("Javi", "123");
-        if(username.getName() == null || username.getPassword() == null)
-        {
-            return ResponseEntity.badRequest().build();
-        }
+        var writeLock = lock.writeLock();
+        writeLock.lock();
 
-        User other = this.userDAO.getUser(username.getName());
-        if(other.getName() != "")
+        try
         {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
+            //username = new User("Javi", "123");
+            if(username.getName() == null || username.getPassword() == null)
+            {
+                return ResponseEntity.badRequest().build();
+            }
 
-        this.api.hasSeen(username.getName());
-        this.api.connectedUsersSince(10000);
-        userDAO.postUser(username);
-        return ResponseEntity.ok().build();
+            User other = this.userDAO.getUser(username.getName());
+            if(other.getName() != "")
+            {
+                return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            }
+
+            this.api.hasSeen(username.getName());
+            this.api.connectedUsersSince(10000);
+            userDAO.postUser(username);
+            return ResponseEntity.ok().build();
+        }
+        finally
+        {
+            writeLock.unlock();
+        }
+        
     }
 
     @PutMapping("/{username}")
     public ResponseEntity<?> updatePassword(@RequestBody User username)
     {
-        User user = new User(username.getName(), username.getPassword());
-        userDAO.updateUser(user);
-        this.api.hasSeen(username.getName());
-        this.api.connectedUsersSince(10000);
-        return ResponseEntity.noContent().build();
+        var writeLock = lock.writeLock();
+        writeLock.lock();
+        try
+        {
+            User user = new User(username.getName(), username.getPassword());
+            userDAO.updateUser(user);
+            this.api.hasSeen(username.getName());
+            this.api.connectedUsersSince(10000);
+            return ResponseEntity.noContent().build();
+        }
+        finally
+        {
+            writeLock.unlock();
+        }
+        
     }
 
 }
