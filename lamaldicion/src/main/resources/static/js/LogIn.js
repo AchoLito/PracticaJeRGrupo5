@@ -98,7 +98,7 @@ class LogIn extends Phaser.Scene
             console.log(scene);
             
             scene.stop("LogIn");
-            scene.start("MenuInicio");
+            scene.start("PantallaInicio");
         }
     }
 
