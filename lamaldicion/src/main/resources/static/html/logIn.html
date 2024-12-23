@@ -5,18 +5,29 @@
         <title> La Maldición </title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <style>
-            .Contenido
+            .Registro
             {
                 margin: auto;
-                margin-top: 20%;
-                width: 10%;
+                margin-top: 75%;
+                width: 100%;
+                position: static;
+                margin-left: -75%;
+            }
+
+            .InicioSesion
+            {
+                margin: auto;
+                margin-top: -35%;
+                width: 100%;
+                margin-left: 150%;
+                position: static;
             }
 
             #registro
             {
                 position: absolute;
-                top: 125px;
-                margin-left: 15px;
+                top: 260px;
+                margin-left: 18px;
                 
                 y: 500px;
                 background-color: #fbeee0;
@@ -45,8 +56,8 @@
             #inicio
             {
                 position: absolute;
-                top: 200px;
-                margin-left: 7px;
+                top: 265px;
+                margin-left: 12px;
                 
                 y: 500px;
                 background-color: #fbeee0;
@@ -135,9 +146,21 @@
             #nombreUsuario
             {
                 height: 30px;
+                margin-right: 50px;
             }
 
             #password
+            {
+                margin-top: 10px;
+                height: 30px;
+            }
+
+            #nombreUsuario1
+            {
+                height: 30px;
+            }
+
+            #password1
             {
                 margin-top: 10px;
                 height: 30px;
@@ -146,13 +169,17 @@
     </head>
     <body>
         <form>
-            <div class="Contenido">
+            <div class="Registro">
                 <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Nombre de usuario"><br>
                 <input type="password" id="password" name="password" placeholder="Contraseña"><br>
                 <input type="button" id="registro" name="botonRegistrar" value="Registrarse"></input>
+                <!--<input type="button" id="editar" name="botonEdit" value="Editar contraseña"></input>
+                <input type="button" id="borrar" name="botonDelete" value="Borrar usuario"></input>-->
+            </div>
+            <div class="InicioSesion">
+                <input type="text" id="nombreUsuario1" name="nombreUsuario" placeholder="Nombre de usuario"><br>
+                <input type="password" id="password1" name="password" placeholder="Contraseña"><br>
                 <input type="button" id="inicio" name="botonLogIn" value="Iniciar sesión"></input>
-                <input type="button" id="editar" name="botonEdit" value="Editar contraseña"></input>
-                <input type="button" id="borrar" name="botonDelete" value="Borrar usuario"></input>
             </div>
         </form>
     </body>
