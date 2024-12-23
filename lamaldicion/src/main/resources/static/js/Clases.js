@@ -652,11 +652,3 @@ class DatosOnline
         return JSON.stringify(this.ANT_arrayEncendidas[numeroAntorcha]);
     }
 }
-
-class DatosOnlineEstatuas_Array{
-    constructor(numeroEstatuas){
-        
-    }
-
-    
-}
