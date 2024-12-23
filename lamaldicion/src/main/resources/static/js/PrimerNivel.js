@@ -118,6 +118,7 @@ class PrimerNivel extends Phaser.Scene
         this.puertasColliders_Array = [];
         
 
+        this.esHumano = true;//o false, lo recibe de la pantalla de eleccion de personaje
         //HUMANO
         this.humano = new Humano(580,500, this);
 
@@ -174,6 +175,10 @@ class PrimerNivel extends Phaser.Scene
         this.palanca= new PalancaInventario(1100,450, this );
 
 
+        //WEBSOKETS
+        this.socket = new WebSocket("ws://" + location.host + "/ws");
+        this.setupWebSocket();
+
         //FUNCIONES DE RESPUESTA
         this.inicializarControlesHumano();
         this.inicializarControlesFantasma();
@@ -184,12 +189,62 @@ class PrimerNivel extends Phaser.Scene
         this.input.keyboard.on('keydown-SPACE', () => { this.dialogo.actualizar();});
 
     }
-
-    // Función llamada cuando los objetos colisionan    
-    
     update()
     {
+
     }
+
+    sendMessage(type, data = null) {
+        if (this.socket.readyState === WebSocket.OPEN) {
+            if (data) {
+                this.socket.send(`${type}${JSON.stringify(data)}`);
+            } else {
+                this.socket.send(type);
+            }
+        }
+    }
+    
+    setupWebSocket() {
+        this.socket.onopen = () => {
+            console.log('Connected to server');
+        };
+
+        this.socket.onmessage = (event) => {
+            const type = event.data.charAt(0); //la primera letra del mensaje es su tipo
+            const data = event.data.length > 1 ? JSON.parse(event.data.substring(1)) : null;
+            //mete en data el resto del mensaje, lo pasa de string a JSON
+
+            switch(type) 
+            {
+                case 'p'://recibimos posiciones del otro personaje
+                    if(this.esHumano){
+
+                    }
+                    else{
+
+                    }
+                    break;
+                case 'v'://recibimos direcciones del otro personaje
+                    if(this.esHumano){
+
+                    }
+                    else{
+                        
+                    }
+                    break;
+                case 'e'://recibimos direccion de una estatua
+                    break;
+                case 'a'://recibimos estado de una antorcha
+                    break;
+            }
+        };
+
+        this.socket.onclose = () => {
+            this.gameStarted = false;
+        };
+    }
+    
+    
     
     inicializarControlesHumano(){
         
