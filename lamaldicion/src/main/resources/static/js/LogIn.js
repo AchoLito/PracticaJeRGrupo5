@@ -10,12 +10,16 @@ class LogIn extends Phaser.Scene
         this.load.html("logIn", "html/logIn.html");
         //this.load.json("acho", "data/acho.json");
 
-        this.load.image("fondo", "imagenes/MENU_PAUSA.png");        
+        this.load.image("fondo", "imagenes/MENU_PAUSA.png");  
+        this.load.image("fondoRegistro", "imagenes/fondoRegistro.png");  
+        this.load.image("fondoInicioSesion", "imagenes/fondoInicioSesion.png");    
     }
 
     create()
     {
         this.add.image(1280/2, 900/2, "fondo").setScale(0.45);
+        this.add.image(395, 400, "fondoRegistro").setScale(0.6);
+        this.add.image(895, 400, "fondoInicioSesion").setScale(0.6);
 
         //const text = this.add.text(10, 10, 'Please login to play', { color: 'white', fontFamily: 'Arial', fontSize: '32px '});
         this.baseUrl = `${window.location.origin}/api/users`;
@@ -28,16 +32,13 @@ class LogIn extends Phaser.Scene
         //console.log(users);
         formulario.addListener("click");
 
-        
-
         formulario.on("click", function (event)
         {
-            nombreInput = this.getChildByID("nombreUsuario");
-            passwordInput = this.getChildByID("password");      
-
             if (event.target.name === "botonRegistrar") //Crea el usuario
             {
-                
+                nombreInput = this.getChildByID("nombreUsuario");
+                passwordInput = this.getChildByID("password");  
+
                 if (nombreInput.value !== "" && passwordInput.value !== "")
                 {
                     //if (nombreInput.value === users.name && passwordInput.value === users.password)
@@ -70,6 +71,9 @@ class LogIn extends Phaser.Scene
 
             if(event.target.name === "botonLogIn")//si el usuario existe y la contraseña exis
             {
+                nombreInput = this.getChildByID("nombreUsuario1");
+                passwordInput = this.getChildByID("password1");  
+
                 this.scene.getUserServer(nombreInput.value, passwordInput.value, formulario, scene);
                 this.scene.scene.get('Musica').setUsuario(nombreInput.value);
             }
