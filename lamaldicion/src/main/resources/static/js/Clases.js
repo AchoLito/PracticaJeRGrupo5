@@ -569,3 +569,94 @@ class FinNivel{
         this.AreaInteraccion =scene.physics.add.existing(this.rect);
     }
 }
+
+class DatosOnline
+{
+    //variables q pasamos entre clientes
+    //estado del juego
+    constructor(numeroEstatuas,numeroAntorchas)
+    {
+        //VARIABLES JUGADOR (las leera el otro cliente para moverlo en su pantalla)
+        this.J_posX=0; //la posicion del jugador
+        this.J_posY=0;
+        this.J_direccion; //la direccion del jugador
+
+        //VARIABLES ESTATUAS
+        this.EST_arrayDirecciones = [];
+        for(const i=0;i<numeroEstatuas;i++)
+        {
+            this.EST_arrayDirecciones[i] = '';
+        }
+        
+        //VARIABLES ANTORCHAS
+        this.ANT_arrayEncendidas = [];
+        for(const i=0;i<numeroAntorchas;i++)
+        {
+            this.ANT_arrayEncendidas[i] = false;
+        }
+
+        //VARIABLES INVENTARIO
+
+        //VARIABLES PUERTAS
+
+        //OTRAS (cambio fondo, etc)
+
+    }
+//////////////////////////////////////////////////////////////
+    setDirJugador(dir){
+        this.J_direccion=dir;
+    }
+    setPosJugador(x,y){
+        this.J_posX=x;
+        this.J_posY=y;
+    }
+
+    getJSONdir()//cada vez q cambiemos la velocidad mandamos un websoket con esto
+    {
+        return JSON.stringify(this.J_direccion);
+    }
+    getJSONpos()//lo mandamos de vez en cuando como control, por si un envio de velocidad ha fallado (5 segundos?)
+    {
+        const p = {
+            x: this.J_posX,
+            y: this.J_posY
+        };
+        return JSON.stringify(p);
+    }
+//////////////////////////////////////////////////////////////
+    setDirEstatua(dir,numeroEstatua){
+        this.EST_arrayDirecciones[numeroEstatua]=dir;
+    }
+
+    getJSONestatuas()//de vez en cuando como control
+    {
+        return JSON.stringify(this.EST_arrayDirecciones);
+        //con JSON.parse recuperamos el array a partir del string
+    }
+    getJSONestatua(numeroEstatua)//cada vez q cambiamos estatua
+    {
+        return JSON.stringify(this.EST_arrayDirecciones[numeroEstatua]);
+    }
+//////////////////////////////////////////////////////////////
+    setEncendidaAntorcha(enc,numeroAntorcha){
+        this.ANT_arrayEncendidas[numeroAntorcha]=enc;
+    }
+
+    getJSONantorchas()//de vez en cuando como control
+    {
+        return JSON.stringify(this.ANT_arrayEncendidas);
+        //con JSON.parse recuperamos el array a partir del string
+    }
+    getJSONantorcha(numeroAntorcha)//cada vez q cambiamos antorcha
+    {
+        return JSON.stringify(this.ANT_arrayEncendidas[numeroAntorcha]);
+    }
+}
+
+class DatosOnlineEstatuas_Array{
+    constructor(numeroEstatuas){
+        
+    }
+
+    
+}
