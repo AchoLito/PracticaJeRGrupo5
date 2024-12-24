@@ -182,6 +182,21 @@ class Antorcha
         this.AreaInteraccion.body.setImmovable(true);
     }
 
+    getEncendida(){
+        return this.encendida;
+    }
+
+    setEncendida(enc){
+        this.encendida = enc;
+        if(enc){
+            this.SpriteObject.setTexture('ANTORCHA_ENCENDIDA');
+        }
+        else{
+            
+            this.SpriteObject.setTexture('ANTORCHA_APAGADA');
+        }
+    }
+
     interactuar()//cada vez q interactuas cambia su estado
     {
         if(!this.cooldown)//si no hay cooldow
@@ -201,7 +216,6 @@ class Antorcha
             }
         }
         return -1;
-        //this.SpriteObject.setTexture('sprite encendida');
     }
 
     resetearCooldown()
@@ -247,6 +261,13 @@ class Estatua
         this.posCorrecta = pos;
         this.correcta = false;
     } 
+    getDireccion(){
+        return this.direccion;
+    }
+    setDireccion(dir){
+        this.direccion = dir;
+        this.SpriteObject.setTexture(dir);
+    }
 
     girarEstatua()
     {
@@ -256,20 +277,16 @@ class Estatua
             switch(this.direccion)
             {
                 case 'ESTATUA_ATRAS':
-                    this.direccion = 'ESTATUA_DERECHA';
-                    this.SpriteObject.setTexture('ESTATUA_DERECHA');
+                    this.setDireccion('ESTATUA_DERECHA');
                     break;
                 case 'ESTATUA_FRONTAL':
-                    this.direccion = 'ESTATUA_IZQUIERDA';
-                    this.SpriteObject.setTexture('ESTATUA_IZQUIERDA');
+                    this.setDireccion('ESTATUA_IZQUIERDA');
                     break;
                 case 'ESTATUA_DERECHA':
-                    this.direccion = 'ESTATUA_FRONTAL';
-                    this.SpriteObject.setTexture('ESTATUA_FRONTAL');
+                    this.setDireccion('ESTATUA_FRONTAL');
                     break;
                 case 'ESTATUA_IZQUIERDA':
-                    this.direccion = 'ESTATUA_ATRAS';
-                    this.SpriteObject.setTexture('ESTATUA_ATRAS');
+                    this.setDireccion('ESTATUA_ATRAS');
                     break;
             }
             return 1;
@@ -655,7 +672,7 @@ class DatosOnline
     {
         const data = {
             n: numeroEstatua,
-            dvir: this.EST_arrayDirecciones[numeroEstatua]
+            val: this.EST_arrayDirecciones[numeroEstatua]
         };
         return JSON.stringify(data);
     }

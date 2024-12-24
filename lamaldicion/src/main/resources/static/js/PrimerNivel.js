@@ -179,6 +179,9 @@ class PrimerNivel extends Phaser.Scene
         this.socket = new WebSocket("ws://" + location.host + "/ws");
         this.setupWebSocket();
 
+        this.t_EnvioControl=0;
+        this.frec_EnvioControl=3000;//milisegundos
+
         //FUNCIONES DE RESPUESTA
         if(this.esHumano){
             this.inicializarControlesHumano();
@@ -193,9 +196,21 @@ class PrimerNivel extends Phaser.Scene
 
         this.input.keyboard.on('keydown-SPACE', () => { this.dialogo.actualizar();});
     }
-    update()
+    update(_,deltaTime)
     {
+        this.t_EnvioControl+=deltaTime;
 
+        if(this.t_EnvioControl>this.frec_EnvioControl){
+            this.t_EnvioControl=0;
+
+            this.envioDatosControl();
+        }
+    }
+
+    envioDatosControl(){ //asegura de vez en cuando que todo este en su sitio :=)
+        this.enviarPosicion();
+        this.enviarDireccionEstatuas_CTR();
+        this.enviarEstadoAntorchas_CTR();
     }
 
     sendMessage(type, data = null) {
@@ -239,10 +254,20 @@ class PrimerNivel extends Phaser.Scene
                     }
                     break;
                 case 'e'://recibimos direccion de una estatua, cada vez que el otro gira una
-                    this.estatuas_Array[data.n]=data.val;
+                    this.estatuas_Array[data.n].setDireccion(data.val);
+                    break;
+                case 'E'://info de todas las estatuas, como control cada x segundos
+                    for(var i=0;i<this.NUM_ESTATUAS;i++){
+                        this.estatuas_Array[i].setDireccion(data[i]);
+                    }
                     break;
                 case 'a'://recibimos estado de una antorcha
-                    this.antorchas_Array[data.n]=data.val;
+                    this.antorchas_Array[data.n].setEncendida(data.val);
+                    break;
+                case 'A'://info de todas las antorcha, como control cada x segundos
+                    for(var i=0;i<this.NUM_ANTORCHAS;i++){
+                        this.antorchas_Array[i].setEncendida(data[i]);
+                    }
                     break;
             }
         };
@@ -252,41 +277,83 @@ class PrimerNivel extends Phaser.Scene
         };
     }
     
+    enviarPosicion(){//se llama cada x segundo
+        if(this.esHumano){
+            this.sendMessage('p',this.humano.getPos());
+        }else{
+            this.sendMessage('p',this.fantasma.getPos());
+        }
+    }
     
-    
+    enviarVelocidad(direccion){//lo llama el imput de teclado
+        this.sendMessage('v',direccion);
+    }
+
+    enviarDireccionEstatua(numeroEstatua){ //en la funcion de colisiones, cuando interactuamos con una
+        const data = {
+            n: numeroEstatua,
+            val: this.estatuas_Array[numeroEstatua].getDireccion()
+        };
+        this.sendMessage('e',data);
+    }
+    enviarDireccionEstatuas_CTR()//se llama cada x segundo
+    {
+        var data = [];
+        for(var i=0;i<this.NUM_ESTATUAS;i++){
+            data = this.estatuas_Array[i].getDireccion();
+        }
+        this.sendMessage('E', data);
+    }
+
+    enviarEstadoAntorcha(numeroAntorcha){ //en la funcion de colisiones, cuando interactuamos con una
+        const data = {
+            n: numeroAntorcha,
+            val: this.antorchas_Array[numeroAntorcha].getEncendida()
+        };
+        this.sendMessage('a',data);
+    }
+    enviarEstadoAntorchas_CTR()//se llama cada x segundo
+    {
+        var data = [];
+        for(var i=0;i<this.NUM_ANTORCHAS;i++){
+            data = this.antorchas_Array[i].getEncendida();
+        }
+        this.sendMessage('A', data);
+    }
+
     inicializarControlesHumano(){
         
         //MOVIMIENTO
-        this.input.keyboard.on('keydown-W', () => { this.humano.input('UP',true);});
-        this.input.keyboard.on('keyup-W', () => { this.humano.input('UP',false);});
+        this.input.keyboard.on('keydown-W', () => { this.enviarVelocidad(this.humano.input('UP',true));});
+        this.input.keyboard.on('keyup-W', () => { this.enviarVelocidad(this.humano.input('UP',false));});
 
-        this.input.keyboard.on('keydown-S', () => { this.humano.input('DOWN',true); });
-        this.input.keyboard.on('keyup-S', () => { this.humano.input('DOWN',false);});
+        this.input.keyboard.on('keydown-S', () => { this.enviarVelocidad(this.humano.input('DOWN',true));});
+        this.input.keyboard.on('keyup-S', () => { this.enviarVelocidad(this.humano.input('DOWN',false));});
         
-        this.input.keyboard.on('keydown-A', () => { this.humano.input('LEFT',true);});
-        this.input.keyboard.on('keyup-A', () => {this.humano.input('LEFT',false);});
+        this.input.keyboard.on('keydown-A', () => { this.enviarVelocidad(this.humano.input('LEFT',true));});
+        this.input.keyboard.on('keyup-A', () => { this.enviarVelocidad(this.humano.input('LEFT',false));});
 
-        this.input.keyboard.on('keydown-D', () => {this.humano.input('RIGHT',true);});
-        this.input.keyboard.on('keyup-D', () => {this.humano.input('RIGHT',false);});
+        this.input.keyboard.on('keydown-D', () => { this.enviarVelocidad(this.humano.input('RIGHT',true));});
+        this.input.keyboard.on('keyup-D', () => { this.enviarVelocidad(this.humano.input('RIGHT',false));});
 
         //TECLAS ESPECIALES
-        this.input.keyboard.on('keydown-E',  () => {this.humano.input('INTERACT',true);});
-        this.input.keyboard.on('keyup-E',  () => {this.humano.input('INTERACT',false);});
+        this.input.keyboard.on('keydown-E',  () => { this.humano.input('INTERACT',true);});
+        this.input.keyboard.on('keyup-E',  () => { this.humano.input('INTERACT',false);});
     }
 
     inicializarControlesFantasma(){
         //MOVIMIENTO
-        this.input.keyboard.on('keydown-UP', () => { this.fantasma.input('UP',true);});
-        this.input.keyboard.on('keyup-UP', () => { this.fantasma.input('UP',false);});
+        this.input.keyboard.on('keydown-UP', () => { this.enviarVelocidad(this.fantasma.input('UP',true));});
+        this.input.keyboard.on('keyup-UP', () => { this.enviarVelocidad(this.fantasma.input('UP',false));});
 
-        this.input.keyboard.on('keydown-DOWN', () => { this.fantasma.input('DOWN',true); });
-        this.input.keyboard.on('keyup-DOWN', () => { this.fantasma.input('DOWN',false);});
+        this.input.keyboard.on('keydown-DOWN', () => { this.enviarVelocidad(this.fantasma.input('DOWN',true));});
+        this.input.keyboard.on('keyup-DOWN', () => { this.enviarVelocidad(this.fantasma.input('DOWN',false));});
         
-        this.input.keyboard.on('keydown-LEFT', () => { this.fantasma.input('LEFT',true);});
-        this.input.keyboard.on('keyup-LEFT', () => {this.fantasma.input('LEFT',false);});
+        this.input.keyboard.on('keydown-LEFT', () => { this.enviarVelocidad(this.fantasma.input('LEFT',true));});
+        this.input.keyboard.on('keyup-LEFT', () => { this.enviarVelocidad(this.fantasma.input('LEFT',false));});
 
-        this.input.keyboard.on('keydown-RIGHT', () => {this.fantasma.input('RIGHT',true);});
-        this.input.keyboard.on('keyup-RIGHT', () => {this.fantasma.input('RIGHT',false);});
+        this.input.keyboard.on('keydown-RIGHT', () => { this.enviarVelocidad(this.fantasma.input('RIGHT',true));});
+        this.input.keyboard.on('keyup-RIGHT', () => { this.enviarVelocidad(this.fantasma.input('RIGHT',false));});
 
         //TECLAS ESPECIALES
         this.input.keyboard.on('keydown-ENTER',  () => {this.fantasma.input('INTERACT',true);});
