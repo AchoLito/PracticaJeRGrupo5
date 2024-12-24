@@ -68,6 +68,15 @@ class Humano {
                 this.desplazarse('0');
             }
         }
+
+        return this.direccion;//se la pasamos por websokets al otro cliente
+    }
+
+    getPos() {
+        return { x: this.body.x, y: this.body.y };
+    }
+    setPos({ x, y }) {
+        this.body.setPosition(x, y);
     }
 }
 
@@ -136,6 +145,15 @@ class Fantasma
                 this.desplazarse('0');
             }
         }
+
+        return this.direccion;//se la pasamos por websokets al otro cliente
+    }
+
+    getPos() {
+        return { x: this.body.x, y: this.body.y };
+    }
+    setPos({ x, y }) {
+        this.body.setPosition(x, y);
     }
 }
 
@@ -635,7 +653,11 @@ class DatosOnline
     }
     getJSONestatua(numeroEstatua)//cada vez q cambiamos estatua
     {
-        return JSON.stringify(this.EST_arrayDirecciones[numeroEstatua]);
+        const data = {
+            n: numeroEstatua,
+            dvir: this.EST_arrayDirecciones[numeroEstatua]
+        };
+        return JSON.stringify(data);
     }
 //////////////////////////////////////////////////////////////
     setEncendidaAntorcha(enc,numeroAntorcha){
@@ -649,6 +671,10 @@ class DatosOnline
     }
     getJSONantorcha(numeroAntorcha)//cada vez q cambiamos antorcha
     {
-        return JSON.stringify(this.ANT_arrayEncendidas[numeroAntorcha]);
+        const data = {
+            n: numeroAntorcha,
+            val: this.ANT_arrayEncendidas[numeroAntorcha]
+        };
+        return JSON.stringify(data);
     }
 }

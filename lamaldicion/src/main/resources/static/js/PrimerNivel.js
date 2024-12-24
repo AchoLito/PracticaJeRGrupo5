@@ -180,14 +180,18 @@ class PrimerNivel extends Phaser.Scene
         this.setupWebSocket();
 
         //FUNCIONES DE RESPUESTA
-        this.inicializarControlesHumano();
-        this.inicializarControlesFantasma();
-        this.inicializarControlesInventario();
+        if(this.esHumano){
+            this.inicializarControlesHumano();
+            this.inicializarControlesInventario();
+        }
+        else{
+            this.inicializarControlesFantasma();
+        }
+
         this.inicializarColisiones();
         this.colliderMuros();
 
         this.input.keyboard.on('keydown-SPACE', () => { this.dialogo.actualizar();});
-
     }
     update()
     {
@@ -216,25 +220,29 @@ class PrimerNivel extends Phaser.Scene
 
             switch(type) 
             {
-                case 'p'://recibimos posiciones del otro personaje
+                case 'p'://recibimos posiciones del otro personaje cada x segundos como control
                     if(this.esHumano){
-
+                        //movemos fantasma
+                        this.fantasma.setPos(data);
                     }
                     else{
-
+                        //movemos humano
+                        this.humano.setPos(data);
                     }
                     break;
-                case 'v'://recibimos direcciones del otro personaje
+                case 'v'://recibimos direcciones del otro personaje, cada vez q pulsa una tecla
                     if(this.esHumano){
-
+                        this.fantasma.desplazarse(data);
                     }
                     else{
-                        
+                        this.humano.desplazarse(data);
                     }
                     break;
-                case 'e'://recibimos direccion de una estatua
+                case 'e'://recibimos direccion de una estatua, cada vez que el otro gira una
+                    this.estatuas_Array[data.n]=data.val;
                     break;
                 case 'a'://recibimos estado de una antorcha
+                    this.antorchas_Array[data.n]=data.val;
                     break;
             }
         };
