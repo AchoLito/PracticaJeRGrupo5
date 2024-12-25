@@ -12,7 +12,11 @@ class LogIn extends Phaser.Scene
 
         this.load.image("fondo", "imagenes/MENU_PAUSA.png");  
         this.load.image("fondoRegistro", "imagenes/fondoRegistro.png");  
-        this.load.image("fondoInicioSesion", "imagenes/fondoInicioSesion.png");    
+        this.load.image("fondoInicioSesion", "imagenes/fondoInicioSesion.png");   
+        this.load.image("fondoSiRegistro", "imagenes/fondoAvisos.png"); // imagen de confirmación registro
+        this.load.image("botonAviso", "imagenes/botonAvisos.png");
+        //this.load.image(); // imagen no registro
+        //this.load.image(); // imagen no inicio 
     }
 
     create()
@@ -20,6 +24,12 @@ class LogIn extends Phaser.Scene
         this.add.image(1280/2, 900/2, "fondo").setScale(0.45);
         this.add.image(395, 400, "fondoRegistro").setScale(0.6);
         this.add.image(895, 400, "fondoInicioSesion").setScale(0.6);
+
+        //this.add.image(650, 600, "fondoSiRegistro").setScale(0.7); // imagen de confirmación registro
+        //this.add.text(310, 560, "El usuario que ha introducido ya existe, por favor introduzca un nombre distinto.", {font: '21px Sans Serif',
+        //    fill: '#000000'});
+        //this.add.image(); // imagen no registro
+        //this.add.image(); // imagen no inicio
 
         //const text = this.add.text(10, 10, 'Please login to play', { color: 'white', fontFamily: 'Arial', fontSize: '32px '});
         this.baseUrl = `${window.location.origin}/api/users`;
@@ -104,6 +114,22 @@ class LogIn extends Phaser.Scene
             scene.stop("LogIn");
             scene.start("PantallaInicio");
         }
+
+        const aviso3 = this.add.image(650, 600, "fondoSiRegistro").setScale(0.7); // imagen de confirmación registro
+        const textAviso3 = this.add.text(480, 560, "El usuario o la contraseña no son correctas.", {font: '21px Sans Serif',
+        fill: '#000000'});
+
+        const boton3 = this.add.image(650, 630, "botonAviso").setScale(0.8)
+            .setInteractive()
+            .on("pointerdown", () => {
+                //this.sound.play("clic");
+                aviso3.visible = false;
+                textAviso3.visible = false;
+                boton3.visible = false;
+                textBoton3.visible = false;
+            }); 
+            
+        const textBoton3 = this.add.text(626, 615, "Vale", {font: '25px Sans Serif', fill: '#000000'});
     }
 
     getUserServer(username, contrasena, formulario, scene)
@@ -138,10 +164,25 @@ class LogIn extends Phaser.Scene
             this.compruebaUser(user, username, contrasena, formulario, scene);
         })
         .catch(error => {
+            const aviso2 = this.add.image(650, 600, "fondoSiRegistro").setScale(0.7); // imagen de confirmación registro
+            const textAviso2 = this.add.text(480, 560, "Este usuario no existe, por favor regístrese.", {font: '21px Sans Serif',
+            fill: '#000000'});
+
+            const boton2 = this.add.image(650, 630, "botonAviso").setScale(0.8)
+                .setInteractive()
+                .on("pointerdown", () => {
+                    //this.sound.play("clic");
+                    aviso2.visible = false;
+                    textAviso2.visible = false;
+                    boton2.visible = false;
+                    textBoton2.visible = false;
+                }); 
+                
+            const textBoton2 = this.add.text(626, 615, "Vale", {font: '25px Sans Serif', fill: '#000000'});
             console.error('There has been a problem with your fetch operation:', error);
         });
     }
-   
+
     postUserServer(username, contrasena, formulario, scene)
     {
         console.log("He posteado el usuario:");
@@ -158,13 +199,44 @@ class LogIn extends Phaser.Scene
             data: JSON.stringify(user), // Convertir a JSON
             contentType: "application/json", // Especificar Content-Type
             success:  (data)=> {
+                const aviso1 = this.add.image(650, 600, "fondoSiRegistro").setScale(0.7); // imagen de confirmación registro
+                const textAviso1 = this.add.text(510, 560, "El usuario ha sido creado con éxito.", {font: '21px Sans Serif',
+                fill: '#000000'});
+
+                const boton1 = this.add.image(650, 630, "botonAviso").setScale(0.8)
+                    .setInteractive()
+                    .on("pointerdown", () => {
+                        //this.sound.play("clic");
+                        aviso1.visible = false;
+                        textAviso1.visible = false;
+                        boton1.visible = false;
+                        textBoton1.visible = false;
+                    }); 
+                    
+                const textBoton1 = this.add.text(626, 615, "Vale", {font: '25px Sans Serif', fill: '#000000'});    
                 console.log("Mensaje Enviado" + data);
             },
-            error: function (error) {
+            error: () => {
+                const aviso = this.add.image(650, 600, "fondoSiRegistro").setScale(0.7); // imagen de confirmación registro
+                const textAviso = this.add.text(310, 560, "El usuario que ha introducido ya existe, por favor introduzca un nombre distinto.", {font: '21px Sans Serif',
+                fill: '#000000'});
+
+                const boton = this.add.image(650, 630, "botonAviso").setScale(0.8)
+                    .setInteractive()
+                    .on("pointerdown", () => {
+                        //this.sound.play("clic");
+                        aviso.visible = false;
+                        textAviso.visible = false;
+                        boton.visible = false;
+                        textBoton.visible = false;
+                    }); 
+                    
+                const textBoton = this.add.text(626, 615, "Vale", {font: '25px Sans Serif', fill: '#000000'}); 
                 console.error("Error al enviar mensaje:", error);
-            }
-        });
+        }});
     }
+
+    
    
     updateUserServer(username, contrasena)
     {
