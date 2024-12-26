@@ -466,117 +466,136 @@ class PrimerNivel extends Phaser.Scene
         for(let i=0;i<this.antorchas_Array.length;i++){
             
             this.physics.add.collider(this.humano.SpriteObject,this.antorchas_Array[i].SpriteObject);
-            this.physics.add.overlap(this.humano.SpriteObject,this.antorchas_Array[i].AreaInteraccion,() => {
-                if(this.humano.interacting)
-                {
-                    var resultadoInteraccion=this.antorchas_Array[i].interactuar();
-                    if(resultadoInteraccion===-1){}//no se pudo por cooldown
-                    else if(resultadoInteraccion===true)//se encendió
+            if(this.esHumano)//solo calculamos colisiones de interaccion si es con el personaje que manejamos
+            {
+                this.physics.add.overlap(this.humano.SpriteObject,this.antorchas_Array[i].AreaInteraccion,() => {
+                    if(this.humano.interacting)
                     {
-                        this.numeroAntorchasEncendidas++;
-                        if(this.numeroAntorchasEncendidas===this.NUM_ANTORCHAS)
+                        var resultadoInteraccion=this.antorchas_Array[i].interactuar();
+                        if(resultadoInteraccion===-1){}//no se pudo por cooldown
+                        else if(resultadoInteraccion===true)//se encendió
                         {
-                            this.activarPistasAntorchas();
+                            this.enviarEstadoAntorcha(i);
+                            this.numeroAntorchasEncendidas++;
+                            if(this.numeroAntorchasEncendidas===this.NUM_ANTORCHAS)
+                            {
+                                this.activarPistasAntorchas();
+                            }
+                        }
+                        else if(resultadoInteraccion===false)//se apagó
+                        {
+                            this.enviarEstadoAntorcha(i);
+                            this.numeroAntorchasEncendidas--;
+                            if(this.numeroAntorchasEncendidas+1 ===this.NUM_ANTORCHAS)
+                            {
+                                this.desActivarPistasAntorchas();
+                            }
                         }
                     }
-                    else if(resultadoInteraccion===false)//se apagó
+                    else
                     {
-                        this.numeroAntorchasEncendidas--;
-                        if(this.numeroAntorchasEncendidas+1 ===this.NUM_ANTORCHAS)
-                        {
-                            this.desActivarPistasAntorchas();
-                        }
+                        this.antorchas_Array[i].resetearCooldown();
                     }
-                }
-                else
-                {
-                    this.antorchas_Array[i].resetearCooldown();
-                }
-            });
+                });
+            }
+            
         }
 
         //Colision de las estatuas
         for(let i=0;i<this.estatuas_Array.length;i++){
             
             this.physics.add.collider(this.humano.SpriteObject,this.estatuas_Array[i].SpriteObject);
-            this.physics.add.overlap(this.humano.SpriteObject,this.estatuas_Array[i].AreaInteraccion,() => {
-                if(this.humano.interacting)
-                {
-                    var resultadoInteraccion=this.estatuas_Array[i].girarEstatua();
-                    this.sound.play('ESTATUA');
-                    if(!(resultadoInteraccion===-1))
+
+            if(this.esHumano)//solo calculamos colisiones de interaccion si es con el personaje que manejamos
+            {
+                this.physics.add.overlap(this.humano.SpriteObject,this.estatuas_Array[i].AreaInteraccion,() => {
+                    if(this.humano.interacting)
                     {
-                        if(this.comprobarPosicionEstatua(this.estatuas_Array[i]))
+                        var resultadoInteraccion=this.estatuas_Array[i].girarEstatua();
+                        this.sound.play('ESTATUA');
+                        if(!(resultadoInteraccion===-1))
                         {
-                            this.estatuas_Array[i].correcta = true;
-                        }
-                        else
-                        {
-                            this.estatuas_Array[i].correcta = false;
-                        }
-                        this.numeroEstatuasCorrectas = 0;
-                        for(let j = 0; j < this.estatuas_Array.length; j++)
-                        {
-                            if(this.estatuas_Array[j].correcta)
+                            enviarDireccionEstatua(i);
+    
+                            if(this.comprobarPosicionEstatua(this.estatuas_Array[i]))
                             {
-                                this.numeroEstatuasCorrectas++;
+                                this.estatuas_Array[i].correcta = true;
                             }
-                        }
-
-                        if(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS)
-                        {
-                            this.accionEstatua(true);
-                        }else
-                        {
-                            this.accionEstatua(false);
-                        }
-                    }                    
-                }
-                else
-                {
-                    this.estatuas_Array[i].resetearCooldown();
-                }
-            });
-
-            this.physics.add.overlap(this.fantasma.SpriteObject,this.estatuas_Array[i].AreaInteraccion,() => {
-                if(this.fantasma.interacting)
-                {
-                    var resultadoInteraccion=this.estatuas_Array[i].girarEstatua();
-                    this.sound.play('ESTATUA');
-                    if(!(resultadoInteraccion===-1))
+                            else
+                            {
+                                this.estatuas_Array[i].correcta = false;
+                            }
+                            this.numeroEstatuasCorrectas = 0;
+                            for(let j = 0; j < this.estatuas_Array.length; j++)
+                            {
+                                if(this.estatuas_Array[j].correcta)
+                                {
+                                    this.numeroEstatuasCorrectas++;
+                                }
+                            }
+    
+                            if(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS)
+                            {
+                                this.accionEstatua(true);
+                            }else
+                            {
+                                this.accionEstatua(false);
+                            }
+                        }                    
+                    }
+                    else
                     {
-                        if(this.comprobarPosicionEstatua(this.estatuas_Array[i]))
+                        this.estatuas_Array[i].resetearCooldown();
+                    }
+                });
+            }
+            else
+            {
+                this.physics.add.overlap(this.fantasma.SpriteObject,this.estatuas_Array[i].AreaInteraccion,() => {
+                    if(this.fantasma.interacting)
+                    {
+                        var resultadoInteraccion=this.estatuas_Array[i].girarEstatua();
+                        this.sound.play('ESTATUA');
+                        if(!(resultadoInteraccion===-1))
                         {
-                            this.estatuas_Array[i].correcta = true;
-                        }
-                        else
-                        {
-                            this.estatuas_Array[i].correcta = false;
-                        }
-                        this.numeroEstatuasCorrectas = 0;
-                        for(let j = 0; j < this.estatuas_Array.length; j++)
-                        {
-                            if(this.estatuas_Array[j].correcta)
+                            enviarDireccionEstatua(i);
+    
+                            if(this.comprobarPosicionEstatua(this.estatuas_Array[i]))
                             {
-                                this.numeroEstatuasCorrectas++;
+                                this.estatuas_Array[i].correcta = true;
                             }
-                        }
+                            else
+                            {
+                                this.estatuas_Array[i].correcta = false;
+                            }
+                            this.numeroEstatuasCorrectas = 0;
+                            for(let j = 0; j < this.estatuas_Array.length; j++)
+                            {
+                                if(this.estatuas_Array[j].correcta)
+                                {
+                                    this.numeroEstatuasCorrectas++;
+                                }
+                            }
+    
+    
+                            if(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS)
+                            {
+                                this.accionEstatua(true);
+                            }else
+                            {
+                                this.accionEstatua(false);
+                            }
+                        }                    
+                    }
+                    else
+                    {
+                        this.estatuas_Array[i].resetearCooldown();
+                    }
+                });
+            }
+            
 
-
-                        if(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS)
-                        {
-                            this.accionEstatua(true);
-                        }else
-                        {
-                            this.accionEstatua(false);
-                        }
-                    }                    
-                }
-                else
-                {
-                    this.estatuas_Array[i].resetearCooldown();
-                }
-            });
+            
         }
 
         //Colisiones de las puertas
