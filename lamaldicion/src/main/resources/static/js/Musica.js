@@ -27,6 +27,10 @@ class Musica extends Phaser.Scene
 
         this.nombreUsuario="";
 
+        this.isHumano=null;
+        //true->humano
+        //false->fantasma
+
     }
 
     setVolume(nuevoVolumen) {
@@ -46,6 +50,14 @@ class Musica extends Phaser.Scene
     getUsuario()
     {
         return this.nombreUsuario;
+    }
+
+    setIsHumano(boolIsHumano){
+        this.isHumano=boolIsHumano;
+    }
+
+    getIsHumano(){
+        return this.isHumano;
     }
 
 }
