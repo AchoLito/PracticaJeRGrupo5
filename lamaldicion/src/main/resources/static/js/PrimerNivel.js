@@ -167,9 +167,6 @@ class PrimerNivel extends Phaser.Scene
             { imagenPersonaje: 'FANTASMA', mensaje: 'No, algo peor que eso. Mantente cerca. Este castillo nos está mirando.' }
         ]);
 
-        
-
-
         //INVENTARIO
         this.inventario= new Inventario(1105,80, this );
         this.palanca= new PalancaInventario(1100,450, this );
@@ -209,8 +206,8 @@ class PrimerNivel extends Phaser.Scene
 
     envioDatosControl(){ //asegura de vez en cuando que todo este en su sitio :=)
         this.enviarPosicion();
-        this.enviarDireccionEstatuas_CTR();
-        this.enviarEstadoAntorchas_CTR();
+        this.enviarDatosEstatuas_CTR();
+        this.enviarDatosAntorchas_CTR();
     }
 
     sendMessage(type, data = null) {
@@ -254,20 +251,41 @@ class PrimerNivel extends Phaser.Scene
                     }
                     break;
                 case 'e'://recibimos direccion de una estatua, cada vez que el otro gira una
-                    this.estatuas_Array[data.n].setDireccion(data.val);
+                    this.estatuas_Array[data.n].setDireccion(data.dir);
+                    this.estatuas_Array[data.n].correcta=data.corr;
+                    this.numeroEstatuasCorrectas=data.nCor;
+
+                    this.accionEstatua(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS);
                     break;
                 case 'E'://info de todas las estatuas, como control cada x segundos
                     for(var i=0;i<this.NUM_ESTATUAS;i++){
-                        this.estatuas_Array[i].setDireccion(data[i]);
+                        this.estatuas_Array[i].setDireccion(data.arr[i].dir);
+                        this.estatuas_Array[i].correcta=data.arr[i].corr;
                     }
+                    this.numeroEstatuasCorrectas=data.nCor;
+                    this.accionEstatua(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS);
                     break;
                 case 'a'://recibimos estado de una antorcha
                     this.antorchas_Array[data.n].setEncendida(data.val);
+                    this.numeroAntorchasEncendidas=data.nEnc;
+
+                    if(this.numeroAntorchasEncendidas===this.NUM_ANTORCHAS){
+                        this.activarPistasAntorchas();
+                    }
+                    else this.desActivarPistasAntorchas();
+
                     break;
                 case 'A'://info de todas las antorcha, como control cada x segundos
+                    this.numeroAntorchasEncendidas=data.nEnc;
                     for(var i=0;i<this.NUM_ANTORCHAS;i++){
-                        this.antorchas_Array[i].setEncendida(data[i]);
+                        this.antorchas_Array[i].setEncendida(data.arr[i]);
                     }
+
+                    if(this.numeroAntorchasEncendidas===this.NUM_ANTORCHAS){
+                        this.activarPistasAntorchas();
+                    }
+                    else this.desActivarPistasAntorchas();
+
                     break;
             }
         };
@@ -289,34 +307,50 @@ class PrimerNivel extends Phaser.Scene
         this.sendMessage('v',direccion);
     }
 
-    enviarDireccionEstatua(numeroEstatua){ //en la funcion de colisiones, cuando interactuamos con una
+    enviarDatosEstatua(numeroEstatua){ //en la funcion de colisiones, cuando interactuamos con una
         const data = {
             n: numeroEstatua,
-            val: this.estatuas_Array[numeroEstatua].getDireccion()
+            dir: this.estatuas_Array[numeroEstatua].getDireccion(),
+            corr: this.estatuas_Array[numeroEstatua].correcta,
+            nCor: this.numeroEstatuasCorrectas
         };
         this.sendMessage('e',data);
     }
-    enviarDireccionEstatuas_CTR()//se llama cada x segundo
+    enviarDatosEstatuas_CTR()//se llama cada x segundo
     {
-        var data = [];
+        var array = [];
         for(var i=0;i<this.NUM_ESTATUAS;i++){
-            data = this.estatuas_Array[i].getDireccion();
+            array[i] = {
+                dir: this.estatuas_Array[numeroEstatua].getDireccion(),
+                corr: this.estatuas_Array[numeroEstatua].correcta
+            };
+            
+        }
+        const data ={
+            nCor: this.numeroEstatuasCorrectas,
+            arr: array
         }
         this.sendMessage('E', data);
     }
 
-    enviarEstadoAntorcha(numeroAntorcha){ //en la funcion de colisiones, cuando interactuamos con una
+    enviarDatosAntorcha(numeroAntorcha){ //en la funcion de colisiones, cuando interactuamos con una
         const data = {
             n: numeroAntorcha,
-            val: this.antorchas_Array[numeroAntorcha].getEncendida()
+            val: this.antorchas_Array[numeroAntorcha].getEncendida(),
+            nEnc: this.numeroAntorchasEncendidas
         };
         this.sendMessage('a',data);
     }
-    enviarEstadoAntorchas_CTR()//se llama cada x segundo
+    enviarDatosAntorchas_CTR()//se llama cada x segundo
     {
-        var data = [];
+        var array = [];
         for(var i=0;i<this.NUM_ANTORCHAS;i++){
-            data = this.antorchas_Array[i].getEncendida();
+            array[i] = this.antorchas_Array[i].getEncendida();
+        }
+
+        const data ={
+            nEnc: this.numeroAntorchasEncendidas,
+            arr: array
         }
         this.sendMessage('A', data);
     }
@@ -475,8 +509,8 @@ class PrimerNivel extends Phaser.Scene
                         if(resultadoInteraccion===-1){}//no se pudo por cooldown
                         else if(resultadoInteraccion===true)//se encendió
                         {
-                            this.enviarEstadoAntorcha(i);
                             this.numeroAntorchasEncendidas++;
+                            this.enviarDatosAntorcha(i);
                             if(this.numeroAntorchasEncendidas===this.NUM_ANTORCHAS)
                             {
                                 this.activarPistasAntorchas();
@@ -484,8 +518,8 @@ class PrimerNivel extends Phaser.Scene
                         }
                         else if(resultadoInteraccion===false)//se apagó
                         {
-                            this.enviarEstadoAntorcha(i);
                             this.numeroAntorchasEncendidas--;
+                            this.enviarDatosAntorcha(i);
                             if(this.numeroAntorchasEncendidas+1 ===this.NUM_ANTORCHAS)
                             {
                                 this.desActivarPistasAntorchas();
@@ -515,7 +549,7 @@ class PrimerNivel extends Phaser.Scene
                         this.sound.play('ESTATUA');
                         if(!(resultadoInteraccion===-1))
                         {
-                            enviarDireccionEstatua(i);
+                            
     
                             if(this.comprobarPosicionEstatua(this.estatuas_Array[i]))
                             {
@@ -534,13 +568,9 @@ class PrimerNivel extends Phaser.Scene
                                 }
                             }
     
-                            if(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS)
-                            {
-                                this.accionEstatua(true);
-                            }else
-                            {
-                                this.accionEstatua(false);
-                            }
+                            this.accionEstatua(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS);
+
+                            this.enviarDatosEstatua(i);
                         }                    
                     }
                     else
@@ -558,7 +588,6 @@ class PrimerNivel extends Phaser.Scene
                         this.sound.play('ESTATUA');
                         if(!(resultadoInteraccion===-1))
                         {
-                            enviarDireccionEstatua(i);
     
                             if(this.comprobarPosicionEstatua(this.estatuas_Array[i]))
                             {
@@ -576,15 +605,10 @@ class PrimerNivel extends Phaser.Scene
                                     this.numeroEstatuasCorrectas++;
                                 }
                             }
-    
-    
-                            if(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS)
-                            {
-                                this.accionEstatua(true);
-                            }else
-                            {
-                                this.accionEstatua(false);
-                            }
+
+                            this.accionEstatua(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS);
+
+                            this.enviarDatosEstatua(i);
                         }                    
                     }
                     else
