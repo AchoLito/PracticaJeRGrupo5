@@ -275,7 +275,7 @@ class PrimerNivel extends Phaser.Scene
                     else this.desActivarPistasAntorchas();
 
                     break;
-                case 'A'://info de todas las antorcha, como control cada x segundos
+                case 'A'://info de todas las antorchas, como control cada x segundos
                     this.numeroAntorchasEncendidas=data.nEnc;
                     for(var i=0;i<this.NUM_ANTORCHAS;i++){
                         this.antorchas_Array[i].setEncendida(data.arr[i]);
@@ -286,6 +286,9 @@ class PrimerNivel extends Phaser.Scene
                     }
                     else this.desActivarPistasAntorchas();
 
+                    break;
+                case 'P'://mandamos datos de las palancas
+                    
                     break;
             }
         };
@@ -412,89 +415,101 @@ class PrimerNivel extends Phaser.Scene
 
         //Coision palanca
         this.physics.add.collider(this.humano.SpriteObject,this.palanca.SpriteObject);
-        this.physics.add.overlap(this.humano.SpriteObject,this.palanca.AreaInteraccion,() => {
-            if(this.humano.interacting)
-            {
-                this.palanca.interactuar(this.inventario);               
-            }
-        });
-
-        this.physics.add.collider(this.humano.SpriteObject,this.palancaPared_Estatua.SpriteObject);
-        this.physics.add.overlap(this.humano.SpriteObject,this.palancaPared_Estatua.AreaInteraccion,() => {
-            if(this.humano.interacting && this.herramientaActiva === 'PALANCA')
-            {       
-                if(!this.palancaPared_Estatua.metida && !this.palancaPared_Estatua.cooldown)
+        if(this.esHumano){
+            this.physics.add.overlap(this.humano.SpriteObject,this.palanca.AreaInteraccion,() => {
+                if(this.humano.interacting)
                 {
-                    this.palancaPared_Estatua.SpriteObject.setTexture('ARRIBA_PALANCA');
-                    this.palancaPared_Estatua.metida = true;
+                    this.palanca.interactuar(this.inventario);               
+                }
+            });
+        }
+        
+        this.physics.add.collider(this.humano.SpriteObject,this.palancaPared_Estatua.SpriteObject);
+
+        if(this.esHumano){
+            this.physics.add.overlap(this.humano.SpriteObject,this.palancaPared_Estatua.AreaInteraccion,() => {
+                if(this.humano.interacting && this.herramientaActiva === 'PALANCA')
+                {       
+                    if(!this.palancaPared_Estatua.metida && !this.palancaPared_Estatua.cooldown)
+                    {
+                        this.palancaPared_Estatua.SpriteObject.setTexture('ARRIBA_PALANCA');
+                        this.palancaPared_Estatua.metida = true;
+                    }
+                    else
+                    {
+                        if(this.palancaPared_Estatua.cooldown){}
+                        else if(!this.palancaPared_Estatua.usada && !this.cooldown){
+                            this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
+                            this.sound.play('ESTATUA');
+                            
+                            this.fondo.cambioFondo(true, false);
+                            this.pasilloDescubierto = true;
+                            this.palancaPared_Puerta.SpriteObject.setVisible(true);
+                            this.palancaPared_Estatua.SpriteObject.setTexture('ABAJO_PALANCA');
+                        }
+                    }                                         
                 }
                 else
                 {
-                    if(this.palancaPared_Estatua.cooldown){}
-                    else if(!this.palancaPared_Estatua.usada && !this.cooldown){
+                    this.palancaPared_Estatua.cooldown = false;
+                }
+            });
+        }
+        else{
+            this.physics.add.overlap(this.fantasma.SpriteObject,this.palancaPared_Estatua.AreaInteraccion,() => {
+                if(this.fantasma.interacting)
+                {       
+                    if(!this.palancaPared_Estatua.usada && this.palancaPared_Estatua.metida){
                         this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
-                        this.sound.play('ESTATUA');
+                        this.sound.play('ESTATUA'); 
                         
                         this.fondo.cambioFondo(true, false);
                         this.pasilloDescubierto = true;
                         this.palancaPared_Puerta.SpriteObject.setVisible(true);
                         this.palancaPared_Estatua.SpriteObject.setTexture('ABAJO_PALANCA');
                     }
-                }                                         
-            }
-            else
-            {
-                this.palancaPared_Estatua.cooldown = false;
-            }
-        });
-
-        this.physics.add.overlap(this.fantasma.SpriteObject,this.palancaPared_Estatua.AreaInteraccion,() => {
-            if(this.fantasma.interacting)
-            {       
-                if(!this.palancaPared_Estatua.usada && this.palancaPared_Estatua.metida){
-                    this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
-                    this.sound.play('ESTATUA'); 
-                    
-                    this.fondo.cambioFondo(true, false);
-                    this.pasilloDescubierto = true;
-                    this.palancaPared_Puerta.SpriteObject.setVisible(true);
-                    this.palancaPared_Estatua.SpriteObject.setTexture('ABAJO_PALANCA');
+                }                                                 
+                else
+                {
+                    this.palancaPared_Estatua.cooldown = false;
                 }
-            }                                                 
-            else
-            {
-                this.palancaPared_Estatua.cooldown = false;
-            }
-        });
+            });
+        }
 
+        
         this.physics.add.collider(this.humano.SpriteObject,this.palancaPared_Puerta.SpriteObject);
-        this.physics.add.overlap(this.humano.SpriteObject,this.palancaPared_Puerta.AreaInteraccion,() => {
-            if(this.humano.interacting)
-            {             
-                if(!this.palancaPared_Puerta.usada){
-                    this.palancaPared_Puerta.usada = true;
-                    this.abrirYCerrarPuertaBajo(true);  
-                    this.abrirYCerrarPuertaArriba(true);   
-                    this.palancaPared_Puerta.SpriteObject.setTexture('ABAJO_PALANCA');
-                    //this.fondo.cambioFondo(true, false);
+        if(this.esHumano){
+            this.physics.add.overlap(this.humano.SpriteObject,this.palancaPared_Puerta.AreaInteraccion,() => {
+                if(this.humano.interacting)
+                {             
+                    if(!this.palancaPared_Puerta.usada){
+                        this.palancaPared_Puerta.usada = true;
+                        this.abrirYCerrarPuertaBajo(true);  
+                        this.abrirYCerrarPuertaArriba(true);   
+                        this.palancaPared_Puerta.SpriteObject.setTexture('ABAJO_PALANCA');
+                        //this.fondo.cambioFondo(true, false);
+                    }
+                             
                 }
-                         
-            }
-        });
+            });
+        }
+        else{
+            this.physics.add.overlap(this.fantasma.SpriteObject,this.palancaPared_Puerta.AreaInteraccion,() => {
+                if(this.fantasma.interacting)
+                {             
+                    if(!this.palancaPared_Puerta.usada){
+                        this.palancaPared_Puerta.usada = true;
+                        this.abrirYCerrarPuertaBajo(true);   
+                        this.abrirYCerrarPuertaArriba(true);  
+                        this.palancaPared_Puerta.SpriteObject.setTexture('ABAJO_PALANCA');
+                        //this.fondo.cambioFondo(true, false);
+                    }
+                             
+                }
+            });
+        }
 
-        this.physics.add.overlap(this.fantasma.SpriteObject,this.palancaPared_Puerta.AreaInteraccion,() => {
-            if(this.fantasma.interacting)
-            {             
-                if(!this.palancaPared_Puerta.usada){
-                    this.palancaPared_Puerta.usada = true;
-                    this.abrirYCerrarPuertaBajo(true);   
-                    this.abrirYCerrarPuertaArriba(true);  
-                    this.palancaPared_Puerta.SpriteObject.setTexture('ABAJO_PALANCA');
-                    //this.fondo.cambioFondo(true, false);
-                }
-                         
-            }
-        });
+        
         
         //Colision de las antorchas
         for(let i=0;i<this.antorchas_Array.length;i++){
