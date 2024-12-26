@@ -19,15 +19,14 @@ class Musica extends Phaser.Scene
         this.musica = this.sound.add("musicaInicio", { volume: 0.2 });
         this.musica.loop = true;
         if (!this.musica.isPlaying) {
-        this.musica.play();
-
+            this.musica.play();
         }
 
         this.registry.set('Volumen', 0.5);
 
         this.nombreUsuario="";
 
-        this.isHumano=null;
+        this.esHumano=null;
         //true->humano
         //false->fantasma
 
@@ -52,12 +51,12 @@ class Musica extends Phaser.Scene
         return this.nombreUsuario;
     }
 
-    setIsHumano(boolIsHumano){
-        this.isHumano=boolIsHumano;
+    setEsHumano(boolEsHumano){
+        this.esHumano = boolEsHumano;
     }
 
-    getIsHumano(){
-        return this.isHumano;
+    getEsHumano(){
+        return this.esHumano;
     }
 
 }

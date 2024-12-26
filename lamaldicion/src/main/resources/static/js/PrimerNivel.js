@@ -118,7 +118,7 @@ class PrimerNivel extends Phaser.Scene
         this.puertasColliders_Array = [];
         
 
-        this.esHumano = true;//o false, lo recibe de la pantalla de eleccion de personaje
+        this.esHumano = this.scene.get('Musica').getEsHumano();// lo recibe de la pantalla de eleccion de personaje
         //HUMANO
         this.humano = new Humano(580,500, this);
 
