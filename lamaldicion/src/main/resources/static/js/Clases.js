@@ -489,15 +489,17 @@ class PalancaInventario {
         this.body.setImmovable(true);
         this.AreaInteraccion.body.setImmovable(true);
     
-       
+       this.ctrl=true;
     }
 
     interactuar(p)//cada vez q interactuas cambia su estado
     {       
-        p.meterInventario('PALANCA');   
-        this.body.x=10000;
-        this.AreaInteraccion.body.x=10000;
-       
+        if(this.ctrl){
+            p.meterInventario('PALANCA');   
+            this.body.x=10000;
+            this.AreaInteraccion.body.x=10000;
+            this.ctrl=false;
+        }
     }
 
 }

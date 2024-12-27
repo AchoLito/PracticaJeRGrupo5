@@ -167,6 +167,7 @@ class PrimerNivel extends Phaser.Scene
         //INVENTARIO
         this.inventario= new Inventario(1105,80, this );
         this.palanca= new PalancaInventario(1100,450, this );
+        this.palancaRecogida=false;
 
 
         //WEBSOKETS
@@ -206,6 +207,7 @@ class PrimerNivel extends Phaser.Scene
         this.enviarDatosEstatuas_CTR();
         this.enviarDatosAntorchas_CTR();
         this.enviarDatosPalancas();
+        this.enviarPalancaSuelo();      
     }
 
     sendMessage(type, data = null) {
@@ -255,7 +257,7 @@ class PrimerNivel extends Phaser.Scene
 
                     this.accionEstatua(this.numeroEstatuasCorrectas === this.NUM_ESTATUAS);
                     break;
-                case 'E'://info de todas las estatuas, como control cada x segundos
+                case 'E'://recibimos info de todas las estatuas, como control cada x segundos
                     for(var i=0;i<this.NUM_ESTATUAS;i++){
                         this.estatuas_Array[i].setDireccion(data.arr[i].dir);
                         this.estatuas_Array[i].correcta=data.arr[i].corr;
@@ -273,7 +275,7 @@ class PrimerNivel extends Phaser.Scene
                     else this.desActivarPistasAntorchas();
 
                     break;
-                case 'A'://info de todas las antorchas, como control cada x segundos
+                case 'A'://recibimos info de todas las antorchas, como control cada x segundos
                     this.numeroAntorchasEncendidas=data.nEnc;
                     for(var i=0;i<this.NUM_ANTORCHAS;i++){
                         this.antorchas_Array[i].setEncendida(data.arr[i]);
@@ -285,7 +287,7 @@ class PrimerNivel extends Phaser.Scene
                     else this.desActivarPistasAntorchas();
 
                     break;
-                case 'P'://mandamos datos de todas las palancas
+                case 'P'://recibimos datos de todas las palancas, al cambiarlas y cada x segundos
 
                     //Palanca 1
                     if(data.met1){
@@ -309,6 +311,12 @@ class PrimerNivel extends Phaser.Scene
                         {
                             this.usarPalancaPared_Puerta();
                         }
+                    }
+                    break;
+                case'L'://recibimos si la palanca del suelo ha sido cogida o no, al cogerla y cada x segundos
+                    this.palancaRecogida=data;
+                    if(data===true){
+                        this.palanca.interactuar(this.inventario);
                     }
                     break;
             }
@@ -389,6 +397,12 @@ class PrimerNivel extends Phaser.Scene
         this.sendMessage('P', data);
     }
 
+    enviarPalancaSuelo(){
+        if(this.palancaRecogida===true){
+            this.sendMessage('L', this.palancaRecogida);
+        }
+    }
+
     inicializarControlesHumano(){
         
         //MOVIMIENTO
@@ -450,7 +464,9 @@ class PrimerNivel extends Phaser.Scene
             this.physics.add.overlap(this.humano.SpriteObject,this.palanca.AreaInteraccion,() => {
                 if(this.humano.interacting)
                 {
-                    this.palanca.interactuar(this.inventario);               
+                    this.palanca.interactuar(this.inventario);
+                    this.palancaRecogida=true;
+                    this.enviarPalancaSuelo();               
                 }
             });
         }
