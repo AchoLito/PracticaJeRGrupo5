@@ -205,6 +205,7 @@ class PrimerNivel extends Phaser.Scene
         this.enviarPosicion();
         this.enviarDatosEstatuas_CTR();
         this.enviarDatosAntorchas_CTR();
+        this.enviarDatosPalancas();
     }
 
     sendMessage(type, data = null) {
@@ -454,6 +455,7 @@ class PrimerNivel extends Phaser.Scene
             });
         }
         
+        //Interaccion Palanca Estatua
         this.physics.add.collider(this.humano.SpriteObject,this.palancaPared_Estatua.SpriteObject);
 
         if(this.esHumano){
@@ -463,6 +465,7 @@ class PrimerNivel extends Phaser.Scene
                     if(!this.palancaPared_Estatua.metida && !this.palancaPared_Estatua.cooldown)
                     {
                         this.palancaPared_Estatua.meter();
+                        this.enviarDatosPalancas();
                     }
                     else
                     {
@@ -470,6 +473,7 @@ class PrimerNivel extends Phaser.Scene
                         else if(!this.palancaPared_Estatua.usada && !this.cooldown){
 
                             this.usarPalancaPared_Estatua();
+                            this.enviarDatosPalancas();
                         }
                     }                                         
                 }
@@ -486,6 +490,7 @@ class PrimerNivel extends Phaser.Scene
                     if(!this.palancaPared_Estatua.usada && this.palancaPared_Estatua.metida){
                         
                         this.usarPalancaPared_Estatua();
+                        this.enviarDatosPalancas();
                     }
                 }                                                 
                 else
@@ -495,7 +500,7 @@ class PrimerNivel extends Phaser.Scene
             });
         }
 
-        
+        //Interaccion Palanca Puerta
         this.physics.add.collider(this.humano.SpriteObject,this.palancaPared_Puerta.SpriteObject);
         if(this.esHumano){
             this.physics.add.overlap(this.humano.SpriteObject,this.palancaPared_Puerta.AreaInteraccion,() => {
@@ -503,6 +508,7 @@ class PrimerNivel extends Phaser.Scene
                 {             
                     if(!this.palancaPared_Puerta.usada){
                         this.usarPalancaPared_Puerta();
+                        this.enviarDatosPalancas();
                     }
                              
                 }
@@ -514,6 +520,7 @@ class PrimerNivel extends Phaser.Scene
                 {             
                     if(!this.palancaPared_Puerta.usada){
                         this.usarPalancaPared_Puerta();
+                        this.enviarDatosPalancas();
                     }
                              
                 }
