@@ -24,7 +24,7 @@ class SeleccionarPersonaje extends Phaser.Scene
         const dom = this.add.dom(590, 400).createFromCache('seleccion');
         var humano = dom.getChildByID("humano");
         var fantasma = dom.getChildByID("fantasma");
-
+        var juanito = this;
         dom.addListener("click");
 
         dom.on("click", function (event)
@@ -32,14 +32,14 @@ class SeleccionarPersonaje extends Phaser.Scene
             if(event.target.name === "humano")
             {
                 this.seleccion = 1;
-                this.scene.get('Musica').setEsHumano(this.seleccion);
-                enviarSeleccion();
+                juanito.scene.get('Musica').setEsHumano(this.seleccion);
+                juanito.enviarSeleccion();
             }
             else if(event.target.name === "fantasma")
             {
                 this.seleccion = 2;
-                this.scene.get('Musica').setEsHumano(this.seleccion);
-                enviarSeleccion();
+                juanito.scene.get('Musica').setEsHumano(this.seleccion);
+                juanito.enviarSeleccion();
             }
         });
     }
