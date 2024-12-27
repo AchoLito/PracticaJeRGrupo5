@@ -285,7 +285,30 @@ class PrimerNivel extends Phaser.Scene
 
                     break;
                 case 'P'://mandamos datos de todas las palancas
+
+                    //Palanca 1
+                    if(data.met1){
+                        if(! this.palancaPared_Estatua.metida)//Primera Vez Que la Metes
+                        {
+                            this.palancaPared_Estatua.meter();
+                        }
+                        if(data.us1 && ! this.palancaPared_Estatua.usada)//Primera Vez Que la Usas
+                        {
+                           this.usarPalancaPared_Estatua();
+                        }
+                    }
                     
+                    //Palanca 2
+                    if(data.met2){
+                        if(! this.palancaPared_Puerta.metida)//Primera Vez Que la Metes
+                        {
+                            this.palancaPared_Puerta.meter();
+                        }
+                        if(data.us2 && ! this.palancaPared_Puerta.usada)//Primera Vez Que la Usas
+                        {
+                            this.usarPalancaPared_Puerta();
+                        }
+                    }
                     break;
             }
         };
@@ -445,14 +468,8 @@ class PrimerNivel extends Phaser.Scene
                     {
                         if(this.palancaPared_Estatua.cooldown){}
                         else if(!this.palancaPared_Estatua.usada && !this.cooldown){
-                            this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
-                            this.sound.play('ESTATUA');
-                            
-                            this.fondo.cambioFondo(true, false);
-                            this.pasilloDescubierto = true;
-                            this.palancaPared_Puerta.SpriteObject.setVisible(true);
 
-                            this.palancaPared_Estatua.usar();
+                            this.usarPalancaPared_Estatua();
                         }
                     }                                         
                 }
@@ -467,14 +484,8 @@ class PrimerNivel extends Phaser.Scene
                 if(this.fantasma.interacting)
                 {       
                     if(!this.palancaPared_Estatua.usada && this.palancaPared_Estatua.metida){
-                        this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
-                        this.sound.play('ESTATUA'); 
                         
-                        this.fondo.cambioFondo(true, false);
-                        this.pasilloDescubierto = true;
-                        this.palancaPared_Puerta.SpriteObject.setVisible(true);
-
-                        this.palancaPared_Estatua.usar();
+                        this.usarPalancaPared_Estatua();
                     }
                 }                                                 
                 else
@@ -491,10 +502,7 @@ class PrimerNivel extends Phaser.Scene
                 if(this.humano.interacting)
                 {             
                     if(!this.palancaPared_Puerta.usada){
-                        this.palancaPared_Puerta.usar();
-                        this.abrirYCerrarPuertaBajo(true);  
-                        this.abrirYCerrarPuertaArriba(true);   
-                        //this.fondo.cambioFondo(true, false);
+                        this.usarPalancaPared_Puerta();
                     }
                              
                 }
@@ -505,10 +513,7 @@ class PrimerNivel extends Phaser.Scene
                 if(this.fantasma.interacting)
                 {             
                     if(!this.palancaPared_Puerta.usada){
-                        this.palancaPared_Puerta.usar();
-                        this.abrirYCerrarPuertaBajo(true);   
-                        this.abrirYCerrarPuertaArriba(true);  
-                        //this.fondo.cambioFondo(true, false);
+                        this.usarPalancaPared_Puerta();
                     }
                              
                 }
@@ -650,6 +655,22 @@ class PrimerNivel extends Phaser.Scene
             //this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[i].puertaAbierta);
            
         }
+    }
+
+    usarPalancaPared_Estatua(){
+        this.palancaPared_Estatua.moverEstatua(this.estatuas_Array[2]);
+        this.sound.play('ESTATUA');
+        
+        this.fondo.cambioFondo(true, false);
+        this.pasilloDescubierto = true;
+        this.palancaPared_Puerta.SpriteObject.setVisible(true);
+
+        this.palancaPared_Estatua.usar();
+    }
+    usarPalancaPared_Puerta(){
+        this.palancaPared_Puerta.usar();
+        this.abrirYCerrarPuertaBajo(true);  
+        this.abrirYCerrarPuertaArriba(true);  
     }
 
     colliderMuros()
