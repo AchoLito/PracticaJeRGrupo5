@@ -518,9 +518,22 @@ class PalancaPared {
 
         this.usada = false;
         
-       this.metida = estado;
+        this.metida = false;
+
+        if(estado){
+            this.meter();
+        }
+    }
+
+    meter(){
+        this.metida=true;
+        this.SpriteObject.setTexture('ARRIBA_PALANCA');
     }
     
+    usar(){
+        this.usada = true;
+        this.SpriteObject.setTexture('ABAJO_PALANCA');
+    }
 
     moverEstatua(estatua){
         estatua.body.x -= 20;

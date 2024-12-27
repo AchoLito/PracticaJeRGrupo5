@@ -90,10 +90,7 @@ class PrimerNivel extends Phaser.Scene
 
         this.palancaPared_Estatua = new PalancaPared(450,300, this, false); 
 
-        
-
         this.palancaPared_Puerta = new PalancaPared(350,95, this, true); 
-        this.palancaPared_Puerta.SpriteObject.setTexture('ARRIBA_PALANCA');
         this.palancaPared_Puerta.SpriteObject.setVisible(false);
 
         this.pasilloDescubierto=false;
@@ -287,7 +284,7 @@ class PrimerNivel extends Phaser.Scene
                     else this.desActivarPistasAntorchas();
 
                     break;
-                case 'P'://mandamos datos de las palancas
+                case 'P'://mandamos datos de todas las palancas
                     
                     break;
             }
@@ -356,6 +353,16 @@ class PrimerNivel extends Phaser.Scene
             arr: array
         }
         this.sendMessage('A', data);
+    }
+
+    enviarDatosPalancas(){//cada x segundos y al cambiar palanca
+        const data = {
+            met1: this.palancaPared_Estatua.metida,
+            us1:this.palancaPared_Estatua.usada,
+            met2: this.palancaPared_Puerta.metida,
+            us2:this.palancaPared_Puerta.usada
+        }
+        this.sendMessage('P', data);
     }
 
     inicializarControlesHumano(){
@@ -432,8 +439,7 @@ class PrimerNivel extends Phaser.Scene
                 {       
                     if(!this.palancaPared_Estatua.metida && !this.palancaPared_Estatua.cooldown)
                     {
-                        this.palancaPared_Estatua.SpriteObject.setTexture('ARRIBA_PALANCA');
-                        this.palancaPared_Estatua.metida = true;
+                        this.palancaPared_Estatua.meter();
                     }
                     else
                     {
@@ -445,7 +451,8 @@ class PrimerNivel extends Phaser.Scene
                             this.fondo.cambioFondo(true, false);
                             this.pasilloDescubierto = true;
                             this.palancaPared_Puerta.SpriteObject.setVisible(true);
-                            this.palancaPared_Estatua.SpriteObject.setTexture('ABAJO_PALANCA');
+
+                            this.palancaPared_Estatua.usar();
                         }
                     }                                         
                 }
@@ -466,7 +473,8 @@ class PrimerNivel extends Phaser.Scene
                         this.fondo.cambioFondo(true, false);
                         this.pasilloDescubierto = true;
                         this.palancaPared_Puerta.SpriteObject.setVisible(true);
-                        this.palancaPared_Estatua.SpriteObject.setTexture('ABAJO_PALANCA');
+
+                        this.palancaPared_Estatua.usar();
                     }
                 }                                                 
                 else
@@ -483,10 +491,9 @@ class PrimerNivel extends Phaser.Scene
                 if(this.humano.interacting)
                 {             
                     if(!this.palancaPared_Puerta.usada){
-                        this.palancaPared_Puerta.usada = true;
+                        this.palancaPared_Puerta.usar();
                         this.abrirYCerrarPuertaBajo(true);  
                         this.abrirYCerrarPuertaArriba(true);   
-                        this.palancaPared_Puerta.SpriteObject.setTexture('ABAJO_PALANCA');
                         //this.fondo.cambioFondo(true, false);
                     }
                              
@@ -498,10 +505,9 @@ class PrimerNivel extends Phaser.Scene
                 if(this.fantasma.interacting)
                 {             
                     if(!this.palancaPared_Puerta.usada){
-                        this.palancaPared_Puerta.usada = true;
+                        this.palancaPared_Puerta.usar();
                         this.abrirYCerrarPuertaBajo(true);   
                         this.abrirYCerrarPuertaArriba(true);  
-                        this.palancaPared_Puerta.SpriteObject.setTexture('ABAJO_PALANCA');
                         //this.fondo.cambioFondo(true, false);
                     }
                              
