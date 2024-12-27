@@ -26,7 +26,7 @@ class MenuInicio extends Phaser.Scene
             .on("pointerdown", () => {
                 this.sound.play("clic");
                 this.scene.stop("MenuInicio");
-                this.scene.start("PrimerNivel");
+                this.scene.start("SeleccionarPersonaje");
             });
 
         const botonControles = this.add.image(640, 390, "botonControles")

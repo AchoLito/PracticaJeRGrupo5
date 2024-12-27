@@ -7,16 +7,41 @@ class SeleccionarPersonaje extends Phaser.Scene
 
     preload()
     {
-  
+        this.load.html('seleccion', 'html/seleccion.html');
     }
 
     create()
     {
+        this.seleccion = 0; //0-Nada 1-Humano 2-Fantasma
+        this.seleccionRecibida = 0;
+
         this.socket = new WebSocket("ws://" + location.host + "/ws");
         this.setupWebSocket();
 
         this.t_EnvioControl=0;
         this.frec_EnvioControl=3000;//milisegundos
+
+        const dom = this.add.dom(590, 400).createFromCache('seleccion');
+        var humano = dom.getChildByID("humano");
+        var fantasma = dom.getChildByID("fantasma");
+
+        dom.addListener("click");
+
+        dom.on("click", function (event)
+        {
+            if(event.target.name === "humano")
+            {
+                this.seleccion = 1;
+                this.scene.get('Musica').setEsHumano(this.seleccion);
+                enviarSeleccion();
+            }
+            else if(event.target.name === "fantasma")
+            {
+                this.seleccion = 2;
+                this.scene.get('Musica').setEsHumano(this.seleccion);
+                enviarSeleccion();
+            }
+        });
     }
 
     update(_,deltaTime)
@@ -28,6 +53,11 @@ class SeleccionarPersonaje extends Phaser.Scene
 
             this.envioDatosControl();
         }
+    }
+
+    enviarSeleccion()
+    {
+        this.sendMessage('s',this.seleccion);
     }
 
     envioDatosControl(){ //asegura de vez en cuando que todo este en su sitio :=)
@@ -46,14 +76,11 @@ class SeleccionarPersonaje extends Phaser.Scene
 
             switch(type) 
             {
-                case 'p':
-                    if(this.esHumano)
+                case 's':
+                    this.seleccionRecibida = data;
+                    if(this.seleccion == this.seleccionRecibida)
                     {
-                        //Marcar que ha cogido al humano
-                    }
-                    else
-                    {
-                        //Marcar que ha cogido al fantasma
+                        this.seleccionRecibida = 0;
                     }
                     break;
             }

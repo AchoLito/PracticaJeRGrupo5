@@ -6,6 +6,7 @@
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
         <script src="js/Musica.js"></script>
         <script src="js/PantallaInicio.js"></script>
+        <script src="js/SeleccionarPersonaje.js"></script>
         <script src="js/PrimerNivel.js"></script>
         <script src="js/MenuInicio.js"></script>
         <script src="js/MenuAjustes.js"></script>
@@ -46,12 +47,13 @@
                     createContainer: true
                 },
 
-                scene: [LogIn, Musica, PantallaInicio, MenuInicio, Controles, Creditos,Chat, PrimerNivel, MenuPausa, MenuAjustes2, Fin, MenuAjustes]
+                scene: [LogIn, Musica, PantallaInicio, MenuInicio, Controles, Creditos,Chat, PrimerNivel, MenuPausa, MenuAjustes2, Fin, MenuAjustes, SeleccionarPersonaje]
             };
 
             // Create the game instance
             const game = new Phaser.Game(config);
             
+            //game.scene.start("SeleccionarPersonaje");
             game.scene.start("LogIn");
             //game.scene.start("PrimerNivel");
 
