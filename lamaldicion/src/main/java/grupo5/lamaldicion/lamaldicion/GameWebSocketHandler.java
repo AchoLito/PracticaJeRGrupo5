@@ -19,6 +19,7 @@ import java.util.concurrent.*;
 @Component
 public class GameWebSocketHandler extends TextWebSocketHandler {
     // Thread-safe collections for managing game state
+    private Queue<Game> gameList = new ConcurrentLinkedQueue<>();
     private final Map<String, Player> players = new ConcurrentHashMap<>();
     private final Map<String, Game> games = new ConcurrentHashMap<>();
     private final Queue<WebSocketSession> waitingPlayers = new ConcurrentLinkedQueue<>();
@@ -84,6 +85,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         // Sequential access/write for waitingPlayers
         waitingPlayers.add(session);
         players.put(session.getId(), new Player(session));
+        System.out.println(waitingPlayers.size());
 
         synchronized (this) {
             // Ensure that create game is thread-safe
@@ -116,7 +118,8 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                 Game game = new Game(player1, player2);
                 games.put(session1.getId(), game);
                 games.put(session2.getId(), game);
-                startGame(game);
+                startGame(game);      
+                gameList.add(game);         
             }
         }
     }
@@ -134,8 +137,8 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         );
 
         // Send initial state to both players
-        sendToPlayer(game.player1, "i", Map.of("id", 1, "p", playersData));
-        sendToPlayer(game.player2, "i", Map.of("id", 2, "p", playersData));
+        //sendToPlayer(game.player1, "i", Map.of("id", 1, "p", playersData));
+        //sendToPlayer(game.player2, "i", Map.of("id", 2, "p", playersData));
 
         // Start game timer that runs every second
         game.timerTask = scheduler.scheduleAtFixedRate(() -> {
@@ -143,7 +146,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         }, 0, 1, TimeUnit.SECONDS);
 
         // Spawn first collectible square
-        spawnSquare(game);
+        //spawnSquare(game);
     }
 
     /**
@@ -253,7 +256,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                     }
                     break;
                 case 's':
-                    enviarSeleccion(otherPlayer, payload, data);
+                    enviarSeleccion(otherPlayer, "s", data);
                 break;
             }
         } catch (IOException e) {

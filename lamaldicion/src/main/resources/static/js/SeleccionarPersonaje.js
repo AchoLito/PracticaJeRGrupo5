@@ -18,12 +18,16 @@ class SeleccionarPersonaje extends Phaser.Scene
         this.socket = new WebSocket("ws://" + location.host + "/ws");
         this.setupWebSocket();
 
+        this.scene.get('Musica').setSocket(this.socket);
+
         this.t_EnvioControl=0;
         this.frec_EnvioControl=3000;//milisegundos
 
+        this.timeText = this.add.text(16, 50, 'Time: 15', { fontSize: '32px', fill: '#fff' });
+        this.time = 15;
+        this.timeM = this.time * 1000;
+
         const dom = this.add.dom(590, 400).createFromCache('seleccion');
-        var humano = dom.getChildByID("humano");
-        var fantasma = dom.getChildByID("fantasma");
         var juanito = this;
         dom.addListener("click");
 
@@ -31,15 +35,22 @@ class SeleccionarPersonaje extends Phaser.Scene
         {
             if(event.target.name === "humano")
             {
-                this.seleccion = 1;
-                juanito.scene.get('Musica').setEsHumano(this.seleccion);
-                juanito.enviarSeleccion();
+                if(juanito.seleccionRecibida != 1)
+                {
+                    juanito.seleccion = 1;
+                    juanito.scene.get('Musica').setEsHumano(this.seleccion);
+                    juanito.enviarSeleccion();
+                }
+                
             }
             else if(event.target.name === "fantasma")
             {
-                this.seleccion = 2;
-                juanito.scene.get('Musica').setEsHumano(this.seleccion);
-                juanito.enviarSeleccion();
+                if(juanito.seleccionRecibida != 2)
+                {
+                    juanito.seleccion = 2;
+                    juanito.scene.get('Musica').setEsHumano(this.seleccion);
+                    juanito.enviarSeleccion();
+                }
             }
         });
     }
@@ -47,12 +58,29 @@ class SeleccionarPersonaje extends Phaser.Scene
     update(_,deltaTime)
     {
         this.t_EnvioControl+=deltaTime;
+        this.timeM -= deltaTime;
+        //console.log(this.timeM);
 
         if(this.t_EnvioControl>this.frec_EnvioControl){
             this.t_EnvioControl=0;
 
             this.envioDatosControl();
         }
+
+        if(this.timeM <= 0)
+        {
+            this.scene.stop("SeleccionarPersonaje");
+            this.scene.start("PrimerNivel");
+        }
+        else if(this.timeM % 1000 <= 15)
+        {
+            this.time--;
+            this.updateTimer();
+        }
+    }
+
+    updateTimer() {
+        this.timeText.setText(`Time: ` + this.time);
     }
 
     enviarSeleccion()
@@ -81,7 +109,9 @@ class SeleccionarPersonaje extends Phaser.Scene
                     if(this.seleccion == this.seleccionRecibida)
                     {
                         this.seleccionRecibida = 0;
+                        
                     }
+                    console.log("CLIENTE: " + this.seleccion + " RECIBIDA: " + this.seleccionRecibida);
                     break;
             }
         };
