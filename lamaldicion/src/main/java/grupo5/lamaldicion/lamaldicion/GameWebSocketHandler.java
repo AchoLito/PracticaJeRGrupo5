@@ -32,14 +32,14 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
      */
     private static class Player {
         WebSocketSession session;
-        double x;
-        double y;
-        int score;
+       // double x;
+       // double y;
+       // int score;
         int playerId;
 
         Player(WebSocketSession session) {
             this.session = session;
-            this.score = 0;
+            //this.score = 0;
         }
     }
 
@@ -51,8 +51,8 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     private static class Game {
         Player player1;
         Player player2;
-        Square square;
-        int timeLeft = 60; // Game duration in seconds
+       // Square square;
+        int timeLeft = 400; // Game duration in seconds
         ScheduledFuture<?> timerTask;
 
         Game(Player player1, Player player2) {
@@ -65,16 +65,16 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
      * Represents a collectible square in the game with random coordinates.
      * Squares spawn within the bounds: x(50-750), y(50-550)
      */
-    private static class Square {
-        int x;
-        int y;
+    // private static class Square {
+    //     int x;
+    //     int y;
 
-        Square() {
-            Random rand = new Random();
-            this.x = rand.nextInt(700) + 50; // 50-750 range
-            this.y = rand.nextInt(500) + 50; // 50-550 range
-        }
-    }
+    //     Square() {
+    //         Random rand = new Random();
+    //         this.x = rand.nextInt(700) + 50; // 50-750 range
+    //         this.y = rand.nextInt(500) + 50; // 50-550 range
+    //     }
+    // }
 
     /**
      * Handles new WebSocket connections by creating a player and adding them to the
@@ -110,10 +110,10 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                 // Initialize player positions and IDs
                 player1.playerId = 1;
                 player2.playerId = 2;
-                player1.x = 100; // Left side of screen
-                player1.y = 300; // Middle height
-                player2.x = 700; // Right side of screen
-                player2.y = 300; // Middle height
+                // player1.x = 100; // Left side of screen
+                // player1.y = 300; // Middle height
+                // player2.x = 700; // Right side of screen
+                // player2.y = 300; // Middle height
 
                 Game game = new Game(player1, player2);
                 games.put(session1.getId(), game);
@@ -131,22 +131,22 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
      */
     private void startGame(Game game) {
         // Create initial player data: [x, y, playerId, color]
-        List<List<Object>> playersData = Arrays.asList(
-                Arrays.asList(game.player1.x, game.player1.y, 1, 0xff0000), // Player 1: Red
-                Arrays.asList(game.player2.x, game.player2.y, 2, 0x0000ff) // Player 2: Blue
-        );
+        // List<List<Object>> playersData = Arrays.asList(
+        //     Arrays.asList(game.player1.x, game.player1.y, 1, 0xff0000), // Player 1: Red
+        //     Arrays.asList(game.player2.x, game.player2.y, 2, 0x0000ff) // Player 2: Blue
+        // );
 
         // Send initial state to both players
-        //sendToPlayer(game.player1, "i", Map.of("id", 1, "p", playersData));
-        //sendToPlayer(game.player2, "i", Map.of("id", 2, "p", playersData));
+        // sendToPlayer(game.player1, "i", Map.of("id", 1, "p", playersData));
+        // sendToPlayer(game.player2, "i", Map.of("id", 2, "p", playersData));
 
-        // Start game timer that runs every second
+        //Start game timer that runs every second
         game.timerTask = scheduler.scheduleAtFixedRate(() -> {
             gameLoop(game);
         }, 0, 1, TimeUnit.SECONDS);
 
         // Spawn first collectible square
-        //spawnSquare(game);
+        // spawnSquare(game);
     }
 
     /**
@@ -158,8 +158,8 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         game.timeLeft--;
 
         // Update time for both players
-        sendToPlayer(game.player1, "t", game.timeLeft);
-        sendToPlayer(game.player2, "t", game.timeLeft);
+        // sendToPlayer(game.player1, "t", game.timeLeft);
+        // sendToPlayer(game.player2, "t", game.timeLeft);
 
         // Spawn new square every 10 seconds
         /*
@@ -170,7 +170,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
 
         // End game when time runs out
         if (game.timeLeft <= 0) {
-            endGame(game);
+            //endGame(game);
         }
     }
 
@@ -178,11 +178,11 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
      * Creates and sends a new collectible square to both players.
      * Message format 's': Square position [x, y]
      */
-    private void spawnSquare(Game game) {
-        game.square = new Square();
-        sendToPlayer(game.player1, "s", Arrays.asList(game.square.x, game.square.y));
-        sendToPlayer(game.player2, "s", Arrays.asList(game.square.x, game.square.y));
-    }
+    // private void spawnSquare(Game game) {
+    //     game.square = new Square();
+    //     sendToPlayer(game.player1, "s", Arrays.asList(game.square.x, game.square.y));
+    //     sendToPlayer(game.player2, "s", Arrays.asList(game.square.x, game.square.y));
+    // }
 
     private void enviarSeleccion(Player player, String type, Object data)
     {
@@ -201,18 +201,14 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
 
     /**
      * Handles incoming WebSocket messages from players.
-     * Message types:
-     * 'p': Position update [x, y]
-     * 'c': Collect square attempt
      */
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) {
-        try {
+       // try {
 
             Game game = games.get(session.getId());
 
-            if (game == null)
-                return;
+            if (game == null) return;
 
             Player currentPlayer = players.get(session.getId());
             Player otherPlayer = game.player1 == currentPlayer ? game.player2 : game.player1;
@@ -221,47 +217,60 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             char type = payload.charAt(0);
             String data = payload.length() > 1 ? payload.substring(1) : "";
 
-            switch (type) {
-                case 'p': // Position update
-                    List<Integer> pos = mapper.readValue(data, List.class);
-
-                    // We could synchronize currentPlayer, but we will not have concurrent updates
-                    currentPlayer.x = pos.get(0);
-                    currentPlayer.y = pos.get(1);
-
-                    // Broadcast position to other player
-                    sendToPlayer(otherPlayer, "p",
-                            Arrays.asList(currentPlayer.playerId, currentPlayer.x, currentPlayer.y));
-                    break;
-
-                case 'c': // Square collection attempt
-                    if (game.square != null) {
-                        // Check if player is within collection distance (32 units)
-                        double dx = currentPlayer.x - game.square.x;
-                        double dy = currentPlayer.y - game.square.y;
-                        double distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < 32) {
-                            currentPlayer.score++;
-                            game.square = null;
-
-                            // Update scores for both players
-                            List<Integer> scoreData = Arrays.asList(
-                                    currentPlayer.playerId,
-                                    game.player1.score,
-                                    game.player2.score);
-                            sendToPlayer(game.player1, "c", scoreData);
-                            sendToPlayer(game.player2, "c", scoreData);
-                        }
-                    }
-                    break;
-                case 's':
-                    enviarSeleccion(otherPlayer, "s", data);
-                break;
+            if(type=='X'){
+                endGame(game);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            else if(type=='s'){
+                enviarSeleccion(otherPlayer, "s", data);
+            }
+            else{
+                sendToPlayer(otherPlayer,payload);
+            }
+
+             
+            // 
+
+            // switch (type) {
+            //     case 'p': // Position update
+            //         List<Integer> pos = mapper.readValue(data, List.class);
+
+            //         // We could synchronize currentPlayer, but we will not have concurrent updates
+            //         currentPlayer.x = pos.get(0);
+            //         currentPlayer.y = pos.get(1);
+
+            //         // Broadcast position to other player
+            //         sendToPlayer(otherPlayer, "p",
+            //                 Arrays.asList(currentPlayer.playerId, currentPlayer.x, currentPlayer.y));
+            //         break;
+
+            //     case 'c': // Square collection attempt
+            //         if (game.square != null) {
+            //             // Check if player is within collection distance (32 units)
+            //             double dx = currentPlayer.x - game.square.x;
+            //             double dy = currentPlayer.y - game.square.y;
+            //             double distance = Math.sqrt(dx * dx + dy * dy);
+
+            //             if (distance < 32) {
+            //                 currentPlayer.score++;
+            //                 game.square = null;
+
+            //                 // Update scores for both players
+            //                 List<Integer> scoreData = Arrays.asList(
+            //                         currentPlayer.playerId,
+            //                         game.player1.score,
+            //                         game.player2.score);
+            //                 sendToPlayer(game.player1, "c", scoreData);
+            //                 sendToPlayer(game.player2, "c", scoreData);
+            //             }
+            //         }
+            //         break;
+            //     case 's':
+            //         enviarSeleccion(otherPlayer, "s", data);
+            //     break;
+            // }
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
     }
 
     /**
@@ -270,15 +279,15 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
      */
     private void endGame(Game game) {
         // Send final scores to both players
-        List<Integer> finalScores = Arrays.asList(game.player1.score, game.player2.score);
+       // List<Integer> finalScores = Arrays.asList(game.player1.score, game.player2.score);
 
-        if (this.players.containsKey(game.player1.session.getId())) {
-            sendToPlayer(game.player1, "o", finalScores);
-        }
+        // if (this.players.containsKey(game.player1.session.getId())) {
+        //     sendToPlayer(game.player1, "o", finalScores);
+        // }
 
-        if (this.players.containsKey(game.player2.session.getId())) {
-            sendToPlayer(game.player2, "o", finalScores);
-        }
+        // if (this.players.containsKey(game.player2.session.getId())) {
+        //     sendToPlayer(game.player2, "o", finalScores);
+        // }
 
         // Cancel timer and cleanup game resources
         if (game.timerTask != null) {
@@ -319,6 +328,16 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             if (data != null) {
                 message += mapper.writeValueAsString(data);
             }
+            synchronized (player.session) {
+                player.session.sendMessage(new TextMessage(message));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendToPlayer(Player player,String message){
+        try {
             synchronized (player.session) {
                 player.session.sendMessage(new TextMessage(message));
             }

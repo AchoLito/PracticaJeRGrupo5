@@ -171,7 +171,7 @@ class PrimerNivel extends Phaser.Scene
 
 
         //WEBSOKETS
-        this.socket = new WebSocket("ws://" + location.host + "/ws");
+        this.socket = this.scene.get('Musica').getSocket();
         this.setupWebSocket();
 
         this.t_EnvioControl=0;
