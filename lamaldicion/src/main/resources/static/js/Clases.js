@@ -76,7 +76,10 @@ class Humano {
         return { x: this.body.x, y: this.body.y };
     }
     setPos({ x, y }) {
-        this.body.setPosition(x, y);
+        this.body.x = x;
+        this.body.y = y;
+        //this.SpriteObject.x = x;
+        //this.SpriteObject.y= y;
     }
 }
 
@@ -153,7 +156,11 @@ class Fantasma
         return { x: this.body.x, y: this.body.y };
     }
     setPos({ x, y }) {
-        this.body.setPosition(x, y);
+        this.body.x = x;
+        this.body.y = y;
+
+        //this.SpriteObject.x = x;
+        //this.SpriteObject.y= y;
     }
 }
 

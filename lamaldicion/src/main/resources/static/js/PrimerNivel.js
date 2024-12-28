@@ -356,8 +356,8 @@ class PrimerNivel extends Phaser.Scene
         var array = [];
         for(var i=0;i<this.NUM_ESTATUAS;i++){
             array[i] = {
-                dir: this.estatuas_Array[numeroEstatua].getDireccion(),
-                corr: this.estatuas_Array[numeroEstatua].correcta
+                dir: this.estatuas_Array[i].getDireccion(),
+                corr: this.estatuas_Array[i].correcta
             };
             
         }

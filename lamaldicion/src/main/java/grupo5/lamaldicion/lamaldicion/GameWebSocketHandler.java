@@ -207,7 +207,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
      */
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) {
-        try {
+       // try {
 
             Game game = games.get(session.getId());
 
@@ -220,51 +220,62 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             char type = payload.charAt(0);
             String data = payload.length() > 1 ? payload.substring(1) : "";
 
-            switch (type) {
-                case 'p': // Position update
-                    List<Integer> pos = mapper.readValue(data, List.class);
-
-                    // We could synchronize currentPlayer, but we will not have concurrent updates
-                    currentPlayer.x = pos.get(0);
-                    currentPlayer.y = pos.get(1);
-
-                    // Broadcast position to other player
-                    sendToPlayer(otherPlayer, "p", data);
-                    break;
-
-                /*case 'c': // Square collection attempt
-                    if (game.square != null) {
-                        // Check if player is within collection distance (32 units)
-                        double dx = currentPlayer.x - game.square.x;
-                        double dy = currentPlayer.y - game.square.y;
-                        double distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < 32) {
-                            currentPlayer.score++;
-                            game.square = null;
-
-                            // Update scores for both players
-                            List<Integer> scoreData = Arrays.asList(
-                                    currentPlayer.playerId,
-                                    game.player1.score,
-                                    game.player2.score);
-                            sendToPlayer(game.player1, "c", scoreData);
-                            sendToPlayer(game.player2, "c", scoreData);
-                        }
-                    }
-                    break;
-                    */
-                case 's':
-                    enviarSeleccion(otherPlayer, "s", data);
-                    break;
-                case 'X':
-                    sendToPlayer(otherPlayer,payload);//avisar al otro que la partida terminó
-                    endGame(game);
-                    break;
+            if(type=='X'){
+                sendToPlayer(otherPlayer,payload);//avisar al otro que la partida terminó
+                endGame(game);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            else if(type=='s'){
+                enviarSeleccion(otherPlayer, "s", data);
+            }
+            else{
+                sendToPlayer(otherPlayer,payload);
+            }
+
+            // switch (type) {
+            //     case 'p': // Position update
+            //         List<Integer> pos = mapper.readValue(data, List.class);
+
+            //         // We could synchronize currentPlayer, but we will not have concurrent updates
+            //         currentPlayer.x = pos.get(0);
+            //         currentPlayer.y = pos.get(1);
+
+            //         // Broadcast position to other player
+            //         sendToPlayer(otherPlayer, "p", data);
+            //         break;
+
+            //     /*case 'c': // Square collection attempt
+            //         if (game.square != null) {
+            //             // Check if player is within collection distance (32 units)
+            //             double dx = currentPlayer.x - game.square.x;
+            //             double dy = currentPlayer.y - game.square.y;
+            //             double distance = Math.sqrt(dx * dx + dy * dy);
+
+            //             if (distance < 32) {
+            //                 currentPlayer.score++;
+            //                 game.square = null;
+
+            //                 // Update scores for both players
+            //                 List<Integer> scoreData = Arrays.asList(
+            //                         currentPlayer.playerId,
+            //                         game.player1.score,
+            //                         game.player2.score);
+            //                 sendToPlayer(game.player1, "c", scoreData);
+            //                 sendToPlayer(game.player2, "c", scoreData);
+            //             }
+            //         }
+            //         break;
+            //         */
+            //     case 's':
+            //         enviarSeleccion(otherPlayer, "s", data);
+            //         break;
+            //     case 'X':
+            //         sendToPlayer(otherPlayer,payload);//avisar al otro que la partida terminó
+            //         endGame(game);
+            //         break;
+            // }
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
     }
 
     /**
