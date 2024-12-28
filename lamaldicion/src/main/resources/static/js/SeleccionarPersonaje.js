@@ -15,10 +15,7 @@ class SeleccionarPersonaje extends Phaser.Scene
         this.seleccion = 0; //0-Nada 1-Humano 2-Fantasma
         this.seleccionRecibida = 0;
 
-        this.socket = new WebSocket("ws://" + location.host + "/ws");
-        this.setupWebSocket();
-
-        this.scene.get('Musica').setSocket(this.socket);
+        this.socket = this.scene.get('Musica').getSocket();
 
         this.t_EnvioControl=0;
         this.frec_EnvioControl=3000;//milisegundos
@@ -90,35 +87,6 @@ class SeleccionarPersonaje extends Phaser.Scene
 
     envioDatosControl(){ //asegura de vez en cuando que todo este en su sitio :=)
         this.enviarSeleccion();
-    }
-
-    setupWebSocket() {
-        this.socket.onopen = () => {
-            console.log('Connected to server');
-        };
-
-        this.socket.onmessage = (event) => {
-            const type = event.data.charAt(0); //la primera letra del mensaje es su tipo
-            const data = event.data.length > 1 ? JSON.parse(event.data.substring(1)) : null;
-            //mete en data el resto del mensaje, lo pasa de string a JSON
-
-            switch(type) 
-            {
-                case 's':
-                    this.seleccionRecibida = data;
-                    if(this.seleccion == this.seleccionRecibida)
-                    {
-                        this.seleccionRecibida = 0;
-                        
-                    }
-                    console.log("CLIENTE: " + this.seleccion + " RECIBIDA: " + this.seleccionRecibida);
-                    break;
-            }
-        };
-
-        this.socket.onclose = () => {
-
-        };
     }
 
     sendMessage(type, data = null) {
