@@ -229,8 +229,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                     currentPlayer.y = pos.get(1);
 
                     // Broadcast position to other player
-                    sendToPlayer(otherPlayer, "p",
-                            Arrays.asList(currentPlayer.playerId, currentPlayer.x, currentPlayer.y));
+                    sendToPlayer(otherPlayer, "p", data);
                     break;
 
                 /*case 'c': // Square collection attempt
