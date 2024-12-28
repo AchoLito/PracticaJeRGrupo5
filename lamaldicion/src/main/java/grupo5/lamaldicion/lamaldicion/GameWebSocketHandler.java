@@ -218,6 +218,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             String data = payload.length() > 1 ? payload.substring(1) : "";
 
             if(type=='X'){
+                sendToPlayer(otherPlayer,payload);//avisar al otro que la partida terminó
                 endGame(game);
             }
             else if(type=='s'){

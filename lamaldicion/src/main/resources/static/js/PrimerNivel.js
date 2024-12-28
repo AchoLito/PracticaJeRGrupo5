@@ -319,6 +319,9 @@ class PrimerNivel extends Phaser.Scene
                         this.palanca.interactuar(this.inventario);
                     }
                     break;
+                case'X': //Fin de la Partida
+                    cambiarDeNivel();
+                    break;
             }
         };
 
