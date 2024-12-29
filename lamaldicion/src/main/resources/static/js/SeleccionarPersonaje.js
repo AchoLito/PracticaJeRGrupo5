@@ -16,6 +16,7 @@ class SeleccionarPersonaje extends Phaser.Scene
         this.seleccionRecibida = 0;
 
         this.socket = this.scene.get('Musica').getSocket();
+        this.setupWebSocket();
 
         this.t_EnvioControl=0;
         this.frec_EnvioControl=3000;//milisegundos
@@ -35,7 +36,7 @@ class SeleccionarPersonaje extends Phaser.Scene
                 if(juanito.seleccionRecibida != 1)
                 {
                     juanito.seleccion = 1;
-                    juanito.scene.get('Musica').setEsHumano(this.seleccion);
+                    juanito.scene.get('Musica').setEsHumano(true);
                     juanito.enviarSeleccion();
                 }
                 
@@ -45,7 +46,7 @@ class SeleccionarPersonaje extends Phaser.Scene
                 if(juanito.seleccionRecibida != 2)
                 {
                     juanito.seleccion = 2;
-                    juanito.scene.get('Musica').setEsHumano(this.seleccion);
+                    juanito.scene.get('Musica').setEsHumano(false);
                     juanito.enviarSeleccion();
                 }
             }
@@ -68,6 +69,10 @@ class SeleccionarPersonaje extends Phaser.Scene
         {
             this.scene.stop("SeleccionarPersonaje");
             this.scene.start("PrimerNivel");
+            if(this.seleccion == 0)
+            {
+                this.sendMessage('n', null);
+            }
         }
         else if(this.timeM % 1000 <= 15)
         {
@@ -78,6 +83,53 @@ class SeleccionarPersonaje extends Phaser.Scene
 
     updateTimer() {
         this.timeText.setText(`Time: ` + this.time);
+    }
+
+    setupWebSocket() {
+        this.socket.onopen = () => {
+            console.log('Connected to server');
+        };
+
+        this.socket.onmessage = (event) => {
+            const type = event.data.charAt(0); //la primera letra del mensaje es su tipo
+            const data = event.data.length > 1 ? JSON.parse(event.data.substring(1)) : null;
+            //mete en data el resto del mensaje, lo pasa de string a JSON
+
+            switch(type) 
+            {
+                case 'm':
+                    this.scene.stop("PantallaDeEspera");
+                    this.scene.start("SeleccionarPersonaje");
+                    break;
+                case 's':
+                    this.seleccionRecibida = data;
+                    if(this.seleccion == this.seleccionRecibida)
+                    {
+                        this.seleccionRecibida = 0;
+                        
+                    }
+                    console.log("CLIENTE: " + this.seleccion + " RECIBIDA: " + this.seleccionRecibida);
+                    break;
+                case 'n':
+                this.seleccion = data;
+                console.log("Hola");
+                if(this.seleccion == 1)
+                {
+                    this.scene.get('Musica').setEsHumano(true);
+                }
+                else
+                {
+                    this.scene.get('Musica').setEsHumano(false);
+                }
+                
+                console.log("CLIENTE: " + this.seleccion + " RECIBIDA: " + this.seleccionRecibida);
+                break;
+            }
+        };
+
+        this.socket.onclose = () => {
+
+        };
     }
 
     enviarSeleccion()

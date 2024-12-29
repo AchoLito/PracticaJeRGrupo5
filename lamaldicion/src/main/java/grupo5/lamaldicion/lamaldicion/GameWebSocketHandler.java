@@ -32,6 +32,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
      */
     private static class Player {
         WebSocketSession session;
+        int seleccion;
         double x;
         double y;
        // int score;
@@ -39,6 +40,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
 
         Player(WebSocketSession session) {
             this.session = session;
+            this.seleccion = 0;
             //this.score = 0;
         }
     }
@@ -225,7 +227,51 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                 endGame(game);
             }
             else if(type=='s'){
+                if(data == "1")
+                {
+                    currentPlayer.seleccion = 1;
+                }
+                else if(data == "2")
+                {
+                    currentPlayer.seleccion = 2;
+                }
+                
                 enviarSeleccion(otherPlayer, "s", data);
+            }
+            else if(type=='n')
+            {
+                if(currentPlayer.seleccion == 0 && otherPlayer.seleccion == 0)
+                {
+                    if(game.player1.playerId == currentPlayer.playerId)
+                    {
+                        boolean r =Math.random() <= 0.5;
+                        String seleccion, s;
+                        if(r)
+                        {
+                            seleccion = "1";
+                            s = "2";
+                        }
+                        else
+                        {
+                            s = "1";
+                            seleccion = "2";
+                        }
+                        System.out.println("He entrado una vez");
+                        enviarSeleccion(currentPlayer, "n", s);
+                        enviarSeleccion(otherPlayer, "n", seleccion);
+                    }
+                }
+                else if(currentPlayer.seleccion == 0)
+                {
+                    if(otherPlayer.seleccion == 1)
+                    {
+                        enviarSeleccion(currentPlayer, "n", "2");
+                    }
+                    else
+                    {
+                        enviarSeleccion(currentPlayer, "n", "1");
+                    }
+                }                                                   
             }
             else{
                 sendToPlayer(otherPlayer,payload);
