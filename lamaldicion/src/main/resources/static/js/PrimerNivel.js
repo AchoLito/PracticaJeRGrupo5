@@ -127,7 +127,7 @@ class PrimerNivel extends Phaser.Scene
         this.estatuas_Array = [];
         this.NUM_ESTATUAS = 6;
         this.numeroEstatuasCorrectas = 0;
-
+        this.puertaEstatuaAbierta=false;
         
 
         //El segundo string es para marcar cual es la posicion correcta de la estatua
@@ -320,7 +320,7 @@ class PrimerNivel extends Phaser.Scene
                     }
                     break;
                 case'X': //Fin de la Partida
-                    cambiarDeNivel();
+                    this.cambiarDeNivel();
                     break;
             }
         };
@@ -404,6 +404,10 @@ class PrimerNivel extends Phaser.Scene
         if(this.palancaRecogida===true){
             this.sendMessage('L', this.palancaRecogida);
         }
+    }
+
+    enviarFinPartida(){
+        this.sendMessage('X');
     }
 
     inicializarControlesHumano(){
@@ -793,9 +797,14 @@ class PrimerNivel extends Phaser.Scene
         //las estatuas esten en su posicion
         if(hecho)
         {
-            this.puertas_Array[0].interactuar(true);
+            if(this.puertaEstatuaAbierta===false){
+                this.puertas_Array[0].interactuar(true);
             
-            this.physics.world.removeCollider(this.puertasColliders_Array[0]);
+                this.physics.world.removeCollider(this.puertasColliders_Array[0]);
+
+                this.puertaEstatuaAbierta=true;
+            }
+            
         }
         else
         {
@@ -806,12 +815,13 @@ class PrimerNivel extends Phaser.Scene
                 this.physics.world.removeCollider(this.puertasColliders_Array[0]);
                 this.puertasColliders_Array[0] =this.physics.add.collider(this.humano.SpriteObject,this.puertas_Array[0].puertaCerrada);
             } 
-
+            this.puertaEstatuaAbierta=false;
 
             
         }
     }
     cambiarDeNivel(){
+        this.enviarFinPartida();
         this.scene.stop("PrimerNivel");
         this.scene.start("Fin");
 

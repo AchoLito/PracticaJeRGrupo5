@@ -73,13 +73,13 @@ class Humano {
     }
 
     getPos() {
-        return { x: this.body.x, y: this.body.y };
+        return { x: this.SpriteObject.x, y: this.SpriteObject.y };
     }
     setPos({ x, y }) {
-        this.body.x = x;
-        this.body.y = y;
-        //this.SpriteObject.x = x;
-        //this.SpriteObject.y= y;
+      //  this.body.x = x;
+      //  this.body.y = y;
+        this.SpriteObject.x = x;
+        this.SpriteObject.y= y;
     }
 }
 
@@ -153,14 +153,14 @@ class Fantasma
     }
 
     getPos() {
-        return { x: this.body.x, y: this.body.y };
+        return { x: this.SpriteObject.x, y: this.SpriteObject.y };
     }
     setPos({ x, y }) {
-        this.body.x = x;
-        this.body.y = y;
+       // this.body.x = x;
+      //  this.body.y = y;
 
-        //this.SpriteObject.x = x;
-        //this.SpriteObject.y= y;
+        this.SpriteObject.x = x;
+        this.SpriteObject.y= y;
     }
 }
 
@@ -504,6 +504,7 @@ class PalancaInventario {
         if(this.ctrl){
             p.meterInventario('PALANCA');   
             this.body.x=10000;
+            this.SpriteObject.x = 10000;
             this.AreaInteraccion.body.x=10000;
             this.ctrl=false;
         }
