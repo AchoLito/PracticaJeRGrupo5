@@ -12,7 +12,7 @@ class PantallaDeEspera extends Phaser.Scene
 
     create()
     {
-        this.text = this.add.text(200, 200, 'Buscando partida...', { fontSize: '32px', fill: '#fff' });
+        this.text = this.add.text(500, 425, 'Buscando partida...', { fontSize: '32px', fill: '#fff' });
         this.socket = new WebSocket("ws://" + location.host + "/ws");
         this.setupWebSocket();
 
