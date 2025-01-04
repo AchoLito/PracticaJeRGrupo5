@@ -31,8 +31,16 @@ class MenuAjustes extends Phaser.Scene
                 this.scene.start("EditarContrasena");
             });
         this.add.text(730, 475, "Editar contraseña", {font: '45px Cambria Math', fill: '#000000'});
-        const fondoDelete = this.add.image(900, 650, "fondoBotonEdit");
+        const fondoDelete = this.add.image(900, 650, "fondoBotonEdit")
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.sound.play("clic");
+                this.scene.stop("MenuAjustes");
+                this.scene.start("BorrarUsuario");
+            });
         this.add.text(760, 625, "Borrar usuario", {font: '45px Cambria Math', fill: '#000000'});
+        
+        
         const controlVolumen = this.scene.get('Musica'); // Obtener la escena de audio
 
         let volumenActual = controlVolumen.getVolume();
