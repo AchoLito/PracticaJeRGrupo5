@@ -8,6 +8,9 @@ class SeleccionarPersonaje extends Phaser.Scene
     preload()
     {
         this.load.html('seleccion', 'html/seleccion.html');
+
+        this.load.image("imgHumano", "imagenes/BANDIDO_DELANTE.png");
+        this.load.image("imgFantasma", "imagenes/FANTASMA.png");
     }
 
     create()
@@ -24,6 +27,9 @@ class SeleccionarPersonaje extends Phaser.Scene
         this.timeText = this.add.text(16, 50, 'Time: 15', { fontSize: '32px', fill: '#fff' });
         this.time = 15;
         this.timeM = this.time * 1000;
+
+        this.add.image(300, 425, "imgHumano");
+        this.add.image(600, 425, "imgFantasma");
 
         const dom = this.add.dom(590, 400).createFromCache('seleccion');
         var juanito = this;
