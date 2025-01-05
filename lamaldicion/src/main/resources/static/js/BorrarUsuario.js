@@ -61,12 +61,52 @@ class BorrarUsuario extends Phaser.Scene
             data: username, // Convertir a JSON
             contentType: "application/json", // Especificar Content-Type
             success:  (data)=> {
+                this.avisoUsuarioBorrado();
                 console.log("Mensaje Enviado" + data);
             },
-            error: function (error) {
+            error: () => {
+                avisoUsuarioNoBorrado();
                 console.error("Err or al enviar mensaje:", error);
             }
         });
+    }
+
+    avisoUsuarioBorrado()
+    {
+        const aviso12 = this.add.image(650, 620, "fondoAvisos").setScale(0.7); // imagen de confirmación registro
+        const textAviso12 = this.add.text(500, 580, "El usuario ha sido borrado con éxito.", {font: '21px Sans Serif',
+        fill: '#000000'});
+
+        const boton12 = this.add.image(650, 650, "botonAviso").setScale(0.8)
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.sound.play("clic");
+                aviso12.visible = false;
+                textAviso12.visible = false;
+                boton12.visible = false;
+                textBoton12.visible = false;
+            }); 
+            
+        const textBoton12 = this.add.text(626, 635, "Vale", {font: '25px Sans Serif', fill: '#000000'});
+    }
+
+    avisoUsuarioNoBorrado()
+    {
+        const aviso13 = this.add.image(650, 620, "fondoAvisos").setScale(0.7); // imagen de confirmación registro
+        const textAviso13 = this.add.text(480, 580, "No se ha podido borrar el usuario, vuelva a intentarlo.", {font: '21px Sans Serif',
+        fill: '#000000'});
+
+        const boton13 = this.add.image(650, 650, "botonAviso").setScale(0.8)
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.sound.play("clic");
+                aviso13.visible = false;
+                textAviso13.visible = false;
+                boton13.visible = false;
+                textBoton13.visible = false;
+            }); 
+            
+        const textBoton13 = this.add.text(626, 635, "Vale", {font: '25px Sans Serif', fill: '#000000'});
     }
 
     stopEscena(escenaAnterior)
