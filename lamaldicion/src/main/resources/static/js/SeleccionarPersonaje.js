@@ -45,6 +45,13 @@ class SeleccionarPersonaje extends Phaser.Scene
                     juanito.scene.get('Musica').setEsHumano(true);
                     juanito.enviarSeleccion();
                 }
+
+                if(juanito.seleccion == 1)
+                {
+                    juanito.seleccion = 0;
+                    juanito.scene.get('Musica').setEsHumano(false);
+                    juanito.enviarSeleccion();
+                }
                 
             }
             else if(event.target.name === "fantasma")
@@ -52,6 +59,13 @@ class SeleccionarPersonaje extends Phaser.Scene
                 if(juanito.seleccionRecibida != 2)
                 {
                     juanito.seleccion = 2;
+                    juanito.scene.get('Musica').setEsHumano(false);
+                    juanito.enviarSeleccion();
+                }
+
+                if(juanito.seleccion == 2)
+                {
+                    juanito.seleccion = 0;
                     juanito.scene.get('Musica').setEsHumano(false);
                     juanito.enviarSeleccion();
                 }
