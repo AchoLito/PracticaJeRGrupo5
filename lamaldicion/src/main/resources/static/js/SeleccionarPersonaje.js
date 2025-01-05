@@ -9,12 +9,16 @@ class SeleccionarPersonaje extends Phaser.Scene
     {
         this.load.html('seleccion', 'html/seleccion.html');
 
-        this.load.image("imgHumano", "imagenes/BANDIDO_DELANTE.png");
+        this.load.image("fondoCastilloSelect", "imagenes/MENU_PAUSA.png");
+        this.load.image("imgHumano", "imagenes/HUMANO.png");
         this.load.image("imgFantasma", "imagenes/FANTASMA.png");
+        this.load.image("fondoTiempo", "imagenes/fondoAvisos.png");
     }
 
     create()
     {
+        this.add.image(1280/2, 900/2, "fondoCastilloSelect").setScale(0.45);
+
         this.seleccion = 0; //0-Nada 1-Humano 2-Fantasma
         this.seleccionRecibida = 0;
 
@@ -24,12 +28,13 @@ class SeleccionarPersonaje extends Phaser.Scene
         this.t_EnvioControl=0;
         this.frec_EnvioControl=3000;//milisegundos
 
-        this.timeText = this.add.text(16, 50, 'Time: 15', { fontSize: '32px', fill: '#fff' });
+        this.add.image(100, 65, "fondoTiempo").setScale(0.2);
+        this.timeText = this.add.text(35, 50, 'Time: 15', { fontSize: '32px', fill: '#000000' });
         this.time = 15;
         this.timeM = this.time * 1000;
 
-        this.add.image(300, 425, "imgHumano");
-        this.add.image(600, 425, "imgFantasma");
+        this.add.image(400, 425, "imgHumano");
+        this.add.image(885, 425, "imgFantasma");
 
         const dom = this.add.dom(590, 400).createFromCache('seleccion');
         var juanito = this;
@@ -44,6 +49,12 @@ class SeleccionarPersonaje extends Phaser.Scene
                     juanito.seleccion = 1;
                     juanito.scene.get('Musica').setEsHumano(true);
                     juanito.enviarSeleccion();
+
+                    this.scene.avisoSiHumano();
+                }
+                else
+                {
+                    this.scene.avisoNoPersonaje();
                 }
 
                 if(juanito.seleccion == 1)
@@ -51,6 +62,8 @@ class SeleccionarPersonaje extends Phaser.Scene
                     juanito.seleccion = 0;
                     juanito.scene.get('Musica').setEsHumano(false);
                     juanito.enviarSeleccion();
+
+                    //this.scene.avisoDejarHumano();
                 }
                 
             }
@@ -61,6 +74,12 @@ class SeleccionarPersonaje extends Phaser.Scene
                     juanito.seleccion = 2;
                     juanito.scene.get('Musica').setEsHumano(false);
                     juanito.enviarSeleccion();
+
+                    this.scene.avisoSiFantasma();
+                }
+                else
+                {
+                    this.scene.avisoNoPersonaje();
                 }
 
                 if(juanito.seleccion == 2)
@@ -68,9 +87,106 @@ class SeleccionarPersonaje extends Phaser.Scene
                     juanito.seleccion = 0;
                     juanito.scene.get('Musica').setEsHumano(false);
                     juanito.enviarSeleccion();
+
+                    //this.scene.avisoDejarFantasma();
                 }
             }
         });
+    }
+
+    avisoSiHumano()
+    {
+        const aviso7 = this.add.image(650, 450, "fondoTiempo").setScale(0.7); // imagen de confirmación registro
+        const textAviso7 = this.add.text(460, 410, "El personaje del humano ha sido seleccionado.", {font: '21px Sans Serif',
+        fill: '#000000'});
+
+        const boton7 = this.add.image(650, 480, "botonAviso").setScale(0.8)
+            .setInteractive()
+            .on("pointerdown", () => {
+                //this.sound.play("clic");
+                aviso7.visible = false;
+                textAviso7.visible = false;
+                boton7.visible = false;
+                textBoton7.visible = false;
+            }); 
+            
+        const textBoton7 = this.add.text(626, 465, "Vale", {font: '25px Sans Serif', fill: '#000000'});
+    }
+
+    avisoDejarHumano()
+    {
+        const aviso8 = this.add.image(650, 450, "fondoTiempo").setScale(0.7); // imagen de confirmación registro
+        const textAviso8 = this.add.text(460, 410, "Has deseleccionado al personaje del humano.", {font: '21px Sans Serif',
+        fill: '#000000'});
+
+        const boton8 = this.add.image(650, 480, "botonAviso").setScale(0.8)
+            .setInteractive()
+            .on("pointerdown", () => {
+                //this.sound.play("clic");
+                aviso8.visible = false;
+                textAviso8.visible = false;
+                boton8.visible = false;
+                textBoton8.visible = false;
+            }); 
+            
+        const textBoton8 = this.add.text(626, 465, "Vale", {font: '25px Sans Serif', fill: '#000000'});
+    }
+
+    avisoSiFantasma()
+    {
+        const aviso10 = this.add.image(650, 450, "fondoTiempo").setScale(0.7); // imagen de confirmación registro
+        const textAviso10 = this.add.text(460, 410, "El personaje del fantasma ha sido seleccionado.", {font: '21px Sans Serif',
+        fill: '#000000'});
+
+        const boton10 = this.add.image(650, 480, "botonAviso").setScale(0.8)
+            .setInteractive()
+            .on("pointerdown", () => {
+                //this.sound.play("clic");
+                aviso10.visible = false;
+                textAviso10.visible = false;
+                boton10.visible = false;
+                textBoton10.visible = false;
+            }); 
+            
+        const textBoton10 = this.add.text(626, 465, "Vale", {font: '25px Sans Serif', fill: '#000000'});
+    }
+
+    avisoDejarFantasma()
+    {
+        const aviso11 = this.add.image(650, 450, "fondoTiempo").setScale(0.7); // imagen de confirmación registro
+        const textAviso11 = this.add.text(460, 410, "Has deseleccionado al personaje del fantasma.", {font: '21px Sans Serif',
+        fill: '#000000'});
+
+        const boton11 = this.add.image(650, 480, "botonAviso").setScale(0.8)
+            .setInteractive()
+            .on("pointerdown", () => {
+                //this.sound.play("clic");
+                aviso11.visible = false;
+                textAviso11.visible = false;
+                boton11.visible = false;
+                textBoton11.visible = false;
+            }); 
+            
+        const textBoton11 = this.add.text(626, 465, "Vale", {font: '25px Sans Serif', fill: '#000000'});
+    }
+
+    avisoNoPersonaje()
+    {
+        const aviso9 = this.add.image(650, 450, "fondoTiempo").setScale(0.7); // imagen de confirmación registro
+        const textAviso9 = this.add.text(460, 410, "Este personaje ya ha sido seleccionado por otro jugador.", {font: '21px Sans Serif',
+        fill: '#000000'});
+
+        const boton9 = this.add.image(650, 480, "botonAviso").setScale(0.8)
+            .setInteractive()
+            .on("pointerdown", () => {
+                //this.sound.play("clic");
+                aviso9.visible = false;
+                textAviso9.visible = false;
+                boton9.visible = false;
+                textBoton9.visible = false;
+            }); 
+            
+        const textBoton9 = this.add.text(626, 465, "Vale", {font: '25px Sans Serif', fill: '#000000'});
     }
 
     update(_,deltaTime)
