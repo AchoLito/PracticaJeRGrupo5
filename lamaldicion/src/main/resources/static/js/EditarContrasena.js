@@ -52,8 +52,6 @@ class EditarContrasena extends Phaser.Scene
                 {
                     this.scene.noPassword();
                 }  
-
-                
             }
         });
 

@@ -91,9 +91,6 @@ class LogIn extends Phaser.Scene
             if(event.target.name === "botonDelete"){
                 this.scene.deleteUserServer(nombreInput.value);
             }
-            if(event.target.name === "botonEdit"){
-                this.scene.updateUserServer(nombreInput.value, passwordInput.value);
-            }
         });
 
         this.tweens.add({
@@ -134,21 +131,6 @@ class LogIn extends Phaser.Scene
 
     getUserServer(username, contrasena, formulario, scene)
     {
-        /*
-        console.log(`${username}`);
-        console.log(this.baseUrl + `/${username}`);
-        $.get(this.baseUrl, `/${username}`, function(data){
-            //console.log("He obtenido el usuario: " + data.user.getName());
-   
-            var user = JSON.parse(data)
-            console.log(user);
-            console.log(user.name + " " + username + " " + user.password + " " + contrasena);
-            console.log(user.name === username && user.password === contrasena);
-            console.log(result);
-            result = user.name === username && user.password === contrasena;
-            return result;
-        })
-   */
         fetch(this.baseUrl + `/${username}`)
         .then(response => {
             if (!response.ok) {

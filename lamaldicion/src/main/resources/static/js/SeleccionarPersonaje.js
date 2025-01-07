@@ -50,7 +50,7 @@ class SeleccionarPersonaje extends Phaser.Scene
                     juanito.scene.get('Musica').setEsHumano(false);
                     juanito.enviarSeleccion();
 
-                    //this.scene.avisoDejarHumano();
+                    this.scene.avisoDejarHumano();
                 }
                 else
                 {
@@ -76,7 +76,7 @@ class SeleccionarPersonaje extends Phaser.Scene
                     juanito.scene.get('Musica').setEsHumano(false);
                     juanito.enviarSeleccion();
 
-                    //this.scene.avisoDejarFantasma();
+                    this.scene.avisoDejarFantasma();
                 }
                 else
                 {
