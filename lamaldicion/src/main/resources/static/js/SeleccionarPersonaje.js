@@ -44,19 +44,6 @@ class SeleccionarPersonaje extends Phaser.Scene
         {
             if(event.target.name === "humano")
             {
-                if(juanito.seleccionRecibida != 1)
-                {
-                    juanito.seleccion = 1;
-                    juanito.scene.get('Musica').setEsHumano(true);
-                    juanito.enviarSeleccion();
-
-                    this.scene.avisoSiHumano();
-                }
-                else
-                {
-                    this.scene.avisoNoPersonaje();
-                }
-
                 if(juanito.seleccion == 1)
                 {
                     juanito.seleccion = 0;
@@ -65,23 +52,24 @@ class SeleccionarPersonaje extends Phaser.Scene
 
                     //this.scene.avisoDejarHumano();
                 }
-                
+                else
+                {
+                    if(juanito.seleccionRecibida != 1)
+                        {
+                            juanito.seleccion = 1;
+                            juanito.scene.get('Musica').setEsHumano(true);
+                            juanito.enviarSeleccion();
+        
+                            juanito.avisoSiHumano();
+                        }
+                        else
+                        {
+                            juanito.avisoNoPersonaje();                    
+                        }
+                }                                
             }
             else if(event.target.name === "fantasma")
             {
-                if(juanito.seleccionRecibida != 2)
-                {
-                    juanito.seleccion = 2;
-                    juanito.scene.get('Musica').setEsHumano(false);
-                    juanito.enviarSeleccion();
-
-                    this.scene.avisoSiFantasma();
-                }
-                else
-                {
-                    this.scene.avisoNoPersonaje();
-                }
-
                 if(juanito.seleccion == 2)
                 {
                     juanito.seleccion = 0;
@@ -90,6 +78,22 @@ class SeleccionarPersonaje extends Phaser.Scene
 
                     //this.scene.avisoDejarFantasma();
                 }
+                else
+                {
+                    if(juanito.seleccionRecibida != 2)
+                    {
+                        juanito.seleccion = 2;
+                        juanito.scene.get('Musica').setEsHumano(false);
+                        juanito.enviarSeleccion();
+    
+                        juanito.avisoSiFantasma();
+                    }
+                    else
+                    {
+                        juanito.avisoNoPersonaje();                    
+                    } 
+                }
+                              
             }
         });
     }
