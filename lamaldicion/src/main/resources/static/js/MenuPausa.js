@@ -23,10 +23,8 @@ class MenuPausa extends Phaser.Scene
         const botonJugar = this.add.image(640, 320, "botonSeguirJugando") // añadir en el paréntesis la posición en la que queremos la imagen
             .setInteractive()
             .on("pointerdown", () => {
-                this.sound.play("clic");
-                this.scene.resume("PrimerNivel");
-                this.scene.stop("MenuPausa");
-                
+                this.enviarReanudar();
+                this.jugar();
             });
 
             const botonMenuPrincipal = this.add.image(640, 470, "botonMenuPrincipal")
@@ -51,11 +49,42 @@ class MenuPausa extends Phaser.Scene
                 
             });
             
-       
+            this.socket = this.scene.get('Musica').getSocket();
+            this.setupWebSocket();
     }
 
-    update()
-    {
+    setupWebSocket() {
+        this.socket.onopen = () => {
+            console.log('Connected to server');
+        };
 
+        this.socket.onmessage = (event) => {
+            const type = event.data.charAt(0); //la primera letra del mensaje es su tipo
+            //const data = event.data.length > 1 ? JSON.parse(event.data.substring(1)) : null;
+            //mete en data el resto del mensaje, lo pasa de string a JSON
+
+            switch(type) 
+            {
+                case 'R'://reanudar
+                this.jugar();
+                break;
+            }
+        };
+
+        this.socket.onclose = () => {
+            this.gameStarted = false;
+        };
+    }
+
+    enviarReanudar(){
+        this.socket.send('R');
+    }
+
+    jugar()
+    {
+        this.sound.play("clic");
+        this.scene.resume("PrimerNivel");
+        this.scene.get("PrimerNivel").reanudar();
+        this.scene.stop("MenuPausa");
     }
 }

@@ -446,6 +446,7 @@ class PrimerNivel extends Phaser.Scene
     }
 
     enviarPausa(){
+        console.log("PausaEnviada");
         this.sendMessage('S');
     }
     enviarDialogo(){
@@ -920,5 +921,10 @@ class PrimerNivel extends Phaser.Scene
         this.sound.play("clic");
         this.scene.launch("MenuPausa");
         this.scene.pause("PrimerNivel");
+    }
+
+    reanudar(){
+        this.socket = this.scene.get('Musica').getSocket();
+        this.setupWebSocket();
     }
 }
