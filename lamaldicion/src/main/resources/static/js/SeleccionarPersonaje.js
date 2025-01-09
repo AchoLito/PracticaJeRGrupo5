@@ -55,17 +55,17 @@ class SeleccionarPersonaje extends Phaser.Scene
                 else
                 {
                     if(juanito.seleccionRecibida != 1)
-                        {
-                            juanito.seleccion = 1;
-                            juanito.scene.get('Musica').setEsHumano(true);
-                            juanito.enviarSeleccion();
-        
-                            juanito.avisoSiHumano();
-                        }
-                        else
-                        {
-                            juanito.avisoNoPersonaje();                    
-                        }
+                    {
+                        juanito.seleccion = 1;
+                        juanito.scene.get('Musica').setEsHumano(true);
+                        juanito.enviarSeleccion();
+    
+                        juanito.avisoSiHumano();
+                    }
+                    else
+                    {
+                        juanito.avisoNoPersonaje();                    
+                    }
                 }                                
             }
             else if(event.target.name === "fantasma")
