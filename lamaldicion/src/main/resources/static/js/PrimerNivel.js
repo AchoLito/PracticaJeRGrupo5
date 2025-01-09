@@ -1038,6 +1038,11 @@ class PrimerNivel extends Phaser.Scene
         this.sound.play("clic");
         this.scene.launch("MenuPausa");
         this.scene.pause("PrimerNivel");
+
+        if (this.chatAbierto)
+        {
+            this.scene.stop("Chat");
+        }
     }
 
     reanudar(){
