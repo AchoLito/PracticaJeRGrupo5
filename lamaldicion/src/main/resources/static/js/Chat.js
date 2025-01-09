@@ -23,7 +23,8 @@ class Chat extends Phaser.Scene
         this.BotonChat = this.add.image(70, 70, 'BOTON_CHAT').setScale(0.7,0.7)
         .setInteractive().on("pointerdown", () => {
             this.sound.play("clic");
-            this.scene.resume("PrimerNivel");
+            //this.scene.resume("PrimerNivel");
+            this.scene.get("PrimerNivel").habilitarControles();
             this.scene.stop("Chat");
         });
 

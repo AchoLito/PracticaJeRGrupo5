@@ -87,7 +87,8 @@ class PrimerNivel extends Phaser.Scene
         .setInteractive().on("pointerdown", () => {
             this.sound.play("clic");
             this.scene.launch("Chat");
-            this.scene.pause("PrimerNivel");   
+            //this.scene.pause("PrimerNivel");   
+            this.deshabilitarControles();
         });
         this.BotonPausa = this.add.image(70, 165, 'BOTON_PAUSA').setScale(0.65,0.65)
         .setInteractive().on("pointerdown", () => {
@@ -453,6 +454,12 @@ class PrimerNivel extends Phaser.Scene
         this.sendMessage('D');
     }
 
+    deshabilitarControles(){
+        this.input.keyboard.enabled = false;
+    }
+    habilitarControles(){
+        this.input.keyboard.enabled = true;
+    }
     inicializarControlesHumano(){
         
         //MOVIMIENTO
@@ -472,6 +479,7 @@ class PrimerNivel extends Phaser.Scene
         this.input.keyboard.on('keydown-E',  () => { this.humano.input('INTERACT',true);});
         this.input.keyboard.on('keyup-E',  () => { this.humano.input('INTERACT',false);});
     }
+   
 
     inicializarControlesFantasma(){
         //MOVIMIENTO
@@ -491,12 +499,14 @@ class PrimerNivel extends Phaser.Scene
         this.input.keyboard.on('keydown-ENTER',  () => {this.fantasma.input('INTERACT',true);});
         this.input.keyboard.on('keyup-ENTER',  () => {this.fantasma.input('INTERACT',false);});
     }
+    
 
     inicializarControlesInventario(){
         this.input.keyboard.on('keydown-ONE', () => { this.herramientaActiva = this.inventario.getHerramienta(0)});
         this.input.keyboard.on('keydown-TWO', () => { this.herramientaActiva = this.inventario.getHerramienta(1)});
         this.input.keyboard.on('keydown-THREE', () => { this.herramientaActiva = this.inventario.getHerramienta(2)});
     }
+    
     inicializarColisiones(){
         //Colision entre jugadores, hacemos q se frenen tras colisionar
         this.physics.add.collider(this.humano.SpriteObject, this.fantasma.SpriteObject, this.manejoDeColisionJugadores);
