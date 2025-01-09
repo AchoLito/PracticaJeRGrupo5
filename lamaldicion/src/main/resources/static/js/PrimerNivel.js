@@ -67,6 +67,9 @@ class PrimerNivel extends Phaser.Scene
         this.load.image('BOTON_PAUSA','imagenes/iconoBoton_Pausa.png');
         this.load.image('BOTON_CHAT','imagenes/iconoBoton_Chat.png');
         this.load.audio("clic", "audio/clic.mp3"); // sonido pulsar botón
+
+        //INSIGNEA
+        this.load.image('GATO_ESTATUA', 'imagenes/GATO_ESTATUA.png');
     }
 
     create()
@@ -101,6 +104,7 @@ class PrimerNivel extends Phaser.Scene
         this.pasilloDescubierto=false;
 
         this.herramientaActiva='';
+
         //ANTORCHAS
         this.antorchas_Array = [];
         this.NUM_ANTORCHAS = 4;
@@ -174,6 +178,9 @@ class PrimerNivel extends Phaser.Scene
         this.palanca= new PalancaInventario(1100,450, this );
         this.palancaRecogida=false;
 
+        // INSIGNIA
+        this.add.image(646, 320, 'GATO_ESTATUA');
+
 
         //WEBSOKETS
         this.socket = this.scene.get('Musica').getSocket();
@@ -196,7 +203,7 @@ class PrimerNivel extends Phaser.Scene
 
         this.input.keyboard.on('keydown-SPACE', () => { this.dialogo.actualizar();});
     }
-    update(_,deltaTime)
+    update(_, deltaTime)
     {
         this.t_EnvioControl+=deltaTime;
         this.timeM -=deltaTime;
