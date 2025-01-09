@@ -350,9 +350,95 @@ En la **pantalla de juego** se han utilizado WebSockets para que un jugador avis
 Cada uno de los mensajes utilizados comienza con una letra que indicará qué tipo de información contiene, esta letra se llama **Type**:  
 
 - **Velocidad del otro personaje:**
-  - Su Type es "v".
+  - Su Type es "v"
   - Envía la dirección de desplazamiento en forma de string
   - Se envía cada vez que se pulsa una tecla de desplazamiento
+- **Posición del otro personaje:**
+  - Su Type es "p"
+  - Enviarán un JSON con la posición x e y
+  - Se mandarán cada 3 segundos como control extra a la velocidad
+- **Estado de la estatua cambiada:**
+  - Su Type es "e"
+  - Envía la dirección nueva de la estatua
+  - Se envía cada vez que interactúas con una estatuda
+- **Estado de todas las estatuas:**
+  - Su Type es "E"
+  - Envía la dirección de todas las estatuas
+  - Se envía cada 3 segundos como control extra
+- **Estado de la antorcha cambiada:**
+  - Su Type es "a"
+  - Envía el estado nuevo de la antorcha
+  - Se envía cada vez que interactúas con una antorcha
+- **Estado de todas las antorchas:**
+  - Su Type es "A"
+  - Envía la dirección de todas las antorchas
+  - Se envía cada 3 segundos como control extra
+- **Estado de todas las palancas:**
+  - Su Type es "P"
+  - Envía el estado de todas las palancas
+  - Se envía cada vez que cambias una palanca (solo hay 2)
+  - Se envía cada 3 segundos como control extra
+- **Recoger palanca del suelo:**
+  - Su Type es "L"
+  - Envía un booleano que indica si se ha recogido
+  - Se envía cuando se coge la palanca del suelo
+  - Se envía cada 3 segundos como control extra
+  - Este mensaje produce la actualización de inventario
+- **Actualizar diálogo:**
+  - Su Type es "D"
+  - Se envía cuando un jugador pulsa la tecla de pasar diálogo
+- **Terminar nivel:**
+  - Su Type es "X"
+  - Se envía cuando un jugador llega al final del nivel
+- **Actualizar temporizador de derrota:**
+  - Su Type es "t"
+  - Se envía cada 3 segundos
+  - Si tu temporizador está retrasado respecto al del otro jugador te lo corrige
+ 
+En la **pantalla de chat** se han utilizado WebSockets para que cuando un jugador mande un mensaje y el otro tenga el chat cerrado le salte una notificación con el número de mensajes nuevos.  
+
+Cuando un jugador envía un mensaje por el chat se envía un mensaje WebSocket, iniciado por un Type="M".  
+
+Cuando el otro jugador reciba este mensaje aumentará un contador de mensajes no abiertos que se muestra junto al botón de chat. Cuando el chat está abierto este icono no se muestra y el número de mensajes sin abrir vuelve a ser cero.  
+
+En el **menú de pausa** se envían WebSockets con la finalidad de sincronizar ambos jugadores: si uno pausa el juego, al otro se le pausa automáticamente; y si uno de ellos reanuda el juego, el otro también lo reanudará.  
+
+Los mensajes que se han utilizado son los siguientes:  
+
+- **Pausar el juego:**
+  - Su Type es "S"
+  - Se envía si un jugador pulsa el botón de pausar
+- **Reanudar el juego:**
+  - Su Type es "R"
+  - Se envía cuando un jugador pulsa el botón de reanudar
+
+En la **pantalla de espera** los jugadores esperan hasta que se encuentra otro jugador conectado, momento en el cual se les mete en la misma sala.  
+
+Se envía un mensaje que comienza con la letra "m", como Type para indicar que se ha encontrado una sala.  
+
+Cuando recibe este mensaje se cambia de escena a la pantalla de Seleccionar Personaje.  
+
+En la **pantalla de seleccionar personaje** se han utilizado WebSockets para que un jugador reciba qué personaje ha elegido el otro jugador y gestionar conflictos si ambos eligen el mismo.  
+
+Los mensajes que se han utilizado son los siguientes:  
+
+- **Selección de personaje:**
+  - Su Type es "s"
+  - Envía el personaje elegido por el otro jugador
+  - Se envía cuando eliges un personaje
+  - Se envía cada 3 segundos como control extra
+  - Se guarda en la base de datos en la clase java GameWebSocketHandler
+- **Actualizar temporizador de elección:**
+  - Su Type es "t"
+  - Se envía cada 3 segundos
+  - Si tu temporizador está retrasado respecto al del otro jugador te lo corrige
+- **Enviar evento de Fin de Temporizador:**
+  - Su Type es "n"
+  - Se envía cuando el temporizador llega a 0
+  - Le indica a la clase GameWebSocketHandler que gestiones qué selección devolver a cada jugador (por si ambos eligieron el 
+    mismo o ninguno)
+  - Los jugadores guardan la selección recibida y se pasa a la pantalla de juego
+    
 
 ### 17. MÚSICA Y EFECTOS DE SONIDO
 ***
