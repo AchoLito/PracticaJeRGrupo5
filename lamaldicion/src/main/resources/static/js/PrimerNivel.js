@@ -39,6 +39,7 @@ class PrimerNivel extends Phaser.Scene
 
         //INVENTARIO
         this.load.image('INVENTARIO','imagenes/INVENTARIO.png');
+        this.load.image("FONDO_TIEMPO", "imagenes/fondoAvisos.png");
 
         //pal
         this.load.image('PALANCA','imagenes/PALANCA.png');
@@ -74,6 +75,10 @@ class PrimerNivel extends Phaser.Scene
 
         this.finNivel = new FinNivel(15,630, this);
         
+        this.add.image(640, 65, "FONDO_TIEMPO").setScale(0.3);
+        this.timeText = this.add.text(535, 50, 'Tiempo: 180', { fontSize: '32px', fill: '#000000' });
+        this.time = 180;
+        this.timeM = this.time * 1000;
 
         this.BotonChat = this.add.image(70, 70, 'BOTON_CHAT').setScale(0.7,0.7)
         .setInteractive().on("pointerdown", () => {
@@ -194,12 +199,28 @@ class PrimerNivel extends Phaser.Scene
     update(_,deltaTime)
     {
         this.t_EnvioControl+=deltaTime;
+        this.timeM -=deltaTime;
 
         if(this.t_EnvioControl>this.frec_EnvioControl){
             this.t_EnvioControl=0;
 
             this.envioDatosControl();
         }
+        if(this.timeM <= 0)
+            {
+                this.scene.stop("PrimerNivel");
+                this.scene.start("Derrota");
+            }
+
+        else if(this.timeM % 1000 <= 15)
+            {
+                 this.time--;
+                 this.updateTimer();
+             }
+    }
+
+    updateTimer() {
+        this.timeText.setText(`Tiempo: ` + this.time);
     }
 
     envioDatosControl(){ //asegura de vez en cuando que todo este en su sitio :=)
