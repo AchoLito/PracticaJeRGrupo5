@@ -45,7 +45,8 @@ class MenuAjustes2 extends Phaser.Scene
 
         let volumenActual = controlVolumen.getVolume();
      
-
+        this.socket = this.scene.get('Musica').getSocket();
+        this.setupWebSocket();
 
    
 
@@ -74,6 +75,36 @@ class MenuAjustes2 extends Phaser.Scene
                 this.scene.resume("PrimerNivel");
             });
 
+    }
+
+    setupWebSocket() {
+        this.socket.onopen = () => {
+            console.log('Connected to server');
+        };
+
+        this.socket.onmessage = (event) => {
+            const type = event.data.charAt(0); //la primera letra del mensaje es su tipo
+            //const data = event.data.length > 1 ? JSON.parse(event.data.substring(1)) : null;
+            //mete en data el resto del mensaje, lo pasa de string a JSON
+
+            switch(type) 
+            {
+                case 'R'://reanudar
+                this.scene.resume("PrimerNivel");
+                this.scene.get("PrimerNivel").reanudar();
+                this.scene.stop("MenuAjustes2");
+                break;
+                case 'S':
+                    this.scene.start("MenuInicio");
+                    this.scene.stop("MenuPausa");
+                    this.scene.stop("PrimerNivel");
+                break;
+            }
+        };
+
+        this.socket.onclose = () => {
+            this.gameStarted = false;
+        };
     }
 
     upload()
