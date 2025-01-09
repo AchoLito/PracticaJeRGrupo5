@@ -90,7 +90,7 @@ class Fantasma
         this.interacting = false; //indica si pulsas la tecla de interaccion
 
         this.direccion="0";//quieto
-        this.velocidad=90;
+        this.velocidad=120;
 
         this.SpriteObject = scene.physics.add.image(x, y, 'FANTASMA_FRONTAL');
         this.body = this.SpriteObject.body;
