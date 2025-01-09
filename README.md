@@ -387,7 +387,7 @@ Este es el diagrama de las clases que se han implementado en Java, obviando los 
 
 ![Imagen diagrama clases](lamaldicion/src/main/resources/static/imagenes/DiagramaClases.png "Imagen diagrama de clases")  
 
-*Imagen 26: Diagrama de clases*  
+*Imagen 30: Diagrama de clases*  
 
 ### 16. PROTOCOLO WEBSOCKET  
 ***  
