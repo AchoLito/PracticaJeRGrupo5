@@ -34,6 +34,7 @@ class MenuPausa extends Phaser.Scene
                 this.scene.start("MenuInicio");
                 this.scene.stop("MenuPausa");
                 this.scene.stop("PrimerNivel");
+                this.enviarSalir();
 
             });
 
@@ -66,7 +67,12 @@ class MenuPausa extends Phaser.Scene
             switch(type) 
             {
                 case 'R'://reanudar
-                this.jugar();
+                    this.jugar();
+                break;
+                case 'S':
+                    this.scene.start("MenuInicio");
+                    this.scene.stop("MenuPausa");
+                    this.scene.stop("PrimerNivel");
                 break;
             }
         };
@@ -78,6 +84,10 @@ class MenuPausa extends Phaser.Scene
 
     enviarReanudar(){
         this.socket.send('R');
+    }
+
+    enviarSalir(){
+        this.socket.send('S');
     }
 
     jugar()
