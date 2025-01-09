@@ -85,7 +85,6 @@ class SeleccionarPersonaje extends Phaser.Scene
                         juanito.seleccion = 2;
                         juanito.scene.get('Musica').setEsHumano(false);
                         juanito.enviarSeleccion();
-    
                         juanito.avisoSiFantasma();
                     }
                     else
@@ -196,8 +195,15 @@ class SeleccionarPersonaje extends Phaser.Scene
     update(_,deltaTime)
     {
         this.t_EnvioControl+=deltaTime;
-        this.timeM -= deltaTime;
-        //console.log(this.timeM);
+        // this.timeM -= deltaTime; borrado
+        // console.log(this.timeM);
+
+        // Puesto por mi
+        if (this.time > 0)
+        {
+            this.time -= deltaTime / 1000;
+            this.updateTimer();
+        }
 
         if(this.t_EnvioControl>this.frec_EnvioControl){
             this.t_EnvioControl=0;
@@ -214,15 +220,16 @@ class SeleccionarPersonaje extends Phaser.Scene
                 this.sendMessage('n', null);
             }
         }
+        /* borrado
         else if(this.timeM % 1000 <= 15)
         {
             this.time--;
             this.updateTimer();
-        }
+        }*/
     }
 
     updateTimer() {
-        this.timeText.setText(`Tiempo: ` + this.time);
+        this.timeText.setText(`Tiempo: ${Math.ceil(this.time)}`);
     }
 
     setupWebSocket() {
@@ -251,16 +258,20 @@ class SeleccionarPersonaje extends Phaser.Scene
                     console.log("CLIENTE: " + this.seleccion + " RECIBIDA: " + this.seleccionRecibida);
                     break;
                 case 'n':
-                this.seleccion = data;
-                console.log("Hola");
-                if(this.seleccion == 1)
-                {
-                    this.scene.get('Musica').setEsHumano(true);
-                }
-                else
-                {
-                    this.scene.get('Musica').setEsHumano(false);
-                }
+                    this.seleccion = data;
+                    console.log("Hola");
+                    if(this.seleccion == 1)
+                    {
+                        this.scene.get('Musica').setEsHumano(true);
+                    }
+                    else
+                    {
+                        this.scene.get('Musica').setEsHumano(false);
+                    }
+                    break;
+                case 't':
+                    this.time = data.time;
+                    this.updateTimer();
                 
                 console.log("CLIENTE: " + this.seleccion + " RECIBIDA: " + this.seleccionRecibida);
                 break;
@@ -268,7 +279,7 @@ class SeleccionarPersonaje extends Phaser.Scene
         };
 
         this.socket.onclose = () => {
-
+            conseole.log('Disconected from server');
         };
     }
 

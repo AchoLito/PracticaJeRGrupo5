@@ -15,10 +15,9 @@ class PrimerNivel extends Phaser.Scene
         this.load.image('FANTASMA_DERECHA', 'imagenes/FANTASMA_PERFIL_DERECHO.png');
 
         //SPRITE BANDIDO
-         this.load.image('BANDIDO_ATRAS', 'imagenes/BANDIDO_ATRAS.png');
-         this.load.image('BANDIDO_FRONTAL', 'imagenes/BANDIDO_DELANTE.png');
-         this.load.image('BANDIDO_IZQUIERDA', 'imagenes/BANDIDO_PERFIL_IZQUIERDO.png');
-         this.load.image('BANDIDO_DERECHA', 'imagenes/BANDIDO_PERFIL_DERECHO.png');
+        this.load.image('BANDIDO_FRONTAL', 'imagenes/BANDIDO_DELANTE.png');
+        this.load.spritesheet('BANDIDO', 'imagenes/JeR_Humano_Andando.png', {frameWidth: 736, frameHeight: 1202});
+
 
         //SPRITE ESTATUA
         this.load.image('ESTATUA_ATRAS','imagenes/ESTATUA_ATRAS.png');
@@ -87,6 +86,7 @@ class PrimerNivel extends Phaser.Scene
         .setInteractive().on("pointerdown", () => {
             this.sound.play("clic");
             this.scene.launch("Chat");
+            //this.mensajeIcono.setVisible(false);
             //this.scene.pause("PrimerNivel");   
             this.deshabilitarControles();
         });
@@ -125,8 +125,37 @@ class PrimerNivel extends Phaser.Scene
         
 
         this.esHumano = this.scene.get('Musica').getEsHumano();// lo recibe de la pantalla de eleccion de personaje
+
+        // INSIGNIA
+        this.add.image(646, 320, 'GATO_ESTATUA');
+        
         //HUMANO
         this.humano = new Humano(580,500, this);
+
+        this.anims.create({
+            key: 'caminarDerecha',
+            frames: this.anims.generateFrameNumbers('BANDIDO', {pregfix: 'right', start: 0, end: 12, zeroPad: 1}),
+            framerate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'caminarIzquierda',
+            frames: this.anims.generateFrameNumbers('BANDIDO', {pregfix: 'left', start: 0, end: 12, zeroPad: 1}),
+            framerate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'caminarArriba',
+            frames: this.anims.generateFrameNumbers('BANDIDO', {pregfix: 'up', start: 13, end: 13, zeroPad: 1}),
+            framerate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'caminarAbajo',
+            frames: this.anims.generateFrameNumbers('BANDIDO', {pregfix: 'down', start: 14, end: 14, zeroPad: 1}),
+            framerate: 10,
+            repeat: -1
+        });
 
         //FANTASMA
         this.fantasma = new Fantasma(659,500, this);
@@ -151,6 +180,9 @@ class PrimerNivel extends Phaser.Scene
 
         //DIALOGOS
         this.dialogo = new Dialogo(this);
+
+        // NOTIFICACIÓN
+        this.mensajeIcono = this.add.image(520, 520, 'GATO_ESTATUA').setVisible(false);
 
         // Configurar los diálogos (puedes tener varios)
         this.dialogo.configurarDialogos
@@ -178,9 +210,6 @@ class PrimerNivel extends Phaser.Scene
         this.palanca= new PalancaInventario(1100,450, this );
         this.palancaRecogida=false;
 
-        // INSIGNIA
-        this.add.image(646, 320, 'GATO_ESTATUA');
-
 
         //WEBSOKETS
         this.socket = this.scene.get('Musica').getSocket();
@@ -188,6 +217,11 @@ class PrimerNivel extends Phaser.Scene
 
         this.t_EnvioControl=0;
         this.frec_EnvioControl=3000;//milisegundos
+
+       /* this.deshabilitarControles.get('Chat').events.on('nuevo_mensaje', (mensaje) =>
+        {
+            this.mostrarIconoNotificacion();
+        })*/
 
         //FUNCIONES DE RESPUESTA
         if(this.esHumano){
@@ -209,27 +243,41 @@ class PrimerNivel extends Phaser.Scene
     update(_, deltaTime)
     {
         this.t_EnvioControl+=deltaTime;
-        this.timeM -=deltaTime;
+        // this.timeM -= deltaTime; borrado
+        // console.log(this.timeM);
+
+        // Puesto por mi
+        if (this.time > 0)
+        {
+            this.time -= deltaTime / 1000;
+            this.updateTimer();
+        }
 
         if(this.t_EnvioControl>this.frec_EnvioControl){
             this.t_EnvioControl=0;
 
             this.envioDatosControl();
         }
-        if(this.timeM <= 0)
+
+        if(this.time <= 0)
         {
-            this.scene.stop("PrimerNivel");
+            this.scene.stop("PrimelNivel");
             this.scene.start("Derrota");
+            if(this.seleccion == 0)
+            {
+                this.sendMessage('n', null);
+            }
         }
+        /* borrado
         else if(this.timeM % 1000 <= 15)
         {
             this.time--;
             this.updateTimer();
-        }
+        }*/
     }
 
     updateTimer() {
-        this.timeText.setText(`Tiempo: ` + this.time);
+        this.timeText.setText(`Tiempo: ${Math.ceil(this.time)}`);
     }
 
     envioDatosControl(){ //asegura de vez en cuando que todo este en su sitio :=)
@@ -358,6 +406,15 @@ class PrimerNivel extends Phaser.Scene
                 case'X': //Fin de la Partida
                     this.cambiarDeNivel();
                     break;
+                case 't':
+                    this.time = data.time;
+                    this.updateTimer();
+                    break;
+                    /*
+                case 'c':
+                    this.mostrarMensajeChat(data);
+                    this.mostrarIconoNOtificación();
+                    break;*/
             }
         };
 
@@ -453,6 +510,21 @@ class PrimerNivel extends Phaser.Scene
     enviarDialogo(){
         this.sendMessage('D');
     }
+/*
+    enviarMensajeChat(mensaje)
+    {
+        const data = {
+            user: this.nombreUsuario,
+            message:mensaje,
+        };
+
+        this.socket.send(`c ${JSON.stringify(data)}`);
+    }
+
+    mostrarIconoNotificación()
+    {
+        this.mensajeIcono.setVisible(true);
+    }*/
 
     deshabilitarControles(){
         this.input.keyboard.enabled = false;

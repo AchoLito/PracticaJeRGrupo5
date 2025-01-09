@@ -6,14 +6,18 @@ class Humano {
         this.direccion="0";//quieto
         this.velocidad=90;
 
-        this.SpriteObject = scene.physics.add.image(x, y, "BANDIDO_FRONTAL");
+        this.SpriteObject = scene.physics.add.sprite(x, y, "BANDIDO");
         this.body = this.SpriteObject.body;
 
         this.body.setAllowGravity(false);
         this.body.setCollideWorldBounds(true);
 
        // this.SpriteObject.setPosition(x,y);
-       
+
+        const escalaX = 38/736;
+        const escalaY = 75/1202;
+
+        this.SpriteObject.setScale(escalaX, escalaY);
     }
 
     desplazarse(direccion)
@@ -24,26 +28,31 @@ class Humano {
                 //this.SpriteObject.setTexture('ESTATUA_ATRAS.png');
                 this.body.setVelocityX(0);
                 this.body.setVelocityY(0);
+                this.SpriteObject.anims.stop();
                 break;
             case 'UP':
-                this.SpriteObject.setTexture('BANDIDO_ATRAS');
                 this.body.setVelocityX(0);
                 this.body.setVelocityY(-this.velocidad);
+                this.SpriteObject.anims.play('caminarArriba', true);
                 break;
             case 'DOWN':
-                this.SpriteObject.setTexture('BANDIDO_FRONTAL');
                 this.body.setVelocityX(0);
                 this.body.setVelocityY(this.velocidad);
+                this.SpriteObject.anims.play('caminarAbajo', true);
                 break;
             case 'LEFT':
-                this.SpriteObject.setTexture('BANDIDO_IZQUIERDA');
+                //this.SpriteObject.setTexture('BANDIDO_IZQUIERDA');
                 this.body.setVelocityX(-this.velocidad);
                 this.body.setVelocityY(0);
+                this.SpriteObject.anims.play('caminarIzquierda', true);
+                this.SpriteObject.setFlipX(true);
                 break;
             case 'RIGHT':
-                this.SpriteObject.setTexture('BANDIDO_DERECHA');
+                //this.SpriteObject.setTexture('BANDIDO_DERECHA');
                 this.body.setVelocityX(this.velocidad);
                 this.body.setVelocityY(0);
+                this.SpriteObject.anims.play('caminarDerecha', true);
+                this.SpriteObject.setFlipX(false);
                 break;
             default:
                 console.log("nee");
