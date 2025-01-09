@@ -308,6 +308,7 @@ class PrimerNivel extends Phaser.Scene
         this.enviarDatosAntorchas_CTR();
         this.enviarDatosPalancas();
         this.enviarPalancaSuelo();      
+        this.enviarTimer();
     }
 
     sendMessage(type, data = null) {
@@ -429,8 +430,10 @@ class PrimerNivel extends Phaser.Scene
                     this.cambiarDeNivel();
                     break;
                 case 't':
-                    this.time = data.time;
-                    this.updateTimer();
+                    if(this.time>data){
+                        this.time=data;
+                        this.updateTimer();
+                    }
                     break;
                 case "M"://el otro jugador escribio mensaje 
                     if(this.chatAbierto===false){
@@ -452,7 +455,9 @@ class PrimerNivel extends Phaser.Scene
             this.gameStarted = false;
         };
     }
-    
+    enviarTimer(){
+        this.sendMessage('t',this.time);
+    }
     enviarPosicion(){//se llama cada x segundo
         if(this.esHumano){
             this.sendMessage('p',this.humano.getPos());

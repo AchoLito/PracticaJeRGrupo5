@@ -270,8 +270,10 @@ class SeleccionarPersonaje extends Phaser.Scene
                     }
                     break;
                 case 't':
-                    this.time = data.time;
-                    this.updateTimer();
+                    if(this.time>data){
+                        this.time=data;
+                        this.updateTimer();
+                    }
                 
                 console.log("CLIENTE: " + this.seleccion + " RECIBIDA: " + this.seleccionRecibida);
                 break;
@@ -283,6 +285,10 @@ class SeleccionarPersonaje extends Phaser.Scene
         };
     }
 
+    enviarTimer(){
+        this.sendMessage('t',this.time);
+    }
+
     enviarSeleccion()
     {
         this.sendMessage('s',this.seleccion);
@@ -290,6 +296,7 @@ class SeleccionarPersonaje extends Phaser.Scene
 
     envioDatosControl(){ //asegura de vez en cuando que todo este en su sitio :=)
         this.enviarSeleccion();
+        this.enviarTimer();
     }
 
     sendMessage(type, data = null) {
