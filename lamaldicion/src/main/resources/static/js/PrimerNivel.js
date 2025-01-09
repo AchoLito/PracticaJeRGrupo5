@@ -86,14 +86,17 @@ class PrimerNivel extends Phaser.Scene
 
         //Chat
         this.chatAbierto=false;
-        this.mensajeIcono = this.add.image(40, 40, 'GATO_ESTATUA').setVisible(false);
-
+        this.mensajeIcono = this.add.image(70, 70, 'NOTIFICACION').setVisible(false);
+        this.actualizarTextoNotificacion("");
+        this.numeroMensajesNuevos=0;
         this.BotonChat = this.add.image(70, 70, 'BOTON_CHAT').setScale(0.7,0.7)
         .setInteractive().on("pointerdown", () => {
             this.sound.play("clic");
             this.chatAbierto=true;
             this.scene.launch("Chat");
             this.mensajeIcono.setVisible(false); 
+            this.actualizarTextoNotificacion("");
+            this.numeroMensajesNuevos=0;
             this.deshabilitarControles();
         });
         this.BotonPausa = this.add.image(70, 165, 'BOTON_PAUSA').setScale(0.65,0.65)
@@ -285,6 +288,20 @@ class PrimerNivel extends Phaser.Scene
         this.timeText.setText(`Tiempo: ${Math.ceil(this.time)}`);
     }
 
+    actualizarTextoNotificacion(numeroMensajes) {
+        if (!this.texto) {
+            this.texto = this.add.text(106, 28, numeroMensajes, {
+                font: '18px Sans Serif',
+                fill: '#ffffff',
+            });
+            this.texto.setDepth(11);
+
+        } else {
+            this.texto.setText(numeroMensajes);
+            this.texto.setX(106 - this.texto.width / 2);
+        }
+    }
+
     envioDatosControl(){ //asegura de vez en cuando que todo este en su sitio :=)
         this.enviarPosicion();
         this.enviarDatosEstatuas_CTR();
@@ -417,7 +434,10 @@ class PrimerNivel extends Phaser.Scene
                     break;
                 case "M"://el otro jugador escribio mensaje 
                     if(this.chatAbierto===false){
+                        this.numeroMensajesNuevos++;
                         this.mensajeIcono.setVisible(true); 
+                        this.actualizarTextoNotificacion(this.numeroMensajesNuevos);
+                        
                     }
                     break;
                     /*

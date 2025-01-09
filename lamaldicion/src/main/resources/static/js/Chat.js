@@ -23,7 +23,7 @@ class Chat extends Phaser.Scene
             //this.scene.resume("PrimerNivel");
             this.scene.get("PrimerNivel").habilitarControles();
             this.scene.get("PrimerNivel").chatAbierto=false;
-            this.scene.stop("Chat");
+            this.scene.stop("Chat"); 
         });
 
         this.nombreUsuario=this.scene.get('Musica').getUsuario();

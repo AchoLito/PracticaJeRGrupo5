@@ -30,7 +30,7 @@ class SeleccionarPersonaje extends Phaser.Scene
 
         this.add.image(100, 65, "fondoTiempo").setScale(0.3);
         this.timeText = this.add.text(25, 50, 'Tiempo: 15', { fontSize: '32px', fill: '#000000' });
-        this.time = 15;
+        this.time = 3;
         this.timeM = this.time * 1000;
 
         this.add.image(400, 425, "imgHumano");
