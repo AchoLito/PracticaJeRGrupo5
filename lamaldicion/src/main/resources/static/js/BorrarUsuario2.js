@@ -81,6 +81,9 @@ class BorrarUsuario2 extends Phaser.Scene
             .setInteractive()
             .on("pointerdown", () => {
                 this.sound.play("clic");
+                this.scene.stop("BorrarUsuario2");
+                this.scene.stop("PrimerNivel");
+                this.scene.start("LogIn");
                 aviso12.visible = false;
                 textAviso12.visible = false;
                 boton12.visible = false;
