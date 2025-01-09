@@ -1,3 +1,7 @@
+**LINK DEL VÍDEO DE YOUTUBE**  
+https://youtu.be/4YPFXzmn-2A
+
+
 # PracticaJeRGrupo5
 ## LA MALDICIÓN
 JUEGOS EN RED  
@@ -248,10 +252,6 @@ La pantalla de login es la primera interacción del usuario con el juego permiti
 
 **Iniciar sesión:** Valida los datos y accede al juego.  
 
-**Editar usuario:** Modifica información de un usuario existente.  
-
-**Eliminar usuario:** Borra una cuenta tras confirmación.  
-
 ![Imagen login](lamaldicion/src/main/resources/static/imagenes/Login.png "Imagen de la pantalla de LogIn")  
 
 *Imagen 17: Pantalla de LogIn*  
@@ -287,7 +287,31 @@ El menú principal contiene todas las opciones iniciales necesarias para comenza
 
 *Imagen 21: Créditos del juego*  
 
-#### 14.4. PANTALLA DE PAUSA  
+#### 14.4. PANTALLA DE SELECCIÓN DE PERSONAJES  
+
+La pantalla de selección de personajes aparece después de que el jugador haya iniciado una partida y se encuentra a la espera de que el segundo jugador se conecte. Esta pantalla es fundamental para garantizar la asignación adecuada de roles, la cual está gestionada por WebSockets.  
+
+Estos son los elementos de la pantalla:  
+
+**Humano:** Botón para seleccionar el humano como personaje.  
+
+**Fantasma:** Botón para seleccionar al fantasma como personaje.  
+
+Estas son las funcionalidades de la pantalla:  
+
+**Ambos jugadores eligen personaje:** Si ambos jugadores seleccionan un personaje diferente, la partida comenzará con los personajes elegidos. En caso de que dos jugadores seleccionen el mismo personaje saldrá un mensaje de advertencia avisando del problema.  
+
+**Un jugador elige personaje y el otro no:** Si solo uno de los jugadores elige personaje, al otro se le asignará de forma automática el personaje restante.  
+
+**Ningún personaje elegido:** Si ninguno de los dos jugadores elige personajes, se asignan de forma aleatoria.  
+
+Cada vez que un jugador hace una elección o la cancela, este es notificado mediante un mensaje en pantalla.  
+
+![Imagen selección de personajes](lamaldicion/src/main/resources/static/imagenes/Seleccion.png "Imagen de la pantalla de selección de personaje")  
+
+*Imagen 22: Pantalla de selección de personaje*
+
+#### 14.5. PANTALLA DE PAUSA  
 
 El menú de pausa aparece cuando el usuario presiona en alguna de las pantallas de niveles el botón en la esquina superior izquierda que tiene el símbolo de pausa. Esta pantalla permite a los jugadores detener el juego, acceder a las opciones de ajustes y salir al menú principal. Estos son los elementos de esta pantalla:  
 
@@ -299,19 +323,32 @@ El menú de pausa aparece cuando el usuario presiona en alguna de las pantallas 
 
 ![Imagen pausa](lamaldicion/src/main/resources/static/imagenes/Pausa.png "Imagen del menú de pausa")  
 
-*Imagen 22: Menú de pausa*
+*Imagen 23: Menú de pausa*
 
-#### 14.5. PANTALLA DE AJUSTES  
+#### 14.6. PANTALLA DE AJUSTES  
 
 El menú de ajustes permite al jugador personalizar ciertos aspectos del juego para mejorar su experiencia. Las opciones son:  
 
-**Volumen:** Ajusta el nivel de volumen del juego.  
+**Volumen:** Ajusta el nivel de volumen del juego.    
+
+**Editar contraseña:** Modifica la contraseña de un usuario existente.  
+
+**Eliminar usuario:** Borra una cuenta tras confirmar la acción.  
 
 ![Imagen ajustes](lamaldicion/src/main/resources/static/imagenes/Pantalla_Ajustes.png "Imagen de los ajustes")  
 
-*Imagen 23: Pantalla de ajustes*
+*Imagen 24: Pantalla de ajustes*  
 
-#### 14.6. PANTALLA DE CHAT  
+![Imagen editar contraseña](lamaldicion/src/main/resources/static/imagenes/CambiarContrasena.png "Imagen del html de cambiar la contraseña")  
+
+*Imagen 25: Pantalla de cambio de contraseña*  
+
+![Imagen borrar usuario](lamaldicion/src/main/resources/static/imagenes/BorrarUsuario.png "Imagen del html de borrar usuario")  
+
+*Imagen 26: Pantalla de borrar usuario*  
+
+
+#### 14.7. PANTALLA DE CHAT  
 
 La pantalla de chat se activa durante el juego presionando el botón en la esquina superior izquierda que tiene el símbolo de chat. Esta pantalla permite a los usuarios comunicarse mientras siguen en la partida. Los elementos principales de esta pantalla son:  
 
@@ -319,17 +356,29 @@ La pantalla de chat se activa durante el juego presionando el botón en la esqui
 
 **Campo de entrada:** En la parte inferior, hay un cuadro de texto donde el jugador puede escribir su mensaje.  
 
+Si el jugador ha recibido un nuevo mensaje saldrá un icono de notificaciones sobre el icono de chat indicando la cantidad de mensajes.  
+
+
 ![Imagen chat](lamaldicion/src/main/resources/static/imagenes/Pantalla_Chat.png "Imagen del chat")  
 
-*Imagen 24: Chat del juego*
+*Imagen 27: Chat del juego*
 
-#### 14.7. NIVEL 1  
+#### 14.8. NIVEL 1  
 
 Durante el juego, la interfaz del primer nivel incluye elementos específicos diseñados para guiar a los jugadores en la exploración y resolución del puzle. Esta interfaz muestra el inventario del humano, además de los diálogos que aparecen en los momentos requeridos. Al completar el puzle principal del nivel 1, la pantalla muestra un breve mensaje de "*Continuará*" antes de cargar el siguiente nivel.  
 
 ![Imagen nivel 1](lamaldicion/src/main/resources/static/imagenes/Nivel_1.png "Imagen del nivel 1")  
 
-*Imagen 25: Nivel 1 del juego*  
+*Imagen 28: Nivel 1 del juego*  
+
+#### 14.9. PANTALLA DE DERROTA  
+
+La pantalla de derrota aparece automáticamente cuando el tiempo límite del juego se agota, indicando que los jugadores no lograron completar los objetivos antes de que el cronómetro llegue a cero. Esta pantalla proporciona un cierre claro a la partida y una opción para regresar al menú principal, así los jugadores pueden volverlo a intentar las veces que quieran.  
+
+![Imagen derrota](lamaldicion/src/main/resources/static/imagenes/Pantalla_Derrota.png "Imagen de la escena de derrota")  
+
+*Imagen 29: Pantalla de derrota*  
+
 
 ### 15. DIAGRAMA DE CLASES  
 *** 
