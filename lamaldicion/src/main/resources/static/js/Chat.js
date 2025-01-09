@@ -15,9 +15,6 @@ class Chat extends Phaser.Scene
 
     create()
     {
-
-        
-
         this.scene.bringToTop('Chat');
         this.FondoChat = this.add.image(1010,445, 'CHAT_Fondo');
         this.BotonChat = this.add.image(70, 70, 'BOTON_CHAT').setScale(0.7,0.7)
@@ -25,6 +22,7 @@ class Chat extends Phaser.Scene
             this.sound.play("clic");
             //this.scene.resume("PrimerNivel");
             this.scene.get("PrimerNivel").habilitarControles();
+            this.scene.get("PrimerNivel").chatAbierto=false;
             this.scene.stop("Chat");
         });
 
@@ -106,10 +104,10 @@ class Chat extends Phaser.Scene
     
     enviarMensaje() 
     {
-
-        
-
         if (!this.inputChat.val().trim()) return;
+
+        //indicar al otro jugador q mandamos mensaje
+        this.scene.get("PrimerNivel").sendMessage("M");
 
         const mensaje = this.inputChat.val();
         

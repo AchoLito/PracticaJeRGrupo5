@@ -82,12 +82,16 @@ class PrimerNivel extends Phaser.Scene
         this.time = 180;
         this.timeM = this.time * 1000;
 
+        //Chat
+        this.chatAbierto=false;
+        this.mensajeIcono = this.add.image(40, 40, 'GATO_ESTATUA').setVisible(false);
+
         this.BotonChat = this.add.image(70, 70, 'BOTON_CHAT').setScale(0.7,0.7)
         .setInteractive().on("pointerdown", () => {
             this.sound.play("clic");
+            this.chatAbierto=true;
             this.scene.launch("Chat");
-            //this.mensajeIcono.setVisible(false);
-            //this.scene.pause("PrimerNivel");   
+            this.mensajeIcono.setVisible(false); 
             this.deshabilitarControles();
         });
         this.BotonPausa = this.add.image(70, 165, 'BOTON_PAUSA').setScale(0.65,0.65)
@@ -181,8 +185,7 @@ class PrimerNivel extends Phaser.Scene
         //DIALOGOS
         this.dialogo = new Dialogo(this);
 
-        // NOTIFICACIÓN
-        this.mensajeIcono = this.add.image(520, 520, 'GATO_ESTATUA').setVisible(false);
+       
 
         // Configurar los diálogos (puedes tener varios)
         this.dialogo.configurarDialogos
@@ -409,6 +412,11 @@ class PrimerNivel extends Phaser.Scene
                 case 't':
                     this.time = data.time;
                     this.updateTimer();
+                    break;
+                case "M"://el otro jugador escribio mensaje 
+                    if(this.chatAbierto===false){
+                        this.mensajeIcono.setVisible(true); 
+                    }
                     break;
                     /*
                 case 'c':
