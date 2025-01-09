@@ -209,119 +209,73 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
      */
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) {
-       // try {
 
-            Game game = games.get(session.getId());
 
-            if (game == null) return;
+        Game game = games.get(session.getId());
 
-            Player currentPlayer = players.get(session.getId());
-            Player otherPlayer = game.player1 == currentPlayer ? game.player2 : game.player1;
+        if (game == null) return;
 
-            String payload = message.getPayload();
-            char type = payload.charAt(0);
-            String data = payload.length() > 1 ? payload.substring(1) : "";
+        Player currentPlayer = players.get(session.getId());
+        Player otherPlayer = game.player1 == currentPlayer ? game.player2 : game.player1;
 
-            if(type=='X'){
-                sendToPlayer(otherPlayer,payload);//avisar al otro que la partida terminó
-                endGame(game);
-            }
-            else if(type=='s'){
-                if(data == "1")
-                {
-                    currentPlayer.seleccion = 1;
-                }
-                else if(data == "2")
-                {
-                    currentPlayer.seleccion = 2;
-                }
-                
-                enviarSeleccion(otherPlayer, "s", data);
-            }
-            else if(type=='n')
+        String payload = message.getPayload();
+        char type = payload.charAt(0);
+        String data = payload.length() > 1 ? payload.substring(1) : "";
+
+        if(type=='X'){
+            sendToPlayer(otherPlayer,payload);//avisar al otro que la partida terminó
+            endGame(game);
+        }
+        else if(type=='s'){
+            if(data == "1")
             {
-                if(currentPlayer.seleccion == 0 && otherPlayer.seleccion == 0)
+                currentPlayer.seleccion = 1;
+            }
+            else if(data == "2")
+            {
+                currentPlayer.seleccion = 2;
+            }
+            
+            enviarSeleccion(otherPlayer, "s", data);
+        }
+        else if(type=='n')
+        {
+            if(currentPlayer.seleccion == 0 && otherPlayer.seleccion == 0)
+            {
+                if(game.player1.playerId == currentPlayer.playerId)
                 {
-                    if(game.player1.playerId == currentPlayer.playerId)
+                    boolean r =Math.random() <= 0.5;
+                    String seleccion, s;
+                    if(r)
                     {
-                        boolean r =Math.random() <= 0.5;
-                        String seleccion, s;
-                        if(r)
-                        {
-                            seleccion = "1";
-                            s = "2";
-                        }
-                        else
-                        {
-                            s = "1";
-                            seleccion = "2";
-                        }
-                        System.out.println("He entrado una vez");
-                        enviarSeleccion(currentPlayer, "n", s);
-                        enviarSeleccion(otherPlayer, "n", seleccion);
-                    }
-                }
-                else if(currentPlayer.seleccion == 0)
-                {
-                    if(otherPlayer.seleccion == 1)
-                    {
-                        enviarSeleccion(currentPlayer, "n", "2");
+                        seleccion = "1";
+                        s = "2";
                     }
                     else
                     {
-                        enviarSeleccion(currentPlayer, "n", "1");
+                        s = "1";
+                        seleccion = "2";
                     }
-                }                                                   
+                    System.out.println("He entrado una vez");
+                    enviarSeleccion(currentPlayer, "n", s);
+                    enviarSeleccion(otherPlayer, "n", seleccion);
+                }
             }
-            else{
-                sendToPlayer(otherPlayer,payload);
-            }
-
-            // switch (type) {
-            //     case 'p': // Position update
-            //         List<Integer> pos = mapper.readValue(data, List.class);
-
-            //         // We could synchronize currentPlayer, but we will not have concurrent updates
-            //         currentPlayer.x = pos.get(0);
-            //         currentPlayer.y = pos.get(1);
-
-            //         // Broadcast position to other player
-            //         sendToPlayer(otherPlayer, "p", data);
-            //         break;
-
-            //     /*case 'c': // Square collection attempt
-            //         if (game.square != null) {
-            //             // Check if player is within collection distance (32 units)
-            //             double dx = currentPlayer.x - game.square.x;
-            //             double dy = currentPlayer.y - game.square.y;
-            //             double distance = Math.sqrt(dx * dx + dy * dy);
-
-            //             if (distance < 32) {
-            //                 currentPlayer.score++;
-            //                 game.square = null;
-
-            //                 // Update scores for both players
-            //                 List<Integer> scoreData = Arrays.asList(
-            //                         currentPlayer.playerId,
-            //                         game.player1.score,
-            //                         game.player2.score);
-            //                 sendToPlayer(game.player1, "c", scoreData);
-            //                 sendToPlayer(game.player2, "c", scoreData);
-            //             }
-            //         }
-            //         break;
-            //         */
-            //     case 's':
-            //         enviarSeleccion(otherPlayer, "s", data);
-            //         break;
-            //     case 'X':
-            //         sendToPlayer(otherPlayer,payload);//avisar al otro que la partida terminó
-            //         endGame(game);
-            //         break;
-            // }
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
+            else if(currentPlayer.seleccion == 0)
+            {
+                if(otherPlayer.seleccion == 1)
+                {
+                    enviarSeleccion(currentPlayer, "n", "2");
+                }
+                else
+                {
+                    enviarSeleccion(currentPlayer, "n", "1");
+                }
+            }                                                   
+        }
+        else{
+            sendToPlayer(otherPlayer,payload);
+        }
     }
 
     /**
