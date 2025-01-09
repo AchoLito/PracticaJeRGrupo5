@@ -271,9 +271,9 @@ class PrimerNivel extends Phaser.Scene
         {
             this.scene.stop("PrimelNivel");
             this.scene.start("Derrota");
-            if(this.seleccion == 0)
+            if (this.chatAbierto)
             {
-                this.sendMessage('n', null);
+                this.scene.stop("Chat");
             }
         }
         /* borrado
