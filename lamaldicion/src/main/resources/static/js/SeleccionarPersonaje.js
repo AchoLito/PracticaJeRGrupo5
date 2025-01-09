@@ -213,12 +213,13 @@ class SeleccionarPersonaje extends Phaser.Scene
 
         if(this.time <= 0)
         {
-            this.scene.stop("SeleccionarPersonaje");
-            this.scene.start("PrimerNivel");
             if(this.seleccion == 0)
             {
                 this.sendMessage('n', null);
             }
+            this.scene.stop("SeleccionarPersonaje");
+            this.scene.start("PrimerNivel");
+            
         }
         /* borrado
         else if(this.timeM % 1000 <= 15)

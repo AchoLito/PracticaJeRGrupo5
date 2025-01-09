@@ -235,6 +235,10 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             {
                 currentPlayer.seleccion = 2;
             }
+            else
+            {
+                currentPlayer.seleccion = 0;
+            }
             
             enviarSeleccion(otherPlayer, "s", data);
         }
