@@ -22,9 +22,9 @@ class Derrota extends Phaser.Scene
     {
         this.add.image(1280/2,900/2,'Fondo_menu_derrota').setScale(0.45);
 
-        const titulo = this.add.image(640, 150, "TituloDeLaPantallaDerrota").setScale(0.4);
+        const titulo = this.add.image(640, 190, "TituloDeLaPantallaDerrota").setScale(0.4);
 
-        const botonMenuPrincipal = this.add.image(640, 470, "botonVolverMenuPrincipal")
+        const botonMenuPrincipal = this.add.image(640, 690, "botonVolverMenuPrincipal")
         .setInteractive()
         .on("pointerdown", () => {
             this.sound.play("clic");
