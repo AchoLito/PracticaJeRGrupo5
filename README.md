@@ -338,14 +338,28 @@ Este es el diagrama de las clases que se han implementado en Java, obviando los 
 
 ![Imagen diagrama clases](lamaldicion/src/main/resources/static/imagenes/DiagramaClases.png "Imagen diagrama de clases")  
 
-*Imagen 26: Diagrama de clases*
+*Imagen 26: Diagrama de clases*  
 
-### 16. MÚSICA Y EFECTOS DE SONIDO
+### 16. PROTOCOLO WEBSOCKET  
+***  
+
+Hemos implementado el uso de WebSockets tanto en la pantalla de juego, como en las pantallas de selección de personaje, chat y menú de pausa.  
+
+En la **pantalla de juego** se han utilizado WebSockets para que un jugador avise al otro de los cambios realizados. Por ejemplo, si el jugador que maneja al fantasma se mueve a la izquierda, le manda este mensaje al otro jugador y este mueve al fantasma de su pantalla a la posición mandada por el otro.  
+
+Cada uno de los mensajes utilizados comienza con una letra que indicará qué tipo de información contiene, esta letra se llama **Type**:  
+
+- **Velocidad del otro personaje:**
+  - Su Type es "v".
+  - Envía la dirección de desplazamiento en forma de string
+  - Se envía cada vez que se pulsa una tecla de desplazamiento
+
+### 17. MÚSICA Y EFECTOS DE SONIDO
 ***
 
 La música en *La Maldición* está pensada para sumergir a los jugadores en la atmósfera de un castillo sin distraerlos de la jugabilidad. Una música suave creará la ambientación perfecta que incrementará la tensión de los jugadores conforme se vayan adentrando en el castillo y los peligros aumenten. Además de la música, habrá efectos de sonido que permitirán crear una atmósfera mucho más inmersiva, como el soplo del viento o susurros de voces que hagan que el jugador se sienta dentro del castillo, pero sin llegar a asustarlo, para así reflejar la estética y género del juego.  
 
-### 17. QUÉ SE NECESITA Y CÓMO EJECUTAR EL JUEGO  
+### 18. QUÉ SE NECESITA Y CÓMO EJECUTAR EL JUEGO  
 ***  
 
 Para poder ejecutar el juego es necesario que el usuario tenga instalado en su máquina java y el Java Development Kit (JDK) de la versión 21 o superior.  
@@ -359,7 +373,7 @@ Para acceder al juego desde un navegador, abre cualquier navegador y escribe la 
 
 Si el servidor está en una máquina remota, reemplaza *localhost* por la dirección IP del servidor: *"IP del servidor":8080*  
 
-### 18. IMÁGENES DE REFERENCIA
+### 19. IMÁGENES DE REFERENCIA
 ***
 
 https://www.craiyon.com/image/N0GfFcb8So-2AAmaaE1NZA  
@@ -370,7 +384,7 @@ https://www.freepik.es/vector-gratis/coleccion-fantasmas-halloween-dibujados-man
 
 https://www.freepik.es/vector-premium/castillo-ilustracion-fondo-juego-torre_64818939.htm  
 
-### 19. CRÉDITOS DE LA MÚSICA Y SONIDOS
+### 20. CRÉDITOS DE LA MÚSICA Y SONIDOS
 ***  
 
 **Música:**  
