@@ -205,7 +205,7 @@ class SeleccionarPersonaje extends Phaser.Scene
             this.envioDatosControl();
         }
 
-        if(this.timeM <= 0)
+        if(this.time <= 0)
         {
             this.scene.stop("SeleccionarPersonaje");
             this.scene.start("PrimerNivel");
