@@ -91,9 +91,8 @@ class PrimerNivel extends Phaser.Scene
         });
         this.BotonPausa = this.add.image(70, 165, 'BOTON_PAUSA').setScale(0.65,0.65)
         .setInteractive().on("pointerdown", () => {
-            this.sound.play("clic");
-            this.scene.launch("MenuPausa");
-            this.scene.pause("PrimerNivel");
+            this.enviarPausa();
+            this.pausarJuego();
         });
 
         this.palancaPared_Estatua = new PalancaPared(450,300, this, false); 
@@ -201,7 +200,10 @@ class PrimerNivel extends Phaser.Scene
         this.inicializarColisiones();
         this.colliderMuros();
 
-        this.input.keyboard.on('keydown-SPACE', () => { this.dialogo.actualizar();});
+        this.input.keyboard.on('keydown-SPACE', () => { 
+            this.dialogo.actualizar();
+            this.enviarDialogo();
+        });
     }
     update(_, deltaTime)
     {
@@ -214,16 +216,15 @@ class PrimerNivel extends Phaser.Scene
             this.envioDatosControl();
         }
         if(this.timeM <= 0)
-            {
-                this.scene.stop("PrimerNivel");
-                this.scene.start("Derrota");
-            }
-
+        {
+            this.scene.stop("PrimerNivel");
+            this.scene.start("Derrota");
+        }
         else if(this.timeM % 1000 <= 15)
-            {
-                 this.time--;
-                 this.updateTimer();
-             }
+        {
+            this.time--;
+            this.updateTimer();
+        }
     }
 
     updateTimer() {
@@ -347,6 +348,12 @@ class PrimerNivel extends Phaser.Scene
                         this.palanca.interactuar(this.inventario);
                     }
                     break;
+                case'S': //pausar juego
+                    this.pausarJuego();
+                    break;
+                case'D': //pasar dialogo
+                    this.dialogo.actualizar();
+                    break;
                 case'X': //Fin de la Partida
                     this.cambiarDeNivel();
                     break;
@@ -436,6 +443,13 @@ class PrimerNivel extends Phaser.Scene
 
     enviarFinPartida(){
         this.sendMessage('X');
+    }
+
+    enviarPausa(){
+        this.sendMessage('S');
+    }
+    enviarDialogo(){
+        this.sendMessage('D');
     }
 
     inicializarControlesHumano(){
@@ -900,5 +914,11 @@ class PrimerNivel extends Phaser.Scene
 
             
         }
+    }
+
+    pausarJuego(){
+        this.sound.play("clic");
+        this.scene.launch("MenuPausa");
+        this.scene.pause("PrimerNivel");
     }
 }
