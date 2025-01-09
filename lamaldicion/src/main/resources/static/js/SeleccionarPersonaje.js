@@ -28,8 +28,8 @@ class SeleccionarPersonaje extends Phaser.Scene
         this.t_EnvioControl=0;
         this.frec_EnvioControl=3000;//milisegundos
 
-        this.add.image(100, 65, "fondoTiempo").setScale(0.2);
-        this.timeText = this.add.text(35, 50, 'Time: 15', { fontSize: '32px', fill: '#000000' });
+        this.add.image(100, 65, "fondoTiempo").setScale(0.3);
+        this.timeText = this.add.text(25, 50, 'Tiempo: 15', { fontSize: '32px', fill: '#000000' });
         this.time = 15;
         this.timeM = this.time * 1000;
 
@@ -222,7 +222,7 @@ class SeleccionarPersonaje extends Phaser.Scene
     }
 
     updateTimer() {
-        this.timeText.setText(`Time: ` + this.time);
+        this.timeText.setText(`Tiempo: ` + this.time);
     }
 
     setupWebSocket() {
