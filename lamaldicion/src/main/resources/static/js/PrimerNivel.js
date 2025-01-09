@@ -67,6 +67,8 @@ class PrimerNivel extends Phaser.Scene
         this.load.image('BOTON_CHAT','imagenes/iconoBoton_Chat.png');
         this.load.audio("clic", "audio/clic.mp3"); // sonido pulsar botón
 
+        this.load.image('NOTIFICACION','imagenes/iconoNotificacion.png');
+
         //INSIGNEA
         this.load.image('GATO_ESTATUA', 'imagenes/GATO_ESTATUA.png');
     }
