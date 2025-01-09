@@ -1,7 +1,7 @@
 **LINK DEL VÍDEO DE YOUTUBE**  
 https://youtu.be/4YPFXzmn-2A
 
-[![](https://markdown-videos.deta.dev/youtube/4YPFXzmn-2A?si=gkzSlT-4d9ZGLIo0)](https://youtu.be/4YPFXzmn-2A?si=gkzSlT-4d9ZGLIo0)
+<iframe width="320" height="180" src="https://www.youtube-nocookie.com/embed/4YPFXzmn-2A&ab" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1"></iframe>
 
 # PracticaJeRGrupo5
 ## LA MALDICIÓN
