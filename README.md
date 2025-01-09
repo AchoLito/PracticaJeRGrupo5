@@ -1,7 +1,7 @@
 **LINK DEL VÍDEO DE YOUTUBE**  
 https://youtu.be/4YPFXzmn-2A
 
-<iframe width="320" height="180" src="https://www.youtube-nocookie.com/embed/4YPFXzmn-2A&ab" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="1"></iframe>
+[![](https://markdown-videos.deta.dev/youtube/watch?v=4YPFXzmn-2A&ab_channel=PatataGames)](https://www.youtube.com/watch?v=4YPFXzmn-2A&ab_channel=PatataGames)
 
 # PracticaJeRGrupo5
 ## LA MALDICIÓN
