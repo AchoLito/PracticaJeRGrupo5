@@ -1,3 +1,7 @@
+**LINK A LA PLATAFORMA EN LA QUE SE HA SUBIDO EL JUEGO**
+https://acholito.itch.io/la-maldicin
+
+
 En esta etapa del proyecto se han introducido varias mejoras que refuerzan tanto la jugabilidad como la experiencia visual y funcional del juego. A continuación, se detallan las mejoras realizadas hasta esta etapa, especificando su origen y evolución:  
 
   
