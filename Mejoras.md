@@ -1,4 +1,5 @@
-**LINK A LA PLATAFORMA EN LA QUE SE HA SUBIDO EL JUEGO**
+**LINK A LA PLATAFORMA EN LA QUE SE HA SUBIDO EL JUEGO**  
+
 https://acholito.itch.io/la-maldicin
 
 
